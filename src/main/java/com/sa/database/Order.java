@@ -11,6 +11,10 @@ public class Order {
     private double price;
     private org.joda.time.DateTime date;
 
+    public Order() {
+        //default constructor
+    }
+
     Order(int orderID, ArrayList<Item> items, Table table, double price, DateTime date) {
         this.orderID = orderID;
         this.items = items;
@@ -23,6 +27,11 @@ public class Order {
         this.table = table;
         this.price = price;
         this.date = date;
+    }
+    public Order(ArrayList<Item> items, Table table, double price) {
+        this.items = items;
+        this.table = table;
+        this.price = price;
     }
 
     public int getOrderID() {
@@ -39,5 +48,9 @@ public class Order {
     }
     public DateTime getDate() {
         return this.date;
+    }
+
+    public void setDate(DateTime dateTime) {
+        this.date = dateTime;
     }
 }

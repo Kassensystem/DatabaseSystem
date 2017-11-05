@@ -1,11 +1,16 @@
 package com.sa.database;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 public class Item {
     private int itemID;
     private String name;
     private double retailprice;
     private int quantity;
 
+    public Item() {
+        //default constructor
+    }
     Item(int itemID, String name, double retailprice, int quantity){
         this.itemID = itemID;
         this.name = name;

@@ -165,6 +165,7 @@ public class DatabaseService implements DatabaseService_Interface{
     //endregion
 
     //region Updating data in database
+    @Override
     public void updateItem(int itemID, Item item) {
 
         try {
@@ -179,6 +180,7 @@ public class DatabaseService implements DatabaseService_Interface{
             pst.executeUpdate();
         } catch(SQLException e) { e.printStackTrace(); }
     }
+    @Override
     public void updateTable(int tableID, Table table) {
 
         try {
@@ -191,6 +193,7 @@ public class DatabaseService implements DatabaseService_Interface{
             pst.executeUpdate();
         } catch(SQLException e) { e.printStackTrace(); }
     }
+    @Override
     public void updateOrder(int orderID, Order order) {
         try {
             String query =  "UPDATE " + dbp.getDatabase() + ".orders " +

@@ -26,6 +26,7 @@ public interface DatabaseService_Interface {
     //endregion
 
     //region Deleting data from the database
+
     // TODO Klären: Welche Daten drüfen gelöscht werden, ohne dass in bisherigen Orders Daten fehlen?
     // TODO Mögliche Lösung: Items und Tables als gelöscht markieren, Daten sind weiterhin zugänglich,
     // TODO aber können durch eine vorherige Abfrage der Lösch-Markierung als gelöscht erkannt werden.

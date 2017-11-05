@@ -4,6 +4,10 @@ public class Table {
     private int tableID;
     private String name;
 
+    public Table() {
+        //default constructor
+    }
+
     Table(int tableID, String name) {
         this.tableID = tableID;
         this.name = name;
