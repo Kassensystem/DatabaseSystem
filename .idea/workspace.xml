@@ -2,30 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="776fb8f0-9a4c-4f54-9c91-bf08f53f8a96" name="Default" comment="">
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/sa/exceptions/ControllerConnectionException.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/sa/exceptions/MySQLException.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/sa/restApi/RestApiProperties.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/sa/restApi/client/RestApiClient.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/test/java/RestApiClient_Test.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/test/java/RestApiController_Test.java" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/sa/controller/RestApiController.java" afterPath="$PROJECT_DIR$/src/main/java/com/sa/restApi/controller/RestApiController.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/sa/controller/TestController.java" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/sa/database/DatabaseService.java" afterPath="$PROJECT_DIR$/src/main/java/com/sa/database/DatabaseService.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/sa/database/DatabaseService_Interface.java" afterPath="$PROJECT_DIR$/src/main/java/com/sa/database/DatabaseService_Interface.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/sa/database/Item.java" afterPath="$PROJECT_DIR$/src/main/java/com/sa/database/Item.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/sa/database/Order.java" afterPath="$PROJECT_DIR$/src/main/java/com/sa/database/Order.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/sa/database/Table.java" afterPath="$PROJECT_DIR$/src/main/java/com/sa/database/Table.java" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/DatabaseServiceTest.java" afterPath="$PROJECT_DIR$/src/test/java/DatabaseService_Test.java" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/sa/controller/RestApiController.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/sa/controller/TestController.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/sa/database/DatabaseService.class" afterPath="$PROJECT_DIR$/target/classes/com/sa/database/DatabaseService.class" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/sa/database/Item.class" afterPath="$PROJECT_DIR$/target/classes/com/sa/database/Item.class" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/sa/database/Order.class" afterPath="$PROJECT_DIR$/target/classes/com/sa/database/Order.class" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/sa/database/Table.class" afterPath="$PROJECT_DIR$/target/classes/com/sa/database/Table.class" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/DatabaseServiceTest.class" afterPath="" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -78,7 +55,7 @@
       <file leaf-file-name="RestApiClient.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/sa/restApi/client/RestApiClient.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="493">
+            <state relative-caret-position="712">
               <caret line="95" column="9" lean-forward="true" selection-start-line="95" selection-start-column="9" selection-end-line="95" selection-end-column="9" />
               <folding>
                 <element signature="method#test#0;class#RestApiClient#0" expanded="false" />
@@ -547,12 +524,20 @@
       <workItem from="1509067616569" duration="3366000" />
       <workItem from="1509800514182" duration="2493000" />
       <workItem from="1509810254358" duration="12830000" />
-      <workItem from="1509868809796" duration="13927000" />
+      <workItem from="1509868809796" duration="13988000" />
     </task>
+    <task id="LOCAL-00001" summary="Client hinzugefügt">
+      <created>1509897940236</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1509897940237</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="32616000" />
+    <option name="totallyTimeSpent" value="32677000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -565,7 +550,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1066" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.27849463" sideWeight="0.5063966" order="7" side_tool="true" content_ui="tabs" />
@@ -583,8 +567,8 @@
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Java Enterprise" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3172043" sideWeight="0.4936034" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32903227" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3172043" sideWeight="0.4936034" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Spring" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.19936034" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -638,6 +622,10 @@
   </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Client hinzugefügt" />
+    <option name="LAST_COMMIT_MESSAGE" value="Client hinzugefügt" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -729,6 +717,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="85">
           <caret line="5" column="20" lean-forward="false" selection-start-line="5" selection-start-column="20" selection-end-line="5" selection-end-column="20" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -869,6 +858,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="35" lean-forward="false" selection-start-line="0" selection-start-column="35" selection-end-line="0" selection-end-column="35" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -876,6 +866,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="51">
           <caret line="3" column="4" lean-forward="false" selection-start-line="3" selection-start-column="4" selection-end-line="3" selection-end-column="4" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1007,8 +998,8 @@
         <state relative-caret-position="356">
           <caret line="64" column="35" lean-forward="false" selection-start-line="64" selection-start-column="21" selection-end-line="64" selection-end-column="35" />
           <folding>
-            <element signature="e#1247#1248#0" expanded="true" />
-            <element signature="e#1270#1271#0" expanded="true" />
+            <element signature="e#1247#1248#0" expanded="false" />
+            <element signature="e#1270#1271#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1039,7 +1030,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/sa/restApi/client/RestApiClient.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="493">
+        <state relative-caret-position="712">
           <caret line="95" column="9" lean-forward="true" selection-start-line="95" selection-start-column="9" selection-end-line="95" selection-end-column="9" />
           <folding>
             <element signature="method#test#0;class#RestApiClient#0" expanded="false" />
