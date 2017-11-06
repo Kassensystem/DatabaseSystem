@@ -944,59 +944,70 @@
       <DataType>int(11)|0</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <key id="237" parent="230" name="PRIMARY">
+    <column id="237" parent="230" name="available">
+      <Position>5</Position>
+      <DataType>tinyint(1)|0</DataType>
+      <NotNull>1</NotNull>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <key id="238" parent="230" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>itemID</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="238" parent="231" name="orderID">
+    <column id="239" parent="231" name="orderID">
       <Position>1</Position>
       <DataType>int(11)|0</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="239" parent="231" name="itemIDs">
+    <column id="240" parent="231" name="itemIDs">
       <Position>2</Position>
       <DataType>char(30)|0</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="240" parent="231" name="price">
+    <column id="241" parent="231" name="price">
       <Position>3</Position>
       <DataType>float|0</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="241" parent="231" name="date">
+    <column id="242" parent="231" name="date">
       <Position>4</Position>
       <DataType>datetime|0</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="242" parent="231" name="tableID">
+    <column id="243" parent="231" name="tableID">
       <Position>5</Position>
       <DataType>int(11)|0</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <key id="243" parent="231" name="PRIMARY">
+    <column id="244" parent="231" name="paid">
+      <Position>6</Position>
+      <DataType>tinyint(1)|0</DataType>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <key id="245" parent="231" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>orderID</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="244" parent="232" name="tableID">
+    <column id="246" parent="232" name="tableID">
       <Position>1</Position>
       <DataType>int(11)|0</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="245" parent="232" name="name">
+    <column id="247" parent="232" name="name">
       <Position>2</Position>
       <DataType>char(30)|0</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <key id="246" parent="232" name="PRIMARY">
+    <key id="248" parent="232" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>tableID</ColNames>
       <Primary>1</Primary>

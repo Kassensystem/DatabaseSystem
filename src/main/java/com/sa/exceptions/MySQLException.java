@@ -1,4 +1,12 @@
 package com.sa.exceptions;
 
-public class MySQLException {
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.ResponseStatus;
+
+public class MySQLException extends Exception{
+
+    public MySQLException() {
+        super("MySQL-Server nicht erreichbar!");
+    }
+
 }

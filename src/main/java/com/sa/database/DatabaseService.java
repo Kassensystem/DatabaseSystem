@@ -16,7 +16,7 @@ public class DatabaseService implements DatabaseService_Interface{
     ArrayList<Table> tables = new ArrayList<>();
     ArrayList<Order> orders = new ArrayList<>();
 
-    DatabaseService() {
+    public DatabaseService() {
         this.connect();
     }
 
@@ -48,7 +48,7 @@ public class DatabaseService implements DatabaseService_Interface{
         this.items.clear();
 
         try {
-            String query = "SELECT itemID, name, retailprice, quantity " +
+            String query = "SELECT itemID, name, retailprice, quantity, available " +
                     "FROM " + dbp.getDatabase() + ".items";
             PreparedStatement pst = connection.prepareStatement(query);
             ResultSet rs = pst.executeQuery();
@@ -60,7 +60,8 @@ public class DatabaseService implements DatabaseService_Interface{
                 double retailprice = rs.getFloat("retailprice");
                 retailprice = round(retailprice);
                 int quantity = rs.getInt("quantity");
-                items.add(new Item(itemID, name, retailprice, quantity));
+                boolean available = rs.getBoolean("available");
+                items.add(new Item(itemID, name, retailprice, quantity, available));
             }
             return this.items;
         } catch (SQLException e) {
@@ -95,7 +96,7 @@ public class DatabaseService implements DatabaseService_Interface{
         this.orders.clear();
 
         try {
-            String query = "SELECT orderID, itemIDs, price, date, tableID " +
+            String query = "SELECT orderID, itemIDs, price, date, tableID, paid " +
                     "FROM " + dbp.getDatabase() + ".orders";
             PreparedStatement pst = connection.prepareStatement(query);
             ResultSet rs = pst.executeQuery();
@@ -103,14 +104,13 @@ public class DatabaseService implements DatabaseService_Interface{
             while(rs.next()) {
                 int orderID = rs.getInt("orderID");
                 String itemIdString = rs.getString("itemIDs");
-                ArrayList<Item> items = getItemListByID(itemIdString);
                 int tableID = rs.getInt("tableID");
-                Table table = getTableByID(tableID);
                 double price = rs.getFloat("price");
                 price = round(price);
                 DateTime dateTime = convertSqlTimestampToJodaDateTime(rs.getTimestamp("date"));
+                boolean paid = rs.getBoolean("paid");
 
-                this.orders.add(new Order(orderID, items, table, price, dateTime));
+                this.orders.add(new Order(orderID, itemIdString, tableID, price, dateTime, paid));
             }
             return this.orders;
         } catch (SQLException e) {
@@ -125,13 +125,14 @@ public class DatabaseService implements DatabaseService_Interface{
     public void addItem(Item item) {
 
         try {
-            String query =  "INSERT INTO " + dbp.getDatabase() + ".items(itemID, name, retailprice, quantity) " +
-                            "VALUES(DEFAULT, ?, ?, ?)";
+            String query =  "INSERT INTO " + dbp.getDatabase() + ".items(itemID, name, retailprice, quantity, available) " +
+                            "VALUES(DEFAULT, ?, ?, ?, ?)";
             PreparedStatement pst = connection.prepareStatement(query);
 
             pst.setString(1, item.getName());
             pst.setDouble(2, item.getRetailprice());
             pst.setInt(3, item.getQuantity());
+            pst.setBoolean(4, item.isAvailable());
             pst.executeUpdate();
         } catch(SQLException e) { e.printStackTrace(); }
     }
@@ -151,14 +152,17 @@ public class DatabaseService implements DatabaseService_Interface{
     public void addOrder(Order order) {
 
         try {
-            String query =  "INSERT INTO " + dbp.getDatabase() + ".orders(orderID, itemIDs, price, date, tableID) " +
-                            "VALUES(DEFAULT, ?, ?, ?, ?)";
+            String query =  "INSERT INTO " + dbp.getDatabase() + ".orders(orderID, itemIDs, price, date, tableID, paid) " +
+                            "VALUES(DEFAULT, ?, ?, ?, ?, ?)";
             PreparedStatement pst = connection.prepareStatement(query);
-
-            pst.setString(1, joinIDsIntoString(order.getItems()));
+            /**
+             * TODO Erkennen ob bezahlt oder nicht, und je nachdem ausdrucken
+             */
+            pst.setString(1, order.getItems());
             pst.setDouble(2, order.getPrice());
             pst.setObject(3, convertJodaDateTimeToSqlTimestamp(order.getDate()) );
-            pst.setInt(4, order.getTable().getTableID());
+            pst.setInt(4, order.getTable());
+            pst.setBoolean(5, order.isPaid());
             pst.executeUpdate();
         } catch(SQLException e) { e.printStackTrace(); }
     }
@@ -198,25 +202,21 @@ public class DatabaseService implements DatabaseService_Interface{
         try {
             String query =  "UPDATE " + dbp.getDatabase() + ".orders " +
                             "SET itemIDs = ?, price = ?, date = ?, tableID = ? " +
-                            "WHERE ID = " + orderID;
+                            "WHERE orderID = " + orderID;
             PreparedStatement pst = connection.prepareStatement(query);
-
-            pst.setString(1, joinIDsIntoString(order.getItems()));
+            /**
+             * TODO Erkennen ob bezahlt oder nicht, und je nachdem ausdrucken
+             */
+            pst.setString(1, order.getItems());
             pst.setDouble(2, order.getPrice());
             pst.setObject(3, convertJodaDateTimeToSqlTimestamp(order.getDate()) );
-            pst.setInt(4, order.getTable().getTableID());
+            pst.setInt(4, order.getTable());
             pst.executeUpdate();
         } catch(SQLException e) { e.printStackTrace(); }
     }
     //endregion
 
-    private String joinIDsIntoString(ArrayList<Item> items) {
-        String IDString = "";
-        for(Item i: items) {
-            IDString += i.getItemID() + ";";
-        }
-        return IDString;
-    }
+
     private double round(double number) {
         return (double) Math.round(number * 100d) / 100d;
     }
@@ -227,49 +227,6 @@ public class DatabaseService implements DatabaseService_Interface{
     private DateTime convertSqlTimestampToJodaDateTime(Timestamp sqlTimestamp) {
         //Convert joda.DateTime to sql-Timestamp
         return new DateTime(sqlTimestamp);
-    }
-
-    //region Getting items by a string with multiple IDs with the syntax: "10;11;12;13;14"
-    private ArrayList<Item> getItemListByID(String itemIDString) {
-        ArrayList<Item> items = new ArrayList<>();
-        ArrayList<Integer> itemIDs = splitItemIDString(itemIDString);
-        for(Integer i: itemIDs) {
-            Item item = getItemByID(i);
-            items.add(item);
-        }
-        return items;
-    }
-    private ArrayList<Integer> splitItemIDString(String itemIDString) {
-        ArrayList<Integer> itemIDList = new ArrayList<>();
-        for(String itemID: itemIDString.split(";")) {
-            itemIDList.add(Integer.parseInt(itemID));
-        }
-        return itemIDList;
-    }
-    private Item getItemByID(int itemID) {
-        for(Item i: items) {
-            if(i.getItemID() == itemID)
-                return i;
-        }
-        return null;
-    }
-    private Table getTableByID(int tableID) {
-        for(Table t: tables) {
-            if(t.getTableID() == tableID)
-                return t;
-        }
-        return null;
-    }
-    //endregion
-
-    //Convert util- and sql-Date
-    private Date localDateToSqlDate(LocalDate localDate) {
-        //convert LocalDate to SQL-Date
-        return Date.valueOf( localDate );
-    }
-    private LocalDate sqlDateToLocalDate(Date sqlDate) {
-        //Convert sqlDate to LocalDate
-        return sqlDate.toLocalDate();
     }
 
 }
