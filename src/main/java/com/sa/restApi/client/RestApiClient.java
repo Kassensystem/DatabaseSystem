@@ -24,12 +24,12 @@ import java.util.ArrayList;
  * --> HttpServerErrorException: Der DatabaseService ist nicht erreichbar.
  */
 
-public class RestApiClient {
+public class RestApiClient implements RestApiClient_Interface{
 
-    public static final String REST_SERVICE_URL = RestApiProperties.getRestServiceUrl();
+    private static final String REST_SERVICE_URL = RestApiProperties.getRestServiceUrl();
 
     /******************TEST*******************/
-    public static String test()
+    public String test()
             throws  ControllerConnectionException,
                     MySQLException,
                     NoContentException {
@@ -73,7 +73,7 @@ public class RestApiClient {
 
     /*******************GET*******************/
 
-    public static ArrayList<Item> getAllItems() throws Exception {
+    public ArrayList<Item> getAllItems() throws Exception {
         System.out.println("Getting all items...");
 
         RestTemplate restTemplate = new RestTemplate();
@@ -87,7 +87,7 @@ public class RestApiClient {
         return items;
     }
 
-    public static ArrayList<Table> getAllTables() throws Exception {
+    public ArrayList<Table> getAllTables() throws Exception {
         System.out.println("Getting all tables...");
 
         RestTemplate restTemplate = new RestTemplate();
@@ -101,7 +101,7 @@ public class RestApiClient {
         return tables;
     }
 
-    public static ArrayList<Order> getAllOrders() throws Exception {
+    public ArrayList<Order> getAllOrders() throws Exception {
         // TODO Ergänzen einer Abfrage an den Controller zum Erhalten aller Orders
 
         return null;
@@ -109,14 +109,14 @@ public class RestApiClient {
 
     /******************POST*******************/
 
-    public static void createOrder(Order order) throws Exception {
+    public void createOrder(Order order) throws Exception {
         System.out.println("Creating order...");
 
         RestTemplate restTemplate = new RestTemplate();
         URI uri = restTemplate.postForLocation(REST_SERVICE_URL + "/order/", order, Order.class);
     }
 
-    public static void updateOrder(Order order) throws Exception {
+    public void updateOrder(Order order) throws Exception {
         // TODO
     }
 
