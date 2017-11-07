@@ -1,16 +1,24 @@
-import com.sa.exceptions.ControllerConnectionException;
-import com.sa.exceptions.MySQLException;
-import com.sa.exceptions.NoContentException;
-import com.sa.restApi.client.RestApiClient;
-import org.springframework.web.client.HttpServerErrorException;
-import org.springframework.web.client.ResourceAccessException;
+import dhbw.sa.database.Order;
+import dhbw.sa.restApi.client.RestApiClient;
+
+import java.util.ArrayList;
 
 
 public class RestApiClient_Test {
 
     public static void main(String[] args) {
 
+        RestApiClient restApiClient = new RestApiClient();
+        try {
+            ArrayList<Order> allOrders = restApiClient.getAllOrders();
+            for (Order o: allOrders) {
+                System.out.println(o.getItems());
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
+        /*
         try {
             System.out.println(RestApiClient.test());
         } catch (ControllerConnectionException e) {

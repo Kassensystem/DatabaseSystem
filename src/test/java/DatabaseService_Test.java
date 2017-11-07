@@ -1,7 +1,7 @@
-import com.sa.database.DatabaseService;
-import com.sa.database.Item;
-import com.sa.database.Order;
-import com.sa.database.Table;
+import dhbw.sa.database.DatabaseService;
+import dhbw.sa.database.Item;
+import dhbw.sa.database.Order;
+import dhbw.sa.database.Table;
 import org.joda.time.DateTime;
 
 import java.util.ArrayList;
@@ -11,6 +11,7 @@ import java.util.ArrayList;
  *  Test der Add-Methoden: Mit generischen dummyObjekten wird das Befüllen der Datenbank getestet. Anschließendes manuelles Löschen notwendig.
  *  Test der Update-Methoden:
  */
+
 
 public class DatabaseService_Test {
     private static DatabaseService dbs = new DatabaseService();
