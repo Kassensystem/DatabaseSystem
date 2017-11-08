@@ -2,6 +2,7 @@ import dhbw.sa.database.DatabaseService;
 import dhbw.sa.database.Item;
 import dhbw.sa.database.Order;
 import dhbw.sa.database.Table;
+import dhbw.sa.printer.PrinterService;
 import org.joda.time.DateTime;
 
 import java.util.ArrayList;
@@ -19,6 +20,8 @@ public class DatabaseService_Test {
     private static int updateNumber = 999;
 
     public static void main(String[] args) {
+
+
         /*
         //Add-Test
         System.out.println("---------------Adding Dummy Entries---------------");
@@ -29,7 +32,7 @@ public class DatabaseService_Test {
         getItems();
         getOrders();
         getTables();
-        */
+
 
         //Update-Test
         System.out.println("Adding Update-Dummy-Order...");
@@ -50,6 +53,7 @@ public class DatabaseService_Test {
         updateOrder(updateOrder);
         System.out.println("---------------Checking manipulated Update-Dummy-Order------------------------");
         getOrders();
+        */
     }
 
     //region Test der Get-Methoden

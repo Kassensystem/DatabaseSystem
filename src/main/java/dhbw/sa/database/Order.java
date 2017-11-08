@@ -84,6 +84,13 @@ public class Order {
         }
         return items;
     }
+    public Table getTable(ArrayList<Table> allTables) {
+        for(Table t: allTables) {
+            if(t.getTableID() == this.tableID)
+                return t;
+        }
+        return null;
+    }
     //region Hilfsmethoden zur Ermittlung der Items
     private ArrayList<Integer> splitItemIDString(String itemIDString) {
         //Ermitteln der einzelnen IDs aus String

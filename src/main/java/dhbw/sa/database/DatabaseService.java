@@ -1,5 +1,7 @@
 package dhbw.sa.database;
 
+import dhbw.sa.printer.PrintableOrder;
+import dhbw.sa.printer.PrinterService;
 import org.joda.time.DateTime;
 import org.springframework.stereotype.Service;
 
@@ -150,13 +152,14 @@ public class DatabaseService implements DatabaseService_Interface{
     @Override
     public void addOrder(Order order) {
 
+        if(order.isPaid())
+            printOrder(order);
+
         try {
             String query =  "INSERT INTO " + dbp.getDatabase() + ".orders(orderID, itemIDs, price, date, tableID, paid) " +
                             "VALUES(DEFAULT, ?, ?, ?, ?, ?)";
             PreparedStatement pst = connection.prepareStatement(query);
-            /**
-             * TODO Erkennen ob bezahlt oder nicht, und je nachdem ausdrucken
-             */
+
             pst.setString(1, order.getItems());
             pst.setDouble(2, order.getPrice());
             pst.setObject(3, convertJodaDateTimeToSqlTimestamp(order.getDate()) );
@@ -198,14 +201,16 @@ public class DatabaseService implements DatabaseService_Interface{
     }
     @Override
     public void updateOrder(int orderID, Order order) {
+
+        if(order.isPaid())
+            printOrder(order);
+
         try {
             String query =  "UPDATE " + dbp.getDatabase() + ".orders " +
                             "SET itemIDs = ?, price = ?, date = ?, tableID = ? " +
                             "WHERE orderID = " + orderID;
             PreparedStatement pst = connection.prepareStatement(query);
-            /**
-             * TODO Erkennen ob bezahlt oder nicht, und je nachdem ausdrucken
-             */
+
             pst.setString(1, order.getItems());
             pst.setDouble(2, order.getPrice());
             pst.setObject(3, convertJodaDateTimeToSqlTimestamp(order.getDate()) );
@@ -226,6 +231,20 @@ public class DatabaseService implements DatabaseService_Interface{
     private DateTime convertSqlTimestampToJodaDateTime(Timestamp sqlTimestamp) {
         //Convert joda.DateTime to sql-Timestamp
         return new DateTime(sqlTimestamp);
+    }
+
+    //Drucken einer Order
+    public void printOrder(Order order) {
+        PrinterService printerService = new PrinterService();
+        printerService.printOrder(order,  this.getAllItems(), this.getAllTables());
+    }
+
+    public Order getOrderById(int orderID) {
+        for(Order o: this.getAllOrders()) {
+            if(o.getOrderID() == orderID)
+                return o;
+        }
+        return null;
     }
 
 }
