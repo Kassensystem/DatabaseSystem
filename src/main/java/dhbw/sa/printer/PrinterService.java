@@ -20,36 +20,18 @@ import java.util.List;
  */
 
 public class PrinterService {
+
     private final String printerName = "EPSON TM-T88V Receipt";
-
-
 
     public void printOrder(Order order, ArrayList<Item> allItems, ArrayList<Table> allTables) {
         PrintableOrder printableOrder = getPrintableOrder(order, allItems, allTables);
 
-        String formattedOrderText =
-                Gastronomy.getName()  + "\n"
-                + Gastronomy.getAdress() + "\n"
-                + Gastronomy.getTelephonenumber() + "\n"
-                + "\n"
-                + "Ihre Bestellung mit der ID " + printableOrder.getOrderID() + ":\n";
-
-        for(Item i: printableOrder.getItems()) {
-            formattedOrderText += i.getName() + "\t\t" + i.getRetailprice() + " EUR\n";
-        }
-
-        double mwst = Math.round(printableOrder.getPrice()*0.19 * 100d) / 100d;
-
-        formattedOrderText += "MWST 19%\t" + mwst + " EUR\n"
-                + "Summe\t" + printableOrder.getPrice() + " EUR\n"
-                + "\n"
-                + "Sie saßen am Tisch " + printableOrder.getTableName() + ".\n"
-                + "Vielen Dank für Ihren Besuch!\n" + printableOrder.getDate() + "\n\n";
+        String formattedOrderText = getFormattedOrder(printableOrder);
 
         printString(formattedOrderText);
     }
 
-    public void printString(String text) {
+    private void printString(String text) {
         // find the printService of name printerName
         DocFlavor flavor = DocFlavor.BYTE_ARRAY.AUTOSENSE;
         PrintRequestAttributeSet pras = new HashPrintRequestAttributeSet();
@@ -81,32 +63,6 @@ public class PrinterService {
         }
     }
 
-    private PrintService findPrintService(String printerName,
-                                          PrintService[] services) {
-        for (PrintService service : services) {
-            if (service.getName().equalsIgnoreCase(printerName)) {
-                return service;
-            }
-        }
-
-        return null;
-    }
-    public List<String> getPrinters(){
-
-        DocFlavor flavor = DocFlavor.BYTE_ARRAY.AUTOSENSE;
-        PrintRequestAttributeSet pras = new HashPrintRequestAttributeSet();
-
-        PrintService printServices[] = PrintServiceLookup.lookupPrintServices(
-                flavor, pras);
-
-        List<String> printerList = new ArrayList<>();
-        for(PrintService printerService: printServices){
-            printerList.add( printerService.getName());
-        }
-
-        return printerList;
-    }
-
     private PrintableOrder getPrintableOrder(Order order, ArrayList<Item> allItems, ArrayList<Table> allTables) {
         PrintableOrder printableOrder = new PrintableOrder();
 
@@ -126,4 +82,38 @@ public class PrinterService {
 
         return printableOrder;
     }
+
+    private String getFormattedOrder(PrintableOrder printableOrder) {
+        String formattedOrderText =
+                Gastronomy.getName()  + "\n"
+                        + Gastronomy.getAdress() + "\n"
+                        + Gastronomy.getTelephonenumber() + "\n"
+                        + "\n"
+                        + "Ihre Bestellung mit der ID " + printableOrder.getOrderID() + ":\n";
+
+        for(Item i: printableOrder.getItems()) {
+            formattedOrderText += i.getName() + "\t\t" + i.getRetailprice() + " EUR\n";
+        }
+
+        double mwst = Math.round(printableOrder.getPrice()*0.19 * 100d) / 100d;
+
+        formattedOrderText += "MWST 19%\t" + mwst + " EUR\n"
+                + "Summe\t" + printableOrder.getPrice() + " EUR\n"
+                + "\n"
+                + "Sie saßen am Tisch " + printableOrder.getTableName() + ".\n"
+                + "Vielen Dank für Ihren Besuch!\n" + printableOrder.getDate() + "\n\n";
+
+        return formattedOrderText;
+    }
+
+    private PrintService findPrintService(String printerName, PrintService[] services) {
+        for (PrintService service : services) {
+            if (service.getName().equalsIgnoreCase(printerName)) {
+                return service;
+            }
+        }
+
+        return null;
+    }
+
 }
