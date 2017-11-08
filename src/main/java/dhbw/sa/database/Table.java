@@ -1,5 +1,8 @@
 package dhbw.sa.database;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class Table {
     private int tableID;
     private String name;

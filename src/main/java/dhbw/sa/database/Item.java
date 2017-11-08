@@ -1,6 +1,8 @@
 package dhbw.sa.database;
 
+import org.springframework.stereotype.Component;
 
+@Component
 public class Item {
     private int itemID;
     private String name;

@@ -26,7 +26,7 @@ public class RestApiClient implements RestApiClient_Interface{
     private static final String REST_SERVICE_URL = RestApiProperties.getRestServiceUrl();
 
     /******************TEST*******************/
-    public String test()
+    public static String test()
             throws ControllerConnectionException,
             MySQLException,
             NoContentException {
@@ -99,9 +99,6 @@ public class RestApiClient implements RestApiClient_Interface{
     }
 
     public ArrayList<Order> getAllOrders() {
-        // TODO Ergänzen einer Abfrage an den Controller zum Erhalten aller Orders
-        // Fehler: TableID und itemIDs kommen nicht an, nur null
-
         System.out.println("Getting all orders...");
 
         RestTemplate restTemplate = new RestTemplate();

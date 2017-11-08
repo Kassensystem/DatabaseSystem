@@ -1,24 +1,25 @@
+import dhbw.sa.database.Item;
 import dhbw.sa.database.Order;
+import dhbw.sa.database.Table;
+import dhbw.sa.exceptions.ControllerConnectionException;
+import dhbw.sa.exceptions.MySQLException;
+import dhbw.sa.exceptions.NoContentException;
 import dhbw.sa.restApi.client.RestApiClient;
+import org.joda.time.DateTime;
 
 import java.util.ArrayList;
 
 
 public class RestApiClient_Test {
+    private static RestApiClient restApiClient = new RestApiClient();
 
     public static void main(String[] args) {
 
-        RestApiClient restApiClient = new RestApiClient();
-        try {
-            ArrayList<Order> allOrders = restApiClient.getAllOrders();
-            for (Order o: allOrders) {
-                System.out.println(o.getItems());
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        createOrder();
 
-        /*
+    }
+
+    static void test() {
         try {
             System.out.println(RestApiClient.test());
         } catch (ControllerConnectionException e) {
@@ -28,33 +29,78 @@ public class RestApiClient_Test {
         } catch (NoContentException e) {
             e.printStackTrace();
         }
+    }
 
-         /*catch(HttpServerErrorException e) {
-            System.out.println("--------\nSQL-Service ist nicht erreichbar!\n-----------");
-        } catch(Exception e) { //TODO
-            System.out.println("--------\nTabelle hat keinen Inhalt!\n-----------");
-        }*/
-
-        /*
+    static ArrayList<Order> getAllOrders() {
+        System.out.println("---------Get all orders---------");
         try {
-            for(Item i: getAllItems()) {
+            ArrayList<Order> allOrders = restApiClient.getAllOrders();
+            for (Order o: allOrders) {
+                System.out.println(o.getOrderID() + "\t" + o.getItems() + "\t" + o.getTable() + "\t" + o.getPrice());
+            }
+            return allOrders;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    static ArrayList<Item> getAllItems() {
+        System.out.println("---------Get all items---------");
+        try {
+            ArrayList<Item> allItems = restApiClient.getAllItems();
+            for(Item i: allItems) {
                 System.out.println(i.getItemID() + " \t  " + i.getName() + " \t " + i.getRetailprice() + " \t " + i.getQuantity());
             }
+            return allItems;
         } catch (Exception e) {
             e.printStackTrace();
         }
         System.out.println();
+        return null;
+    }
+
+    static ArrayList<Table> getAllTables() {
+        System.out.println("---------Get all tables---------");
         try {
-            for(Table t: getAllTables()) {
+            ArrayList<Table> allTables = restApiClient.getAllTables();
+            for(Table t: allTables) {
                 System.out.println(t.getTableID() + " \t " + t.getName());
             }
             System.out.println();
-
-            Order newOrder = new Order(getAllItems(), getAllTables().get(2), 7.89);
-            createOrder(newOrder);
+            return allTables;
         } catch (Exception e) {
             e.printStackTrace();
         }
-        */
+        return null;
+    }
+
+    static void createOrder() {
+
+        //Items zusammenstellen
+        ArrayList<Item> orderItems = new ArrayList<>();
+        double price = 0;
+        for(Item i: restApiClient.getAllItems()) {
+            int id = i.getItemID();
+            if(id == 4 || id ==5) {
+                orderItems.add(i);
+                price += i.getRetailprice();
+            }
+        }
+        String itemIDs = Order.joinIDsIntoString(orderItems);
+        //Table festlegen
+        Table table = new Table();
+        for(Table t: restApiClient.getAllTables()) {
+            if(t.getTableID() == 5)
+                table = t;
+        }
+
+        Order order = new Order(itemIDs, table.getTableID(), price, DateTime.now(), true);
+
+        restApiClient.createOrder(order);
+    }
+
+    static void updateOrder() {
+
     }
 }
