@@ -1,9 +1,9 @@
 package dhbw.sa.database;
 
 public class Gastronomy {
-    private static String name = "Test Gastronomie";
-    private static String adress = "Test Straße\n12345 Testhausen";
-    private static String telephonenumber = "+49 123 456789";
+    private static String name = "Restaurante Gaumenfreude";
+    private static String adress = "Gourmetstraße 11\n12345 Leckerschmeckerhausen";
+    private static String telephonenumber = "+49 541 466 655";
 
     public static String getName() {
         return name;

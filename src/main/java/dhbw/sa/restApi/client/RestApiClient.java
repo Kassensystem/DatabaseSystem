@@ -70,7 +70,7 @@ public class RestApiClient implements RestApiClient_Interface{
 
     /*******************GET*******************/
 
-    public ArrayList<Item> getAllItems() throws Exception {
+    public ArrayList<Item> getAllItems() {
         System.out.println("Getting all items...");
 
         RestTemplate restTemplate = new RestTemplate();
@@ -84,7 +84,7 @@ public class RestApiClient implements RestApiClient_Interface{
         return items;
     }
 
-    public ArrayList<Table> getAllTables() throws Exception {
+    public ArrayList<Table> getAllTables() {
         System.out.println("Getting all tables...");
 
         RestTemplate restTemplate = new RestTemplate();
@@ -98,7 +98,7 @@ public class RestApiClient implements RestApiClient_Interface{
         return tables;
     }
 
-    public ArrayList<Order> getAllOrders() throws Exception {
+    public ArrayList<Order> getAllOrders() {
         // TODO Ergänzen einer Abfrage an den Controller zum Erhalten aller Orders
         // Fehler: TableID und itemIDs kommen nicht an, nur null
 
@@ -117,14 +117,14 @@ public class RestApiClient implements RestApiClient_Interface{
 
     /******************POST*******************/
 
-    public void createOrder(Order order) throws Exception {
+    public void createOrder(Order order) {
         System.out.println("Creating order...");
 
         RestTemplate restTemplate = new RestTemplate();
         URI uri = restTemplate.postForLocation(REST_SERVICE_URL + "/order/", order, Order.class);
     }
 
-    public void updateOrder(Order order) throws Exception {
+    public void updateOrder(Order order) {
         // TODO
     }
 

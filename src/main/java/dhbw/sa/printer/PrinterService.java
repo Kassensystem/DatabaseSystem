@@ -9,6 +9,7 @@ import org.joda.time.DateTime;
 import javax.print.*;
 import javax.print.attribute.HashPrintRequestAttributeSet;
 import javax.print.attribute.PrintRequestAttributeSet;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -91,16 +92,21 @@ public class PrinterService {
                         + "\n"
                         + "Ihre Bestellung mit der ID " + printableOrder.getOrderID() + ":\n";
 
+        DecimalFormat df = new DecimalFormat("#0.00");
         for(Item i: printableOrder.getItems()) {
-            formattedOrderText += i.getName() + "\t\t" + i.getRetailprice() + " EUR\n";
+            double price = i.getRetailprice();
+
+            formattedOrderText += i.getName() + "\t\t" + df.format(price) + " EUR\n";
         }
 
-        double mwst = Math.round(printableOrder.getPrice()*0.19 * 100d) / 100d;
+        double mwst = Math.round(printableOrder.getPrice()*0.199 * 100d) / 100d;
 
-        formattedOrderText += "MWST 19%\t" + mwst + " EUR\n"
-                + "Summe\t" + printableOrder.getPrice() + " EUR\n"
+        formattedOrderText +=
+                "________________________\n"
+                + "Summe\t\t" + df.format(printableOrder.getPrice()) + " EUR\n"
+                + "MWST 19%\t" + df.format(mwst) + " EUR\n"
                 + "\n"
-                + "Sie saßen am Tisch " + printableOrder.getTableName() + ".\n"
+                + "Sie saßen an Tisch " + printableOrder.getTableName() + ".\n"
                 + "Vielen Dank für Ihren Besuch!\n" + printableOrder.getDate() + "\n\n";
 
         return formattedOrderText;

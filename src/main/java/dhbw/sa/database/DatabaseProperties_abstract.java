@@ -7,8 +7,8 @@ public abstract class DatabaseProperties_abstract {
     private static String password;
 
     DatabaseProperties_abstract(String username, String password) {
-        this.username = username;
-        this.password = password;
+        DatabaseProperties_abstract.username = username;
+        DatabaseProperties_abstract.password = password;
     }
 
     public String getUrl() {
@@ -18,10 +18,10 @@ public abstract class DatabaseProperties_abstract {
     public String getDatabase() { return this.database; }
 
     public String getUsername() {
-        return this.username;
+        return username;
     }
 
     public String getPassword() {
-        return this.password;
+        return password;
     }
 }
