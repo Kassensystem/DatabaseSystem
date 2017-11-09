@@ -176,13 +176,14 @@ public class DatabaseService implements DatabaseService_Interface{
 
         try {
             String query =  "UPDATE " + dbp.getDatabase() + ".items " +
-                            "SET name = ?, retailprice = ?, quantity = ? " +
+                            "SET name = ?, retailprice = ?, quantity = ?, available = ? " +
                             "WHERE ID = " + itemID;
             PreparedStatement pst = connection.prepareStatement(query);
 
             pst.setString(1, item.getName());
             pst.setDouble(2, item.getRetailprice());
             pst.setInt(3, item.getQuantity());
+            pst.setBoolean(4, item.isAvailable());
             pst.executeUpdate();
         } catch(SQLException e) { e.printStackTrace(); }
     }
@@ -207,7 +208,7 @@ public class DatabaseService implements DatabaseService_Interface{
 
         try {
             String query =  "UPDATE " + dbp.getDatabase() + ".orders " +
-                            "SET itemIDs = ?, price = ?, date = ?, tableID = ? " +
+                            "SET itemIDs = ?, price = ?, date = ?, tableID = ?, paid = ? " +
                             "WHERE orderID = " + orderID;
             PreparedStatement pst = connection.prepareStatement(query);
 
@@ -215,6 +216,7 @@ public class DatabaseService implements DatabaseService_Interface{
             pst.setDouble(2, order.getPrice());
             pst.setObject(3, convertJodaDateTimeToSqlTimestamp(order.getDate()) );
             pst.setInt(4, order.getTable());
+            pst.setBoolean(5, order.isPaid());
             pst.executeUpdate();
         } catch(SQLException e) { e.printStackTrace(); }
     }

@@ -15,8 +15,8 @@ public class RestApiClient_Test {
 
     public static void main(String[] args) {
 
-        //updateOrder(8, testOrder());
-        createOrder();
+        updateOrder(8, testOrder());
+        //createOrder();
 
     }
 
@@ -103,6 +103,6 @@ public class RestApiClient_Test {
                 table = t;
         }
 
-        return new Order(itemIDs, table.getTableID(), price, DateTime.now(), false);
+        return new Order(itemIDs, table.getTableID(), price, DateTime.now(), true);
     }
 }
