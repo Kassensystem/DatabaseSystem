@@ -15,6 +15,7 @@ public class RestApiClient_Test {
 
     public static void main(String[] args) {
 
+        //updateOrder(8, testOrder());
         createOrder();
 
     }
@@ -76,7 +77,14 @@ public class RestApiClient_Test {
     }
 
     static void createOrder() {
+        restApiClient.createOrder(testOrder());
+    }
 
+    static void updateOrder(int orderID, Order testOrder) {
+        restApiClient.updateOrder(orderID, testOrder);
+    }
+
+    private static Order testOrder() {
         //Items zusammenstellen
         ArrayList<Item> orderItems = new ArrayList<>();
         double price = 0;
@@ -95,12 +103,6 @@ public class RestApiClient_Test {
                 table = t;
         }
 
-        Order order = new Order(itemIDs, table.getTableID(), price, DateTime.now(), true);
-
-        restApiClient.createOrder(order);
-    }
-
-    static void updateOrder() {
-
+        return new Order(itemIDs, table.getTableID(), price, DateTime.now(), false);
     }
 }

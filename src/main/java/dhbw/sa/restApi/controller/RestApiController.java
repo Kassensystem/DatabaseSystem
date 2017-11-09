@@ -68,21 +68,12 @@ public class RestApiController {
 
     @RequestMapping(value = "/order/", method = RequestMethod.POST)
     public void createOrder(@RequestBody Order order) {
-        order.setDate(DateTime.now());
         databaseService.addOrder(order);
     }
 
-    /**
-     * neue Methode zum Updaten einer Order ergänzen
-     */
-    @RequestMapping(value = "/order/{id}", method = RequestMethod.POST)
-    public void updateOrder(@RequestBody Order order) {
-        /**
-         *  TODO Ergänzen einer Aktualisierung einer Order mit gegebener ID
-         *  --> ID wird in Pfad mit angegeben
-         *  POST oder PUT oder was zum Aktualisieren?
-         */
-        //databaseService.updateOrder(ID, order);
+    @RequestMapping(value = "/order/{orderID}", method = RequestMethod.PUT)
+    public @ResponseBody void updateOrder(@PathVariable("orderID") int orderID, @RequestBody Order order) {
+        databaseService.updateOrder(orderID, order);
     }
 
 }

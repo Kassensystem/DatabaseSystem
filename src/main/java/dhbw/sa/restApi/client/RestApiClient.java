@@ -121,8 +121,16 @@ public class RestApiClient implements RestApiClient_Interface{
         URI uri = restTemplate.postForLocation(REST_SERVICE_URL + "/order/", order, Order.class);
     }
 
-    public void updateOrder(Order order) {
-        // TODO
+    @Override
+    public void updateOrder(Order order) throws Exception {
+
+    }
+
+    public void updateOrder(int orderID, Order order) {
+        System.out.println("Updating order...");
+
+        RestTemplate restTemplate = new RestTemplate();
+        restTemplate.put(REST_SERVICE_URL + "/order/" + orderID, order);
     }
 
 }

@@ -100,10 +100,6 @@ public class Order {
         this.paid = true;
     }
 
-    public void setOrderID(int orderID) {
-        this.orderID = orderID;
-    }
-
     public void setTableID(int tableID) {
         this.tableID = tableID;
     }
