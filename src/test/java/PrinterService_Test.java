@@ -1,5 +1,5 @@
-import dhbw.sa.database.DatabaseService;
-import dhbw.sa.printer.PrinterService;
+import dhbw.sa.databaseApplication.database.DatabaseService;
+import dhbw.sa.databaseApplication.printer.PrinterService;
 
 public class PrinterService_Test {
     private static DatabaseService dbs = new DatabaseService();
@@ -9,7 +9,7 @@ public class PrinterService_Test {
         //PrinterTest
         PrinterService printerService = new PrinterService();
         //printerService.printOrder(dbs.getOrderById(4), dbs.getAllItems(), dbs.getAllTables());
-        printerService.printOrder(dbs.getOrderById(1), dbs.getAllItems(), dbs.getAllTables());
+        printerService.printOrder(dbs.getOrderById(4), dbs.getAllItems(), dbs.getAllTables());
         //printerService.printOrder(dbs.getOrderById(3), dbs.getAllItems(), dbs.getAllTables());
     }
 }

@@ -1,8 +1,7 @@
-import dhbw.sa.database.DatabaseService;
-import dhbw.sa.database.Item;
-import dhbw.sa.database.Order;
-import dhbw.sa.database.Table;
-import dhbw.sa.printer.PrinterService;
+import dhbw.sa.databaseApplication.database.DatabaseService;
+import dhbw.sa.databaseApplication.database.entity.Item;
+import dhbw.sa.databaseApplication.database.entity.Order;
+import dhbw.sa.databaseApplication.database.entity.Table;
 import org.joda.time.DateTime;
 
 import java.util.ArrayList;

@@ -1,10 +1,10 @@
-import dhbw.sa.database.Item;
-import dhbw.sa.database.Order;
-import dhbw.sa.database.Table;
-import dhbw.sa.exceptions.ControllerConnectionException;
-import dhbw.sa.exceptions.MySQLException;
-import dhbw.sa.exceptions.NoContentException;
-import dhbw.sa.restApi.client.RestApiClient;
+import dhbw.sa.databaseApplication.database.entity.Item;
+import dhbw.sa.databaseApplication.database.entity.Order;
+import dhbw.sa.databaseApplication.database.entity.Table;
+import dhbw.sa.databaseApplication.exceptions.ControllerConnectionException;
+import dhbw.sa.databaseApplication.exceptions.MySQLException;
+import dhbw.sa.databaseApplication.exceptions.NoContentException;
+import dhbw.sa.databaseApplication.restApi.client.RestApiClient;
 import org.joda.time.DateTime;
 
 import java.util.ArrayList;
@@ -15,7 +15,7 @@ public class RestApiClient_Test {
 
     public static void main(String[] args) {
 
-        updateOrder(8, testOrder());
+        //updateOrder(8, testOrder());
         //createOrder();
 
     }
