@@ -25,6 +25,10 @@ public class RestApiClient implements RestApiClient_Interface {
 
     private static final String REST_SERVICE_URL = RestApiProperties.getRestServiceUrl();
 
+    public RestApiClient() {
+        //default
+    }
+
     /******************TEST*******************/
     public static String test()
             throws ControllerConnectionException,

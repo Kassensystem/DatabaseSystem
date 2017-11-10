@@ -611,7 +611,7 @@ public class Util {
         return false;
     }
 
-    /** Main MySQL JDBC package name */
+    /** MainUserApplication MySQL JDBC package name */
     private static final String MYSQL_JDBC_PACKAGE_ROOT;
 
     static {

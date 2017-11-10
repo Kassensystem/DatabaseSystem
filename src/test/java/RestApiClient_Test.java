@@ -15,7 +15,7 @@ public class RestApiClient_Test {
 
     public static void main(String[] args) {
 
-        //updateOrder(8, testOrder());
+        updateOrder(8, testOrder());
         //createOrder();
 
     }

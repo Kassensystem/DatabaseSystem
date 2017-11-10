@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="module_kassensystem_rest" default="compile.module.kassensystem_rest">
+  <dirname property="module.kassensystem_rest.basedir" file="${ant.file.module_kassensystem_rest}"/>
+  
+  <property name="module.jdk.home.kassensystem_rest" value="${project.jdk.home}"/>
+  <property name="module.jdk.bin.kassensystem_rest" value="${project.jdk.bin}"/>
+  <property name="module.jdk.classpath.kassensystem_rest" value="${project.jdk.classpath}"/>
+  
+  <property name="compiler.args.kassensystem_rest" value="-encoding UTF-8 -source 1.8 -target 1.8 ${compiler.args}"/>
+  
+  <property name="kassensystem_rest.output.dir" value="${module.kassensystem_rest.basedir}/target/classes"/>
+  <property name="kassensystem_rest.testoutput.dir" value="${module.kassensystem_rest.basedir}/target/test-classes"/>
+  
+  <path id="kassensystem_rest.module.bootclasspath">
+    <!-- Paths to be included in compilation bootclasspath -->
+  </path>
+  
+  <path id="kassensystem_rest.module.production.classpath">
+    <path refid="${module.jdk.classpath.kassensystem_rest}"/>
+    <path refid="library.joda-time-2.9.classpath"/>
+    <path refid="library.maven:_org.springframework.boot:spring-boot-starter-web:1.5.8.release.classpath"/>
+    <path refid="library.maven:_org.springframework.boot:spring-boot-starter:1.5.8.release.classpath"/>
+    <path refid="library.maven:_org.springframework.boot:spring-boot:1.5.8.release.classpath"/>
+    <path refid="library.maven:_org.springframework.boot:spring-boot-autoconfigure:1.5.8.release.classpath"/>
+    <path refid="library.maven:_org.springframework.boot:spring-boot-starter-logging:1.5.8.release.classpath"/>
+    <path refid="library.maven:_ch.qos.logback:logback-classic:1.1.11.classpath"/>
+    <path refid="library.maven:_ch.qos.logback:logback-core:1.1.11.classpath"/>
+    <path refid="library.maven:_org.slf4j:slf4j-api:1.7.25.classpath"/>
+    <path refid="library.maven:_org.slf4j:jcl-over-slf4j:1.7.25.classpath"/>
+    <path refid="library.maven:_org.slf4j:jul-to-slf4j:1.7.25.classpath"/>
+    <path refid="library.maven:_org.slf4j:log4j-over-slf4j:1.7.25.classpath"/>
+    <path refid="library.maven:_org.springframework:spring-core:4.3.12.release.classpath"/>
+    <path refid="library.maven:_org.springframework.boot:spring-boot-starter-tomcat:1.5.8.release.classpath"/>
+    <path refid="library.maven:_org.apache.tomcat.embed:tomcat-embed-core:8.5.23.classpath"/>
+    <path refid="library.maven:_org.apache.tomcat:tomcat-annotations-api:8.5.23.classpath"/>
+    <path refid="library.maven:_org.apache.tomcat.embed:tomcat-embed-el:8.5.23.classpath"/>
+    <path refid="library.maven:_org.apache.tomcat.embed:tomcat-embed-websocket:8.5.23.classpath"/>
+    <path refid="library.maven:_org.hibernate:hibernate-validator:5.3.5.final.classpath"/>
+    <path refid="library.maven:_javax.validation:validation-api:1.1.0.final.classpath"/>
+    <path refid="library.maven:_org.jboss.logging:jboss-logging:3.3.1.final.classpath"/>
+    <path refid="library.maven:_com.fasterxml:classmate:1.3.4.classpath"/>
+    <path refid="library.maven:_com.fasterxml.jackson.core:jackson-databind:2.8.10.classpath"/>
+    <path refid="library.maven:_org.springframework:spring-web:4.3.12.release.classpath"/>
+    <path refid="library.maven:_org.springframework:spring-aop:4.3.12.release.classpath"/>
+    <path refid="library.maven:_org.springframework:spring-beans:4.3.12.release.classpath"/>
+    <path refid="library.maven:_org.springframework:spring-context:4.3.12.release.classpath"/>
+    <path refid="library.maven:_org.springframework:spring-webmvc:4.3.12.release.classpath"/>
+    <path refid="library.maven:_org.springframework:spring-expression:4.3.12.release.classpath"/>
+    <path refid="library.maven:_com.fasterxml.jackson.datatype:jackson-datatype-joda:2.8.10.classpath"/>
+    <path refid="library.maven:_com.fasterxml.jackson.core:jackson-annotations:2.8.0.classpath"/>
+    <path refid="library.maven:_com.fasterxml.jackson.core:jackson-core:2.8.10.classpath"/>
+    <path refid="library.maven:_joda-time:joda-time:2.9.9.classpath"/>
+  </path>
+  
+  <path id="kassensystem_rest.runtime.production.module.classpath">
+    <pathelement location="${kassensystem_rest.output.dir}"/>
+    <path refid="library.joda-time-2.9.classpath"/>
+    <path refid="library.maven:_org.springframework.boot:spring-boot-starter-web:1.5.8.release.classpath"/>
+    <path refid="library.maven:_org.springframework.boot:spring-boot-starter:1.5.8.release.classpath"/>
+    <path refid="library.maven:_org.springframework.boot:spring-boot:1.5.8.release.classpath"/>
+    <path refid="library.maven:_org.springframework.boot:spring-boot-autoconfigure:1.5.8.release.classpath"/>
+    <path refid="library.maven:_org.springframework.boot:spring-boot-starter-logging:1.5.8.release.classpath"/>
+    <path refid="library.maven:_ch.qos.logback:logback-classic:1.1.11.classpath"/>
+    <path refid="library.maven:_ch.qos.logback:logback-core:1.1.11.classpath"/>
+    <path refid="library.maven:_org.slf4j:slf4j-api:1.7.25.classpath"/>
+    <path refid="library.maven:_org.slf4j:jcl-over-slf4j:1.7.25.classpath"/>
+    <path refid="library.maven:_org.slf4j:jul-to-slf4j:1.7.25.classpath"/>
+    <path refid="library.maven:_org.slf4j:log4j-over-slf4j:1.7.25.classpath"/>
+    <path refid="library.maven:_org.springframework:spring-core:4.3.12.release.classpath"/>
+    <path refid="library.maven:_org.yaml:snakeyaml:1.17.classpath"/>
+    <path refid="library.maven:_org.springframework.boot:spring-boot-starter-tomcat:1.5.8.release.classpath"/>
+    <path refid="library.maven:_org.apache.tomcat.embed:tomcat-embed-core:8.5.23.classpath"/>
+    <path refid="library.maven:_org.apache.tomcat:tomcat-annotations-api:8.5.23.classpath"/>
+    <path refid="library.maven:_org.apache.tomcat.embed:tomcat-embed-el:8.5.23.classpath"/>
+    <path refid="library.maven:_org.apache.tomcat.embed:tomcat-embed-websocket:8.5.23.classpath"/>
+    <path refid="library.maven:_org.hibernate:hibernate-validator:5.3.5.final.classpath"/>
+    <path refid="library.maven:_javax.validation:validation-api:1.1.0.final.classpath"/>
+    <path refid="library.maven:_org.jboss.logging:jboss-logging:3.3.1.final.classpath"/>
+    <path refid="library.maven:_com.fasterxml:classmate:1.3.4.classpath"/>
+    <path refid="library.maven:_com.fasterxml.jackson.core:jackson-databind:2.8.10.classpath"/>
+    <path refid="library.maven:_org.springframework:spring-web:4.3.12.release.classpath"/>
+    <path refid="library.maven:_org.springframework:spring-aop:4.3.12.release.classpath"/>
+    <path refid="library.maven:_org.springframework:spring-beans:4.3.12.release.classpath"/>
+    <path refid="library.maven:_org.springframework:spring-context:4.3.12.release.classpath"/>
+    <path refid="library.maven:_org.springframework:spring-webmvc:4.3.12.release.classpath"/>
+    <path refid="library.maven:_org.springframework:spring-expression:4.3.12.release.classpath"/>
+    <path refid="library.maven:_com.fasterxml.jackson.datatype:jackson-datatype-joda:2.8.10.classpath"/>
+    <path refid="library.maven:_com.fasterxml.jackson.core:jackson-annotations:2.8.0.classpath"/>
+    <path refid="library.maven:_com.fasterxml.jackson.core:jackson-core:2.8.10.classpath"/>
+    <path refid="library.maven:_joda-time:joda-time:2.9.9.classpath"/>
+  </path>
+  
+  <path id="kassensystem_rest.module.classpath">
+    <path refid="${module.jdk.classpath.kassensystem_rest}"/>
+    <pathelement location="${kassensystem_rest.output.dir}"/>
+    <path refid="library.joda-time-2.9.classpath"/>
+    <path refid="library.maven:_org.springframework.boot:spring-boot-starter-web:1.5.8.release.classpath"/>
+    <path refid="library.maven:_org.springframework.boot:spring-boot-starter:1.5.8.release.classpath"/>
+    <path refid="library.maven:_org.springframework.boot:spring-boot:1.5.8.release.classpath"/>
+    <path refid="library.maven:_org.springframework.boot:spring-boot-autoconfigure:1.5.8.release.classpath"/>
+    <path refid="library.maven:_org.springframework.boot:spring-boot-starter-logging:1.5.8.release.classpath"/>
+    <path refid="library.maven:_ch.qos.logback:logback-classic:1.1.11.classpath"/>
+    <path refid="library.maven:_ch.qos.logback:logback-core:1.1.11.classpath"/>
+    <path refid="library.maven:_org.slf4j:slf4j-api:1.7.25.classpath"/>
+    <path refid="library.maven:_org.slf4j:jcl-over-slf4j:1.7.25.classpath"/>
+    <path refid="library.maven:_org.slf4j:jul-to-slf4j:1.7.25.classpath"/>
+    <path refid="library.maven:_org.slf4j:log4j-over-slf4j:1.7.25.classpath"/>
+    <path refid="library.maven:_org.springframework:spring-core:4.3.12.release.classpath"/>
+    <path refid="library.maven:_org.yaml:snakeyaml:1.17.classpath"/>
+    <path refid="library.maven:_org.springframework.boot:spring-boot-starter-tomcat:1.5.8.release.classpath"/>
+    <path refid="library.maven:_org.apache.tomcat.embed:tomcat-embed-core:8.5.23.classpath"/>
+    <path refid="library.maven:_org.apache.tomcat:tomcat-annotations-api:8.5.23.classpath"/>
+    <path refid="library.maven:_org.apache.tomcat.embed:tomcat-embed-el:8.5.23.classpath"/>
+    <path refid="library.maven:_org.apache.tomcat.embed:tomcat-embed-websocket:8.5.23.classpath"/>
+    <path refid="library.maven:_org.hibernate:hibernate-validator:5.3.5.final.classpath"/>
+    <path refid="library.maven:_javax.validation:validation-api:1.1.0.final.classpath"/>
+    <path refid="library.maven:_org.jboss.logging:jboss-logging:3.3.1.final.classpath"/>
+    <path refid="library.maven:_com.fasterxml:classmate:1.3.4.classpath"/>
+    <path refid="library.maven:_com.fasterxml.jackson.core:jackson-databind:2.8.10.classpath"/>
+    <path refid="library.maven:_org.springframework:spring-web:4.3.12.release.classpath"/>
+    <path refid="library.maven:_org.springframework:spring-aop:4.3.12.release.classpath"/>
+    <path refid="library.maven:_org.springframework:spring-beans:4.3.12.release.classpath"/>
+    <path refid="library.maven:_org.springframework:spring-context:4.3.12.release.classpath"/>
+    <path refid="library.maven:_org.springframework:spring-webmvc:4.3.12.release.classpath"/>
+    <path refid="library.maven:_org.springframework:spring-expression:4.3.12.release.classpath"/>
+    <path refid="library.maven:_com.fasterxml.jackson.datatype:jackson-datatype-joda:2.8.10.classpath"/>
+    <path refid="library.maven:_com.fasterxml.jackson.core:jackson-annotations:2.8.0.classpath"/>
+    <path refid="library.maven:_com.fasterxml.jackson.core:jackson-core:2.8.10.classpath"/>
+    <path refid="library.maven:_joda-time:joda-time:2.9.9.classpath"/>
+  </path>
+  
+  <path id="kassensystem_rest.runtime.module.classpath">
+    <pathelement location="${kassensystem_rest.testoutput.dir}"/>
+    <pathelement location="${kassensystem_rest.output.dir}"/>
+    <path refid="library.joda-time-2.9.classpath"/>
+    <path refid="library.maven:_org.springframework.boot:spring-boot-starter-web:1.5.8.release.classpath"/>
+    <path refid="library.maven:_org.springframework.boot:spring-boot-starter:1.5.8.release.classpath"/>
+    <path refid="library.maven:_org.springframework.boot:spring-boot:1.5.8.release.classpath"/>
+    <path refid="library.maven:_org.springframework.boot:spring-boot-autoconfigure:1.5.8.release.classpath"/>
+    <path refid="library.maven:_org.springframework.boot:spring-boot-starter-logging:1.5.8.release.classpath"/>
+    <path refid="library.maven:_ch.qos.logback:logback-classic:1.1.11.classpath"/>
+    <path refid="library.maven:_ch.qos.logback:logback-core:1.1.11.classpath"/>
+    <path refid="library.maven:_org.slf4j:slf4j-api:1.7.25.classpath"/>
+    <path refid="library.maven:_org.slf4j:jcl-over-slf4j:1.7.25.classpath"/>
+    <path refid="library.maven:_org.slf4j:jul-to-slf4j:1.7.25.classpath"/>
+    <path refid="library.maven:_org.slf4j:log4j-over-slf4j:1.7.25.classpath"/>
+    <path refid="library.maven:_org.springframework:spring-core:4.3.12.release.classpath"/>
+    <path refid="library.maven:_org.yaml:snakeyaml:1.17.classpath"/>
+    <path refid="library.maven:_org.springframework.boot:spring-boot-starter-tomcat:1.5.8.release.classpath"/>
+    <path refid="library.maven:_org.apache.tomcat.embed:tomcat-embed-core:8.5.23.classpath"/>
+    <path refid="library.maven:_org.apache.tomcat:tomcat-annotations-api:8.5.23.classpath"/>
+    <path refid="library.maven:_org.apache.tomcat.embed:tomcat-embed-el:8.5.23.classpath"/>
+    <path refid="library.maven:_org.apache.tomcat.embed:tomcat-embed-websocket:8.5.23.classpath"/>
+    <path refid="library.maven:_org.hibernate:hibernate-validator:5.3.5.final.classpath"/>
+    <path refid="library.maven:_javax.validation:validation-api:1.1.0.final.classpath"/>
+    <path refid="library.maven:_org.jboss.logging:jboss-logging:3.3.1.final.classpath"/>
+    <path refid="library.maven:_com.fasterxml:classmate:1.3.4.classpath"/>
+    <path refid="library.maven:_com.fasterxml.jackson.core:jackson-databind:2.8.10.classpath"/>
+    <path refid="library.maven:_org.springframework:spring-web:4.3.12.release.classpath"/>
+    <path refid="library.maven:_org.springframework:spring-aop:4.3.12.release.classpath"/>
+    <path refid="library.maven:_org.springframework:spring-beans:4.3.12.release.classpath"/>
+    <path refid="library.maven:_org.springframework:spring-context:4.3.12.release.classpath"/>
+    <path refid="library.maven:_org.springframework:spring-webmvc:4.3.12.release.classpath"/>
+    <path refid="library.maven:_org.springframework:spring-expression:4.3.12.release.classpath"/>
+    <path refid="library.maven:_com.fasterxml.jackson.datatype:jackson-datatype-joda:2.8.10.classpath"/>
+    <path refid="library.maven:_com.fasterxml.jackson.core:jackson-annotations:2.8.0.classpath"/>
+    <path refid="library.maven:_com.fasterxml.jackson.core:jackson-core:2.8.10.classpath"/>
+    <path refid="library.maven:_joda-time:joda-time:2.9.9.classpath"/>
+  </path>
+  
+  
+  <patternset id="excluded.from.module.kassensystem_rest">
+    <patternset refid="ignored.files"/>
+  </patternset>
+  
+  <patternset id="excluded.from.compilation.kassensystem_rest">
+    <patternset refid="excluded.from.module.kassensystem_rest"/>
+  </patternset>
+  
+  <path id="kassensystem_rest.module.sourcepath">
+    <dirset dir="${module.kassensystem_rest.basedir}">
+      <include name="src/main/java"/>
+      <include name="src/main/resources"/>
+    </dirset>
+  </path>
+  
+  <path id="kassensystem_rest.module.test.sourcepath">
+    <dirset dir="${module.kassensystem_rest.basedir}">
+      <include name="src/test/java"/>
+    </dirset>
+  </path>
+  
+  
+  <target name="compile.module.kassensystem_rest" depends="compile.module.kassensystem_rest.production,compile.module.kassensystem_rest.tests" description="Compile module kassensystem_rest"/>
+  
+  <target name="compile.module.kassensystem_rest.production" depends="register.custom.compilers" description="Compile module kassensystem_rest; production classes">
+    <mkdir dir="${kassensystem_rest.output.dir}"/>
+    <javac2 destdir="${kassensystem_rest.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.kassensystem_rest}/javac">
+      <compilerarg line="${compiler.args.kassensystem_rest}"/>
+      <bootclasspath refid="kassensystem_rest.module.bootclasspath"/>
+      <classpath refid="kassensystem_rest.module.production.classpath"/>
+      <src refid="kassensystem_rest.module.sourcepath"/>
+      <patternset refid="excluded.from.compilation.kassensystem_rest"/>
+    </javac2>
+    
+    <copy todir="${kassensystem_rest.output.dir}">
+      <fileset dir="${module.kassensystem_rest.basedir}/src/main/java">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+      <fileset dir="${module.kassensystem_rest.basedir}/src/main/resources">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="compile.module.kassensystem_rest.tests" depends="register.custom.compilers,compile.module.kassensystem_rest.production" description="compile module kassensystem_rest; test classes" unless="skip.tests">
+    <mkdir dir="${kassensystem_rest.testoutput.dir}"/>
+    <javac2 destdir="${kassensystem_rest.testoutput.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.kassensystem_rest}/javac">
+      <compilerarg line="${compiler.args.kassensystem_rest}"/>
+      <bootclasspath refid="kassensystem_rest.module.bootclasspath"/>
+      <classpath refid="kassensystem_rest.module.classpath"/>
+      <src refid="kassensystem_rest.module.test.sourcepath"/>
+      <patternset refid="excluded.from.compilation.kassensystem_rest"/>
+    </javac2>
+    
+    <copy todir="${kassensystem_rest.testoutput.dir}">
+      <fileset dir="${module.kassensystem_rest.basedir}/src/test/java">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="clean.module.kassensystem_rest" description="cleanup module">
+    <delete dir="${kassensystem_rest.output.dir}"/>
+    <delete dir="${kassensystem_rest.testoutput.dir}"/>
+  </target>
+</project>
