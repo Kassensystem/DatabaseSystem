@@ -6,7 +6,7 @@
 
     <groupId>com.marvin</groupId>
     <artifactId>springBoot</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>kassensystem_databaseServer</version>
 
     <parent>
         <groupId>org.springframework.boot</groupId>
@@ -24,6 +24,14 @@
             <groupId>com.fasterxml.jackson.datatype</groupId>
             <artifactId>jackson-datatype-joda</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>5.1.26</version>
+        </dependency>
+
+
     </dependencies>
 
     <properties>
@@ -32,10 +40,36 @@
 
 
     <build>
+        <!-- To define the plugin version in your parent POM -->
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-maven-plugin</artifactId>
+                    <version>1.5.8.RELEASE</version>
+
+                    <configuration>
+                        <mainClass>dhbw.sa.databaseApplication.Main</mainClass>
+                        <layout>ZIP</layout>
+                    </configuration>
+
+                    <executions>
+                        <execution>
+                            <goals>
+                                <goal>repackage</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+
+                </plugin>
+            </plugins>
+        </pluginManagement>
+        <!-- To use the plugin goals in your POM or parent POM -->
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>1.5.8.RELEASE</version>
             </plugin>
         </plugins>
     </build>

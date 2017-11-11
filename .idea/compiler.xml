@@ -6,10 +6,12 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="kassensystem_database" />
         <module name="kassensystem_rest" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="kassensystem_database" target="1.8" />
       <module name="kassensystem_rest" target="1.8" />
     </bytecodeTargetLevel>
   </component>
