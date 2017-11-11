@@ -238,6 +238,9 @@ public class DatabaseService implements DatabaseService_Interface{
     }
 
     //Drucken einer Order
+    public void printOrder(int orderID) {
+        printOrder(getOrderById(orderID));
+    }
     public void printOrder(Order order) {
         PrinterService printerService = new PrinterService();
         printerService.printOrder(order,  this.getAllItems(), this.getAllTables());

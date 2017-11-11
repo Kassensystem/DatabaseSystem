@@ -75,4 +75,9 @@ public class RestApiController {
         databaseService.updateOrder(orderID, order);
     }
 
+    @RequestMapping(value = "/print/order/{orderID}")
+    public @ResponseBody void printOrder(@PathVariable("orderID") int orderID) {
+        databaseService.printOrder(orderID);
+    }
+
 }
