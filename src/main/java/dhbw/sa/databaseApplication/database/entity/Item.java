@@ -22,6 +22,13 @@ public class Item {
         this.available = available;
     }
 
+    public Item(int itemID, String name, double retailprice, boolean available){
+        this.itemID = itemID;
+        this.name = name;
+        this.retailprice = retailprice;
+        this.available = available;
+    }
+
     public Item(String name, double retailprice, int quantity, boolean available){
         this.name = name;
         this.retailprice = retailprice;

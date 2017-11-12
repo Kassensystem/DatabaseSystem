@@ -1,5 +1,6 @@
 import dhbw.sa.databaseApplication.database.DatabaseService;
 import dhbw.sa.databaseApplication.database.entity.Item;
+import dhbw.sa.databaseApplication.database.entity.Itemdelivery;
 import dhbw.sa.databaseApplication.database.entity.Order;
 import dhbw.sa.databaseApplication.database.entity.Table;
 import org.joda.time.DateTime;
@@ -20,6 +21,12 @@ public class DatabaseService_Test {
 
     public static void main(String[] args) {
 
+        Item newItem = new Item("Apfel", 0.75, 55, true);
+        dbs.addItem(newItem);
+
+        //Itemdelivery itemdelivery = new Itemdelivery(5, 20);
+        //dbs.addItemdelivery(itemdelivery);
+        //System.out.println(dbs.getItemQuantity(5));
 
         /*
         //Add-Test
@@ -56,7 +63,7 @@ public class DatabaseService_Test {
     }
 
     //region Test der Get-Methoden
-    private static void getOrders() {
+    private static ArrayList<Order> getOrders() {
         ArrayList<Order> allOrders = dbs.getAllOrders();
 
         System.out.println("----------------All-Orders-Test----------------");
@@ -65,8 +72,9 @@ public class DatabaseService_Test {
                     + "\t" + o.getPrice() + "\t" + o.getDate()
                     + "\t" + o.getTable() + "\t" + o.isPaid());
         }
+        return allOrders;
     }
-    private static void getItems() {
+    private static ArrayList<Item> getItems() {
         ArrayList<Item> allItems = dbs.getAllItems();
 
         System.out.println("-----------------All-Items-Test-----------------");
@@ -75,14 +83,16 @@ public class DatabaseService_Test {
                             + i.getRetailprice() + "\t" + i.getQuantity() + "\t"
                             + i.isAvailable());
         }
+        return allItems;
     }
-    private static void getTables() {
+    private static ArrayList<Table> getTables() {
         ArrayList<Table> allTables = dbs.getAllTables();
 
         System.out.println("-------------All-Tables-Test---------------");
         for(Table t: allTables) {
             System.out.println(t.getTableID() + "\t" + t.getName());
         }
+        return allTables;
     }
     //endregion
 

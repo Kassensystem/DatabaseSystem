@@ -1,6 +1,7 @@
 package dhbw.sa.databaseApplication.database;
 
 import dhbw.sa.databaseApplication.database.entity.Item;
+import dhbw.sa.databaseApplication.database.entity.Itemdelivery;
 import dhbw.sa.databaseApplication.database.entity.Order;
 import dhbw.sa.databaseApplication.database.entity.Table;
 import dhbw.sa.databaseApplication.printer.PrinterService;
@@ -18,6 +19,7 @@ public class DatabaseService implements DatabaseService_Interface{
     ArrayList<Item> items = new ArrayList<>();
     ArrayList<Table> tables = new ArrayList<>();
     ArrayList<Order> orders = new ArrayList<>();
+    ArrayList<Itemdelivery> itemdeliveries = new ArrayList<>();
 
     public DatabaseService() {
         this.connect();
@@ -51,7 +53,7 @@ public class DatabaseService implements DatabaseService_Interface{
         this.items.clear();
 
         try {
-            String query = "SELECT itemID, name, retailprice, quantity, available " +
+            String query = "SELECT itemID, name, retailprice, available " +
                     "FROM " + dbp.getDatabase() + ".items";
             PreparedStatement pst = connection.prepareStatement(query);
             ResultSet rs = pst.executeQuery();
@@ -62,7 +64,9 @@ public class DatabaseService implements DatabaseService_Interface{
                 String name = rs.getString("name");
                 double retailprice = rs.getFloat("retailprice");
                 retailprice = round(retailprice);
-                int quantity = rs.getInt("quantity");
+
+                int quantity = getItemQuantity(itemID);
+
                 boolean available = rs.getBoolean("available");
                 items.add(new Item(itemID, name, retailprice, quantity, available));
             }
@@ -122,6 +126,29 @@ public class DatabaseService implements DatabaseService_Interface{
         }
         return null;
     }
+    @Override
+    public ArrayList<Itemdelivery> getAllItemdeliveries() {
+        this.itemdeliveries.clear();
+
+        try {
+            String query = "SELECT itemdeliveryID, itemID, quantity " +
+                    "FROM " + dbp.getDatabase() + ".itemdeliveries";
+            PreparedStatement pst = connection.prepareStatement(query);
+            ResultSet rs = pst.executeQuery();
+
+            while(rs.next()) {
+                //get each Itemdelivery from DB
+                int itemdeliveryID = rs.getInt("itemdeliveryID");
+                int itemID = rs.getInt("itemID");
+                int quantity = rs.getInt("quantity");
+                itemdeliveries.add(new Itemdelivery(itemdeliveryID, itemID, quantity));
+            }
+            return this.itemdeliveries;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
     //endregion
 
     //region Adding data to the database
@@ -129,15 +156,26 @@ public class DatabaseService implements DatabaseService_Interface{
     public void addItem(Item item) {
 
         try {
-            String query =  "INSERT INTO " + dbp.getDatabase() + ".items(itemID, name, retailprice, quantity, available) " +
-                            "VALUES(DEFAULT, ?, ?, ?, ?)";
+            String query =  "INSERT INTO " + dbp.getDatabase() + ".items(itemID, name, retailprice, available) " +
+                            "VALUES(DEFAULT, ?, ?, ?)";
             PreparedStatement pst = connection.prepareStatement(query);
 
             pst.setString(1, item.getName());
             pst.setDouble(2, item.getRetailprice());
-            pst.setInt(3, item.getQuantity());
-            pst.setBoolean(4, item.isAvailable());
+            pst.setBoolean(3, item.isAvailable());
             pst.executeUpdate();
+
+            //ID des neu erzeugten Items ermitteln, um anschließend hierfür einen neuen Wareneingang anzulegen
+            query = "SELECT * FROM " + dbp.getDatabase() + ".items ORDER BY itemID DESC LIMIT 1";
+            pst = connection.prepareStatement(query);
+            ResultSet rs = pst.executeQuery();
+
+            int itemID = 0;
+            while(rs.next()) {
+                itemID = rs.getInt("itemID");
+            }
+            Itemdelivery itemdelivery = new Itemdelivery(itemID, item.getQuantity());
+            addItemdelivery(itemdelivery);
         } catch(SQLException e) { e.printStackTrace(); }
     }
     @Override
@@ -172,6 +210,18 @@ public class DatabaseService implements DatabaseService_Interface{
             pst.executeUpdate();
         } catch(SQLException e) { e.printStackTrace(); }
     }
+    @Override
+    public void addItemdelivery(Itemdelivery itemdelivery) {
+        try {
+            String query =  "INSERT INTO " + dbp.getDatabase() + ".itemdeliveries(itemdeliveryID, itemID, quantity) " +
+                    "VALUES(DEFAULT, ?, ?)";
+            PreparedStatement pst = connection.prepareStatement(query);
+
+            pst.setInt(1, itemdelivery.getItemID());
+            pst.setInt(2, itemdelivery.getQuantity());
+            pst.executeUpdate();
+        } catch(SQLException e) { e.printStackTrace(); }
+    }
     //endregion
 
     //region Updating data in database
@@ -180,14 +230,13 @@ public class DatabaseService implements DatabaseService_Interface{
 
         try {
             String query =  "UPDATE " + dbp.getDatabase() + ".items " +
-                            "SET name = ?, retailprice = ?, quantity = ?, available = ? " +
+                            "SET name = ?, retailprice = ?, available = ? " +
                             "WHERE itemID = " + itemID;
             PreparedStatement pst = connection.prepareStatement(query);
 
             pst.setString(1, item.getName());
             pst.setDouble(2, item.getRetailprice());
-            pst.setInt(3, item.getQuantity());
-            pst.setBoolean(4, item.isAvailable());
+            pst.setBoolean(3, item.isAvailable());
             pst.executeUpdate();
         } catch(SQLException e) { e.printStackTrace(); }
     }
@@ -263,6 +312,48 @@ public class DatabaseService implements DatabaseService_Interface{
     }
     //endregion
 
+    public int getItemQuantity(int itemID) {
+        //Ermitteln der Wareneingänge
+        int itemdeliveries = 0;
+        for(Itemdelivery i: this.getAllItemdeliveries()) {
+            if(i.getItemID() == itemID)
+                itemdeliveries += i.getQuantity();
+        }
+        //Ermitteln der Warenausgänge
+        int itemorders = 0;
+        ArrayList<Item> allItems = this.getAllItemsEmpty();
+        for(Order o: this.getAllOrders()) {
+            for(Item i: o.getItems(allItems)) {
+                if(i.getItemID() == itemID)
+                    itemorders++;
+            }
+        }
+        return itemdeliveries - itemorders;
+    }
+    public ArrayList<Item> getAllItemsEmpty()  {
+        ArrayList<Item> emptyItems = new ArrayList<>();
+        try {
+            String query = "SELECT itemID, name, retailprice, available " +
+                    "FROM " + dbp.getDatabase() + ".items";
+            PreparedStatement pst = connection.prepareStatement(query);
+            ResultSet rs = pst.executeQuery();
+
+            while(rs.next()) {
+                //get each Item from DB without quantity
+                int itemID = rs.getInt("itemID");
+                String name = rs.getString("name");
+                double retailprice = rs.getFloat("retailprice");
+                retailprice = round(retailprice);
+                boolean available = rs.getBoolean("available");
+                emptyItems.add(new Item(itemID, name, retailprice, available));
+            }
+            return emptyItems;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
     private double round(double number) {
         return (double) Math.round(number * 100d) / 100d;
     }
@@ -291,17 +382,24 @@ public class DatabaseService implements DatabaseService_Interface{
         }
         return null;
     }
-    private Item getItemById(int itemID) {
+    public Item getItemById(int itemID) {
         for(Item i: this.getAllItems()) {
             if(i.getItemID() == itemID)
                 return i;
         }
         return null;
     }
-    private Table getTableById(int tableID) {
+    public Table getTableById(int tableID) {
         for(Table t: this.getAllTables()) {
             if(t.getTableID() == tableID)
                 return t;
+        }
+        return null;
+    }
+    public Itemdelivery getItemdeliveryById(int itemdeliveryID) {
+        for(Itemdelivery i: this.getAllItemdeliveries()) {
+            if(i.getItemdeliveryID() == itemdeliveryID)
+                return i;
         }
         return null;
     }
