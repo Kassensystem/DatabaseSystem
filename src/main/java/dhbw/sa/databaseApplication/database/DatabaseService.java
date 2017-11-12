@@ -77,7 +77,7 @@ public class DatabaseService implements DatabaseService_Interface{
         this.tables.clear();
 
         try {
-            String query = "SELECT tableID, name " +
+            String query = "SELECT tableID, name, available " +
                     "FROM " + dbp.getDatabase() + ".tables";
             PreparedStatement pst = connection.prepareStatement(query);
             ResultSet rs = pst.executeQuery();
@@ -86,7 +86,8 @@ public class DatabaseService implements DatabaseService_Interface{
                 //get each table from DB
                 int tableID = rs.getInt("tableID");
                 String name = rs.getString("name");
-                tables.add(new Table(tableID, name));
+                boolean available = rs.getBoolean("available");
+                tables.add(new Table(tableID, name, available));
             }
             return this.tables;
         } catch (SQLException e) {
@@ -143,11 +144,12 @@ public class DatabaseService implements DatabaseService_Interface{
     public void addTable(Table table) {
 
         try {
-            String query =  "INSERT INTO " + dbp.getDatabase() + ".tables(tableID, name) " +
-                            "VALUES(DEFAULT, ?)";
+            String query =  "INSERT INTO " + dbp.getDatabase() + ".tables(tableID, name, available) " +
+                            "VALUES(DEFAULT, ?, ?)";
             PreparedStatement pst = connection.prepareStatement(query);
 
             pst.setString(1, table.getName());
+            pst.setBoolean(2, table.isAvailable());
             pst.executeUpdate();
         } catch(SQLException e) { e.printStackTrace(); }
     }
@@ -179,7 +181,7 @@ public class DatabaseService implements DatabaseService_Interface{
         try {
             String query =  "UPDATE " + dbp.getDatabase() + ".items " +
                             "SET name = ?, retailprice = ?, quantity = ?, available = ? " +
-                            "WHERE ID = " + itemID;
+                            "WHERE itemID = " + itemID;
             PreparedStatement pst = connection.prepareStatement(query);
 
             pst.setString(1, item.getName());
@@ -194,11 +196,12 @@ public class DatabaseService implements DatabaseService_Interface{
 
         try {
             String query =  "UPDATE " + dbp.getDatabase() + ".tables " +
-                            "SET name = ? " +
-                            "WHERE ID = " + tableID;
+                            "SET name = ?, available = ? " +
+                            "WHERE tableID = " + tableID;
             PreparedStatement pst = connection.prepareStatement(query);
 
             pst.setString(1, table.getName());
+            pst.setBoolean(2, table.isAvailable());
             pst.executeUpdate();
         } catch(SQLException e) { e.printStackTrace(); }
     }
@@ -224,6 +227,41 @@ public class DatabaseService implements DatabaseService_Interface{
     }
     //endregion
 
+    //region Deleting data from database
+    /**
+     * Beim Löschen eines Items oder Tables wird dieser nur als nicht verfügbar markiert, verbleiben aber in der Datenbank.
+     * Somit ist sichergestellt, dass für bisherige Orders alle Daten verfügbar bleiben.
+     */
+    @Override
+    public void deleteItem(int itemID) {
+        Item item = this.getItemById(itemID);
+
+        item.setAvailable(false);
+
+        this.updateItem(itemID, item);
+    }
+    @Override
+    public void deleteTable(int tableID) {
+        Table table = this.getTableById(tableID);
+
+        table.setAvailable(false);
+
+        this.updateTable(tableID, table);
+    }
+    @Override
+    public void deleteOrder(int orderID) {
+        /**
+         * Löschen einer Order löscht diese unwiederruflich aus der Datenbank.
+         */
+        try {
+            String query =  "DELETE FROM " + dbp.getDatabase() + ".orders " +
+                    "WHERE orderID = " + orderID;
+            PreparedStatement pst = connection.prepareStatement(query);
+
+            pst.executeUpdate();
+        } catch(SQLException e) { e.printStackTrace(); }
+    }
+    //endregion
 
     private double round(double number) {
         return (double) Math.round(number * 100d) / 100d;
@@ -250,6 +288,20 @@ public class DatabaseService implements DatabaseService_Interface{
         for(Order o: this.getAllOrders()) {
             if(o.getOrderID() == orderID)
                 return o;
+        }
+        return null;
+    }
+    private Item getItemById(int itemID) {
+        for(Item i: this.getAllItems()) {
+            if(i.getItemID() == itemID)
+                return i;
+        }
+        return null;
+    }
+    private Table getTableById(int tableID) {
+        for(Table t: this.getAllTables()) {
+            if(t.getTableID() == tableID)
+                return t;
         }
         return null;
     }
