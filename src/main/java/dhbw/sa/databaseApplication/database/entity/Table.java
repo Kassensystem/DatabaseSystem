@@ -22,6 +22,10 @@ public class Table {
         this.name = name;
         this.available = available;
     }
+    public Table(String name, boolean available) {
+        this.name = name;
+        this.available = available;
+    }
 
     public Table(String name) {
         this.name = name;

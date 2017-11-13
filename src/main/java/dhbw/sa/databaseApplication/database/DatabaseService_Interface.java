@@ -36,6 +36,7 @@ public interface DatabaseService_Interface {
     void deleteItem(int itemID);
     void deleteTable(int tableID);
     void deleteOrder(int orderID);
+    void deleteItemdelivery(int itemdeliveryID);
     //endregion
 
 }

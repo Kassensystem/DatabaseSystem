@@ -21,8 +21,11 @@ public class DatabaseService_Test {
 
     public static void main(String[] args) {
 
-        Item newItem = new Item("Apfel", 0.75, 55, true);
-        dbs.addItem(newItem);
+        for(int i = 0; i < 20; i++){
+            dbs.addOrder(dummyOrder());
+        }
+        //Item newItem = new Item("Apfel", 0.75, 55, true);
+        //dbs.addItem(newItem);
 
         //Itemdelivery itemdelivery = new Itemdelivery(5, 20);
         //dbs.addItemdelivery(itemdelivery);

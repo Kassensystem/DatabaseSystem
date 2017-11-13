@@ -310,6 +310,16 @@ public class DatabaseService implements DatabaseService_Interface{
             pst.executeUpdate();
         } catch(SQLException e) { e.printStackTrace(); }
     }
+    @Override
+    public void deleteItemdelivery(int itemdeliveryID) {
+        try {
+            String query =  "DELETE FROM " + dbp.getDatabase() + ".itemdeliveries " +
+                    "WHERE itemdeliveryID = " + itemdeliveryID;
+            PreparedStatement pst = connection.prepareStatement(query);
+
+            pst.executeUpdate();
+        } catch(SQLException e) { e.printStackTrace(); }
+    }
     //endregion
 
     public int getItemQuantity(int itemID) {
