@@ -20,6 +20,7 @@ import java.util.ArrayList;
 
 public class PrinterService {
 
+    //TODO Ergänzen eines Datensatzes in der Datenbank, um Druckernamen einstellbar zu machen
     private final String printerName = "EPSON TM-T88V Receipt";
 
     public void printOrder(Order order, ArrayList<Item> allItems, ArrayList<Table> allTables) {
@@ -38,6 +39,7 @@ public class PrinterService {
         PrintService printService[] = PrintServiceLookup.lookupPrintServices(flavor, pras);
         PrintService service = findPrintService(printerName, printService);
 
+        assert service != null;
         DocPrintJob job = service.createPrintJob();
 
         try {
@@ -57,7 +59,6 @@ public class PrinterService {
             job.print(doc, null);
 
         } catch (Exception e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
     }
@@ -83,31 +84,30 @@ public class PrinterService {
     }
 
     private String getFormattedOrder(PrintableOrder printableOrder) {
-        String formattedOrderText =
-                Gastronomy.getName()  + "\n"
+        StringBuilder formattedOrderText =
+                new StringBuilder(Gastronomy.getName() + "\n"
                         + Gastronomy.getAdress() + "\n"
                         + Gastronomy.getTelephonenumber() + "\n"
                         + "\n"
-                        + "Ihre Bestellung:\n";
+                        + "Ihre Bestellung:\n");
 
         DecimalFormat df = new DecimalFormat("#0.00");
         for(Item i: printableOrder.getItems()) {
             double price = i.getRetailprice();
 
-            formattedOrderText += i.getName() + "\t\t" + df.format(price) + " EUR\n";
+            formattedOrderText.append(i.getName()).append("\t\t").append(df.format(price)).append(" EUR\n");
         }
 
         double mwst = Math.round(printableOrder.getPrice()*0.199 * 100d) / 100d;
 
-        formattedOrderText +=
-                "________________________\n"
-                + "Summe\t\t" + df.format(printableOrder.getPrice()) + " EUR\n"
-                + "inkl. MWST 19%\t" + df.format(mwst) + " EUR\n"
-                + "\n"
-                + "Sie saßen an Tisch " + printableOrder.getTableName() + ".\n"
-                + "Vielen Dank für Ihren Besuch!\n" + printableOrder.getDate() + "\n\n";
+        formattedOrderText
+                .append("________________________\n" + "Summe\t\t")
+                .append(df.format(printableOrder.getPrice())).append(" EUR\n")
+                .append("inkl. MWST 19%\t").append(df.format(mwst)).append(" EUR\n").append("\n").append("Sie saßen an Tisch ")
+                .append(printableOrder.getTableName()).append(".\n").append("Vielen Dank für Ihren Besuch!\n")
+                .append(printableOrder.getDate()).append("\n\n");
 
-        return formattedOrderText;
+        return formattedOrderText.toString();
     }
 
     private PrintService findPrintService(String printerName, PrintService[] services) {

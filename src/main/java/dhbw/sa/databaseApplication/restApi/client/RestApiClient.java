@@ -3,133 +3,127 @@ package dhbw.sa.databaseApplication.restApi.client;
 import dhbw.sa.databaseApplication.database.entity.Item;
 import dhbw.sa.databaseApplication.database.entity.Order;
 import dhbw.sa.databaseApplication.database.entity.Table;
-import dhbw.sa.databaseApplication.exceptions.ControllerConnectionException;
-import dhbw.sa.databaseApplication.exceptions.MySQLException;
-import dhbw.sa.databaseApplication.exceptions.NoContentException;
-import dhbw.sa.databaseApplication.restApi.RestApiProperties;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.client.*;
+import org.springframework.web.client.HttpClientErrorException;
+import org.springframework.web.client.RestTemplate;
 
-import java.net.URI;
 import java.util.ArrayList;
-
-/**
- * ------------Erläuterung der Exceptions------------
- * Bei ResourceAccessException: Der Controller ist nicht erreichbar
- * --> HttpServerErrorException: Der DatabaseService ist nicht erreichbar.
- */
 
 public class RestApiClient implements RestApiClient_Interface {
 
-    private static final String REST_SERVICE_URL = RestApiProperties.getRestServiceUrl();
+    private String REST_SERVICE_URL;
 
     public RestApiClient() {
-        //default
+        this.REST_SERVICE_URL = "http://localhost:8080/api";
+        System.out.println(
+                "\n------------WARNUNG-----------\nDiesen Konstruktor nur verwenden, wenn der Client auf dem selben PC läuft wie der Controller! " +
+                "\nAnsonsten Konstruktor mit Angabe der REST_SERVICE_URL verwenden!\n------------------------------\n"
+        );
     }
 
-    /******************TEST*******************/
-    public static String test()
-            throws ControllerConnectionException,
-            MySQLException,
-            NoContentException {
-        /**
-         * TODO Lösung für Exceptions-Empfang finden
+    public RestApiClient(String REST_SERVICE_URL) {
+        /*
+          Die REST_SERVICE_URL muss vom Benutzer in den Einstellungen angegeben werden.
          */
-
-        System.out.println("Testing connection to RestApiController...");
-
-        RestTemplate restTemplate = new RestTemplate();
-        String s = null;
-        ResponseEntity<String> responseEntity;
-        //s = restTemplate.getForObject(REST_SERVICE_URL + "/test", String.class);
-        try {
-            responseEntity = restTemplate.exchange
-                    (REST_SERVICE_URL + "/test", HttpMethod.GET, null, new ParameterizedTypeReference<String>() {});
-            return responseEntity.getBody();
-
-        } catch (HttpServerErrorException e) {
-            //e.printStackTrace();
-            /**
-             * Controller ist erreichbar aber meldet
-             * eine Exception. Fehler-Code muss extrahiert werden.
-             */
-            System.out.println("------\nController meldet Fehler\n------");
-            switch(e.getResponseBodyAsString()) {
-                case "SERVICE_UNAVAILABLE":
-                    throw new MySQLException();
-                case "NO_CONTENT":
-                    throw new NoContentException();
-            }
-        } catch (ResourceAccessException e) {
-            /**
-             * Rest-Api-Controller ist nicht erreichbar.
-             */
-            throw new ControllerConnectionException();
-        }
-        return null;
+        this.REST_SERVICE_URL = REST_SERVICE_URL;
     }
-
 
     /*******************GET*******************/
 
-    public ArrayList<Item> getAllItems() {
+    public ArrayList<Item> getAllItems() throws Exception {
         System.out.println("Getting all items...");
 
         RestTemplate restTemplate = new RestTemplate();
 
-        ResponseEntity<ArrayList<Item>> responseEntity =
-                restTemplate.exchange
-                        (REST_SERVICE_URL + "/items", HttpMethod.GET,
-                                null, new ParameterizedTypeReference<ArrayList<Item>>() {});
-        ArrayList<Item> items = responseEntity.getBody();
+        try {
+            ResponseEntity<ArrayList<Item>> responseEntity =
+                    restTemplate.exchange
+                            (REST_SERVICE_URL + "/items", HttpMethod.GET,
+                                    null, new ParameterizedTypeReference<ArrayList<Item>>() {});
 
-        return items;
+            return responseEntity.getBody();
+        } catch (HttpClientErrorException e) {
+            String message = getMessage(e.getResponseBodyAsString());
+            throw new Exception(message);
+        }
     }
 
-    public ArrayList<Table> getAllTables() {
+    public ArrayList<Table> getAllTables() throws Exception {
         System.out.println("Getting all tables...");
 
         RestTemplate restTemplate = new RestTemplate();
 
-        ResponseEntity<ArrayList<Table>> responseEntity =
-                restTemplate.exchange
-                        (REST_SERVICE_URL + "/tables", HttpMethod.GET,
-                                null, new ParameterizedTypeReference<ArrayList<Table>>() {});
-        ArrayList<Table> tables = responseEntity.getBody();
+        try {
+            ResponseEntity<ArrayList<Table>> responseEntity =
+                    restTemplate.exchange
+                            (REST_SERVICE_URL + "/tables", HttpMethod.GET,
+                                    null, new ParameterizedTypeReference<ArrayList<Table>>() {});
 
-        return tables;
+            return responseEntity.getBody();
+        } catch (HttpClientErrorException e) {
+            String message = getMessage(e.getResponseBodyAsString());
+            throw new Exception(message);
+        }
     }
 
-    public ArrayList<Order> getAllOrders() {
+    public ArrayList<Order> getAllOrders() throws Exception {
         System.out.println("Getting all orders...");
 
         RestTemplate restTemplate = new RestTemplate();
 
-        ResponseEntity<ArrayList<Order>> responseEntity =
-                restTemplate.exchange
-                        (REST_SERVICE_URL + "/orders", HttpMethod.GET,
-                                null, new ParameterizedTypeReference<ArrayList<Order>>() {});
-        ArrayList<Order> orders = responseEntity.getBody();
+        try {
+            ResponseEntity<ArrayList<Order>> responseEntity =
+                    restTemplate.exchange
+                            (REST_SERVICE_URL + "/orders", HttpMethod.GET,
+                                    null, new ParameterizedTypeReference<ArrayList<Order>>() {});
 
-        return orders;
+            return responseEntity.getBody();
+        } catch (HttpClientErrorException e) {
+            String message = getMessage(e.getResponseBodyAsString());
+            throw new Exception(message);
+        }
     }
 
     /******************POST*******************/
 
-    public void createOrder(Order order) {
+    public void createOrder(Order order) throws Exception {
         System.out.println("Creating order...");
 
         RestTemplate restTemplate = new RestTemplate();
-        URI uri = restTemplate.postForLocation(REST_SERVICE_URL + "/order/", order, Order.class);
+
+        try {
+            restTemplate.postForLocation(REST_SERVICE_URL + "/order/", order, Order.class);
+        } catch (HttpClientErrorException e) {
+            String message = getMessage(e.getResponseBodyAsString());
+            throw new Exception(message);
+        }
     }
 
-    public void updateOrder(int orderID, Order order) {
+    public void updateOrder(int orderID, Order order) throws Exception {
         System.out.println("Updating order...");
 
         RestTemplate restTemplate = new RestTemplate();
-        restTemplate.put(REST_SERVICE_URL + "/order/" + orderID, order);
+        try {
+            restTemplate.put(REST_SERVICE_URL + "/order/" + orderID, order);
+        } catch (HttpClientErrorException e) {
+            String message = getMessage(e.getResponseBodyAsString());
+            throw new Exception(message);
+        }
     }
 
+
+    private static String getMessage(String body) {
+        int lastindex = body.lastIndexOf("message");
+        char [] charArray = body.toCharArray();
+        int index = lastindex + 10;
+        char newChar = charArray[index];
+        StringBuilder message = new StringBuilder();
+        while(!String.valueOf(newChar).equals("\"")) {
+            message.append(newChar);
+            newChar = charArray[++index];
+        }
+        return message.toString();
+    }
 }

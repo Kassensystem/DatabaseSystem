@@ -1,8 +1,12 @@
 package dhbw.sa.databaseApplication.exceptions;
 
-public class NoContentException extends Exception{
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.ResponseStatus;
+
+@ResponseStatus(value= HttpStatus.NOT_FOUND, reason="Tabelle hat keinen Inhalt!")
+public class NoContentException extends RuntimeException{
 
     public NoContentException() {
-        super("Tabelle hat keinen Inhalt!");
+
     }
 }

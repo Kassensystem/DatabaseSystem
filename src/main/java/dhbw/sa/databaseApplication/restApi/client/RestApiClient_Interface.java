@@ -6,12 +6,7 @@ import dhbw.sa.databaseApplication.database.entity.Table;
 
 import java.util.ArrayList;
 
-/**
- * Exception wird durch custom Exceptions ersetzt.
- * Fehlertext wird von dieser Exception mitgeliefert.
- */
-
-public interface RestApiClient_Interface {
+interface RestApiClient_Interface {
 
     /*******************GET*******************/
 

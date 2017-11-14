@@ -2,7 +2,6 @@ import dhbw.sa.databaseApplication.database.entity.Item;
 import dhbw.sa.databaseApplication.database.entity.Order;
 import dhbw.sa.databaseApplication.database.entity.Table;
 import dhbw.sa.databaseApplication.exceptions.ControllerConnectionException;
-import dhbw.sa.databaseApplication.exceptions.MySQLException;
 import dhbw.sa.databaseApplication.exceptions.NoContentException;
 import dhbw.sa.databaseApplication.restApi.client.RestApiClient;
 import org.joda.time.DateTime;
@@ -15,21 +14,8 @@ public class RestApiClient_Test {
 
     public static void main(String[] args) {
 
-        updateOrder(8, testOrder());
-        //createOrder();
+        getAllOrders();
 
-    }
-
-    static void test() {
-        try {
-            System.out.println(RestApiClient.test());
-        } catch (ControllerConnectionException e) {
-            e.printStackTrace();
-        } catch (MySQLException e) {
-            e.printStackTrace();
-        } catch (NoContentException e) {
-            e.printStackTrace();
-        }
     }
 
     static ArrayList<Order> getAllOrders() {
@@ -77,30 +63,47 @@ public class RestApiClient_Test {
     }
 
     static void createOrder() {
-        restApiClient.createOrder(testOrder());
+        try {
+            restApiClient.createOrder(testOrder());
+        } catch (Exception e) {
+            //e.printStackTrace();
+        }
     }
 
     static void updateOrder(int orderID, Order testOrder) {
-        restApiClient.updateOrder(orderID, testOrder);
+        // TODO
+        try {
+            restApiClient.updateOrder(orderID, testOrder);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private static Order testOrder() {
         //Items zusammenstellen
         ArrayList<Item> orderItems = new ArrayList<>();
         double price = 0;
-        for(Item i: restApiClient.getAllItems()) {
-            int id = i.getItemID();
-            if(id == 4 || id ==5) {
-                orderItems.add(i);
-                price += i.getRetailprice();
+        try {
+            for(Item i: restApiClient.getAllItems()) {
+                int id = i.getItemID();
+                if(id == 4 || id ==5) {
+                    orderItems.add(i);
+                    price += i.getRetailprice();
+                }
             }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
         String itemIDs = Order.joinIDsIntoString(orderItems);
         //Table festlegen
         Table table = new Table();
-        for(Table t: restApiClient.getAllTables()) {
-            if(t.getTableID() == 5)
-                table = t;
+        try {
+            for(Table t: restApiClient.getAllTables()) {
+                if(t.getTableID() == 5)
+                    table = t;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
 
         return new Order(itemIDs, table.getTableID(), price, DateTime.now(), true);

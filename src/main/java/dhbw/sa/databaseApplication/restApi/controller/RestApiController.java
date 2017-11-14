@@ -4,9 +4,7 @@ import dhbw.sa.databaseApplication.database.DatabaseService;
 import dhbw.sa.databaseApplication.database.entity.Item;
 import dhbw.sa.databaseApplication.database.entity.Order;
 import dhbw.sa.databaseApplication.database.entity.Table;
-import dhbw.sa.databaseApplication.restApi.errorHandling.ApiError;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -20,43 +18,15 @@ public class RestApiController {
     @Autowired
     DatabaseService databaseService;
 
-    /********************TESTS********************/
-
-    @RequestMapping("/test")
-    public ResponseEntity<Object> getTest() {
-        /**
-         * TODO Lösung für Exceptions-Response finden
-         */
-        String s = "unerreichbarTest";
-        if(s == "erreichbarTest")
-            return new ResponseEntity(s, HttpStatus.OK);
-        else if(s == "unerreichbarTest") {
-            /**
-             *
-             */
-            ApiError apiError = new ApiError(
-                    HttpStatus.SERVICE_UNAVAILABLE, "SQL nicht erreichbar");
-            return new ResponseEntity<Object>(apiError, new HttpHeaders(), apiError.getStatus());
-            //throw new HttpServerErrorException(HttpStatus.SERVICE_UNAVAILABLE);
-        }
-        else if (s == "keinInhalt") {
-            /**
-             *
-             */
-            //throw new HttpServerErrorException(HttpStatus.NO_CONTENT);
-        }
-        return new ResponseEntity("--------\ndefault\n---------", HttpStatus.OK);
-    }
-
     /*********************GET**********************/
 
     @RequestMapping("/items")
-    public @ResponseBody ArrayList<Item> getAllItems() {
+    public ArrayList<Item> getAllItems() {
         return databaseService.getAllItems();
     }
 
     @RequestMapping("/orders")
-    public ArrayList<Order> getAllOrder() {
+    public ArrayList<Order> getAllOrders() {
         return databaseService.getAllOrders();
     }
 
@@ -65,18 +35,34 @@ public class RestApiController {
         return databaseService.getAllTables();
     }
 
+    /****************POST/PUT***********************/
+
     @RequestMapping(value = "/order/", method = RequestMethod.POST)
-    public void createOrder(@RequestBody Order order) {
-        databaseService.addOrder(order);
+    public ResponseEntity<?> createOrder(@RequestBody Order order) {
+        try {
+            databaseService.addOrder(order);
+            return new ResponseEntity(HttpStatus.OK);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity(e, HttpStatus.NOT_FOUND);
+        }
     }
 
     @RequestMapping(value = "/order/{orderID}", method = RequestMethod.PUT)
-    public @ResponseBody void updateOrder(@PathVariable("orderID") int orderID, @RequestBody Order order) {
-        databaseService.updateOrder(orderID, order);
+    public ResponseEntity<?> updateOrder(@PathVariable("orderID") int orderID, @RequestBody Order order) {
+        try {
+            databaseService.updateOrder(orderID, order);
+            return new ResponseEntity(HttpStatus.OK);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity(e, HttpStatus.NOT_FOUND);
+        }
     }
 
+    /***************PRINT******************/
+
     @RequestMapping(value = "/print/order/{orderID}")
-    public @ResponseBody void printOrder(@PathVariable("orderID") int orderID) {
+    public void printOrder(@PathVariable("orderID") int orderID) {
         databaseService.printOrder(orderID);
     }
 

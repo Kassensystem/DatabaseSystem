@@ -231,7 +231,8 @@
     <pathelement location="${path.variable.maven_repository}/org/yaml/snakeyaml/1.17/snakeyaml-1.17.jar"/>
   </path>
   <!-- Register Custom Compiler Taskdefs -->
-  <property name="javac2.home" value="${idea.home}/lib"/>
+    <property name="idea.home" value=""/>
+    <property name="javac2.home" value="${idea.home}/lib"/>
   <path id="javac2.classpath">
     <pathelement location="${javac2.home}/javac2.jar"/>
     <pathelement location="${javac2.home}/jdom.jar"/>

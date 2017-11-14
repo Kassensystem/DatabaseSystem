@@ -1,0 +1,8 @@
+<component name="libraryTable">
+  <library name="Arquillian TestNG:Release" type="repository">
+    <properties maven-id="org.jboss.arquillian.testng:arquillian-testng-container:RELEASE" />
+    <CLASSES />
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

@@ -1,14 +1,14 @@
 package dhbw.sa.databaseApplication.database;
 
-public abstract class DatabaseProperties_abstract {
+abstract class DatabaseProperties_abstract {
     private String url = "jdbc:mysql://localhost:3306";
     private String database = "Kassensystem";
     private static String username;
     private static String password;
 
-    DatabaseProperties_abstract(String username, String password) {
-        DatabaseProperties_abstract.username = username;
-        DatabaseProperties_abstract.password = password;
+    DatabaseProperties_abstract() {
+        DatabaseProperties_abstract.username = "DatabaseService";
+        DatabaseProperties_abstract.password = "password";
     }
 
     public String getUrl() {

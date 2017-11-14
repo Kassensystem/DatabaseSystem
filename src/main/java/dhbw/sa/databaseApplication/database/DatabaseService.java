@@ -4,6 +4,8 @@ import dhbw.sa.databaseApplication.database.entity.Item;
 import dhbw.sa.databaseApplication.database.entity.Itemdelivery;
 import dhbw.sa.databaseApplication.database.entity.Order;
 import dhbw.sa.databaseApplication.database.entity.Table;
+import dhbw.sa.databaseApplication.exceptions.DataException;
+import dhbw.sa.databaseApplication.exceptions.MySQLServerConnectionException;
 import dhbw.sa.databaseApplication.printer.PrinterService;
 import org.joda.time.DateTime;
 import org.springframework.stereotype.Service;
@@ -13,13 +15,13 @@ import java.util.ArrayList;
 
 @Service
 public class DatabaseService implements DatabaseService_Interface{
-    private DatabaseProperties dbp = new DatabaseProperties();
+    private final DatabaseProperties dbp = new DatabaseProperties();
     private Connection connection = null;
 
-    ArrayList<Item> items = new ArrayList<>();
-    ArrayList<Table> tables = new ArrayList<>();
-    ArrayList<Order> orders = new ArrayList<>();
-    ArrayList<Itemdelivery> itemdeliveries = new ArrayList<>();
+    private ArrayList<Item> items = new ArrayList<>();
+    private ArrayList<Table> tables = new ArrayList<>();
+    private ArrayList<Order> orders = new ArrayList<>();
+    private ArrayList<Itemdelivery> itemdeliveries = new ArrayList<>();
 
     public DatabaseService() {
         this.connect();
@@ -33,7 +35,7 @@ public class DatabaseService implements DatabaseService_Interface{
             connection = DriverManager.getConnection(dbp.getUrl(), dbp.getUsername(), dbp.getPassword());
             System.out.println("\nDatabase connected!");
         }catch(SQLException e) {
-            throw new IllegalStateException("Cannot connect the database!", e);
+            throw new IllegalStateException("Verbindung zur Datenbank fehlgeschlagen!", e);
         }
     }
     @Override
@@ -49,7 +51,7 @@ public class DatabaseService implements DatabaseService_Interface{
 
     //region Getting Table-Data from the database
     @Override
-    public ArrayList<Item> getAllItems()  {
+    public ArrayList<Item> getAllItems() throws IllegalStateException {
         this.items.clear();
 
         try {
@@ -73,11 +75,11 @@ public class DatabaseService implements DatabaseService_Interface{
             return this.items;
         } catch (SQLException e) {
             e.printStackTrace();
+            throw new MySQLServerConnectionException();
         }
-        return null;
     }
     @Override
-    public ArrayList<Table> getAllTables() {
+    public ArrayList<Table> getAllTables() throws IllegalStateException {
         this.tables.clear();
 
         try {
@@ -96,11 +98,11 @@ public class DatabaseService implements DatabaseService_Interface{
             return this.tables;
         } catch (SQLException e) {
             e.printStackTrace();
+            throw new MySQLServerConnectionException();
         }
-        return null;
     }
     @Override
-    public ArrayList<Order> getAllOrders() {
+    public ArrayList<Order> getAllOrders() throws IllegalStateException  {
         this.orders.clear();
 
         try {
@@ -123,11 +125,11 @@ public class DatabaseService implements DatabaseService_Interface{
             return this.orders;
         } catch (SQLException e) {
             e.printStackTrace();
+            throw new MySQLServerConnectionException();
         }
-        return null;
     }
     @Override
-    public ArrayList<Itemdelivery> getAllItemdeliveries() {
+    public ArrayList<Itemdelivery> getAllItemdeliveries() throws IllegalStateException {
         this.itemdeliveries.clear();
 
         try {
@@ -146,8 +148,8 @@ public class DatabaseService implements DatabaseService_Interface{
             return this.itemdeliveries;
         } catch (SQLException e) {
             e.printStackTrace();
+            throw new MySQLServerConnectionException();
         }
-        return null;
     }
     //endregion
 
@@ -176,7 +178,10 @@ public class DatabaseService implements DatabaseService_Interface{
             }
             Itemdelivery itemdelivery = new Itemdelivery(itemID, item.getQuantity());
             addItemdelivery(itemdelivery);
-        } catch(SQLException e) { e.printStackTrace(); }
+        } catch(SQLException e) {
+            e.printStackTrace();
+            throw new MySQLServerConnectionException();
+        }
     }
     @Override
     public void addTable(Table table) {
@@ -189,10 +194,21 @@ public class DatabaseService implements DatabaseService_Interface{
             pst.setString(1, table.getName());
             pst.setBoolean(2, table.isAvailable());
             pst.executeUpdate();
-        } catch(SQLException e) { e.printStackTrace(); }
+        } catch(SQLException e) {
+            e.printStackTrace();
+            throw new MySQLServerConnectionException();
+        }
     }
     @Override
     public void addOrder(Order order) {
+
+        //Vollständigkeit der Order überprüfen
+        if(order.getItems() == null
+                || order.getOrderID() != 0
+                || order.getTable() == 0
+                || order.getPrice() == 0
+                || order.getDate() == null)
+            throw new DataException("Die Order ist unvollständig!");
 
         if(order.isPaid())
             printOrder(order);
@@ -208,7 +224,10 @@ public class DatabaseService implements DatabaseService_Interface{
             pst.setInt(4, order.getTable());
             pst.setBoolean(5, order.isPaid());
             pst.executeUpdate();
-        } catch(SQLException e) { e.printStackTrace(); }
+        } catch(SQLException e) {
+            e.printStackTrace();
+            throw new MySQLServerConnectionException();
+        }
     }
     @Override
     public void addItemdelivery(Itemdelivery itemdelivery) {
@@ -220,7 +239,10 @@ public class DatabaseService implements DatabaseService_Interface{
             pst.setInt(1, itemdelivery.getItemID());
             pst.setInt(2, itemdelivery.getQuantity());
             pst.executeUpdate();
-        } catch(SQLException e) { e.printStackTrace(); }
+        } catch(SQLException e) {
+            e.printStackTrace();
+            throw new MySQLServerConnectionException();
+        }
     }
     //endregion
 
@@ -257,6 +279,18 @@ public class DatabaseService implements DatabaseService_Interface{
     @Override
     public void updateOrder(int orderID, Order order) {
 
+        //Kontrollieren ob ID existiert
+        if(this.getOrderById(orderID) == null)
+            throw new DataException("Bestellung mit der ID " + orderID + " existiert nicht!");
+
+        //Vollständigkeit der Order überprüfen
+        if(order.getItems() == null
+                || order.getOrderID() != 0
+                || order.getTable() == 0
+                || order.getPrice() == 0
+                || order.getDate() == null)
+            throw new DataException("Die Order ist unvollständig!");
+
         if(order.isPaid())
             printOrder(order);
 
@@ -272,7 +306,10 @@ public class DatabaseService implements DatabaseService_Interface{
             pst.setInt(4, order.getTable());
             pst.setBoolean(5, order.isPaid());
             pst.executeUpdate();
-        } catch(SQLException e) { e.printStackTrace(); }
+        } catch(SQLException e) {
+            e.printStackTrace();
+
+        }
     }
     //endregion
 
@@ -299,8 +336,8 @@ public class DatabaseService implements DatabaseService_Interface{
     }
     @Override
     public void deleteOrder(int orderID) {
-        /**
-         * Löschen einer Order löscht diese unwiederruflich aus der Datenbank.
+        /*
+          Löschen einer Order löscht diese unwiederruflich aus der Datenbank.
          */
         try {
             String query =  "DELETE FROM " + dbp.getDatabase() + ".orders " +
@@ -322,7 +359,7 @@ public class DatabaseService implements DatabaseService_Interface{
     }
     //endregion
 
-    public int getItemQuantity(int itemID) {
+    private int getItemQuantity(int itemID) {
         //Ermitteln der Wareneingänge
         int itemdeliveries = 0;
         for(Itemdelivery i: this.getAllItemdeliveries()) {
@@ -340,7 +377,7 @@ public class DatabaseService implements DatabaseService_Interface{
         }
         return itemdeliveries - itemorders;
     }
-    public ArrayList<Item> getAllItemsEmpty()  {
+    private ArrayList<Item> getAllItemsEmpty()  {
         ArrayList<Item> emptyItems = new ArrayList<>();
         try {
             String query = "SELECT itemID, name, retailprice, available " +
@@ -364,6 +401,7 @@ public class DatabaseService implements DatabaseService_Interface{
         return null;
     }
 
+    //Konverter
     private double round(double number) {
         return (double) Math.round(number * 100d) / 100d;
     }
@@ -378,6 +416,11 @@ public class DatabaseService implements DatabaseService_Interface{
 
     //Drucken einer Order
     public void printOrder(int orderID) {
+
+        //Kontrollieren ob ID existiert
+        if(this.getOrderById(orderID) == null)
+            throw new DataException("Bestellung mit der ID " + orderID + " existiert nicht!");
+
         printOrder(getOrderById(orderID));
     }
     public void printOrder(Order order) {
@@ -385,6 +428,7 @@ public class DatabaseService implements DatabaseService_Interface{
         printerService.printOrder(order,  this.getAllItems(), this.getAllTables());
     }
 
+    //Datenbankinhalte mit Angabe der ID erhalten
     public Order getOrderById(int orderID) {
         for(Order o: this.getAllOrders()) {
             if(o.getOrderID() == orderID)
@@ -413,5 +457,6 @@ public class DatabaseService implements DatabaseService_Interface{
         }
         return null;
     }
+
 
 }

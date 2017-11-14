@@ -129,11 +129,11 @@ public class Order {
     //endregion
 
     public static String joinIDsIntoString(ArrayList<Item> items) {
-        String IDString = "";
+        StringBuilder IDString = new StringBuilder();
         for(Item i: items) {
-            IDString += i.getItemID() + ";";
+            IDString.append(i.getItemID()).append(";");
         }
-        return IDString;
+        return IDString.toString();
     }
 
     public Table getTable(ArrayList<Table> allTables) {

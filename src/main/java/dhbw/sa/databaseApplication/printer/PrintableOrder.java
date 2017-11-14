@@ -4,7 +4,7 @@ import dhbw.sa.databaseApplication.database.entity.Item;
 
 import java.util.ArrayList;
 
-public class PrintableOrder {
+class PrintableOrder {
     private int orderID;
     private ArrayList<Item> items;
     private String tableName;
