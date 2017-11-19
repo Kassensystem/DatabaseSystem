@@ -9,7 +9,7 @@ public class PrinterService_Test {
         //PrinterTest
         PrinterService printerService = new PrinterService();
         //printerService.printOrder(dbs.getOrderById(4), dbs.getAllItems(), dbs.getAllTables());
-        printerService.printOrder(dbs.getOrderById(4), dbs.getAllItems(), dbs.getAllTables());
+        //printerService.printOrder(dbs.getOrderById(4), dbs.getAllItems(), dbs.getAllTables(), false);
         //printerService.printOrder(dbs.getOrderById(3), dbs.getAllItems(), dbs.getAllTables());
     }
 }

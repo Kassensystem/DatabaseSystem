@@ -30,8 +30,13 @@ public class RestApiClient implements RestApiClient_Interface {
         this.REST_SERVICE_URL = REST_SERVICE_URL;
     }
 
-    /*******************GET*******************/
+    /*GET*/
 
+    /**
+     * Fordert alle Artikel der Datenbank vom RestApiController an.
+     * @return Liste mit allen Artikeln {@link Item} der Datenbank.
+     * @throws Exception
+     */
     public ArrayList<Item> getAllItems() throws Exception {
         System.out.println("Getting all items...");
 
@@ -50,6 +55,11 @@ public class RestApiClient implements RestApiClient_Interface {
         }
     }
 
+    /**
+     * Fordert alle Tische der Datenbank vom RestApiController an.
+     * @return Liste mit allen Tischen {@link Table} der Datenbank.
+     * @throws Exception
+     */
     public ArrayList<Table> getAllTables() throws Exception {
         System.out.println("Getting all tables...");
 
@@ -68,6 +78,11 @@ public class RestApiClient implements RestApiClient_Interface {
         }
     }
 
+    /**
+     * Fordert alle Bestellungen der Datenbank vom RestApiController an.
+     * @return Liste mit allen Bestellungen {@link Order} der Datenbank.
+     * @throws Exception
+     */
     public ArrayList<Order> getAllOrders() throws Exception {
         System.out.println("Getting all orders...");
 
@@ -86,8 +101,14 @@ public class RestApiClient implements RestApiClient_Interface {
         }
     }
 
-    /******************POST*******************/
+    /*POST/PUT*/
 
+    /**
+     * Überträgt eine neue Bestellung an den RestApiController im Pfad .../order,
+     * wo diese in die Datenbank gespeichert wird.
+     * @param order Zu übertragende Order.
+     * @throws Exception Fehlermeldung mit Grund als Text.
+     */
     public void createOrder(Order order) throws Exception {
         System.out.println("Creating order...");
 
@@ -101,6 +122,13 @@ public class RestApiClient implements RestApiClient_Interface {
         }
     }
 
+    /**
+     * Überträgt eine bereits existierende Bestellung, die bearbeitet wurde, an den RestApiController im Pfad .../order,
+     * wo diese in der Datenbank aktualisiert wird.
+     * @param orderID ID der Bestellung, die aktualisiert werden soll.
+     * @param order Bestellung, die an Stelle der Bestellung mit der orderID gespeichert werden soll.
+     * @throws Exception Fehlermeldung mit Grund als Text.
+     */
     public void updateOrder(int orderID, Order order) throws Exception {
         System.out.println("Updating order...");
 
@@ -112,7 +140,6 @@ public class RestApiClient implements RestApiClient_Interface {
             throw new Exception(message);
         }
     }
-
 
     private static String getMessage(String body) {
         int lastindex = body.lastIndexOf("message");

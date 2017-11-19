@@ -15,7 +15,7 @@ import java.util.ArrayList;
  * Modell des Druckers:
  * Epson TM-T88V MODEL M244A
  * Treiber muss im OS installiert sein
- * Download des Treibers: https://download.epson-biz.com/modules/pos/index.php?page=single_soft&cid=5131&pcat=3&scat=31
+ * Download des Treibers: https://download.epson-biz.com/modules/pos/index.php?page=single_soft&cid=5131&pcat=3&scat=31;
  */
 
 public class PrinterService {
@@ -23,10 +23,10 @@ public class PrinterService {
     //TODO Ergänzen eines Datensatzes in der Datenbank, um Druckernamen einstellbar zu machen
     private final String printerName = "EPSON TM-T88V Receipt";
 
-    public void printOrder(Order order, ArrayList<Item> allItems, ArrayList<Table> allTables) {
+    public void printOrder(Order order, ArrayList<Item> allItems, ArrayList<Table> allTables, boolean kitchenReceipt) {
         PrintableOrder printableOrder = getPrintableOrder(order, allItems, allTables);
 
-        String formattedOrderText = getFormattedOrder(printableOrder);
+        String formattedOrderText = getFormattedOrder(printableOrder, kitchenReceipt);
 
         printString(formattedOrderText);
     }
@@ -83,9 +83,15 @@ public class PrinterService {
         return printableOrder;
     }
 
-    private String getFormattedOrder(PrintableOrder printableOrder) {
-        StringBuilder formattedOrderText =
-                new StringBuilder(Gastronomy.getName() + "\n"
+    private String getFormattedOrder(PrintableOrder printableOrder, boolean kitchenReceipt) {
+        StringBuilder formattedOrderText = new StringBuilder("");
+
+        if(kitchenReceipt)
+            formattedOrderText.append("----------Küchenbeleg-------------\n\n");
+        else
+            formattedOrderText.append("----------Kundenbeleg-------------\n\n");
+
+        formattedOrderText.append(Gastronomy.getName() + "\n"
                         + Gastronomy.getAdress() + "\n"
                         + Gastronomy.getTelephonenumber() + "\n"
                         + "\n"
@@ -95,7 +101,11 @@ public class PrinterService {
         for(Item i: printableOrder.getItems()) {
             double price = i.getRetailprice();
 
-            formattedOrderText.append(i.getName()).append("\t\t").append(df.format(price)).append(" EUR\n");
+            formattedOrderText
+                    .append(i.getName())
+                    .append("\t\t")
+                    .append(df.format(price))
+                    .append(" EUR\n");
         }
 
         double mwst = Math.round(printableOrder.getPrice()*0.199 * 100d) / 100d;

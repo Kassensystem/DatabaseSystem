@@ -10,12 +10,31 @@ import dhbw.sa.databaseApplication.printer.PrinterService;
 import org.joda.time.DateTime;
 import org.springframework.stereotype.Service;
 
+import javax.xml.crypto.Data;
 import java.sql.*;
 import java.util.ArrayList;
 
+/**
+ * {@inheritDoc}
+ *
+ * Implementierung des DatabaseInterfaces
+ *
+ * @author Marvin Mai
+ */
+
 @Service
 public class DatabaseService implements DatabaseService_Interface{
+    /**
+     *  @param items Alle in der Datenbank befindlichen Items werden hier gespeichert.
+     *  @param tables Alle in der Datenbank befindlichen Tables werden hier gespeichert.
+     *  @param orders Alle in der Datenbank befindlichen Orders werden hier gespeichert.
+     *  @param itemdeliveries Alle in der Datenbank befindlichen itemdeliveries werden hier gespeichert.
+     *  @param connection Eine Instanz einer Verbindung zur Datenbank.
+     *  @param dbp Beinhaltet eine Beschreibung der Daten die zur Verbindung zur Datenbank noetig sind.
+     */
+
     private final DatabaseProperties dbp = new DatabaseProperties();
+
     private Connection connection = null;
 
     private ArrayList<Item> items = new ArrayList<>();
@@ -49,9 +68,9 @@ public class DatabaseService implements DatabaseService_Interface{
         }
     }
 
-    //region Getting Table-Data from the database
+    //Getting Table-Data from the database
     @Override
-    public ArrayList<Item> getAllItems() throws IllegalStateException {
+    public ArrayList<Item> getAllItems() throws MySQLServerConnectionException {
         this.items.clear();
 
         try {
@@ -79,7 +98,7 @@ public class DatabaseService implements DatabaseService_Interface{
         }
     }
     @Override
-    public ArrayList<Table> getAllTables() throws IllegalStateException {
+    public ArrayList<Table> getAllTables() throws MySQLServerConnectionException {
         this.tables.clear();
 
         try {
@@ -102,7 +121,7 @@ public class DatabaseService implements DatabaseService_Interface{
         }
     }
     @Override
-    public ArrayList<Order> getAllOrders() throws IllegalStateException  {
+    public ArrayList<Order> getAllOrders() throws MySQLServerConnectionException  {
         this.orders.clear();
 
         try {
@@ -129,7 +148,7 @@ public class DatabaseService implements DatabaseService_Interface{
         }
     }
     @Override
-    public ArrayList<Itemdelivery> getAllItemdeliveries() throws IllegalStateException {
+    public ArrayList<Itemdelivery> getAllItemdeliveries() throws MySQLServerConnectionException {
         this.itemdeliveries.clear();
 
         try {
@@ -151,11 +170,10 @@ public class DatabaseService implements DatabaseService_Interface{
             throw new MySQLServerConnectionException();
         }
     }
-    //endregion
 
-    //region Adding data to the database
+    //Adding data to the database
     @Override
-    public void addItem(Item item) {
+    public void addItem(Item item) throws MySQLServerConnectionException {
 
         try {
             String query =  "INSERT INTO " + dbp.getDatabase() + ".items(itemID, name, retailprice, available) " +
@@ -167,7 +185,7 @@ public class DatabaseService implements DatabaseService_Interface{
             pst.setBoolean(3, item.isAvailable());
             pst.executeUpdate();
 
-            //ID des neu erzeugten Items ermitteln, um anschließend hierfür einen neuen Wareneingang anzulegen
+            //ID des neu erzeugten Items ermitteln, um anschließend hierfuer einen neuen Wareneingang anzulegen
             query = "SELECT * FROM " + dbp.getDatabase() + ".items ORDER BY itemID DESC LIMIT 1";
             pst = connection.prepareStatement(query);
             ResultSet rs = pst.executeQuery();
@@ -184,7 +202,7 @@ public class DatabaseService implements DatabaseService_Interface{
         }
     }
     @Override
-    public void addTable(Table table) {
+    public void addTable(Table table) throws MySQLServerConnectionException {
 
         try {
             String query =  "INSERT INTO " + dbp.getDatabase() + ".tables(tableID, name, available) " +
@@ -200,9 +218,9 @@ public class DatabaseService implements DatabaseService_Interface{
         }
     }
     @Override
-    public void addOrder(Order order) {
+    public void addOrder(Order order) throws MySQLServerConnectionException, DataException {
 
-        //Vollständigkeit der Order überprüfen
+        //Vollständigkeit der Order ueberpruefen
         if(order.getItems() == null
                 || order.getOrderID() != 0
                 || order.getTable() == 0
@@ -210,11 +228,15 @@ public class DatabaseService implements DatabaseService_Interface{
                 || order.getDate() == null)
             throw new DataException("Die Order ist unvollständig!");
 
-        if(order.isPaid())
-            printOrder(order);
+        if(order.isPaid()) {
+            printOrder(order, true);
+            printOrder(order, false);
+        }
+        else
+            printOrder(order, true);
 
         try {
-            String query =  "INSERT INTO " + dbp.getDatabase() + ".orders(orderID, itemIDs, price, date, tableID, paid) " +
+            String query =  "INSERT INTO " + dbp.getDatabase() + ".orders(orderID, itemIDs, price, date, tableID, paid)" +
                             "VALUES(DEFAULT, ?, ?, ?, ?, ?)";
             PreparedStatement pst = connection.prepareStatement(query);
 
@@ -230,7 +252,7 @@ public class DatabaseService implements DatabaseService_Interface{
         }
     }
     @Override
-    public void addItemdelivery(Itemdelivery itemdelivery) {
+    public void addItemdelivery(Itemdelivery itemdelivery) throws MySQLServerConnectionException {
         try {
             String query =  "INSERT INTO " + dbp.getDatabase() + ".itemdeliveries(itemdeliveryID, itemID, quantity) " +
                     "VALUES(DEFAULT, ?, ?)";
@@ -244,9 +266,8 @@ public class DatabaseService implements DatabaseService_Interface{
             throw new MySQLServerConnectionException();
         }
     }
-    //endregion
 
-    //region Updating data in database
+    //Updating data in database
     @Override
     public void updateItem(int itemID, Item item) {
 
@@ -283,7 +304,7 @@ public class DatabaseService implements DatabaseService_Interface{
         if(this.getOrderById(orderID) == null)
             throw new DataException("Bestellung mit der ID " + orderID + " existiert nicht!");
 
-        //Vollständigkeit der Order überprüfen
+        //Vollständigkeit der Order ueberpruefen
         if(order.getItems() == null
                 || order.getOrderID() != 0
                 || order.getTable() == 0
@@ -292,7 +313,15 @@ public class DatabaseService implements DatabaseService_Interface{
             throw new DataException("Die Order ist unvollständig!");
 
         if(order.isPaid())
-            printOrder(order);
+            //Kundenbeleg ausdrucken, wenn bezahlt wird
+            printOrder(order, false);
+
+        //Bei jedem Update die Differenz zur bisherigen Bestellung erkennen und in einem Kuechenbeleg ausdrucken
+        Order oldOrder = this.getOrderById(orderID);
+        Order newOrder = order;
+        Order diffOrder = getDiffOrder(oldOrder, newOrder);
+
+        printOrder(diffOrder, true);
 
         try {
             String query =  "UPDATE " + dbp.getDatabase() + ".orders " +
@@ -311,12 +340,11 @@ public class DatabaseService implements DatabaseService_Interface{
 
         }
     }
-    //endregion
 
-    //region Deleting data from database
-    /**
-     * Beim Löschen eines Items oder Tables wird dieser nur als nicht verfügbar markiert, verbleiben aber in der Datenbank.
-     * Somit ist sichergestellt, dass für bisherige Orders alle Daten verfügbar bleiben.
+    //Deleting data from database
+    /*
+      Beim Loeschen eines Items oder Tables wird dieser nur als nicht verfuegbar markiert, verbleiben aber in der Datenbank.
+      Somit ist sichergestellt, dass fuer bisherige Orders alle Daten verfuegbar bleiben.
      */
     @Override
     public void deleteItem(int itemID) {
@@ -337,7 +365,7 @@ public class DatabaseService implements DatabaseService_Interface{
     @Override
     public void deleteOrder(int orderID) {
         /*
-          Löschen einer Order löscht diese unwiederruflich aus der Datenbank.
+          Loeschen einer Order loescht diese unwiederruflich aus der Datenbank.
          */
         try {
             String query =  "DELETE FROM " + dbp.getDatabase() + ".orders " +
@@ -357,16 +385,53 @@ public class DatabaseService implements DatabaseService_Interface{
             pst.executeUpdate();
         } catch(SQLException e) { e.printStackTrace(); }
     }
-    //endregion
 
+    //Datenbankinhalte mit Angabe der ID erhalten
+    private Order getOrderById(int orderID) {
+        for(Order o: this.getAllOrders()) {
+            if(o.getOrderID() == orderID)
+                return o;
+        }
+        return null;
+    }
+
+    private Item getItemById(int itemID) {
+        for(Item i: this.getAllItems()) {
+            if(i.getItemID() == itemID)
+                return i;
+        }
+        return null;
+    }
+
+    private Table getTableById(int tableID) {
+        for(Table t: this.getAllTables()) {
+            if(t.getTableID() == tableID)
+                return t;
+        }
+        return null;
+    }
+
+    private Itemdelivery getItemdeliveryById(int itemdeliveryID) {
+        for(Itemdelivery i: this.getAllItemdeliveries()) {
+            if(i.getItemdeliveryID() == itemdeliveryID)
+                return i;
+        }
+        return null;
+    }
+
+    /**
+     * Ermittelt die aktuelle Verfuegbarkeit eines Items anhand der Wareneingaenge und Warenausgaenge.
+     * @param itemID des items, dessen Haeufigkeit ermittelt werden soll.
+     * @return aktuelle Verfuegbarkeit des items.
+     */
     private int getItemQuantity(int itemID) {
-        //Ermitteln der Wareneingänge
+        //Ermitteln der Wareneingaenge
         int itemdeliveries = 0;
         for(Itemdelivery i: this.getAllItemdeliveries()) {
             if(i.getItemID() == itemID)
                 itemdeliveries += i.getQuantity();
         }
-        //Ermitteln der Warenausgänge
+        //Ermitteln der Warenausgaenge
         int itemorders = 0;
         ArrayList<Item> allItems = this.getAllItemsEmpty();
         for(Order o: this.getAllOrders()) {
@@ -377,6 +442,10 @@ public class DatabaseService implements DatabaseService_Interface{
         }
         return itemdeliveries - itemorders;
     }
+
+    /**
+     * @return eine Liste von allen Items der Datenbank ohne die Anzahl zu bestimmen
+     */
     private ArrayList<Item> getAllItemsEmpty()  {
         ArrayList<Item> emptyItems = new ArrayList<>();
         try {
@@ -401,62 +470,111 @@ public class DatabaseService implements DatabaseService_Interface{
         return null;
     }
 
-    //Konverter
+    /**
+     * Ermittelt die hinzugefuegten Items von einer neuen Order im Vergleich zu einer alten.
+     * @param oldOrder die alte Order.
+     * @param newOrder die neue Order, die die alte ersetzt.
+     * @return Order, die diejenigen Items beinhaltet, die in der neuen Order hinzugefuegt wurden.
+     */
+    private static Order getDiffOrder(Order oldOrder, Order newOrder) {
+        int orderID = oldOrder.getOrderID();
+        int tableID = oldOrder.getTable();
+        double price = newOrder.getPrice();
+        DateTime date = newOrder.getDate();
+        boolean paid = newOrder.isPaid();
+
+        String itemIDs = "";
+        ArrayList<Integer> oldItemIDs = oldOrder.splitItemIDString(oldOrder.getItems());
+        ArrayList<Integer> newItemIDs = newOrder.splitItemIDString(newOrder.getItems());
+        ArrayList<Integer> addedItemIDs = new ArrayList<>();
+        ArrayList<Integer> removedItemIDs = new ArrayList<>();
+
+        ArrayList<Integer> allItemIDs = new ArrayList<>();
+        allItemIDs.addAll(oldItemIDs);
+        allItemIDs.addAll(newItemIDs);
+
+        ArrayList<Integer> alreadyCheckedItemIDs = new ArrayList<>();
+        for(Integer id: allItemIDs) {
+            if(!alreadyCheckedItemIDs.contains(id)) {
+                // Wenn die aktuelle itemID noch nicht ueberprueft wurde,
+                // diese den bereits ueberprueften hinzufuegen
+                alreadyCheckedItemIDs.add(id);
+                // Ermitteln, wie oft die gerade untersuchte id in den alten ids vorkommt
+                int oldQuantity = getItemQuantity(id, oldItemIDs);
+                int newQuantity = getItemQuantity(id, newItemIDs);
+                int diffQuantity = newQuantity - oldQuantity;
+                if (diffQuantity > 0) {
+                    // Es wurden von der aktuell untersuchten id welche hinzugefuegt
+                    for(int i = 0; i < diffQuantity; i++) {
+                        addedItemIDs.add(id);
+                    }
+                } else if(diffQuantity < 0) {
+                    // Es wurden von der aktuell untersuchten id welche erntfernt
+                    for(int i = 0; i < -diffQuantity; i++) {
+                        removedItemIDs.add(id);
+                    }
+                }
+            }
+        }
+        itemIDs = Order.joinIntIDsIntoString(addedItemIDs);
+
+        return new Order(orderID, itemIDs, tableID, price, date, paid);
+    }
+
+    /**
+     * Ermittelt die Haeufigkeit einer ID in einer Liste von IDs.
+     * @param id ID desjenigen Items, dessen Haeufigkeit in den itemIDs ermittelt werden soll.
+     * @param itemIDs ArrayList von Integers mit itemIDs.
+     * @return wie oft die id in den itemIDs vorkommt.
+     */
+    private static int getItemQuantity(int id, ArrayList<Integer> itemIDs) {
+        if(!itemIDs.contains(id))
+            return 0;
+        int quantity = 0;
+        for(Integer i: itemIDs) {
+            if(i.intValue() == id)
+                quantity++;
+        }
+        return quantity;
+    }
+
     private double round(double number) {
         return (double) Math.round(number * 100d) / 100d;
     }
+
+    //Konverter
+
+    /**
+     * Konvertiert ein joda.time.DateTime in einen Timestamp, der in der SQL-Datenbank gespeicher weren kann
+     * @param dateTime zu konvertierendes joda.time.DateTime
+     * @return Timestamp
+     */
     private Object convertJodaDateTimeToSqlTimestamp(DateTime dateTime) {
         // Convert sql-Timestamp to joda.DateTime
         return new Timestamp(dateTime.getMillis());
     }
+
+    /**
+     * Konvertiert einen Timestamp aus der SQL-Datenbank in eine joda.time.DateTime
+     * @param sqlTimestamp zu konvertierender Timestamp
+     * @return jode.time.DateTime
+     */
     private DateTime convertSqlTimestampToJodaDateTime(Timestamp sqlTimestamp) {
         //Convert joda.DateTime to sql-Timestamp
         return new DateTime(sqlTimestamp);
     }
 
     //Drucken einer Order
-    public void printOrder(int orderID) {
 
-        //Kontrollieren ob ID existiert
-        if(this.getOrderById(orderID) == null)
-            throw new DataException("Bestellung mit der ID " + orderID + " existiert nicht!");
-
-        printOrder(getOrderById(orderID));
-    }
-    public void printOrder(Order order) {
+    /**
+     * Druckt eine Order aus.
+     * @param order die auszudruckende Order.
+     * @param kitchenReceipt sagt dem PrinterService, ob es sich um einen Kuechenbeleg oder Kundenbeleg handelt. Layout
+     *                       des ausgedruckten Belegs wird dementsprechend geaendert.
+     */
+    private void printOrder(Order order, boolean kitchenReceipt) {
         PrinterService printerService = new PrinterService();
-        printerService.printOrder(order,  this.getAllItems(), this.getAllTables());
+        printerService.printOrder(order,  this.getAllItems(), this.getAllTables(), kitchenReceipt);
     }
-
-    //Datenbankinhalte mit Angabe der ID erhalten
-    public Order getOrderById(int orderID) {
-        for(Order o: this.getAllOrders()) {
-            if(o.getOrderID() == orderID)
-                return o;
-        }
-        return null;
-    }
-    public Item getItemById(int itemID) {
-        for(Item i: this.getAllItems()) {
-            if(i.getItemID() == itemID)
-                return i;
-        }
-        return null;
-    }
-    public Table getTableById(int tableID) {
-        for(Table t: this.getAllTables()) {
-            if(t.getTableID() == tableID)
-                return t;
-        }
-        return null;
-    }
-    public Itemdelivery getItemdeliveryById(int itemdeliveryID) {
-        for(Itemdelivery i: this.getAllItemdeliveries()) {
-            if(i.getItemdeliveryID() == itemdeliveryID)
-                return i;
-        }
-        return null;
-    }
-
 
 }

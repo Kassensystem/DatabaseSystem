@@ -15,6 +15,8 @@ public class Itemdelivery {
         this.quantity = quantity;
     }
 
+    /*Getter*/
+
     public int getItemdeliveryID() {
         return itemdeliveryID;
     }
@@ -27,12 +29,14 @@ public class Itemdelivery {
         return itemID;
     }
 
-    public void setItemID(int itemID) {
-        this.itemID = itemID;
-    }
-
     public int getQuantity() {
         return quantity;
+    }
+
+    /*Setter*/
+
+    public void setItemID(int itemID) {
+        this.itemID = itemID;
     }
 
     public void setQuantity(int quantity) {

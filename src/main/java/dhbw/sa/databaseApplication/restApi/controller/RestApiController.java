@@ -18,7 +18,7 @@ public class RestApiController {
     @Autowired
     DatabaseService databaseService;
 
-    /*********************GET**********************/
+    /*GET*/
 
     @RequestMapping("/items")
     public ArrayList<Item> getAllItems() {
@@ -35,7 +35,7 @@ public class RestApiController {
         return databaseService.getAllTables();
     }
 
-    /****************POST/PUT***********************/
+    /*POST/PUT*/
 
     @RequestMapping(value = "/order/", method = RequestMethod.POST)
     public ResponseEntity<?> createOrder(@RequestBody Order order) {
@@ -59,11 +59,5 @@ public class RestApiController {
         }
     }
 
-    /***************PRINT******************/
-
-    @RequestMapping(value = "/print/order/{orderID}")
-    public void printOrder(@PathVariable("orderID") int orderID) {
-        databaseService.printOrder(orderID);
-    }
 
 }

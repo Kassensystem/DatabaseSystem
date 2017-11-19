@@ -46,7 +46,7 @@ public class Order {
     }
 
 
-    /***************GETTER*****************/
+    /*Getter*/
 
     public int getOrderID() {
         return this.orderID;
@@ -72,7 +72,7 @@ public class Order {
         return paid;
     }
 
-    /*************SETTER******************/
+    /*Setter*/
 
     public void setItemIDs(String itemIDs) {
         this.itemIDs = itemIDs;
@@ -98,8 +98,8 @@ public class Order {
         this.paid = paid;
     }
 
-    /** Funktionen zum Erhalten der Items, die zu dieser Bestellung gehören.
-     *  Zur Verwendung alle Items übergeben, auch nicht verfügbare.
+    /** Funktionen zum Erhalten der Items, die zu dieser Bestellung gehoeren.
+     *  Zur Verwendung alle Items uebergeben, auch nicht verfuegbare.
      */
     public ArrayList<Item> getItems(ArrayList<Item> allItems) {
         ArrayList<Item> items = new ArrayList<>();
@@ -110,8 +110,9 @@ public class Order {
         }
         return items;
     }
+
     //region Hilfsmethoden zur Ermittlung der Items
-    private ArrayList<Integer> splitItemIDString(String itemIDString) {
+    public ArrayList<Integer> splitItemIDString(String itemIDString) {
         //Ermitteln der einzelnen IDs aus String
         ArrayList<Integer> itemIDList = new ArrayList<>();
         for(String itemID: itemIDString.split(";")) {
@@ -119,6 +120,7 @@ public class Order {
         }
         return itemIDList;
     }
+
     private Item getItemByID(int itemID, ArrayList<Item> allItems) {
         for(Item i: allItems) {
             if(i.getItemID() == itemID)
@@ -132,6 +134,14 @@ public class Order {
         StringBuilder IDString = new StringBuilder();
         for(Item i: items) {
             IDString.append(i.getItemID()).append(";");
+        }
+        return IDString.toString();
+    }
+
+    public static String joinIntIDsIntoString(ArrayList<Integer> itemIDs) {
+        StringBuilder IDString = new StringBuilder();
+        for(Integer i: itemIDs) {
+            IDString.append(i).append(";");
         }
         return IDString.toString();
     }
