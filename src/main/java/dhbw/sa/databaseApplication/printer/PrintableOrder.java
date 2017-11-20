@@ -4,6 +4,12 @@ import dhbw.sa.databaseApplication.database.entity.Item;
 
 import java.util.ArrayList;
 
+/**
+ * In einer PrintableOrder werden die Daten einer Order in primitiven Datentypen gespeichert, um diese anschließend#
+ * mit dem PrinterService ausdrucken zu können.s
+ *
+ * @author Marvin Mai
+ */
 class PrintableOrder {
     private int orderID;
     private ArrayList<Item> items;

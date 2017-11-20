@@ -1,8 +1,6 @@
 import dhbw.sa.databaseApplication.database.entity.Item;
 import dhbw.sa.databaseApplication.database.entity.Order;
 import dhbw.sa.databaseApplication.database.entity.Table;
-import dhbw.sa.databaseApplication.exceptions.ControllerConnectionException;
-import dhbw.sa.databaseApplication.exceptions.NoContentException;
 import dhbw.sa.databaseApplication.restApi.client.RestApiClient;
 import org.joda.time.DateTime;
 

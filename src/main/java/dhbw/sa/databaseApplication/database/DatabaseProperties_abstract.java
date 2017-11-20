@@ -1,5 +1,12 @@
 package dhbw.sa.databaseApplication.database;
 
+/**
+ * Klasse für Einstellungen, die benötigt werden, um sich mit der MySQL-Datenbank zu verbinden.
+ * Der username und password muss in der Datenbank mit entsprechenden Zugriffsrechten hinterlegt
+ * sein.
+ *
+ * @author Marvin Mai
+ */
 abstract class DatabaseProperties_abstract {
     private String url = "jdbc:mysql://localhost:3306";
     private String database = "Kassensystem";

@@ -11,6 +11,13 @@ import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
 
+/**
+ * Schnittstelle der Database-Application nach außen. Die Android-Application verwendet diese, um Daten der Datenbank
+ * anzufordern oder zu manipulieren. So können neue Bestellungen erstellt und upgedatet werden; Artikel, Bestellungen
+ * und Tisch können angefordert werden.
+ *
+ * @author Marvin Mai
+ */
 public class RestApiClient implements RestApiClient_Interface {
 
     private String REST_SERVICE_URL;
@@ -141,6 +148,11 @@ public class RestApiClient implements RestApiClient_Interface {
         }
     }
 
+    /**
+     * Extrahiert die Fehlermessage aus dem Body der JSON-Rückmeldung
+     * @param body body der Rückmeldung des RestApiContorllers in JSON
+     * @return extrahierte Fehlermessage des RestApiControllers
+     */
     private static String getMessage(String body) {
         int lastindex = body.lastIndexOf("message");
         char [] charArray = body.toCharArray();

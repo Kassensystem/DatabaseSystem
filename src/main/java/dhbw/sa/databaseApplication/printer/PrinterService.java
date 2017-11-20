@@ -11,18 +11,32 @@ import javax.print.attribute.PrintRequestAttributeSet;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 
-/**Service zum Ausdrucken einer Bestellung
+/**
+ * Service zum Ausdrucken einer Bestellung, die in einer PrintableOrder gespeichert wurde.
+ *
+ * Die folgenden Hardwarekomponenten sind für diesen Service erforderlich:
  * Modell des Druckers:
  * Epson TM-T88V MODEL M244A
  * Treiber muss im OS installiert sein
- * Download des Treibers: https://download.epson-biz.com/modules/pos/index.php?page=single_soft&cid=5131&pcat=3&scat=31;
+ * Download des Treibers:
+ * https://download.epson-biz.com/modules/pos/index.php?page=single_soft&cid=5131&pcat=3&scat=31
+ *
+ * @author Marvin Mai
  */
 
 public class PrinterService {
 
     //TODO Ergänzen eines Datensatzes in der Datenbank, um Druckernamen einstellbar zu machen
+    /** @param printerName Name des Druckers, wie er im Betriebssystem angezeigt wird.*/
     private final String printerName = "EPSON TM-T88V Receipt";
 
+    /**
+     * Druckt über einen formatierten Text die Bestellung aus.
+     * @param order die zu druckende Bestellung.
+     * @param allItems alle Items aus der Datenbank, aus denen die erforderlichen Informationen erhalten weren.
+     * @param allTables alle Tische aus der Datenbank, aus denen die erforderlichen Informationen erhalten weren.
+     * @param kitchenReceipt Indikator, ob es sich um einen Küchen- oder Kundenbeleg handelt.
+     */
     public void printOrder(Order order, ArrayList<Item> allItems, ArrayList<Table> allTables, boolean kitchenReceipt) {
         PrintableOrder printableOrder = getPrintableOrder(order, allItems, allTables);
 
@@ -31,6 +45,10 @@ public class PrinterService {
         printString(formattedOrderText);
     }
 
+    /**
+     * Druckt über einen printJob einen String, in dem die Bestellung formatiert wurde.
+     * @param text formatierter Text der Bestellung.
+     */
     private void printString(String text) {
         // find the printService of name printerName
         DocFlavor flavor = DocFlavor.BYTE_ARRAY.AUTOSENSE;
@@ -63,6 +81,13 @@ public class PrinterService {
         }
     }
 
+    /**
+     * Formatiert eine Bestellung in eine {@link PrintableOrder}
+     * @param order zu druckende Bestellung.
+     * @param allItems alle Items der Datenbank.
+     * @param allTables alle Tische der Datenbank.
+     * @return eine {@link PrintableOrder} mit den Daten der Bestellung.
+     */
     private PrintableOrder getPrintableOrder(Order order, ArrayList<Item> allItems, ArrayList<Table> allTables) {
         PrintableOrder printableOrder = new PrintableOrder();
 
@@ -83,6 +108,12 @@ public class PrinterService {
         return printableOrder;
     }
 
+    /**
+     * Formatiert eine {@link PrintableOrder} in einen Text, der entsprechend dem Layout des Belegs formattiert wurde.
+     * @param printableOrder Daten der Order in ausdruckbarem Format.
+     * @param kitchenReceipt ändert den Beleg zu einem Küchen- oder Kundenbeleg
+     * @return die Order formatiert in einen Text, der als Beleg ausgedruckt werden kann.
+     */
     private String getFormattedOrder(PrintableOrder printableOrder, boolean kitchenReceipt) {
         StringBuilder formattedOrderText = new StringBuilder("");
 

@@ -1,15 +1,33 @@
 package dhbw.sa.databaseApplication.database.entity;
 
+/**
+ * Model für einen Datensatz der Datenbanktabelle Itemdelivery.
+ *
+ * @author Marvin Mai
+ */
 public class Itemdelivery {
     private int itemdeliveryID;
     private int itemID;
     private int quantity;
 
+    /**
+     * Konstruktor für einen vollständigen Wareneingang, der aus der MySQL-Datenbank gelesen wurde.
+     * @param itemdeliveryID ID des Wareneingangs aus der Datenbank.
+     * @param itemID Artikel-ID des Wareneingangs aus der Datenbank.
+     * @param quantity Anzahl des Wareneingangs aus der Datenbank.
+     */
     public Itemdelivery(int itemdeliveryID, int itemID, int quantity) {
         this.itemdeliveryID = itemdeliveryID;
         this.itemID = itemID;
         this.quantity = quantity;
     }
+
+    /**
+     * Konstruktor zum Erstellen eines neuen Wareneingangs, der anschließend an die MySQL-Datenbank
+     * übertragen werden soll.
+     * @param itemID Artikel-ID des neuen Wareneingangs.
+     * @param quantity Anzahl des neuen Wareneingangs.
+     */
     public Itemdelivery(int itemID, int quantity) {
         this.itemID = itemID;
         this.quantity = quantity;

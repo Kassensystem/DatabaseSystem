@@ -137,6 +137,6 @@ public class DatabaseService_Test {
         return new Item("TestItem", i*1.5, i*3, true);
     }
     private static Table dummyTable() {
-        return new Table("TestTable");
+        return new Table("TestTable", true);
     }
 }

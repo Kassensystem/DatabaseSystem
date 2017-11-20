@@ -11,25 +11,44 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 
+/**
+ * Der RestApiController stellt einen Server dar, über den Funktionen des DatabaseServices angesprochen werden können.
+ * Diese sind über das Netzwerk verfügbar. Dabei müssen die entsprechenden Pfade beachtet werden. Der Root-Pfad ist
+ * ".../api".
+ *
+ * @author Marvin Mai
+ */
 @RestController
 @RequestMapping("/api")
-public class RestApiController {
+class RestApiController {
 
     @Autowired
     DatabaseService databaseService;
 
     /*GET*/
 
+    /**
+     * Durch das ansprechen des Pfades ".../api/items" können die Artikel der Datenbank abgefragt werden.
+     * @return Liste aller Artikel der Datenbank.
+     */
     @RequestMapping("/items")
     public ArrayList<Item> getAllItems() {
         return databaseService.getAllItems();
     }
 
+    /**
+     * Durch das ansprechen des Pfades ".../api/orders" können die Bestellungen der Datenbank abgefragt werden.
+     * @return Liste aller Bestellungen der Datenbank.
+     */
     @RequestMapping("/orders")
     public ArrayList<Order> getAllOrders() {
         return databaseService.getAllOrders();
     }
 
+    /**
+     * Durch das ansprechen des Pfades ".../api/tables" können die Tische der Datenbank abgefragt werden.
+     * @return Liste aller Tische der Datenbank.
+     */
     @RequestMapping("/tables")
     public ArrayList<Table> getAllTables() {
         return databaseService.getAllTables();
@@ -37,6 +56,11 @@ public class RestApiController {
 
     /*POST/PUT*/
 
+    /**
+     * Erstellt eine neue Bestellung in der MySQL-Datenbank.
+     * @param order neu zu erstellende Bestellung.
+     * @return ResponseEntity, das Erstellen entweder bestätigt oder eine Fehlermeldung liefert.
+     */
     @RequestMapping(value = "/order/", method = RequestMethod.POST)
     public ResponseEntity<?> createOrder(@RequestBody Order order) {
         try {
@@ -48,6 +72,12 @@ public class RestApiController {
         }
     }
 
+    /**
+     * Updatet eine bereits existierende Bestellung in der Datenbank.
+     * @param orderID Zu aktualisierende Bestellung.
+     * @param order Bestellung, deren Daten anstelle der existierenden Bestellung gespeichert werden sollen.
+     * @return ResponseEntity, das Updaten entweder bestätigt oder eine Fehlermeldung liefert.
+     */
     @RequestMapping(value = "/order/{orderID}", method = RequestMethod.PUT)
     public ResponseEntity<?> updateOrder(@PathVariable("orderID") int orderID, @RequestBody Order order) {
         try {

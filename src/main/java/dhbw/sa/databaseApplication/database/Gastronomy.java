@@ -1,5 +1,11 @@
 package dhbw.sa.databaseApplication.database;
 
+/**
+ * Stellt Informationen über die Gastronomie bereit. Die Klasse soll mit einem Eintrag in der
+ * MySQL-Datenbank ersetzt werden.
+ *
+ * @author Marvin Mai
+ */
 public class Gastronomy {
 
     public static String getName() {

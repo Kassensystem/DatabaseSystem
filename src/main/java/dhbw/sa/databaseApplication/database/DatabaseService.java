@@ -8,29 +8,32 @@ import dhbw.sa.databaseApplication.exceptions.DataException;
 import dhbw.sa.databaseApplication.exceptions.MySQLServerConnectionException;
 import dhbw.sa.databaseApplication.printer.PrinterService;
 import org.joda.time.DateTime;
+import org.junit.jupiter.api.Test;
 import org.springframework.stereotype.Service;
 
 import javax.xml.crypto.Data;
 import java.sql.*;
 import java.util.ArrayList;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 /**
  * {@inheritDoc}
  *
- * Implementierung des DatabaseInterfaces
+ * Implementierung des DatabaseService_Interfaces
  *
  * @author Marvin Mai
  */
 
 @Service
 public class DatabaseService implements DatabaseService_Interface{
-    /**
-     *  @param items Alle in der Datenbank befindlichen Items werden hier gespeichert.
-     *  @param tables Alle in der Datenbank befindlichen Tables werden hier gespeichert.
-     *  @param orders Alle in der Datenbank befindlichen Orders werden hier gespeichert.
-     *  @param itemdeliveries Alle in der Datenbank befindlichen itemdeliveries werden hier gespeichert.
-     *  @param connection Eine Instanz einer Verbindung zur Datenbank.
-     *  @param dbp Beinhaltet eine Beschreibung der Daten die zur Verbindung zur Datenbank noetig sind.
+    /*
+     *  items Alle in der Datenbank befindlichen Items werden hier gespeichert.
+     *  tables Alle in der Datenbank befindlichen Tables werden hier gespeichert.
+     *  orders Alle in der Datenbank befindlichen Orders werden hier gespeichert.
+     *  itemdeliveries Alle in der Datenbank befindlichen itemdeliveries werden hier gespeichert.
+     *  connection Eine Instanz einer Verbindung zur Datenbank.
+     *  dbp Beinhaltet eine Beschreibung der Daten die zur Verbindung zur Datenbank noetig sind.
      */
 
     private final DatabaseProperties dbp = new DatabaseProperties();
@@ -484,8 +487,8 @@ public class DatabaseService implements DatabaseService_Interface{
         boolean paid = newOrder.isPaid();
 
         String itemIDs = "";
-        ArrayList<Integer> oldItemIDs = oldOrder.splitItemIDString(oldOrder.getItems());
-        ArrayList<Integer> newItemIDs = newOrder.splitItemIDString(newOrder.getItems());
+        ArrayList<Integer> oldItemIDs = Order.splitItemIDString(oldOrder.getItems());
+        ArrayList<Integer> newItemIDs = Order.splitItemIDString(newOrder.getItems());
         ArrayList<Integer> addedItemIDs = new ArrayList<>();
         ArrayList<Integer> removedItemIDs = new ArrayList<>();
 
