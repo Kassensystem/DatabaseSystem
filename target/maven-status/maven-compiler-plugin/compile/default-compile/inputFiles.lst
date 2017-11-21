@@ -10,9 +10,7 @@ C:\Users\marvi\workspace\kassensystem_rest\src\main\java\dhbw\sa\databaseApplica
 C:\Users\marvi\workspace\kassensystem_rest\src\main\java\dhbw\sa\databaseApplication\database\DatabaseService.java
 C:\Users\marvi\workspace\kassensystem_rest\src\main\java\dhbw\sa\databaseApplication\printer\PrintableOrder.java
 C:\Users\marvi\workspace\kassensystem_rest\src\main\java\dhbw\sa\databaseApplication\exceptions\MySQLServerConnectionException.java
-C:\Users\marvi\workspace\kassensystem_rest\src\main\java\dhbw\sa\databaseApplication\exceptions\TestException.java
 C:\Users\marvi\workspace\kassensystem_rest\src\main\java\dhbw\sa\databaseApplication\restApi\client\RestApiClient_Interface.java
-C:\Users\marvi\workspace\kassensystem_rest\src\main\java\dhbw\sa\databaseApplication\exceptions\ControllerConnectionException.java
 C:\Users\marvi\workspace\kassensystem_rest\src\main\java\dhbw\sa\databaseApplication\database\entity\Item.java
 C:\Users\marvi\workspace\kassensystem_rest\src\main\java\dhbw\sa\databaseApplication\Main.java
 C:\Users\marvi\workspace\kassensystem_rest\src\main\java\dhbw\sa\databaseApplication\database\DatabaseProperties_abstract.java
