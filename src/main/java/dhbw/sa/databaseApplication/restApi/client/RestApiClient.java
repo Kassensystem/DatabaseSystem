@@ -13,9 +13,11 @@ import java.util.ArrayList;
 
 /**
  * {@inheritDoc}
+ * @deprecated
  *
  * @author Marvin Mai
  */
+@Deprecated
 public class RestApiClient implements RestApiClient_Interface {
 
     private String REST_SERVICE_URL;
