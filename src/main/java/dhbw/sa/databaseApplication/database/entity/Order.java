@@ -5,7 +5,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import org.joda.time.DateTime;
 import org.springframework.stereotype.Component;
 
-import javax.validation.constraints.Null;
 import java.util.ArrayList;
 
 /**
@@ -51,7 +50,8 @@ public class Order {
             throw new NullPointerException("Es müssen itemIDs übergeben werden!");
 
         if(date == null)
-            throw new NullPointerException("Es muss ein Datum übergeben werden!");
+            date = DateTime.now();
+            //throw new NullPointerException("Es muss ein Datum übergeben werden!");
 
         this.orderID = orderID;
         this.itemIDs = itemIDs;
@@ -82,6 +82,16 @@ public class Order {
         this.tableID = tableID;
         this.price = price;
         this.date = date;
+        this.paid = paid;
+    }
+    public Order(String itemIDs, int tableID, double price, boolean paid) {
+
+        if(itemIDs == null)
+            throw new NullPointerException("Es müssen itemIDs übergeben werden!");
+
+        this.itemIDs = itemIDs;
+        this.tableID = tableID;
+        this.price = price;
         this.paid = paid;
     }
 

@@ -4,6 +4,7 @@ import dhbw.sa.databaseApplication.database.DatabaseService;
 import dhbw.sa.databaseApplication.database.entity.Item;
 import dhbw.sa.databaseApplication.database.entity.Order;
 import dhbw.sa.databaseApplication.database.entity.Table;
+import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,6 +25,7 @@ class RestApiController {
 
     @Autowired
     DatabaseService databaseService;
+
 
     /*GET*/
 
@@ -64,6 +66,7 @@ class RestApiController {
     @RequestMapping(value = "/order/", method = RequestMethod.POST)
     public ResponseEntity<?> createOrder(@RequestBody Order order) {
         try {
+            order.setDate(DateTime.now());
             databaseService.addOrder(order);
             return new ResponseEntity(HttpStatus.OK);
         } catch (Exception e) {
@@ -81,6 +84,7 @@ class RestApiController {
     @RequestMapping(value = "/order/{orderID}", method = RequestMethod.PUT)
     public ResponseEntity<?> updateOrder(@PathVariable("orderID") int orderID, @RequestBody Order order) {
         try {
+            order.setDate(DateTime.now());
             databaseService.updateOrder(orderID, order);
             return new ResponseEntity(HttpStatus.OK);
         } catch (Exception e) {
