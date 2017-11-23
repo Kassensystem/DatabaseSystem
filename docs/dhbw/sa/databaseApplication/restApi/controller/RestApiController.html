@@ -175,32 +175,32 @@ extends java.lang.Object</pre>
 </tr>
 <tr id="i0" class="altColor">
 <td class="colFirst"><code>org.springframework.http.ResponseEntity&lt;?&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../dhbw/sa/databaseApplication/restApi/controller/RestApiController.html#createOrder-dhbw.sa.databaseApplication.database.entity.Order-">createOrder</a></span>(<a href="../../../../../dhbw/sa/databaseApplication/database/entity/Order.html" title="class in dhbw.sa.databaseApplication.database.entity">Order</a>&nbsp;order)</code>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../dhbw/sa/databaseApplication/restApi/controller/RestApiController.html#createOrder-entity.Order-">createOrder</a></span>(<a href="../../../../../dhbw/sa/databaseApplication/database/entity/Order.html" title="class in entity">Order</a>&nbsp;order)</code>
 <div class="block">Erstellt eine neue Bestellung in der MySQL-Datenbank.</div>
 </td>
 </tr>
 <tr id="i1" class="rowColor">
-<td class="colFirst"><code>java.util.ArrayList&lt;<a href="../../../../../dhbw/sa/databaseApplication/database/entity/Item.html" title="class in dhbw.sa.databaseApplication.database.entity">Item</a>&gt;</code></td>
+<td class="colFirst"><code>java.util.ArrayList&lt;<a href="../../../../../dhbw/sa/databaseApplication/database/entity/Item.html" title="class in entity">Item</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../dhbw/sa/databaseApplication/restApi/controller/RestApiController.html#getAllItems--">getAllItems</a></span>()</code>
 <div class="block">Durch das ansprechen des Pfades "...</div>
 </td>
 </tr>
 <tr id="i2" class="altColor">
-<td class="colFirst"><code>java.util.ArrayList&lt;<a href="../../../../../dhbw/sa/databaseApplication/database/entity/Order.html" title="class in dhbw.sa.databaseApplication.database.entity">Order</a>&gt;</code></td>
+<td class="colFirst"><code>java.util.ArrayList&lt;<a href="../../../../../dhbw/sa/databaseApplication/database/entity/Order.html" title="class in entity">Order</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../dhbw/sa/databaseApplication/restApi/controller/RestApiController.html#getAllOrders--">getAllOrders</a></span>()</code>
 <div class="block">Durch das ansprechen des Pfades "...</div>
 </td>
 </tr>
 <tr id="i3" class="rowColor">
-<td class="colFirst"><code>java.util.ArrayList&lt;<a href="../../../../../dhbw/sa/databaseApplication/database/entity/Table.html" title="class in dhbw.sa.databaseApplication.database.entity">Table</a>&gt;</code></td>
+<td class="colFirst"><code>java.util.ArrayList&lt;<a href="../../../../../dhbw/sa/databaseApplication/database/entity/Table.html" title="class in entity">Table</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../dhbw/sa/databaseApplication/restApi/controller/RestApiController.html#getAllTables--">getAllTables</a></span>()</code>
 <div class="block">Durch das ansprechen des Pfades "...</div>
 </td>
 </tr>
 <tr id="i4" class="altColor">
 <td class="colFirst"><code>org.springframework.http.ResponseEntity&lt;?&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../dhbw/sa/databaseApplication/restApi/controller/RestApiController.html#updateOrder-int-dhbw.sa.databaseApplication.database.entity.Order-">updateOrder</a></span>(int&nbsp;orderID,
-           <a href="../../../../../dhbw/sa/databaseApplication/database/entity/Order.html" title="class in dhbw.sa.databaseApplication.database.entity">Order</a>&nbsp;order)</code>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../dhbw/sa/databaseApplication/restApi/controller/RestApiController.html#updateOrder-int-entity.Order-">updateOrder</a></span>(int&nbsp;orderID,
+           <a href="../../../../../dhbw/sa/databaseApplication/database/entity/Order.html" title="class in entity">Order</a>&nbsp;order)</code>
 <div class="block">Updatet eine bereits existierende Bestellung in der Datenbank.</div>
 </td>
 </tr>
@@ -268,7 +268,7 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>getAllItems</h4>
 <pre>@RequestMapping(value="/items")
-public&nbsp;java.util.ArrayList&lt;<a href="../../../../../dhbw/sa/databaseApplication/database/entity/Item.html" title="class in dhbw.sa.databaseApplication.database.entity">Item</a>&gt;&nbsp;getAllItems()</pre>
+public&nbsp;java.util.ArrayList&lt;<a href="../../../../../dhbw/sa/databaseApplication/database/entity/Item.html" title="class in entity">Item</a>&gt;&nbsp;getAllItems()</pre>
 <div class="block">Durch das ansprechen des Pfades ".../api/items" können die Artikel der Datenbank abgefragt werden.</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
@@ -283,7 +283,7 @@ public&nbsp;java.util.ArrayList&lt;<a href="../../../../../dhbw/sa/databaseAppli
 <li class="blockList">
 <h4>getAllOrders</h4>
 <pre>@RequestMapping(value="/orders")
-public&nbsp;java.util.ArrayList&lt;<a href="../../../../../dhbw/sa/databaseApplication/database/entity/Order.html" title="class in dhbw.sa.databaseApplication.database.entity">Order</a>&gt;&nbsp;getAllOrders()</pre>
+public&nbsp;java.util.ArrayList&lt;<a href="../../../../../dhbw/sa/databaseApplication/database/entity/Order.html" title="class in entity">Order</a>&gt;&nbsp;getAllOrders()</pre>
 <div class="block">Durch das ansprechen des Pfades ".../api/orders" können die Bestellungen der Datenbank abgefragt werden.</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
@@ -298,7 +298,7 @@ public&nbsp;java.util.ArrayList&lt;<a href="../../../../../dhbw/sa/databaseAppli
 <li class="blockList">
 <h4>getAllTables</h4>
 <pre>@RequestMapping(value="/tables")
-public&nbsp;java.util.ArrayList&lt;<a href="../../../../../dhbw/sa/databaseApplication/database/entity/Table.html" title="class in dhbw.sa.databaseApplication.database.entity">Table</a>&gt;&nbsp;getAllTables()</pre>
+public&nbsp;java.util.ArrayList&lt;<a href="../../../../../dhbw/sa/databaseApplication/database/entity/Table.html" title="class in entity">Table</a>&gt;&nbsp;getAllTables()</pre>
 <div class="block">Durch das ansprechen des Pfades ".../api/tables" können die Tische der Datenbank abgefragt werden.</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
@@ -306,7 +306,7 @@ public&nbsp;java.util.ArrayList&lt;<a href="../../../../../dhbw/sa/databaseAppli
 </dl>
 </li>
 </ul>
-<a name="createOrder-dhbw.sa.databaseApplication.database.entity.Order-">
+<a name="createOrder-entity.Order-">
 <!--   -->
 </a>
 <ul class="blockList">
@@ -315,7 +315,7 @@ public&nbsp;java.util.ArrayList&lt;<a href="../../../../../dhbw/sa/databaseAppli
 <pre>@RequestMapping(value="/order/",
                 method=POST)
 public&nbsp;org.springframework.http.ResponseEntity&lt;?&gt;&nbsp;createOrder(@RequestBody
-                                                                                                                              <a href="../../../../../dhbw/sa/databaseApplication/database/entity/Order.html" title="class in dhbw.sa.databaseApplication.database.entity">Order</a>&nbsp;order)</pre>
+                                                                                                                              <a href="../../../../../dhbw/sa/databaseApplication/database/entity/Order.html" title="class in entity">Order</a>&nbsp;order)</pre>
 <div class="block">Erstellt eine neue Bestellung in der MySQL-Datenbank.</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
@@ -325,7 +325,7 @@ public&nbsp;org.springframework.http.ResponseEntity&lt;?&gt;&nbsp;createOrder(@R
 </dl>
 </li>
 </ul>
-<a name="updateOrder-int-dhbw.sa.databaseApplication.database.entity.Order-">
+<a name="updateOrder-int-entity.Order-">
 <!--   -->
 </a>
 <ul class="blockListLast">
@@ -336,7 +336,7 @@ public&nbsp;org.springframework.http.ResponseEntity&lt;?&gt;&nbsp;createOrder(@R
 public&nbsp;org.springframework.http.ResponseEntity&lt;?&gt;&nbsp;updateOrder(@PathVariable(value="orderID")
                                                                                                                                       int&nbsp;orderID,
                                                                                                                                       @RequestBody
-                                                                                                                                      <a href="../../../../../dhbw/sa/databaseApplication/database/entity/Order.html" title="class in dhbw.sa.databaseApplication.database.entity">Order</a>&nbsp;order)</pre>
+                                                                                                                                      <a href="../../../../../dhbw/sa/databaseApplication/database/entity/Order.html" title="class in entity">Order</a>&nbsp;order)</pre>
 <div class="block">Updatet eine bereits existierende Bestellung in der Datenbank.</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>

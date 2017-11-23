@@ -99,7 +99,7 @@ var activeTableTab = "activeTableTab";
 <li>java.lang.Object</li>
 <li>
 <ul class="inheritance">
-<li>dhbw.sa.databaseApplication.restApi.client.RestApiClient</li>
+<li>dhbw.sa.kassensystem_rest.restApi.client.RestApiClient</li>
 </ul>
 </li>
 </ul>
@@ -160,27 +160,27 @@ extends java.lang.Object</pre>
 </tr>
 <tr id="i0" class="altColor">
 <td class="colFirst"><code>void</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../dhbw/sa/databaseApplication/restApi/client/RestApiClient.html#createOrder-dhbw.sa.databaseApplication.database.entity.Order-">createOrder</a></span>(<a href="../../../../../dhbw/sa/databaseApplication/database/entity/Order.html" title="class in dhbw.sa.databaseApplication.database.entity">Order</a>&nbsp;order)</code>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../dhbw/sa/databaseApplication/restApi/client/RestApiClient.html#createOrder-entity.Order-">createOrder</a></span>(<a href="../../../../../dhbw/sa/databaseApplication/database/entity/Order.html" title="class in entity">Order</a>&nbsp;order)</code>
 <div class="block"><span class="deprecatedLabel">Deprecated.</span>&nbsp;</div>
 <div class="block">Überträgt eine neue Bestellung an den RestApiController im Pfad ...</div>
 </td>
 </tr>
 <tr id="i1" class="rowColor">
-<td class="colFirst"><code>java.util.ArrayList&lt;<a href="../../../../../dhbw/sa/databaseApplication/database/entity/Item.html" title="class in dhbw.sa.databaseApplication.database.entity">Item</a>&gt;</code></td>
+<td class="colFirst"><code>java.util.ArrayList&lt;<a href="../../../../../dhbw/sa/databaseApplication/database/entity/Item.html" title="class in entity">Item</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../dhbw/sa/databaseApplication/restApi/client/RestApiClient.html#getAllItems--">getAllItems</a></span>()</code>
 <div class="block"><span class="deprecatedLabel">Deprecated.</span>&nbsp;</div>
 <div class="block">Fordert alle Artikel der Datenbank vom RestApiController an.</div>
 </td>
 </tr>
 <tr id="i2" class="altColor">
-<td class="colFirst"><code>java.util.ArrayList&lt;<a href="../../../../../dhbw/sa/databaseApplication/database/entity/Order.html" title="class in dhbw.sa.databaseApplication.database.entity">Order</a>&gt;</code></td>
+<td class="colFirst"><code>java.util.ArrayList&lt;<a href="../../../../../dhbw/sa/databaseApplication/database/entity/Order.html" title="class in entity">Order</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../dhbw/sa/databaseApplication/restApi/client/RestApiClient.html#getAllOrders--">getAllOrders</a></span>()</code>
 <div class="block"><span class="deprecatedLabel">Deprecated.</span>&nbsp;</div>
 <div class="block">Fordert alle Bestellungen der Datenbank vom RestApiController an.</div>
 </td>
 </tr>
 <tr id="i3" class="rowColor">
-<td class="colFirst"><code>java.util.ArrayList&lt;<a href="../../../../../dhbw/sa/databaseApplication/database/entity/Table.html" title="class in dhbw.sa.databaseApplication.database.entity">Table</a>&gt;</code></td>
+<td class="colFirst"><code>java.util.ArrayList&lt;<a href="../../../../../dhbw/sa/databaseApplication/database/entity/Table.html" title="class in entity">Table</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../dhbw/sa/databaseApplication/restApi/client/RestApiClient.html#getAllTables--">getAllTables</a></span>()</code>
 <div class="block"><span class="deprecatedLabel">Deprecated.</span>&nbsp;</div>
 <div class="block">Fordert alle Tische der Datenbank vom RestApiController an.</div>
@@ -188,8 +188,8 @@ extends java.lang.Object</pre>
 </tr>
 <tr id="i4" class="altColor">
 <td class="colFirst"><code>void</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../dhbw/sa/databaseApplication/restApi/client/RestApiClient.html#updateOrder-int-dhbw.sa.databaseApplication.database.entity.Order-">updateOrder</a></span>(int&nbsp;orderID,
-           <a href="../../../../../dhbw/sa/databaseApplication/database/entity/Order.html" title="class in dhbw.sa.databaseApplication.database.entity">Order</a>&nbsp;order)</code>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../dhbw/sa/databaseApplication/restApi/client/RestApiClient.html#updateOrder-int-entity.Order-">updateOrder</a></span>(int&nbsp;orderID,
+           <a href="../../../../../dhbw/sa/databaseApplication/database/entity/Order.html" title="class in entity">Order</a>&nbsp;order)</code>
 <div class="block"><span class="deprecatedLabel">Deprecated.</span>&nbsp;</div>
 <div class="block">Überträgt eine bereits existierende Bestellung, die bearbeitet wurde, an den RestApiController im Pfad ...</div>
 </td>
@@ -250,13 +250,13 @@ extends java.lang.Object</pre>
 <ul class="blockList">
 <li class="blockList">
 <h4>getAllItems</h4>
-<pre>public&nbsp;java.util.ArrayList&lt;<a href="../../../../../dhbw/sa/databaseApplication/database/entity/Item.html" title="class in dhbw.sa.databaseApplication.database.entity">Item</a>&gt;&nbsp;getAllItems()
+<pre>public&nbsp;java.util.ArrayList&lt;<a href="../../../../../dhbw/sa/databaseApplication/database/entity/Item.html" title="class in entity">Item</a>&gt;&nbsp;getAllItems()
                                       throws java.lang.Exception</pre>
 <div class="block"><span class="deprecatedLabel">Deprecated.</span>&nbsp;</div>
 <div class="block">Fordert alle Artikel der Datenbank vom RestApiController an.</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
-<dd>Liste mit allen Artikeln <a href="../../../../../dhbw/sa/databaseApplication/database/entity/Item.html" title="class in dhbw.sa.databaseApplication.database.entity"><code>Item</code></a> der Datenbank.</dd>
+<dd>Liste mit allen Artikeln <a href="../../../../../dhbw/sa/databaseApplication/database/entity/Item.html" title="class in entity"><code>Item</code></a> der Datenbank.</dd>
 <dt><span class="throwsLabel">Throws:</span></dt>
 <dd><code>java.lang.Exception</code></dd>
 </dl>
@@ -268,13 +268,13 @@ extends java.lang.Object</pre>
 <ul class="blockList">
 <li class="blockList">
 <h4>getAllTables</h4>
-<pre>public&nbsp;java.util.ArrayList&lt;<a href="../../../../../dhbw/sa/databaseApplication/database/entity/Table.html" title="class in dhbw.sa.databaseApplication.database.entity">Table</a>&gt;&nbsp;getAllTables()
+<pre>public&nbsp;java.util.ArrayList&lt;<a href="../../../../../dhbw/sa/databaseApplication/database/entity/Table.html" title="class in entity">Table</a>&gt;&nbsp;getAllTables()
                                         throws java.lang.Exception</pre>
 <div class="block"><span class="deprecatedLabel">Deprecated.</span>&nbsp;</div>
 <div class="block">Fordert alle Tische der Datenbank vom RestApiController an.</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
-<dd>Liste mit allen Tischen <a href="../../../../../dhbw/sa/databaseApplication/database/entity/Table.html" title="class in dhbw.sa.databaseApplication.database.entity"><code>Table</code></a> der Datenbank.</dd>
+<dd>Liste mit allen Tischen <a href="../../../../../dhbw/sa/databaseApplication/database/entity/Table.html" title="class in entity"><code>Table</code></a> der Datenbank.</dd>
 <dt><span class="throwsLabel">Throws:</span></dt>
 <dd><code>java.lang.Exception</code></dd>
 </dl>
@@ -286,25 +286,25 @@ extends java.lang.Object</pre>
 <ul class="blockList">
 <li class="blockList">
 <h4>getAllOrders</h4>
-<pre>public&nbsp;java.util.ArrayList&lt;<a href="../../../../../dhbw/sa/databaseApplication/database/entity/Order.html" title="class in dhbw.sa.databaseApplication.database.entity">Order</a>&gt;&nbsp;getAllOrders()
+<pre>public&nbsp;java.util.ArrayList&lt;<a href="../../../../../dhbw/sa/databaseApplication/database/entity/Order.html" title="class in entity">Order</a>&gt;&nbsp;getAllOrders()
                                         throws java.lang.Exception</pre>
 <div class="block"><span class="deprecatedLabel">Deprecated.</span>&nbsp;</div>
 <div class="block">Fordert alle Bestellungen der Datenbank vom RestApiController an.</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
-<dd>Liste mit allen Bestellungen <a href="../../../../../dhbw/sa/databaseApplication/database/entity/Order.html" title="class in dhbw.sa.databaseApplication.database.entity"><code>Order</code></a> der Datenbank.</dd>
+<dd>Liste mit allen Bestellungen <a href="../../../../../dhbw/sa/databaseApplication/database/entity/Order.html" title="class in entity"><code>Order</code></a> der Datenbank.</dd>
 <dt><span class="throwsLabel">Throws:</span></dt>
 <dd><code>java.lang.Exception</code></dd>
 </dl>
 </li>
 </ul>
-<a name="createOrder-dhbw.sa.databaseApplication.database.entity.Order-">
+<a name="createOrder-entity.Order-">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
 <h4>createOrder</h4>
-<pre>public&nbsp;void&nbsp;createOrder(<a href="../../../../../dhbw/sa/databaseApplication/database/entity/Order.html" title="class in dhbw.sa.databaseApplication.database.entity">Order</a>&nbsp;order)
+<pre>public&nbsp;void&nbsp;createOrder(<a href="../../../../../dhbw/sa/databaseApplication/database/entity/Order.html" title="class in entity">Order</a>&nbsp;order)
                  throws java.lang.Exception</pre>
 <div class="block"><span class="deprecatedLabel">Deprecated.</span>&nbsp;</div>
 <div class="block">Überträgt eine neue Bestellung an den RestApiController im Pfad .../order,
@@ -317,14 +317,14 @@ extends java.lang.Object</pre>
 </dl>
 </li>
 </ul>
-<a name="updateOrder-int-dhbw.sa.databaseApplication.database.entity.Order-">
+<a name="updateOrder-int-entity.Order-">
 <!--   -->
 </a>
 <ul class="blockListLast">
 <li class="blockList">
 <h4>updateOrder</h4>
 <pre>public&nbsp;void&nbsp;updateOrder(int&nbsp;orderID,
-                        <a href="../../../../../dhbw/sa/databaseApplication/database/entity/Order.html" title="class in dhbw.sa.databaseApplication.database.entity">Order</a>&nbsp;order)
+                        <a href="../../../../../dhbw/sa/databaseApplication/database/entity/Order.html" title="class in entity">Order</a>&nbsp;order)
                  throws java.lang.Exception</pre>
 <div class="block"><span class="deprecatedLabel">Deprecated.</span>&nbsp;</div>
 <div class="block">Überträgt eine bereits existierende Bestellung, die bearbeitet wurde, an den RestApiController im Pfad .../order,

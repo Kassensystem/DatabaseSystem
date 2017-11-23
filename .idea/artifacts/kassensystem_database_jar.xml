@@ -2,7 +2,7 @@
   <artifact type="jar" name="kassensystem_database:jar">
     <output-path>$PROJECT_DIR$/out/artifacts/kassensystem_database_jar</output-path>
     <root id="archive" name="kassensystem_database.jar">
-      <element id="module-output" name="kassensystem_database" />
+      <element id="module-output" name="kassensystem_rest" />
       <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/springframework/spring-aop/4.3.12.RELEASE/spring-aop-4.3.12.RELEASE.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$MAVEN_REPOSITORY$/com/fasterxml/jackson/datatype/jackson-datatype-joda/2.8.10/jackson-datatype-joda-2.8.10.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/yaml/snakeyaml/1.17/snakeyaml-1.17.jar" path-in-jar="/" />

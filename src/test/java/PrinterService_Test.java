@@ -1,5 +1,5 @@
-import dhbw.sa.databaseApplication.database.DatabaseService;
-import dhbw.sa.databaseApplication.printer.PrinterService;
+import dhbw.sa.kassensystem_database.database.DatabaseService;
+import dhbw.sa.kassensystem_database.printer.PrinterService;
 
 public class PrinterService_Test {
     private static DatabaseService dbs = new DatabaseService();

@@ -1,7 +1,8 @@
-import dhbw.sa.databaseApplication.database.entity.Item;
-import dhbw.sa.databaseApplication.database.entity.Order;
-import dhbw.sa.databaseApplication.database.entity.Table;
-import dhbw.sa.databaseApplication.restApi.client.RestApiClient;
+
+import dhbw.sa.kassensystem_database.database.entity.Item;
+import dhbw.sa.kassensystem_database.database.entity.Order;
+import dhbw.sa.kassensystem_database.database.entity.Table;
+import dhbw.sa.kassensystem_rest.restApi.client.RestApiClient;
 import org.joda.time.DateTime;
 
 import java.util.ArrayList;

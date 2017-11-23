@@ -1,11 +1,12 @@
-import dhbw.sa.databaseApplication.database.DatabaseService;
-import dhbw.sa.databaseApplication.database.entity.Item;
-import dhbw.sa.databaseApplication.database.entity.Itemdelivery;
-import dhbw.sa.databaseApplication.database.entity.Order;
-import dhbw.sa.databaseApplication.database.entity.Table;
+
+import dhbw.sa.kassensystem_database.database.DatabaseService;
+import dhbw.sa.kassensystem_database.database.entity.Item;
+import dhbw.sa.kassensystem_database.database.entity.Order;
+import dhbw.sa.kassensystem_database.database.entity.Table;
 import org.joda.time.DateTime;
 
 import java.util.ArrayList;
+
 
 /** Testfälle für die Klasse DatabaseService
  *  Test der Get-Methoden: Es werden alle in der Datenbank befindlichen Daten der Tabelle ausgegeben

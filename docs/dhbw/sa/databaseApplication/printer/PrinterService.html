@@ -99,7 +99,7 @@ var activeTableTab = "activeTableTab";
 <li>java.lang.Object</li>
 <li>
 <ul class="inheritance">
-<li>dhbw.sa.databaseApplication.printer.PrinterService</li>
+<li>dhbw.sa.kassensystem_rest.printer.PrinterService</li>
 </ul>
 </li>
 </ul>
@@ -190,17 +190,17 @@ extends java.lang.Object</pre>
 </tr>
 <tr id="i2" class="altColor">
 <td class="colFirst"><code>private <a href="../../../../dhbw/sa/databaseApplication/printer/PrintableOrder.html" title="class in dhbw.sa.databaseApplication.printer">PrintableOrder</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../dhbw/sa/databaseApplication/printer/PrinterService.html#getPrintableOrder-dhbw.sa.databaseApplication.database.entity.Order-java.util.ArrayList-java.util.ArrayList-">getPrintableOrder</a></span>(<a href="../../../../dhbw/sa/databaseApplication/database/entity/Order.html" title="class in dhbw.sa.databaseApplication.database.entity">Order</a>&nbsp;order,
-                 java.util.ArrayList&lt;<a href="../../../../dhbw/sa/databaseApplication/database/entity/Item.html" title="class in dhbw.sa.databaseApplication.database.entity">Item</a>&gt;&nbsp;allItems,
-                 java.util.ArrayList&lt;<a href="../../../../dhbw/sa/databaseApplication/database/entity/Table.html" title="class in dhbw.sa.databaseApplication.database.entity">Table</a>&gt;&nbsp;allTables)</code>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../dhbw/sa/databaseApplication/printer/PrinterService.html#getPrintableOrder-entity.Order-java.util.ArrayList-java.util.ArrayList-">getPrintableOrder</a></span>(<a href="../../../../dhbw/sa/databaseApplication/database/entity/Order.html" title="class in entity">Order</a>&nbsp;order,
+                 java.util.ArrayList&lt;<a href="../../../../dhbw/sa/databaseApplication/database/entity/Item.html" title="class in entity">Item</a>&gt;&nbsp;allItems,
+                 java.util.ArrayList&lt;<a href="../../../../dhbw/sa/databaseApplication/database/entity/Table.html" title="class in entity">Table</a>&gt;&nbsp;allTables)</code>
 <div class="block">Formatiert eine Bestellung in eine <a href="../../../../dhbw/sa/databaseApplication/printer/PrintableOrder.html" title="class in dhbw.sa.databaseApplication.printer"><code>PrintableOrder</code></a></div>
 </td>
 </tr>
 <tr id="i3" class="rowColor">
 <td class="colFirst"><code>void</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../dhbw/sa/databaseApplication/printer/PrinterService.html#printOrder-dhbw.sa.databaseApplication.database.entity.Order-java.util.ArrayList-java.util.ArrayList-boolean-">printOrder</a></span>(<a href="../../../../dhbw/sa/databaseApplication/database/entity/Order.html" title="class in dhbw.sa.databaseApplication.database.entity">Order</a>&nbsp;order,
-          java.util.ArrayList&lt;<a href="../../../../dhbw/sa/databaseApplication/database/entity/Item.html" title="class in dhbw.sa.databaseApplication.database.entity">Item</a>&gt;&nbsp;allItems,
-          java.util.ArrayList&lt;<a href="../../../../dhbw/sa/databaseApplication/database/entity/Table.html" title="class in dhbw.sa.databaseApplication.database.entity">Table</a>&gt;&nbsp;allTables,
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../dhbw/sa/databaseApplication/printer/PrinterService.html#printOrder-entity.Order-java.util.ArrayList-java.util.ArrayList-boolean-">printOrder</a></span>(<a href="../../../../dhbw/sa/databaseApplication/database/entity/Order.html" title="class in entity">Order</a>&nbsp;order,
+          java.util.ArrayList&lt;<a href="../../../../dhbw/sa/databaseApplication/database/entity/Item.html" title="class in entity">Item</a>&gt;&nbsp;allItems,
+          java.util.ArrayList&lt;<a href="../../../../dhbw/sa/databaseApplication/database/entity/Table.html" title="class in entity">Table</a>&gt;&nbsp;allTables,
           boolean&nbsp;kitchenReceipt)</code>
 <div class="block">Druckt über einen formatierten Text die Bestellung aus.</div>
 </td>
@@ -271,15 +271,15 @@ extends java.lang.Object</pre>
 <!--   -->
 </a>
 <h3>Method Detail</h3>
-<a name="printOrder-dhbw.sa.databaseApplication.database.entity.Order-java.util.ArrayList-java.util.ArrayList-boolean-">
+<a name="printOrder-entity.Order-java.util.ArrayList-java.util.ArrayList-boolean-">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
 <h4>printOrder</h4>
-<pre>public&nbsp;void&nbsp;printOrder(<a href="../../../../dhbw/sa/databaseApplication/database/entity/Order.html" title="class in dhbw.sa.databaseApplication.database.entity">Order</a>&nbsp;order,
-                       java.util.ArrayList&lt;<a href="../../../../dhbw/sa/databaseApplication/database/entity/Item.html" title="class in dhbw.sa.databaseApplication.database.entity">Item</a>&gt;&nbsp;allItems,
-                       java.util.ArrayList&lt;<a href="../../../../dhbw/sa/databaseApplication/database/entity/Table.html" title="class in dhbw.sa.databaseApplication.database.entity">Table</a>&gt;&nbsp;allTables,
+<pre>public&nbsp;void&nbsp;printOrder(<a href="../../../../dhbw/sa/databaseApplication/database/entity/Order.html" title="class in entity">Order</a>&nbsp;order,
+                       java.util.ArrayList&lt;<a href="../../../../dhbw/sa/databaseApplication/database/entity/Item.html" title="class in entity">Item</a>&gt;&nbsp;allItems,
+                       java.util.ArrayList&lt;<a href="../../../../dhbw/sa/databaseApplication/database/entity/Table.html" title="class in entity">Table</a>&gt;&nbsp;allTables,
                        boolean&nbsp;kitchenReceipt)</pre>
 <div class="block">Druckt über einen formatierten Text die Bestellung aus.</div>
 <dl>
@@ -305,15 +305,15 @@ extends java.lang.Object</pre>
 </dl>
 </li>
 </ul>
-<a name="getPrintableOrder-dhbw.sa.databaseApplication.database.entity.Order-java.util.ArrayList-java.util.ArrayList-">
+<a name="getPrintableOrder-entity.Order-java.util.ArrayList-java.util.ArrayList-">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
 <h4>getPrintableOrder</h4>
-<pre>private&nbsp;<a href="../../../../dhbw/sa/databaseApplication/printer/PrintableOrder.html" title="class in dhbw.sa.databaseApplication.printer">PrintableOrder</a>&nbsp;getPrintableOrder(<a href="../../../../dhbw/sa/databaseApplication/database/entity/Order.html" title="class in dhbw.sa.databaseApplication.database.entity">Order</a>&nbsp;order,
-                                         java.util.ArrayList&lt;<a href="../../../../dhbw/sa/databaseApplication/database/entity/Item.html" title="class in dhbw.sa.databaseApplication.database.entity">Item</a>&gt;&nbsp;allItems,
-                                         java.util.ArrayList&lt;<a href="../../../../dhbw/sa/databaseApplication/database/entity/Table.html" title="class in dhbw.sa.databaseApplication.database.entity">Table</a>&gt;&nbsp;allTables)</pre>
+<pre>private&nbsp;<a href="../../../../dhbw/sa/databaseApplication/printer/PrintableOrder.html" title="class in dhbw.sa.databaseApplication.printer">PrintableOrder</a>&nbsp;getPrintableOrder(<a href="../../../../dhbw/sa/databaseApplication/database/entity/Order.html" title="class in entity">Order</a>&nbsp;order,
+                                         java.util.ArrayList&lt;<a href="../../../../dhbw/sa/databaseApplication/database/entity/Item.html" title="class in entity">Item</a>&gt;&nbsp;allItems,
+                                         java.util.ArrayList&lt;<a href="../../../../dhbw/sa/databaseApplication/database/entity/Table.html" title="class in entity">Table</a>&gt;&nbsp;allTables)</pre>
 <div class="block">Formatiert eine Bestellung in eine <a href="../../../../dhbw/sa/databaseApplication/printer/PrintableOrder.html" title="class in dhbw.sa.databaseApplication.printer"><code>PrintableOrder</code></a></div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>

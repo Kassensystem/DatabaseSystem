@@ -1,7 +1,7 @@
 
 dhbw.sa.databaseApplication
 dhbw.sa.databaseApplication.database
-dhbw.sa.databaseApplication.database.entity
+entity
 dhbw.sa.databaseApplication.exceptions
 dhbw.sa.databaseApplication.printer
 dhbw.sa.databaseApplication.restApi.client
