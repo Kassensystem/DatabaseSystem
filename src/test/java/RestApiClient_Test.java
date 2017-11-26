@@ -1,13 +1,13 @@
 
-import dhbw.sa.kassensystem_database.database.entity.Item;
-import dhbw.sa.kassensystem_database.database.entity.Order;
-import dhbw.sa.kassensystem_database.database.entity.Table;
+import dhbw.sa.kassensystem_rest.database.entity.Item;
+import dhbw.sa.kassensystem_rest.database.entity.Order;
+import dhbw.sa.kassensystem_rest.database.entity.Table;
 import dhbw.sa.kassensystem_rest.restApi.client.RestApiClient;
 import org.joda.time.DateTime;
 
 import java.util.ArrayList;
 
-
+@Deprecated
 public class RestApiClient_Test {
     private static RestApiClient restApiClient = new RestApiClient();
 

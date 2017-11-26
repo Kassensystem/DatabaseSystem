@@ -1,8 +1,9 @@
 
-import dhbw.sa.kassensystem_database.database.DatabaseService;
-import dhbw.sa.kassensystem_database.database.entity.Item;
-import dhbw.sa.kassensystem_database.database.entity.Order;
-import dhbw.sa.kassensystem_database.database.entity.Table;
+import dhbw.sa.kassensystem_rest.database.DatabaseService;
+import dhbw.sa.kassensystem_rest.database.entity.Item;
+import dhbw.sa.kassensystem_rest.database.entity.Itemdelivery;
+import dhbw.sa.kassensystem_rest.database.entity.Order;
+import dhbw.sa.kassensystem_rest.database.entity.Table;
 import org.joda.time.DateTime;
 
 import java.util.ArrayList;
@@ -22,9 +23,13 @@ public class DatabaseService_Test {
 
     public static void main(String[] args) {
 
+
+
+        /*
         for(int i = 0; i < 20; i++){
             dbs.addOrder(dummyOrder());
-        }
+        }*/
+
         //Item newItem = new Item("Apfel", 0.75, 55, true);
         //dbs.addItem(newItem);
 
@@ -64,51 +69,119 @@ public class DatabaseService_Test {
         System.out.println("---------------Checking manipulated Update-Dummy-Order------------------------");
         getOrders();
         */
+
+        getItemdeliveryById(0);
+
     }
 
     //region Test der Get-Methoden
     private static ArrayList<Order> getOrders() {
+        System.out.println("----------------All-Orders-Test----------------");
+
         ArrayList<Order> allOrders = dbs.getAllOrders();
 
-        System.out.println("----------------All-Orders-Test----------------");
         for(Order o: allOrders) {
-            System.out.println(o.getOrderID() + "\t" + o.getItems()
-                    + "\t" + o.getPrice() + "\t" + o.getDate()
-                    + "\t" + o.getTable() + "\t" + o.isPaid());
+            logOrder(o);
         }
         return allOrders;
     }
     private static ArrayList<Item> getItems() {
+        System.out.println("-----------------All-Items-Test-----------------");
+
         ArrayList<Item> allItems = dbs.getAllItems();
 
-        System.out.println("-----------------All-Items-Test-----------------");
         for(Item i: allItems) {
-            System.out.println(i.getItemID() + "\t" + i.getName() + "\t"
-                            + i.getRetailprice() + "\t" + i.getQuantity() + "\t"
-                            + i.isAvailable());
+            logItem(i);
         }
         return allItems;
     }
     private static ArrayList<Table> getTables() {
+        System.out.println("-------------All-Tables-Test---------------");
+
         ArrayList<Table> allTables = dbs.getAllTables();
 
-        System.out.println("-------------All-Tables-Test---------------");
         for(Table t: allTables) {
-            System.out.println(t.getTableID() + "\t" + t.getName());
+            logTable(t);
         }
         return allTables;
+    }
+    private static ArrayList<Itemdelivery> getItemdeliveries() {
+        System.out.println("-------------All-Itemdeliveries-Test---------------");
+
+        ArrayList<Itemdelivery> allItemdeliveries = dbs.getAllItemdeliveries();
+
+        for(Itemdelivery i: allItemdeliveries) {
+            logItemdelivery(i);
+        }
+        return allItemdeliveries;
+    }
+
+    private static Order getOrderById(int orderID) {
+        System.out.println("-----------------Order-By-ID-Test-----------------");
+
+        Order o = dbs.getOrderById(orderID);
+
+        logOrder(o);
+
+        return o;
+    }
+    private static Item getItemById(int itemID) {
+        System.out.println("-----------------Item-By-ID-Test-----------------");
+
+        Item i = dbs.getItemById(itemID);
+
+        logItem(i);
+
+        return i;
+    }
+    private static Table getTableById(int tableID) {
+        System.out.println("-----------------Table-By-ID-Test-----------------");
+
+        Table t = dbs.getTableById(tableID);
+
+        logTable(t);
+
+        return t;
+    }
+    private static Itemdelivery getItemdeliveryById(int itemdeliveryID) {
+        System.out.println("-----------------Itemdelivery-By-ID-Test-----------------");
+
+        Itemdelivery i = dbs.getItemdeliveryById(itemdeliveryID);
+
+        logItemdelivery(i);
+
+        return i;
     }
     //endregion
 
     //region Test der Add-Methoden
     private static void addOrder(Order order) {
+        System.out.println("-----------------Add-Order-Test-----------------");
+
+        logOrder(order);
+
         dbs.addOrder(order);
     }
     private static void addItem(Item item) {
+        System.out.println("-----------------Add-Item-Test-----------------");
+
+        logItem(item);
+
         dbs.addItem(item);
     }
     private static void addTable(Table table) {
+        System.out.println("-----------------Add-Table-Test-----------------");
+
+        logTable(table);
+
         dbs.addTable(table);
+    }
+    private static void addItemdelivery(Itemdelivery i) {
+        System.out.println("-----------------Add-Itemdelivery-Test-----------------");
+
+        logItemdelivery(i);
+
+        dbs.addItemdelivery(i);
     }
     //endregion
 
@@ -123,6 +196,24 @@ public class DatabaseService_Test {
 
     }
     //endregion
+
+    /****Logging****/
+    private static void logOrder(Order o) {
+        System.out.println(o.getOrderID() + "\t" + o.getItems()
+                + "\t" + o.getPrice() + "\t" + o.getDate().toString("dd.MM.yyyy kk:mm:ss")
+                + "\t" + o.getTable() + "\t" + o.isPaid());
+    }
+    private static void logItem(Item i) {
+        System.out.println(i.getItemID() + "\t" + i.getName() + "\t"
+                + i.getRetailprice() + "\t" + i.getQuantity() + "\t"
+                + i.isAvailable());
+    }
+    private static void logTable(Table t) {
+        System.out.println(t.getTableID() + "\t" + t.getName() + "\t" + t.isAvailable());
+    }
+    private static void logItemdelivery(Itemdelivery i) {
+        System.out.println(i.getItemdeliveryID() + "\t" + i.getItemID() + "\t" + i.getQuantity());
+    }
 
     /****Dummys****/
     private static Order dummyOrder() {

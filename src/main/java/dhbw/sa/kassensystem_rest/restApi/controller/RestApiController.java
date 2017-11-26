@@ -1,9 +1,9 @@
 package dhbw.sa.kassensystem_rest.restApi.controller;
 
-import dhbw.sa.kassensystem_database.database.DatabaseService;
-import dhbw.sa.kassensystem_database.database.entity.Item;
-import dhbw.sa.kassensystem_database.database.entity.Order;
-import dhbw.sa.kassensystem_database.database.entity.Table;
+import dhbw.sa.kassensystem_rest.database.DatabaseService;
+import dhbw.sa.kassensystem_rest.database.entity.Item;
+import dhbw.sa.kassensystem_rest.database.entity.Order;
+import dhbw.sa.kassensystem_rest.database.entity.Table;
 import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
@@ -27,7 +27,6 @@ class RestApiController {
 
     @Autowired
     DatabaseService databaseService;
-
 
     /*GET*/
 

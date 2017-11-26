@@ -1,1 +1,1 @@
-java -jar target/springBoot-kassensystem_databaseServer.jar
+java -jar target/springBoot-kassensystem_rest.jar

@@ -1,8 +1,8 @@
 package dhbw.sa.kassensystem_rest.restApi.client;
 
-import dhbw.sa.kassensystem_database.database.entity.Item;
-import dhbw.sa.kassensystem_database.database.entity.Order;
-import dhbw.sa.kassensystem_database.database.entity.Table;
+import dhbw.sa.kassensystem_rest.database.entity.Item;
+import dhbw.sa.kassensystem_rest.database.entity.Order;
+import dhbw.sa.kassensystem_rest.database.entity.Table;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
