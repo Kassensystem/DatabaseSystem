@@ -65,7 +65,7 @@ public class DatabaseService implements DatabaseService_Interface{
             try {
                 connection.close();
                 connection = null;
-                System.out.println("\nDatabase disconnected!");
+                logInf("Database disconnected!");
             } catch(SQLException e)  { e.printStackTrace();}
         }
     }
@@ -317,7 +317,7 @@ public class DatabaseService implements DatabaseService_Interface{
 
         logInf("Adding Table to MySQL-Database.");
 
-        this.tables = this.getAllTables();
+        //this.tables = this.getAllTables();
 
         //Vollständigkeit des Tables überprüfen
         if(table.getTableID() != 0) {
@@ -385,6 +385,8 @@ public class DatabaseService implements DatabaseService_Interface{
 
         logInf("Adding Itemdelivery to MySQL-Database.");
 
+        this.items = this.getAllItems();
+
         //Vollständigkeit der Order ueberpruefen
         if(itemdelivery.getItemdeliveryID() != 0) {
             logErr("ID may not be set by the user.");
@@ -412,6 +414,8 @@ public class DatabaseService implements DatabaseService_Interface{
     public void updateItem(int itemID, Item item) {
 
         logInf("Updating Item with ID " + itemID + ".");
+
+        this.items = this.getAllItems();
 
         if(itemID == 0) {
             logErr("Item-ID may not be null.");
@@ -443,6 +447,8 @@ public class DatabaseService implements DatabaseService_Interface{
 
         logInf("Updating Table with ID " + tableID + ".");
 
+        this.tables = this.getAllTables();
+
         if(tableID == 0) {
             logErr("Table-ID may not be null.");
             throw new NullPointerException("No Table-ID given.");
@@ -472,6 +478,10 @@ public class DatabaseService implements DatabaseService_Interface{
 
         logInf("Updating Order with ID " + orderID + ".");
 
+        this.orders = this.getAllOrders();
+        this.items = this.getAllItems();
+        this.tables = this.getAllTables();
+
         if(orderID == 0) {
             logErr("Order-ID may not be null.");
             throw new NullPointerException("No Order-ID given.");
@@ -488,14 +498,6 @@ public class DatabaseService implements DatabaseService_Interface{
         //Kontrollieren ob ID existiert
         if(this.getOrderById(orderID) == null)
             throw new DataException("Bestellung mit der ID " + orderID + " existiert nicht!");
-
-        //Vollständigkeit der Order ueberpruefen
-        if(order.getItems() == null
-                || order.getOrderID() != 0
-                || order.getTable() == 0
-                || order.getPrice() == 0
-                || order.getDate() == null)
-            throw new DataException("Die Order ist unvollständig!");
 
         if(order.isPaid())
             //Kundenbeleg ausdrucken, wenn bezahlt wird
@@ -557,6 +559,15 @@ public class DatabaseService implements DatabaseService_Interface{
 
         logInf("Deleting Order with ID " + orderID + ".");
 
+        this.orders = this.getAllOrders();
+
+        //Existenz einer Order mit der OrderID überprüfen
+        if(!orderIsAvailable(orderID, this.orders)) {
+            logErr("Order with ID " + orderID + " does not exist in the database! Nothing was deleted.");
+            throw new DataException("Bestellung mit der ID " + orderID + " existiert nicht in der Datenbank! " +
+                    "Es konnte nichts gelöscht werden.");
+        }
+
         /*
           Loeschen einer Order loescht diese unwiederruflich aus der Datenbank.
          */
@@ -568,11 +579,19 @@ public class DatabaseService implements DatabaseService_Interface{
             pst.executeUpdate();
         } catch(SQLException e) { e.printStackTrace(); }
     }
-
     @Override
     public void deleteItemdelivery(int itemdeliveryID) {
 
         logInf("Deleting Itemdelivery with ID " + itemdeliveryID + ".");
+
+        this.itemdeliveries = this.getAllItemdeliveries();
+
+        //Existenz einer Order mit der OrderID überprüfen
+        if(!itemdeliveryIsAvailable(itemdeliveryID, this.itemdeliveries)) {
+            logErr("Itemdelivery with ID " + itemdeliveryID + " does not exist in the database! Nothing was deleted.");
+            throw new DataException("Wareneingang mit der ID " + itemdeliveryID + " existiert nicht in der Datenbank! " +
+                    "Es konnte nichts gelöscht werden.");
+        }
 
         try {
             String query =  "DELETE FROM " + dbp.getDatabase() + ".itemdeliveries " +
@@ -583,31 +602,34 @@ public class DatabaseService implements DatabaseService_Interface{
         } catch(SQLException e) { e.printStackTrace(); }
     }
 
-
     //Drucken einer Order
 
     public void printOrderById(int orderID) {
+
+        this.orders = this.getAllOrders();
+        this.items = this.getAllItems();
+        this.tables = this.getAllTables();
+
+        if(orderID == 0) {
+            logErr("Order-ID is null.");
+            throw new NullPointerException("No Order-ID given.");
+        }
+
+        //Existenz einer Order mit der OrderID überprüfen
+        if(!orderIsAvailable(orderID, this.orders)) {
+            logErr("Order with ID " + orderID + " does not exist in the database!");
+            throw new DataException("Bestellung mit der ID " + orderID + " existiert nicht in der Datenbank! Es kann nichts gedruckt werden.");
+        }
+
         this.printOrder(getOrderById(orderID), false);
     }
 
     // Vollständigkeit der Daten von Objekten überprüfen
-
     private boolean isOrderComplete(Order order) {
 
         String missingAttributs = "";
 
-        if(!itemIDsAvailable(order)) {
-            logErr("One or multiple Item-IDs do not exist in the database!");
-            logErr("Order was not added to the Database!");
-            throw new DataException("Eine oder mehrere angegebene Artikel-IDs existieren nicht in der Datenbank.");
-        }
-        if(!tableIsAvailable(order.getTable(), this.tables)) {
-            logErr("The Table-ID does not exist in the database!");
-            logErr("Order was not added to the database!");
-            throw new DataException("Die angegebene Table-ID existiert nicht in der Datenbank!");
-        }
-
-        if(order.getItems() == null) {
+        if(order.getItems() == null || order.getItems() == "") {
             missingAttributs += "Artikel ";
             logErr("Item-IDs missing.");
         }
@@ -620,6 +642,18 @@ public class DatabaseService implements DatabaseService_Interface{
             logErr("Order was not added to the database!");
             throw new DataException("Die Bestellung ist unvollständig! Die folgenden Parameter fehlen: " + missingAttributs);
         }
+
+        if(!itemIDsAvailable(order)) {
+            logErr("One or multiple Item-IDs do not exist in the database!");
+            logErr("Order was not added to the Database!");
+            throw new DataException("Eine oder mehrere angegebene Artikel-IDs existieren nicht in der Datenbank.");
+        }
+        if(!tableIsAvailable(order.getTable(), this.tables)) {
+            logErr("The Table-ID does not exist in the database!");
+            logErr("Order was not added to the database!");
+            throw new DataException("Die angegebene Table-ID existiert nicht in der Datenbank!");
+        }
+
         return true;
 
     }
@@ -631,7 +665,11 @@ public class DatabaseService implements DatabaseService_Interface{
             missingAttributs += " Tisch";
             logErr("Table missing.");
         }
-
+        //Nur Verfügbarkeit von neuen Artikeln darf nicht auf false gesetzt werden
+        if(table.isAvailable() == false && table.getTableID() == 0) {
+            missingAttributs += "Available ";
+            logErr("New Table cannot be set unavailable.");
+        }
         if(missingAttributs != "") {
             logErr("Table was not added to the database!");
             throw new DataException("Der Tisch ist unvollständig! Die folgenden Parameter fehlen: " + missingAttributs);
@@ -647,8 +685,8 @@ public class DatabaseService implements DatabaseService_Interface{
             missingAttributs += "Name ";
             logErr("Name is missing.");
         }
-
-        if(item.isAvailable() == false) {
+        //Nur Verfügbarkeit von neuen Artikeln darf nicht auf false gesetzt werden
+        if(item.isAvailable() == false && item.getItemID() == 0) {
             missingAttributs += "Available ";
             logErr("New Item cannot be set unavailable.");
         }
@@ -663,12 +701,6 @@ public class DatabaseService implements DatabaseService_Interface{
 
         String missingAttributs = "";
 
-        if(!itemIsAvailable(itemdelivery.getItemID(), items)) {
-            logErr("The Item-IDs does not exist in the Database!");
-            logErr("Itemdelivery was not added to the Database!");
-            throw new DataException("Die angegebene Artikel-ID existieren nicht in der Datenbank.");
-        }
-
         if(itemdelivery.getItemID() == 0) {
             missingAttributs += " Artikel";
             logErr("Item-ID missing");
@@ -682,15 +714,25 @@ public class DatabaseService implements DatabaseService_Interface{
             logErr("Itemdelivery was not added to the database!");
             throw new DataException("Der Wareneingang ist unvollständig! Die folgenden Parameter fehlen: " + missingAttributs);
         }
+
+        if(!itemIsAvailable(itemdelivery.getItemID(), this.items)) {
+            logErr("The Item-IDs does not exist in the Database!");
+            logErr("Itemdelivery was not added to the Database!");
+            throw new DataException("Die angegebene Artikel-ID existieren nicht in der Datenbank.");
+        }
+
         return true;
 
     }
 
+    //Überprüfen ob ein Datenbankeintrag mit einer vorgegebenen ID existiert
     private boolean itemIDsAvailable(Order newOrder) {
         this.items = this.getAllItems();
         ArrayList<Item> orderItems = newOrder.getItems(this.items);
+
         for(Item orderItem: orderItems) {
-            if(itemIsAvailable(orderItem.getItemID(), this.items))
+
+            if(!(orderItem == null) && itemIsAvailable(orderItem.getItemID(), this.items))
                 continue;
             else {
                 return false;
@@ -715,6 +757,13 @@ public class DatabaseService implements DatabaseService_Interface{
     private boolean tableIsAvailable(int tableID, ArrayList<Table> tables) {
         for(Table t: tables) {
             if(tableID == t.getTableID())
+                return true;
+        }
+        return false;
+    }
+    private boolean itemdeliveryIsAvailable(int itemdeliveryID, ArrayList<Itemdelivery> itemdeliveries) {
+        for(Itemdelivery i: itemdeliveries) {
+            if(itemdeliveryID == i.getItemdeliveryID())
                 return true;
         }
         return false;

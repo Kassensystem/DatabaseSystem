@@ -24,60 +24,7 @@ public class DatabaseService_Test {
 
     public static void main(String[] args) {
 
-
-
-        /*
-        for(int i = 0; i < 20; i++){
-            dbs.addOrder(dummyOrder());
-        }*/
-
-        //Item newItem = new Item("Apfel", 0.75, 55, true);
-        //dbs.addItem(newItem);
-
-        //Itemdelivery itemdelivery = new Itemdelivery(5, 20);
-        //dbs.addItemdelivery(itemdelivery);
-        //System.out.println(dbs.getItemQuantity(5));
-
-        /*
-        //Add-Test
-        System.out.println("---------------Adding Dummy Entries---------------");
-        addOrder(dummyOrder());
-        addItem(dummyItem());
-        addTable(dummyTable());
-        //Get-Test
-        getItems();
-        getOrders();
-        getTables();
-
-
-        //Update-Test
-        System.out.println("Adding Update-Dummy-Order...");
-        addOrder(dummyUpdateOrder());
-        System.out.println("---------------Checking Update-Dummy-Order------------------------");
-        getOrders();
-        System.out.println("Manipulating Update-Dummy-Order...");
-        //Order mit TableID 999 (updateNumber) soll aktualisiert werden
-        ArrayList<Order> allOrders = dbs.getAllOrders();
-        //Ermitteln der Order mit TableID 99
-        Order updateOrder = new Order();
-        for(Order o: allOrders) {
-            if(o.getTable() == updateNumber)
-                updateOrder = o;
-        }
-        updateOrder.setPrice(30001);
-        System.out.println("Updating Update-Dummy-Order...");
-        updateOrder(updateOrder);
-        System.out.println("---------------Checking manipulated Update-Dummy-Order------------------------");
-        getOrders();
-        */
-
-        //int ID = 4;
-        String itemIDs = "12;13;15";
-        int tableID = 8;
-        double price = 3.3;
-        DateTime date = DateTime.now();
-        boolean paid = true;
-        addOrder(new Order(itemIDs, tableID, price, date, paid));
+        dbs.printOrderById(45);
 
     }
 
@@ -194,13 +141,38 @@ public class DatabaseService_Test {
 
     //region Test der Update-Methoden
     private static void updateOrder(Order updateOrder) {
+        System.out.println("-----------------Update-Order-Test-----------------");
+
+        logOrder(updateOrder);
+
         dbs.updateOrder(updateOrder.getOrderID(), updateOrder);
     }
-    private static void updateItem() {
+    private static void updateItem(Item updateItem) {
+        System.out.println("-----------------Update-Item-Test-----------------");
 
+        logItem(updateItem);
+
+        dbs.updateItem(updateItem.getItemID(), updateItem);
     }
-    private static void updateTable() {
+    private static void updateTable(Table updateTable) {
+        System.out.println("-----------------Update-Table-Test-----------------");
 
+        logTable(updateTable);
+
+        dbs.updateTable(updateTable.getTableID(), updateTable);
+    }
+    //endregion
+
+    //region Test der Delete-Methoden
+    private static void deleteOrder(int orderID) {
+        System.out.println("-----------------Delete-Order-Test-----------------");
+
+        dbs.deleteOrder(orderID);
+    }
+    private static void deleteItemdelivery(int itemdeliveryID) {
+        System.out.println("-----------------Delete-Itemdelivery-Test-----------------");
+
+        dbs.deleteItemdelivery(itemdeliveryID);
     }
     //endregion
 

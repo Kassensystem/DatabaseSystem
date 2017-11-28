@@ -23,7 +23,7 @@ import java.util.ArrayList;
 @RestController
 @ComponentScan("dhbw.sa.kassensystem_database.database")
 @RequestMapping("/api")
-class RestApiController {
+public class RestApiController {
 
     @Autowired
     DatabaseService databaseService;
