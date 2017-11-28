@@ -10,66 +10,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="776fb8f0-9a4c-4f54-9c91-bf08f53f8a96" name="Default" comment="">
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/test/java/RestApiController_Test.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/test-classes/RestApiController_Test.class" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/artifacts/kassensystem_database_jar/kassensystem_database.jar" afterPath="$PROJECT_DIR$/out/artifacts/kassensystem_database_jar/kassensystem_database.jar" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/dhbw/sa/kassensystem_rest/Main.class" afterPath="$PROJECT_DIR$/target/classes/dhbw/sa/kassensystem_rest/Main.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/dhbw/sa/kassensystem_rest/database/DatabaseService.class" afterPath="$PROJECT_DIR$/target/classes/dhbw/sa/kassensystem_rest/database/DatabaseService.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/dhbw/sa/kassensystem_rest/restApi/controller/RestApiController.class" afterPath="$PROJECT_DIR$/target/classes/dhbw/sa/kassensystem_rest/restApi/controller/RestApiController.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/allclasses-frame.html" afterPath="$PROJECT_DIR$/docs/allclasses-frame.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/allclasses-noframe.html" afterPath="$PROJECT_DIR$/docs/allclasses-noframe.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/constant-values.html" afterPath="$PROJECT_DIR$/docs/constant-values.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/deprecated-list.html" afterPath="$PROJECT_DIR$/docs/deprecated-list.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/dhbw/sa/kassensystem_rest/Main.html" afterPath="$PROJECT_DIR$/docs/dhbw/sa/kassensystem_rest/Main.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/dhbw/sa/kassensystem_rest/database/DatabaseService.html" afterPath="$PROJECT_DIR$/docs/dhbw/sa/kassensystem_rest/database/DatabaseService.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/dhbw/sa/kassensystem_rest/database/DatabaseService_Interface.html" afterPath="$PROJECT_DIR$/docs/dhbw/sa/kassensystem_rest/database/DatabaseService_Interface.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/dhbw/sa/kassensystem_rest/database/Gastronomy.html" afterPath="$PROJECT_DIR$/docs/dhbw/sa/kassensystem_rest/database/Gastronomy.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/dhbw/sa/kassensystem_rest/database/entity/Item.html" afterPath="$PROJECT_DIR$/docs/dhbw/sa/kassensystem_rest/database/entity/Item.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/dhbw/sa/kassensystem_rest/database/entity/Itemdelivery.html" afterPath="$PROJECT_DIR$/docs/dhbw/sa/kassensystem_rest/database/entity/Itemdelivery.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/dhbw/sa/kassensystem_rest/database/entity/Order.html" afterPath="$PROJECT_DIR$/docs/dhbw/sa/kassensystem_rest/database/entity/Order.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/dhbw/sa/kassensystem_rest/database/entity/Table.html" afterPath="$PROJECT_DIR$/docs/dhbw/sa/kassensystem_rest/database/entity/Table.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/dhbw/sa/kassensystem_rest/database/entity/package-frame.html" afterPath="$PROJECT_DIR$/docs/dhbw/sa/kassensystem_rest/database/entity/package-frame.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/dhbw/sa/kassensystem_rest/database/entity/package-summary.html" afterPath="$PROJECT_DIR$/docs/dhbw/sa/kassensystem_rest/database/entity/package-summary.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/dhbw/sa/kassensystem_rest/database/entity/package-tree.html" afterPath="$PROJECT_DIR$/docs/dhbw/sa/kassensystem_rest/database/entity/package-tree.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/dhbw/sa/kassensystem_rest/database/package-frame.html" afterPath="$PROJECT_DIR$/docs/dhbw/sa/kassensystem_rest/database/package-frame.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/dhbw/sa/kassensystem_rest/database/package-summary.html" afterPath="$PROJECT_DIR$/docs/dhbw/sa/kassensystem_rest/database/package-summary.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/dhbw/sa/kassensystem_rest/database/package-tree.html" afterPath="$PROJECT_DIR$/docs/dhbw/sa/kassensystem_rest/database/package-tree.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/dhbw/sa/kassensystem_rest/exceptions/DataException.html" afterPath="$PROJECT_DIR$/docs/dhbw/sa/kassensystem_rest/exceptions/DataException.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/dhbw/sa/kassensystem_rest/exceptions/MySQLServerConnectionException.html" afterPath="$PROJECT_DIR$/docs/dhbw/sa/kassensystem_rest/exceptions/MySQLServerConnectionException.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/dhbw/sa/kassensystem_rest/exceptions/NoContentException.html" afterPath="$PROJECT_DIR$/docs/dhbw/sa/kassensystem_rest/exceptions/NoContentException.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/dhbw/sa/kassensystem_rest/exceptions/OrderNotFoundException.html" afterPath="$PROJECT_DIR$/docs/dhbw/sa/kassensystem_rest/exceptions/OrderNotFoundException.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/dhbw/sa/kassensystem_rest/exceptions/package-frame.html" afterPath="$PROJECT_DIR$/docs/dhbw/sa/kassensystem_rest/exceptions/package-frame.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/dhbw/sa/kassensystem_rest/exceptions/package-summary.html" afterPath="$PROJECT_DIR$/docs/dhbw/sa/kassensystem_rest/exceptions/package-summary.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/dhbw/sa/kassensystem_rest/exceptions/package-tree.html" afterPath="$PROJECT_DIR$/docs/dhbw/sa/kassensystem_rest/exceptions/package-tree.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/dhbw/sa/kassensystem_rest/package-frame.html" afterPath="$PROJECT_DIR$/docs/dhbw/sa/kassensystem_rest/package-frame.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/dhbw/sa/kassensystem_rest/package-summary.html" afterPath="$PROJECT_DIR$/docs/dhbw/sa/kassensystem_rest/package-summary.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/dhbw/sa/kassensystem_rest/package-tree.html" afterPath="$PROJECT_DIR$/docs/dhbw/sa/kassensystem_rest/package-tree.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/dhbw/sa/kassensystem_rest/printer/PrinterService.html" afterPath="$PROJECT_DIR$/docs/dhbw/sa/kassensystem_rest/printer/PrinterService.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/dhbw/sa/kassensystem_rest/printer/package-frame.html" afterPath="$PROJECT_DIR$/docs/dhbw/sa/kassensystem_rest/printer/package-frame.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/dhbw/sa/kassensystem_rest/printer/package-summary.html" afterPath="$PROJECT_DIR$/docs/dhbw/sa/kassensystem_rest/printer/package-summary.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/dhbw/sa/kassensystem_rest/printer/package-tree.html" afterPath="$PROJECT_DIR$/docs/dhbw/sa/kassensystem_rest/printer/package-tree.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/dhbw/sa/kassensystem_rest/restApi/client/RestApiClient.html" afterPath="$PROJECT_DIR$/docs/dhbw/sa/kassensystem_rest/restApi/client/RestApiClient.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/dhbw/sa/kassensystem_rest/restApi/client/package-frame.html" afterPath="$PROJECT_DIR$/docs/dhbw/sa/kassensystem_rest/restApi/client/package-frame.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/dhbw/sa/kassensystem_rest/restApi/client/package-summary.html" afterPath="$PROJECT_DIR$/docs/dhbw/sa/kassensystem_rest/restApi/client/package-summary.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/dhbw/sa/kassensystem_rest/restApi/client/package-tree.html" afterPath="$PROJECT_DIR$/docs/dhbw/sa/kassensystem_rest/restApi/client/package-tree.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/dhbw/sa/kassensystem_rest/restApi/controller/package-frame.html" afterPath="$PROJECT_DIR$/docs/dhbw/sa/kassensystem_rest/restApi/controller/package-frame.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/dhbw/sa/kassensystem_rest/restApi/controller/package-summary.html" afterPath="$PROJECT_DIR$/docs/dhbw/sa/kassensystem_rest/restApi/controller/package-summary.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/dhbw/sa/kassensystem_rest/restApi/controller/package-tree.html" afterPath="$PROJECT_DIR$/docs/dhbw/sa/kassensystem_rest/restApi/controller/package-tree.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/help-doc.html" afterPath="$PROJECT_DIR$/docs/help-doc.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/index-files/index-1.html" afterPath="$PROJECT_DIR$/docs/index-files/index-1.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/index-files/index-10.html" afterPath="$PROJECT_DIR$/docs/index-files/index-10.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/index-files/index-11.html" afterPath="$PROJECT_DIR$/docs/index-files/index-11.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/index-files/index-12.html" afterPath="$PROJECT_DIR$/docs/index-files/index-12.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/index-files/index-13.html" afterPath="$PROJECT_DIR$/docs/index-files/index-13.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/index-files/index-14.html" afterPath="$PROJECT_DIR$/docs/index-files/index-14.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/index-files/index-2.html" afterPath="$PROJECT_DIR$/docs/index-files/index-2.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/index-files/index-3.html" afterPath="$PROJECT_DIR$/docs/index-files/index-3.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/index-files/index-4.html" afterPath="$PROJECT_DIR$/docs/index-files/index-4.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/index-files/index-5.html" afterPath="$PROJECT_DIR$/docs/index-files/index-5.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/index-files/index-6.html" afterPath="$PROJECT_DIR$/docs/index-files/index-6.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/index-files/index-7.html" afterPath="$PROJECT_DIR$/docs/index-files/index-7.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/index-files/index-8.html" afterPath="$PROJECT_DIR$/docs/index-files/index-8.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/index-files/index-9.html" afterPath="$PROJECT_DIR$/docs/index-files/index-9.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/index.html" afterPath="$PROJECT_DIR$/docs/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/overview-frame.html" afterPath="$PROJECT_DIR$/docs/overview-frame.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/overview-summary.html" afterPath="$PROJECT_DIR$/docs/overview-summary.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/overview-tree.html" afterPath="$PROJECT_DIR$/docs/overview-tree.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/serialized-form.html" afterPath="$PROJECT_DIR$/docs/serialized-form.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/dhbw/sa/kassensystem_rest/Main.java" afterPath="$PROJECT_DIR$/src/main/java/dhbw/sa/kassensystem_rest/Main.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/dhbw/sa/kassensystem_rest/database/DatabaseService.java" afterPath="$PROJECT_DIR$/src/main/java/dhbw/sa/kassensystem_rest/database/DatabaseService.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -103,17 +52,87 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="RestApiController.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/dhbw/sa/kassensystem_rest/restApi/controller/RestApiController.java">
+      <file leaf-file-name="DatabaseService.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/dhbw/sa/kassensystem_rest/database/DatabaseService.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="187">
-              <caret line="42" column="44" lean-forward="false" selection-start-line="42" selection-start-column="44" selection-end-line="42" selection-end-column="44" />
+            <state relative-caret-position="275">
+              <caret line="568" column="5" lean-forward="false" selection-start-line="568" selection-start-column="5" selection-end-line="568" selection-end-column="5" />
               <folding>
-                <element signature="docComment;class#RestApiController#0" expanded="false" />
-                <element signature="e#890#905#0" expanded="false" />
-                <element signature="method#createOrder#0;class#RestApiController#0" expanded="false" />
-                <element signature="method#updateOrder#0;class#RestApiController#0" expanded="false" />
+                <element signature="docComment;class#DatabaseService#0" expanded="false" />
+                <element signature="method#connect#0;class#DatabaseService#0" expanded="false" />
+                <element signature="method#disconnect#0;class#DatabaseService#0" expanded="false" />
+                <element signature="method#getAllItems#0;class#DatabaseService#0" expanded="false" />
+                <element signature="method#getAllTables#0;class#DatabaseService#0" expanded="false" />
+                <element signature="method#getAllOrders#0;class#DatabaseService#0" expanded="false" />
+                <element signature="method#getAllItemdeliveries#0;class#DatabaseService#0" expanded="false" />
+                <element signature="method#getOrderById#0;class#DatabaseService#0" expanded="false" />
+                <element signature="method#getItemById#0;class#DatabaseService#0" expanded="false" />
+                <element signature="method#getTableById#0;class#DatabaseService#0" expanded="false" />
+                <element signature="method#getItemdeliveryById#0;class#DatabaseService#0" expanded="false" />
+                <element signature="method#addItem#0;class#DatabaseService#0" expanded="false" />
+                <element signature="method#addTable#0;class#DatabaseService#0" expanded="false" />
+                <element signature="e#11725#11761#0" expanded="false" />
+                <element signature="method#addOrder#0;class#DatabaseService#0" expanded="false" />
+                <element signature="method#addItemdelivery#0;class#DatabaseService#0" expanded="false" />
+                <element signature="method#updateItem#0;class#DatabaseService#0" expanded="false" />
+                <element signature="method#updateTable#0;class#DatabaseService#0" expanded="false" />
+                <element signature="method#updateOrder#0;class#DatabaseService#0" expanded="false" />
+                <element signature="method#deleteItem#0;class#DatabaseService#0" expanded="false" />
+                <element signature="method#deleteTable#0;class#DatabaseService#0" expanded="false" />
+                <element signature="method#deleteOrder#0;class#DatabaseService#0" expanded="false" />
+                <element signature="method#deleteItemdelivery#0;class#DatabaseService#0" expanded="false" />
+                <element signature="method#printOrderById#0;class#DatabaseService#0" expanded="false" />
+                <element signature="method#isOrderComplete#0;class#DatabaseService#0" expanded="false" />
+                <element signature="method#isTableComplete#0;class#DatabaseService#0" expanded="false" />
+                <element signature="method#isItemComplete#0;class#DatabaseService#0" expanded="false" />
+                <element signature="method#isItemdeliveryComplete#0;class#DatabaseService#0" expanded="false" />
+                <element signature="method#itemIDsAvailable#0;class#DatabaseService#0" expanded="false" />
+                <element signature="method#itemIsAvailable#0;class#DatabaseService#0" expanded="false" />
+                <element signature="method#orderIsAvailable#0;class#DatabaseService#0" expanded="false" />
+                <element signature="method#tableIsAvailable#0;class#DatabaseService#0" expanded="false" />
+                <element signature="method#itemdeliveryIsAvailable#0;class#DatabaseService#0" expanded="false" />
+                <element signature="docComment;method#printOrder#0;class#DatabaseService#0" expanded="false" />
+                <element signature="method#printOrder#0;class#DatabaseService#0" expanded="false" />
+                <element signature="docComment;method#getItemQuantity#0;class#DatabaseService#0" expanded="false" />
+                <element signature="method#getItemQuantity#0;class#DatabaseService#0" expanded="false" />
+                <element signature="docComment;method#getAllItemsEmpty#0;class#DatabaseService#0" expanded="false" />
+                <element signature="method#getAllItemsEmpty#0;class#DatabaseService#0" expanded="false" />
+                <element signature="docComment;method#getDiffOrder#0;class#DatabaseService#0" expanded="false" />
+                <element signature="method#getDiffOrder#0;class#DatabaseService#0" expanded="false" />
+                <element signature="e#33253#33310#0" expanded="false" />
+                <element signature="docComment;method#getItemQuantity#1;class#DatabaseService#0" expanded="false" />
+                <element signature="method#getItemQuantity#1;class#DatabaseService#0" expanded="false" />
+                <element signature="docComment;method#convertJodaDateTimeToSqlTimestamp#0;class#DatabaseService#0" expanded="false" />
+                <element signature="method#convertJodaDateTimeToSqlTimestamp#0;class#DatabaseService#0" expanded="false" />
+                <element signature="docComment;method#convertSqlTimestampToJodaDateTime#0;class#DatabaseService#0" expanded="false" />
+                <element signature="method#convertSqlTimestampToJodaDateTime#0;class#DatabaseService#0" expanded="false" />
+                <element signature="method#log#0;class#DatabaseService#0" expanded="false" />
+                <marker date="1511899751990" expanded="false" signature="2961:3066" ph="SELECT itemI... items" />
+                <marker date="1511899751990" expanded="false" signature="4094:4188" ph="SELECT table... tables" />
+                <marker date="1511899751990" expanded="false" signature="5028:5142" ph="SELECT order... " />
+                <marker date="1511899751990" expanded="false" signature="6246:6356" ph="SELECT itemd... itemdeliveries" />
+                <marker date="1511899751990" expanded="false" signature="10459:10598" ph="INSERT INTO missingValue.items... " />
+                <marker date="1511899751990" expanded="false" signature="10991:11065" ph="SELECT * FRO... items" />
+                <marker date="1511899751990" expanded="false" signature="12166:12291" ph="INSERT INTO missingValue.tables... " />
+                <marker date="1511899751990" expanded="false" signature="13495:13648" ph="INSERT INTO missingValue.orders... " />
+                <marker date="1511899751990" expanded="false" signature="14848:14981" ph="INSERT INTO missingValue.itemdeliveries... " />
+                <marker date="1511899751990" expanded="false" signature="16159:16324" ph="UPDATE missi... " />
+                <marker date="1511899751990" expanded="false" signature="17539:17689" ph="UPDATE missi... " />
+                <marker date="1511899751990" expanded="false" signature="19544:19726" ph="UPDATE missi... " />
+                <marker date="1511899751990" expanded="false" signature="22016:22102" ph="DELETE FROM " />
+                <marker date="1511899751990" expanded="false" signature="23141:23242" ph="DELETE FROM " />
+                <marker date="1511899751990" expanded="false" signature="31184:31289" ph="SELECT itemI... items" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="RestApiClient.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/dhbw/sa/kassensystem_rest/restApi/client/RestApiClient.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="611">
+              <caret line="49" column="63" lean-forward="false" selection-start-line="49" selection-start-column="63" selection-end-line="49" selection-end-column="63" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -153,7 +172,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/main/java/dhbw/sa/DatabaseApplication/database/DatabaseProperties.java" />
         <option value="$PROJECT_DIR$/src/main/java/dhbw/sa/DatabaseApplication/database/DatabaseService_Interface.java" />
         <option value="$PROJECT_DIR$/src/main/java/dhbw/sa/DatabaseApplication/restApi/client/RestApiClient.java" />
         <option value="$PROJECT_DIR$/src/main/java/dhbw/sa/databaseApplication/restApi/RestApiProperties.java" />
@@ -202,8 +220,9 @@
         <option value="$PROJECT_DIR$/src/test/java/RestApiClient_Test.java" />
         <option value="$PROJECT_DIR$/src/main/java/dhbw/sa/kassensystem_rest/database/DatabaseProperties_abstract.java" />
         <option value="$PROJECT_DIR$/src/test/java/DatabaseService_Test.java" />
-        <option value="$PROJECT_DIR$/src/main/java/dhbw/sa/kassensystem_rest/database/DatabaseService.java" />
         <option value="$PROJECT_DIR$/src/main/java/dhbw/sa/kassensystem_rest/restApi/controller/RestApiController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/dhbw/sa/kassensystem_rest/Main.java" />
+        <option value="$PROJECT_DIR$/src/main/java/dhbw/sa/kassensystem_rest/database/DatabaseService.java" />
       </list>
     </option>
   </component>
@@ -244,11 +263,10 @@
   <component name="MavenRunner">
     <option name="skipTests" value="true" />
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
-    <option name="x" value="2655" />
-    <option name="y" value="511" />
-    <option name="width" value="980" />
-    <option name="height" value="526" />
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="-7" />
+    <option name="width" value="974" />
+    <option name="height" value="1057" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
@@ -269,7 +287,6 @@
     </navigator>
     <panes>
       <pane id="Scratches" />
-      <pane id="Scope" />
       <pane id="AndroidView" />
       <pane id="ProjectPane">
         <subPane>
@@ -320,6 +337,15 @@
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="kassensystem_rest" type="462c0819:PsiDirectoryNode" />
+              <item name="exceptions" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="kassensystem_database" type="b2602c69:ProjectViewProjectNode" />
+              <item name="kassensystem_rest" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="kassensystem_rest" type="462c0819:PsiDirectoryNode" />
               <item name="printer" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -330,6 +356,16 @@
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="kassensystem_rest" type="462c0819:PsiDirectoryNode" />
               <item name="restApi" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="kassensystem_database" type="b2602c69:ProjectViewProjectNode" />
+              <item name="kassensystem_rest" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="kassensystem_rest" type="462c0819:PsiDirectoryNode" />
+              <item name="restApi" type="462c0819:PsiDirectoryNode" />
+              <item name="client" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="kassensystem_database" type="b2602c69:ProjectViewProjectNode" />
@@ -371,14 +407,6 @@
             </path>
             <path>
               <item name="kassensystem_database" type="b2602c69:ProjectViewProjectNode" />
-              <item name="kassensystem_rest" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="test" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="databaseApplication" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="kassensystem_database" type="b2602c69:ProjectViewProjectNode" />
               <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
             </path>
             <path>
@@ -391,6 +419,7 @@
         </subPane>
       </pane>
       <pane id="PackagesPane" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -745,7 +774,8 @@
       <workItem from="1511774443931" duration="11763000" />
       <workItem from="1511868880759" duration="648000" />
       <workItem from="1511871337188" duration="16882000" />
-      <workItem from="1511890596008" duration="948000" />
+      <workItem from="1511890596008" duration="3361000" />
+      <workItem from="1511899074440" duration="3612000" />
     </task>
     <task id="LOCAL-00001" summary="Client hinzugefügt">
       <created>1509897940236</created>
@@ -790,7 +820,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="285496000" />
+    <option name="totallyTimeSpent" value="291521000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -802,7 +832,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="1912" y="511" width="1382" height="754" extended-state="7" />
+    <frame x="-8" y="-8" width="1936" height="1066" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -816,15 +846,16 @@
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.42872456" sideWeight="0.6977612" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32903227" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25442833" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Java Enterprise" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.21505377" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.31877023" sideWeight="0.48454157" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.21182796" sideWeight="0.48454157" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Spring" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3139183" sideWeight="0.49346405" order="0" side_tool="false" content_ui="combo" x="507" y="60" width="352" height="618" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22334754" sideWeight="0.49346405" order="0" side_tool="false" content_ui="combo" x="507" y="60" width="352" height="618" />
       <window_info id="Bean Validation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.15724947" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.36263737" sideWeight="0.50653595" order="5" side_tool="true" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.26666668" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -836,7 +867,6 @@
       <window_info id="Dependency Viewer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.20645161" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection Results" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.30537635" sideWeight="0.5" order="14" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25442833" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
@@ -890,7 +920,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/dhbw/sa/kassensystem_rest/database/DatabaseService.java</url>
-          <line>743</line>
+          <line>765</line>
           <properties />
           <option name="timeStamp" value="86" />
         </line-breakpoint>
@@ -918,7 +948,6 @@
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/dhbw/sa/databaseApplication/database/DatabaseServiceTest.java" />
     <entry file="jar://$PROJECT_DIR$/../- libraries/joda-time-2.9.9/joda-time-2.9.9-sources.jar!/org/joda/time/DateTimeComparator.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="197">
@@ -1061,34 +1090,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/dhbw/sa/kassensystem_rest/exceptions/MySQLServerConnectionException.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/dhbw/sa/kassensystem_rest/exceptions/DataException.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/dhbw/sa/kassensystem_rest/exceptions/OrderNotFoundException.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/dhbw/sa/kassensystem_rest/exceptions/NoContentException.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="11" column="13" lean-forward="false" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://C:/Program Files/Java/jdk1.8.0_77/src.zip!/java/util/ArrayList.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="222">
@@ -1096,49 +1097,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/dhbw/sa/kassensystem_rest/restApi/client/RestApiClient_Interface.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="9" column="49" lean-forward="true" selection-start-line="9" selection-start-column="49" selection-end-line="9" selection-end-column="49" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/dhbw/sa/kassensystem_rest/restApi/client/RestApiClient.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="169">
-          <caret line="23" column="0" lean-forward="false" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/META-INF/MANIFEST.MF">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/RestApiController_Test.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="13" lean-forward="false" selection-start-line="0" selection-start-column="13" selection-end-line="0" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/PrinterService_Test.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="6" column="45" lean-forward="true" selection-start-line="6" selection-start-column="45" selection-end-line="6" selection-end-column="45" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/RestApiClient_Test.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1175,13 +1137,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="102">
           <caret line="6" column="2" lean-forward="false" selection-start-line="6" selection-start-column="2" selection-end-line="6" selection-end-column="2" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/dhbw/sa/kassensystem_rest/printer/PrintableOrder.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-46">
-          <caret line="8" column="44" lean-forward="false" selection-start-line="8" selection-start-column="44" selection-end-line="8" selection-end-column="44" />
         </state>
       </provider>
     </entry>
@@ -1226,37 +1181,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/dhbw/sa/kassensystem_rest/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="5" column="0" lean-forward="false" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="das://table:/906e415a/293b57dd-5e8e-463b-9df2-00616d662c22/kassensystem.tables">
       <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
         <state>
           <filtering enabled="true" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/dhbw/sa/kassensystem_rest/printer/PrinterService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="58" column="39" lean-forward="false" selection-start-line="58" selection-start-column="39" selection-end-line="58" selection-end-column="39" />
-          <folding>
-            <element signature="docComment;class#PrinterService#0" expanded="false" />
-            <element signature="docComment;field#printerName#0;class#PrinterService#0" expanded="false" />
-            <element signature="docComment;method#printOrder#0;class#PrinterService#0" expanded="false" />
-            <element signature="method#printOrder#0;class#PrinterService#0" expanded="false" />
-            <element signature="docComment;method#printString#0;class#PrinterService#0" expanded="false" />
-            <element signature="docComment;method#getPrintableOrder#0;class#PrinterService#0" expanded="false" />
-            <element signature="method#getPrintableOrder#0;class#PrinterService#0" expanded="false" />
-            <element signature="docComment;method#getFormattedOrder#0;class#PrinterService#0" expanded="false" />
-            <element signature="method#getFormattedOrder#0;class#PrinterService#0" expanded="false" />
-            <element signature="method#findPrintService#0;class#PrinterService#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1267,10 +1195,26 @@
         </state>
       </provider>
     </entry>
+    <entry file="das://table:/906e415a/293b57dd-5e8e-463b-9df2-00616d662c22/kassensystem.orders">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/dhbw/sa/kassensystem_rest/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="12" column="48" lean-forward="false" selection-start-line="12" selection-start-column="48" selection-end-line="12" selection-end-column="48" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/RestApiController_Test.java" />
     <entry file="file://$PROJECT_DIR$/src/test/java/DatabaseService_Test.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="158">
-          <caret line="26" column="29" lean-forward="false" selection-start-line="26" selection-start-column="27" selection-end-line="26" selection-end-column="29" />
+          <caret line="26" column="31" lean-forward="false" selection-start-line="26" selection-start-column="31" selection-end-line="26" selection-end-column="31" />
           <folding>
             <element signature="docComment;class#DatabaseService_Test#0" expanded="false" />
             <element signature="method#getOrders#0;class#DatabaseService_Test#0" expanded="false" />
@@ -1301,20 +1245,80 @@
         </state>
       </provider>
     </entry>
-    <entry file="das://table:/906e415a/293b57dd-5e8e-463b-9df2-00616d662c22/kassensystem.orders">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
+    <entry file="file://$PROJECT_DIR$/src/test/java/PrinterService_Test.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="6" column="45" lean-forward="false" selection-start-line="6" selection-start-column="45" selection-end-line="6" selection-end-column="45" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/RestApiClient_Test.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="19" column="43" lean-forward="false" selection-start-line="19" selection-start-column="43" selection-end-line="19" selection-end-column="43" />
+          <folding>
+            <element signature="method#main#0;class#RestApiClient_Test#0" expanded="false" />
+            <element signature="method#getAllOrders#0;class#RestApiClient_Test#0" expanded="false" />
+            <element signature="method#getAllItems#0;class#RestApiClient_Test#0" expanded="false" />
+            <element signature="method#getAllTables#0;class#RestApiClient_Test#0" expanded="false" />
+            <element signature="method#createOrder#0;class#RestApiClient_Test#0" expanded="false" />
+            <element signature="method#updateOrder#0;class#RestApiClient_Test#0" expanded="false" />
+            <element signature="method#testOrder#0;class#RestApiClient_Test#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/dhbw/sa/kassensystem_rest/printer/PrintableOrder.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="8" column="44" lean-forward="false" selection-start-line="8" selection-start-column="44" selection-end-line="8" selection-end-column="44" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/dhbw/sa/kassensystem_rest/printer/PrinterService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="474">
+          <caret line="99" column="54" lean-forward="false" selection-start-line="99" selection-start-column="54" selection-end-line="99" selection-end-column="73" />
+          <folding>
+            <element signature="docComment;class#PrinterService#0" expanded="false" />
+            <element signature="docComment;field#printerName#0;class#PrinterService#0" expanded="false" />
+            <element signature="docComment;method#printOrder#0;class#PrinterService#0" expanded="false" />
+            <element signature="method#printOrder#0;class#PrinterService#0" expanded="false" />
+            <element signature="docComment;method#printString#0;class#PrinterService#0" expanded="false" />
+            <element signature="method#printString#0;class#PrinterService#0" expanded="false" />
+            <element signature="docComment;method#getPrintableOrder#0;class#PrinterService#0" expanded="false" />
+            <element signature="docComment;method#getFormattedOrder#0;class#PrinterService#0" expanded="false" />
+            <element signature="method#getFormattedOrder#0;class#PrinterService#0" expanded="false" />
+            <element signature="method#findPrintService#0;class#PrinterService#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/dhbw/sa/kassensystem_rest/restApi/controller/RestApiController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="405">
+          <caret line="47" column="23" lean-forward="false" selection-start-line="47" selection-start-column="23" selection-end-line="47" selection-end-column="23" />
+          <folding>
+            <element signature="docComment;class#RestApiController#0" expanded="false" />
+            <element signature="e#890#905#0" expanded="false" />
+            <element signature="e#1642#1643#0" expanded="false" />
+            <element signature="e#1695#1696#0" expanded="false" />
+            <element signature="method#createOrder#0;class#RestApiController#0" expanded="false" />
+            <element signature="method#updateOrder#0;class#RestApiController#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/dhbw/sa/kassensystem_rest/database/DatabaseService.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="561">
-          <caret line="271" column="13" lean-forward="true" selection-start-line="271" selection-start-column="13" selection-end-line="271" selection-end-column="13" />
+        <state relative-caret-position="275">
+          <caret line="568" column="5" lean-forward="false" selection-start-line="568" selection-start-column="5" selection-end-line="568" selection-end-column="5" />
           <folding>
             <element signature="docComment;class#DatabaseService#0" expanded="false" />
             <element signature="method#connect#0;class#DatabaseService#0" expanded="false" />
+            <element signature="method#disconnect#0;class#DatabaseService#0" expanded="false" />
             <element signature="method#getAllItems#0;class#DatabaseService#0" expanded="false" />
             <element signature="method#getAllTables#0;class#DatabaseService#0" expanded="false" />
             <element signature="method#getAllOrders#0;class#DatabaseService#0" expanded="false" />
@@ -1325,7 +1329,7 @@
             <element signature="method#getItemdeliveryById#0;class#DatabaseService#0" expanded="false" />
             <element signature="method#addItem#0;class#DatabaseService#0" expanded="false" />
             <element signature="method#addTable#0;class#DatabaseService#0" expanded="false" />
-            <element signature="e#11619#11655#0" expanded="false" />
+            <element signature="e#11725#11761#0" expanded="false" />
             <element signature="method#addOrder#0;class#DatabaseService#0" expanded="false" />
             <element signature="method#addItemdelivery#0;class#DatabaseService#0" expanded="false" />
             <element signature="method#updateItem#0;class#DatabaseService#0" expanded="false" />
@@ -1353,7 +1357,7 @@
             <element signature="method#getAllItemsEmpty#0;class#DatabaseService#0" expanded="false" />
             <element signature="docComment;method#getDiffOrder#0;class#DatabaseService#0" expanded="false" />
             <element signature="method#getDiffOrder#0;class#DatabaseService#0" expanded="false" />
-            <element signature="e#32059#32116#0" expanded="false" />
+            <element signature="e#33253#33310#0" expanded="false" />
             <element signature="docComment;method#getItemQuantity#1;class#DatabaseService#0" expanded="false" />
             <element signature="method#getItemQuantity#1;class#DatabaseService#0" expanded="false" />
             <element signature="docComment;method#convertJodaDateTimeToSqlTimestamp#0;class#DatabaseService#0" expanded="false" />
@@ -1361,35 +1365,80 @@
             <element signature="docComment;method#convertSqlTimestampToJodaDateTime#0;class#DatabaseService#0" expanded="false" />
             <element signature="method#convertSqlTimestampToJodaDateTime#0;class#DatabaseService#0" expanded="false" />
             <element signature="method#log#0;class#DatabaseService#0" expanded="false" />
-            <marker date="1511889735432" expanded="false" signature="2997:3102" ph="SELECT itemI... items" />
-            <marker date="1511889735432" expanded="false" signature="4130:4224" ph="SELECT table... tables" />
-            <marker date="1511889735432" expanded="false" signature="5064:5178" ph="SELECT order... " />
-            <marker date="1511889735432" expanded="false" signature="6282:6392" ph="SELECT itemd... itemdeliveries" />
-            <marker date="1511889735432" expanded="false" signature="10368:10507" ph="INSERT INTO missingValue.items... " />
-            <marker date="1511889735432" expanded="false" signature="10900:10974" ph="SELECT * FRO... items" />
-            <marker date="1511889735432" expanded="false" signature="12060:12185" ph="INSERT INTO missingValue.tables... " />
-            <marker date="1511889735432" expanded="false" signature="13389:13542" ph="INSERT INTO missingValue.orders... " />
-            <marker date="1511889735432" expanded="false" signature="14715:14848" ph="INSERT INTO missingValue.itemdeliveries... " />
-            <marker date="1511889735432" expanded="false" signature="15939:16104" ph="UPDATE missi... " />
-            <marker date="1511889735432" expanded="false" signature="17156:17306" ph="UPDATE missi... " />
-            <marker date="1511889735432" expanded="false" signature="18998:19180" ph="UPDATE missi... " />
-            <marker date="1511889735432" expanded="false" signature="21148:21234" ph="DELETE FROM " />
-            <marker date="1511889735432" expanded="false" signature="22110:22211" ph="DELETE FROM " />
-            <marker date="1511889735432" expanded="false" signature="29990:30095" ph="SELECT itemI... items" />
+            <marker date="1511899751990" expanded="false" signature="2961:3066" ph="SELECT itemI... items" />
+            <marker date="1511899751990" expanded="false" signature="4094:4188" ph="SELECT table... tables" />
+            <marker date="1511899751990" expanded="false" signature="5028:5142" ph="SELECT order... " />
+            <marker date="1511899751990" expanded="false" signature="6246:6356" ph="SELECT itemd... itemdeliveries" />
+            <marker date="1511899751990" expanded="false" signature="10459:10598" ph="INSERT INTO missingValue.items... " />
+            <marker date="1511899751990" expanded="false" signature="10991:11065" ph="SELECT * FRO... items" />
+            <marker date="1511899751990" expanded="false" signature="12166:12291" ph="INSERT INTO missingValue.tables... " />
+            <marker date="1511899751990" expanded="false" signature="13495:13648" ph="INSERT INTO missingValue.orders... " />
+            <marker date="1511899751990" expanded="false" signature="14848:14981" ph="INSERT INTO missingValue.itemdeliveries... " />
+            <marker date="1511899751990" expanded="false" signature="16159:16324" ph="UPDATE missi... " />
+            <marker date="1511899751990" expanded="false" signature="17539:17689" ph="UPDATE missi... " />
+            <marker date="1511899751990" expanded="false" signature="19544:19726" ph="UPDATE missi... " />
+            <marker date="1511899751990" expanded="false" signature="22016:22102" ph="DELETE FROM " />
+            <marker date="1511899751990" expanded="false" signature="23141:23242" ph="DELETE FROM " />
+            <marker date="1511899751990" expanded="false" signature="31184:31289" ph="SELECT itemI... items" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/dhbw/sa/kassensystem_rest/restApi/controller/RestApiController.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/dhbw/sa/kassensystem_rest/restApi/client/RestApiClient_Interface.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="42" column="44" lean-forward="false" selection-start-line="42" selection-start-column="44" selection-end-line="42" selection-end-column="44" />
+        <state relative-caret-position="85">
+          <caret line="9" column="49" lean-forward="true" selection-start-line="9" selection-start-column="49" selection-end-line="9" selection-end-column="49" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-web/4.3.12.RELEASE/spring-web-4.3.12.RELEASE-sources.jar!/org/springframework/http/HttpMethod.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="340">
+          <caret line="35" column="71" lean-forward="true" selection-start-line="35" selection-start-column="71" selection-end-line="35" selection-end-column="71" />
           <folding>
-            <element signature="docComment;class#RestApiController#0" expanded="false" />
-            <element signature="e#890#905#0" expanded="false" />
-            <element signature="method#createOrder#0;class#RestApiController#0" expanded="false" />
-            <element signature="method#updateOrder#0;class#RestApiController#0" expanded="false" />
+            <element signature="e#1123#1143#0" expanded="false" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/dhbw/sa/kassensystem_rest/exceptions/DataException.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="11" column="13" lean-forward="false" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/dhbw/sa/kassensystem_rest/exceptions/MySQLServerConnectionException.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="11" column="23" lean-forward="false" selection-start-line="11" selection-start-column="23" selection-end-line="11" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/dhbw/sa/kassensystem_rest/exceptions/NoContentException.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="11" column="13" lean-forward="false" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/dhbw/sa/kassensystem_rest/exceptions/OrderNotFoundException.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="41" lean-forward="false" selection-start-line="0" selection-start-column="41" selection-end-line="0" selection-end-column="41" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/dhbw/sa/kassensystem_rest/restApi/client/RestApiClient.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="611">
+          <caret line="49" column="63" lean-forward="false" selection-start-line="49" selection-start-column="63" selection-end-line="49" selection-end-column="63" />
+          <folding />
         </state>
       </provider>
     </entry>

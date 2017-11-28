@@ -56,7 +56,7 @@ public class DatabaseService implements DatabaseService_Interface{
             logInf("Database connected!");
         }catch(SQLException e) {
             logErr("Verbindung zur Datenbank fehlgeschlagen!");
-            throw new IllegalStateException("Verbindung zur Datenbank fehlgeschlagen!", e);
+            throw new MySQLServerConnectionException();
         }
     }
     @Override
@@ -186,7 +186,7 @@ public class DatabaseService implements DatabaseService_Interface{
     }
 
     //Datenbankinhalte mit Angabe der ID erhalten
-    public Order getOrderById(int orderID) {
+    public Order getOrderById(int orderID) throws NullPointerException {
 
         if(orderID == 0) {
             logErr("Order-ID may not be null.");
@@ -204,7 +204,7 @@ public class DatabaseService implements DatabaseService_Interface{
         throw new NullPointerException("Order-ID " + orderID + " not found.");
     }
 
-    public Item getItemById(int itemID) {
+    public Item getItemById(int itemID) throws NullPointerException {
 
         this.itemdeliveries = this.getAllItemdeliveries();
         this.orders = this.getAllOrders();
@@ -227,7 +227,7 @@ public class DatabaseService implements DatabaseService_Interface{
         throw new NullPointerException("Item-ID " + itemID + " not found.");
     }
 
-    public Table getTableById(int tableID) {
+    public Table getTableById(int tableID) throws NullPointerException {
 
         if(tableID == 0) {
             logErr("Table-ID may not be null.");
@@ -247,7 +247,7 @@ public class DatabaseService implements DatabaseService_Interface{
         throw new NullPointerException("Table-ID " + tableID + " not found.");
     }
 
-    public Itemdelivery getItemdeliveryById(int itemdeliveryID) {
+    public Itemdelivery getItemdeliveryById(int itemdeliveryID) throws NullPointerException {
 
         if(itemdeliveryID == 0) {
             logErr("Itemdelivery-ID may not be null.");
@@ -270,7 +270,7 @@ public class DatabaseService implements DatabaseService_Interface{
 
     //Adding data to the database
     @Override
-    public void addItem(Item item) throws MySQLServerConnectionException {
+    public void addItem(Item item) throws MySQLServerConnectionException, DataException {
 
         logInf("Adding Item to MySQL-Database.");
 
@@ -313,7 +313,7 @@ public class DatabaseService implements DatabaseService_Interface{
         }
     }
     @Override
-    public void addTable(Table table) throws MySQLServerConnectionException {
+    public void addTable(Table table) throws MySQLServerConnectionException, DataException {
 
         logInf("Adding Table to MySQL-Database.");
 
@@ -381,7 +381,8 @@ public class DatabaseService implements DatabaseService_Interface{
         }
     }
     @Override
-    public void addItemdelivery(Itemdelivery itemdelivery) throws MySQLServerConnectionException {
+    public void addItemdelivery(Itemdelivery itemdelivery) throws MySQLServerConnectionException,
+            DataException {
 
         logInf("Adding Itemdelivery to MySQL-Database.");
 
@@ -411,7 +412,8 @@ public class DatabaseService implements DatabaseService_Interface{
 
     //Updating data in database
     @Override
-    public void updateItem(int itemID, Item item) {
+    public void updateItem(int itemID, Item item) throws NullPointerException, DataException,
+            MySQLServerConnectionException {
 
         logInf("Updating Item with ID " + itemID + ".");
 
@@ -440,10 +442,14 @@ public class DatabaseService implements DatabaseService_Interface{
             pst.setDouble(2, item.getRetailprice());
             pst.setBoolean(3, item.isAvailable());
             pst.executeUpdate();
-        } catch(SQLException e) { e.printStackTrace(); }
+        } catch(SQLException e) {
+            e.printStackTrace();
+            throw new MySQLServerConnectionException();
+        }
     }
     @Override
-    public void updateTable(int tableID, Table table) {
+    public void updateTable(int tableID, Table table) throws NullPointerException, DataException,
+            MySQLServerConnectionException {
 
         logInf("Updating Table with ID " + tableID + ".");
 
@@ -471,10 +477,14 @@ public class DatabaseService implements DatabaseService_Interface{
             pst.setString(1, table.getName());
             pst.setBoolean(2, table.isAvailable());
             pst.executeUpdate();
-        } catch(SQLException e) { e.printStackTrace(); }
+        } catch(SQLException e) {
+            e.printStackTrace();
+            throw new MySQLServerConnectionException();
+        }
     }
     @Override
-    public void updateOrder(int orderID, Order order) {
+    public void updateOrder(int orderID, Order order) throws NullPointerException, DataException,
+            MySQLServerConnectionException {
 
         logInf("Updating Order with ID " + orderID + ".");
 
@@ -524,16 +534,18 @@ public class DatabaseService implements DatabaseService_Interface{
             pst.executeUpdate();
         } catch(SQLException e) {
             e.printStackTrace();
-
+            throw new MySQLServerConnectionException();
         }
     }
     //Deleting data from database
     /*
-      Beim Loeschen eines Items oder Tables wird dieser nur als nicht verfuegbar markiert, verbleiben aber in der Datenbank.
+      Beim Loeschen eines Items oder Tables wird dieser nur als nicht verfuegbar markiert,
+      verbleiben aber in der Datenbank.
       Somit ist sichergestellt, dass fuer bisherige Orders alle Daten verfuegbar bleiben.
      */
     @Override
-    public void deleteItem(int itemID) {
+    public void deleteItem(int itemID) throws NullPointerException, DataException,
+            MySQLServerConnectionException {
 
         logInf("Setting Item with ID " + itemID + " to unavailable.");
 
@@ -544,7 +556,8 @@ public class DatabaseService implements DatabaseService_Interface{
         this.updateItem(itemID, item);
     }
     @Override
-    public void deleteTable(int tableID) {
+    public void deleteTable(int tableID) throws NullPointerException, DataException,
+            MySQLServerConnectionException {
 
         logInf("Setting Table with ID " + tableID + " to unavailable.");
 
@@ -555,7 +568,8 @@ public class DatabaseService implements DatabaseService_Interface{
         this.updateTable(tableID, table);
     }
     @Override
-    public void deleteOrder(int orderID) {
+    public void deleteOrder(int orderID) throws NullPointerException, DataException,
+            MySQLServerConnectionException {
 
         logInf("Deleting Order with ID " + orderID + ".");
 
@@ -577,10 +591,14 @@ public class DatabaseService implements DatabaseService_Interface{
             PreparedStatement pst = connection.prepareStatement(query);
 
             pst.executeUpdate();
-        } catch(SQLException e) { e.printStackTrace(); }
+        } catch(SQLException e) {
+            e.printStackTrace();
+            throw new MySQLServerConnectionException();
+        }
     }
     @Override
-    public void deleteItemdelivery(int itemdeliveryID) {
+    public void deleteItemdelivery(int itemdeliveryID) throws NullPointerException, DataException,
+            MySQLServerConnectionException {
 
         logInf("Deleting Itemdelivery with ID " + itemdeliveryID + ".");
 
@@ -599,12 +617,16 @@ public class DatabaseService implements DatabaseService_Interface{
             PreparedStatement pst = connection.prepareStatement(query);
 
             pst.executeUpdate();
-        } catch(SQLException e) { e.printStackTrace(); }
+        } catch(SQLException e) {
+            e.printStackTrace();
+            throw new MySQLServerConnectionException();
+        }
     }
 
     //Drucken einer Order
 
-    public void printOrderById(int orderID) {
+    public void printOrderById(int orderID) throws NullPointerException, DataException,
+            MySQLServerConnectionException {
 
         this.orders = this.getAllOrders();
         this.items = this.getAllItems();
