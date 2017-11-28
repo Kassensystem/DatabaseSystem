@@ -10,190 +10,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="776fb8f0-9a4c-4f54-9c91-bf08f53f8a96" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docs/DatabaseService_Test.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docs/PrinterService_Test.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docs/RestApiClient_Test.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docs/RestApiController_Test.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docs/allclasses-frame.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docs/allclasses-noframe.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docs/constant-values.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docs/deprecated-list.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docs/dhbw/sa/databaseApplication/Main.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docs/dhbw/sa/databaseApplication/database/DatabaseProperties.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docs/dhbw/sa/databaseApplication/database/DatabaseProperties_abstract.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docs/dhbw/sa/databaseApplication/database/DatabaseService.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docs/dhbw/sa/databaseApplication/database/DatabaseService_Interface.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docs/dhbw/sa/databaseApplication/database/Gastronomy.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docs/dhbw/sa/databaseApplication/database/entity/Item.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docs/dhbw/sa/databaseApplication/database/entity/Itemdelivery.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docs/dhbw/sa/databaseApplication/database/entity/Order.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docs/dhbw/sa/databaseApplication/database/entity/OrderTest.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docs/dhbw/sa/databaseApplication/database/entity/Table.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docs/dhbw/sa/databaseApplication/database/entity/package-frame.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docs/dhbw/sa/databaseApplication/database/entity/package-summary.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docs/dhbw/sa/databaseApplication/database/entity/package-tree.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docs/dhbw/sa/databaseApplication/database/package-frame.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docs/dhbw/sa/databaseApplication/database/package-summary.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docs/dhbw/sa/databaseApplication/database/package-tree.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docs/dhbw/sa/databaseApplication/exceptions/DataException.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docs/dhbw/sa/databaseApplication/exceptions/MySQLServerConnectionException.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docs/dhbw/sa/databaseApplication/exceptions/NoContentException.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docs/dhbw/sa/databaseApplication/exceptions/OrderNotFoundException.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docs/dhbw/sa/databaseApplication/exceptions/package-frame.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docs/dhbw/sa/databaseApplication/exceptions/package-summary.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docs/dhbw/sa/databaseApplication/exceptions/package-tree.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docs/dhbw/sa/databaseApplication/package-frame.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docs/dhbw/sa/databaseApplication/package-summary.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docs/dhbw/sa/databaseApplication/package-tree.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docs/dhbw/sa/databaseApplication/printer/PrintableOrder.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docs/dhbw/sa/databaseApplication/printer/PrinterService.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docs/dhbw/sa/databaseApplication/printer/package-frame.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docs/dhbw/sa/databaseApplication/printer/package-summary.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docs/dhbw/sa/databaseApplication/printer/package-tree.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docs/dhbw/sa/databaseApplication/restApi/client/RestApiClient.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docs/dhbw/sa/databaseApplication/restApi/client/RestApiClient_Interface.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docs/dhbw/sa/databaseApplication/restApi/client/package-frame.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docs/dhbw/sa/databaseApplication/restApi/client/package-summary.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docs/dhbw/sa/databaseApplication/restApi/client/package-tree.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docs/dhbw/sa/databaseApplication/restApi/controller/RestApiController.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docs/dhbw/sa/databaseApplication/restApi/controller/package-frame.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docs/dhbw/sa/databaseApplication/restApi/controller/package-summary.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docs/dhbw/sa/databaseApplication/restApi/controller/package-tree.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docs/help-doc.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docs/index-files/index-1.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docs/index-files/index-10.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docs/index-files/index-11.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docs/index-files/index-12.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docs/index-files/index-13.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docs/index-files/index-14.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docs/index-files/index-15.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docs/index-files/index-16.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docs/index-files/index-17.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docs/index-files/index-2.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docs/index-files/index-3.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docs/index-files/index-4.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docs/index-files/index-5.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docs/index-files/index-6.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docs/index-files/index-7.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docs/index-files/index-8.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docs/index-files/index-9.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docs/index.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docs/overview-frame.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docs/overview-summary.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docs/overview-tree.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docs/package-frame.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docs/package-list" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docs/package-summary.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docs/package-tree.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docs/script.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docs/serialized-form.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docs/stylesheet.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docs_public/DatabaseService_Test.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docs_public/PDF/RestApiClient.pdf" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docs_public/PrinterService_Test.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docs_public/RestApiClient_Test.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docs_public/RestApiController_Test.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docs_public/allclasses-frame.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docs_public/allclasses-noframe.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docs_public/constant-values.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docs_public/deprecated-list.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docs_public/dhbw/sa/databaseApplication/Main.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docs_public/dhbw/sa/databaseApplication/database/DatabaseService.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docs_public/dhbw/sa/databaseApplication/database/DatabaseService_Interface.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docs_public/dhbw/sa/databaseApplication/database/Gastronomy.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docs_public/dhbw/sa/databaseApplication/database/entity/Item.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docs_public/dhbw/sa/databaseApplication/database/entity/Itemdelivery.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docs_public/dhbw/sa/databaseApplication/database/entity/Order.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docs_public/dhbw/sa/databaseApplication/database/entity/Table.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docs_public/dhbw/sa/databaseApplication/database/entity/package-frame.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docs_public/dhbw/sa/databaseApplication/database/entity/package-summary.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docs_public/dhbw/sa/databaseApplication/database/entity/package-tree.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docs_public/dhbw/sa/databaseApplication/database/package-frame.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docs_public/dhbw/sa/databaseApplication/database/package-summary.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docs_public/dhbw/sa/databaseApplication/database/package-tree.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docs_public/dhbw/sa/databaseApplication/exceptions/DataException.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docs_public/dhbw/sa/databaseApplication/exceptions/MySQLServerConnectionException.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docs_public/dhbw/sa/databaseApplication/exceptions/NoContentException.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docs_public/dhbw/sa/databaseApplication/exceptions/OrderNotFoundException.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docs_public/dhbw/sa/databaseApplication/exceptions/package-frame.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docs_public/dhbw/sa/databaseApplication/exceptions/package-summary.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docs_public/dhbw/sa/databaseApplication/exceptions/package-tree.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docs_public/dhbw/sa/databaseApplication/package-frame.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docs_public/dhbw/sa/databaseApplication/package-summary.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docs_public/dhbw/sa/databaseApplication/package-tree.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docs_public/dhbw/sa/databaseApplication/printer/PrinterService.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docs_public/dhbw/sa/databaseApplication/printer/package-frame.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docs_public/dhbw/sa/databaseApplication/printer/package-summary.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docs_public/dhbw/sa/databaseApplication/printer/package-tree.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docs_public/dhbw/sa/databaseApplication/restApi/client/RestApiClient.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docs_public/dhbw/sa/databaseApplication/restApi/client/package-frame.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docs_public/dhbw/sa/databaseApplication/restApi/client/package-summary.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docs_public/dhbw/sa/databaseApplication/restApi/client/package-tree.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docs_public/dhbw/sa/databaseApplication/restApi/controller/RestApiController.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docs_public/dhbw/sa/databaseApplication/restApi/controller/package-frame.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docs_public/dhbw/sa/databaseApplication/restApi/controller/package-summary.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docs_public/dhbw/sa/databaseApplication/restApi/controller/package-tree.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docs_public/dhbw/sa/kassensystem_rest/Main.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docs_public/dhbw/sa/kassensystem_rest/database/DatabaseService.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docs_public/dhbw/sa/kassensystem_rest/database/DatabaseService_Interface.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docs_public/dhbw/sa/kassensystem_rest/database/Gastronomy.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docs_public/dhbw/sa/kassensystem_rest/database/entity/Item.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docs_public/dhbw/sa/kassensystem_rest/database/entity/Itemdelivery.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docs_public/dhbw/sa/kassensystem_rest/database/entity/Order.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docs_public/dhbw/sa/kassensystem_rest/database/entity/Table.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docs_public/dhbw/sa/kassensystem_rest/database/entity/package-frame.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docs_public/dhbw/sa/kassensystem_rest/database/entity/package-summary.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docs_public/dhbw/sa/kassensystem_rest/database/entity/package-tree.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docs_public/dhbw/sa/kassensystem_rest/database/package-frame.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docs_public/dhbw/sa/kassensystem_rest/database/package-summary.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docs_public/dhbw/sa/kassensystem_rest/database/package-tree.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docs_public/dhbw/sa/kassensystem_rest/exceptions/DataException.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docs_public/dhbw/sa/kassensystem_rest/exceptions/MySQLServerConnectionException.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docs_public/dhbw/sa/kassensystem_rest/exceptions/NoContentException.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docs_public/dhbw/sa/kassensystem_rest/exceptions/OrderNotFoundException.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docs_public/dhbw/sa/kassensystem_rest/exceptions/package-frame.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docs_public/dhbw/sa/kassensystem_rest/exceptions/package-summary.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docs_public/dhbw/sa/kassensystem_rest/exceptions/package-tree.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docs_public/dhbw/sa/kassensystem_rest/package-frame.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docs_public/dhbw/sa/kassensystem_rest/package-summary.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docs_public/dhbw/sa/kassensystem_rest/package-tree.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docs_public/dhbw/sa/kassensystem_rest/printer/PrinterService.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docs_public/dhbw/sa/kassensystem_rest/printer/package-frame.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docs_public/dhbw/sa/kassensystem_rest/printer/package-summary.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docs_public/dhbw/sa/kassensystem_rest/printer/package-tree.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docs_public/dhbw/sa/kassensystem_rest/restApi/client/RestApiClient.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docs_public/dhbw/sa/kassensystem_rest/restApi/client/package-frame.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docs_public/dhbw/sa/kassensystem_rest/restApi/client/package-summary.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docs_public/dhbw/sa/kassensystem_rest/restApi/client/package-tree.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docs_public/dhbw/sa/kassensystem_rest/restApi/controller/package-frame.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docs_public/dhbw/sa/kassensystem_rest/restApi/controller/package-summary.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docs_public/dhbw/sa/kassensystem_rest/restApi/controller/package-tree.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docs_public/help-doc.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docs_public/index-files/index-1.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docs_public/index-files/index-10.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docs_public/index-files/index-11.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docs_public/index-files/index-12.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docs_public/index-files/index-13.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docs_public/index-files/index-14.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docs_public/index-files/index-2.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docs_public/index-files/index-3.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docs_public/index-files/index-4.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docs_public/index-files/index-5.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docs_public/index-files/index-6.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docs_public/index-files/index-7.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docs_public/index-files/index-8.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docs_public/index-files/index-9.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docs_public/index.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docs_public/overview-frame.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docs_public/overview-summary.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docs_public/overview-tree.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docs_public/package-frame.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docs_public/package-list" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docs_public/package-summary.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docs_public/package-tree.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docs_public/script.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docs_public/serialized-form.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/docs_public/stylesheet.css" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/dhbw/sa/kassensystem_rest/database/DatabaseService.java" afterPath="$PROJECT_DIR$/src/main/java/dhbw/sa/kassensystem_rest/database/DatabaseService.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/DatabaseService_Test.java" afterPath="$PROJECT_DIR$/src/test/java/DatabaseService_Test.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -240,25 +59,90 @@
         <item name="kassensystem" type="e3449647:DbNodeDescriptor" />
         <item name="orders" type="e3449647:DbNodeDescriptor" />
       </path>
-      <path>
-        <item name="" type="eadb38e5:DatabaseStructure$Root" />
-        <item name="Kassensystem@localhost" type="e3449647:DbNodeDescriptor" />
-        <item name="kassensystem" type="e3449647:DbNodeDescriptor" />
-        <item name="tables" type="e3449647:DbNodeDescriptor" />
-      </path>
     </expand>
     <select />
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="DatabaseService.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/dhbw/sa/kassensystem_rest/database/DatabaseService.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="2074">
+              <caret line="728" column="65" lean-forward="false" selection-start-line="728" selection-start-column="65" selection-end-line="728" selection-end-column="65" />
+              <folding>
+                <element signature="docComment;class#DatabaseService#0" expanded="false" />
+                <element signature="method#connect#0;class#DatabaseService#0" expanded="false" />
+                <element signature="method#disconnect#0;class#DatabaseService#0" expanded="false" />
+                <element signature="method#getAllItems#0;class#DatabaseService#0" expanded="false" />
+                <element signature="method#getAllTables#0;class#DatabaseService#0" expanded="false" />
+                <element signature="method#getAllOrders#0;class#DatabaseService#0" expanded="false" />
+                <element signature="method#getAllItemdeliveries#0;class#DatabaseService#0" expanded="false" />
+                <element signature="method#getOrderById#0;class#DatabaseService#0" expanded="false" />
+                <element signature="method#getItemById#0;class#DatabaseService#0" expanded="false" />
+                <element signature="method#getTableById#0;class#DatabaseService#0" expanded="false" />
+                <element signature="method#getItemdeliveryById#0;class#DatabaseService#0" expanded="false" />
+                <element signature="method#addItem#0;class#DatabaseService#0" expanded="false" />
+                <element signature="method#addTable#0;class#DatabaseService#0" expanded="false" />
+                <element signature="method#addItemdelivery#0;class#DatabaseService#0" expanded="false" />
+                <element signature="method#updateItem#0;class#DatabaseService#0" expanded="false" />
+                <element signature="method#updateTable#0;class#DatabaseService#0" expanded="false" />
+                <element signature="method#updateOrder#0;class#DatabaseService#0" expanded="false" />
+                <element signature="method#deleteItem#0;class#DatabaseService#0" expanded="false" />
+                <element signature="method#deleteTable#0;class#DatabaseService#0" expanded="false" />
+                <element signature="method#deleteOrder#0;class#DatabaseService#0" expanded="false" />
+                <element signature="method#deleteItemdelivery#0;class#DatabaseService#0" expanded="false" />
+                <element signature="method#isOrderComplete#0;class#DatabaseService#0" expanded="false" />
+                <element signature="method#isTableComplete#0;class#DatabaseService#0" expanded="false" />
+                <element signature="method#isItemComplete#0;class#DatabaseService#0" expanded="false" />
+                <element signature="method#isItemdeliveryComplete#0;class#DatabaseService#0" expanded="false" />
+                <element signature="method#itemIDsAvailable#0;class#DatabaseService#0" expanded="false" />
+                <element signature="method#itemIsAvailable#0;class#DatabaseService#0" expanded="false" />
+                <element signature="method#orderIsAvailable#0;class#DatabaseService#0" expanded="false" />
+                <element signature="method#tableIsAvailable#0;class#DatabaseService#0" expanded="false" />
+                <element signature="docComment;method#printOrder#0;class#DatabaseService#0" expanded="false" />
+                <element signature="method#printOrder#0;class#DatabaseService#0" expanded="false" />
+                <element signature="docComment;method#getItemQuantity#0;class#DatabaseService#0" expanded="false" />
+                <element signature="method#getItemQuantity#0;class#DatabaseService#0" expanded="false" />
+                <element signature="docComment;method#getAllItemsEmpty#0;class#DatabaseService#0" expanded="false" />
+                <element signature="method#getAllItemsEmpty#0;class#DatabaseService#0" expanded="false" />
+                <element signature="docComment;method#getDiffOrder#0;class#DatabaseService#0" expanded="false" />
+                <element signature="method#getDiffOrder#0;class#DatabaseService#0" expanded="false" />
+                <element signature="e#29781#29838#0" expanded="false" />
+                <element signature="docComment;method#getItemQuantity#1;class#DatabaseService#0" expanded="false" />
+                <element signature="method#getItemQuantity#1;class#DatabaseService#0" expanded="false" />
+                <element signature="docComment;method#convertJodaDateTimeToSqlTimestamp#0;class#DatabaseService#0" expanded="false" />
+                <element signature="method#convertJodaDateTimeToSqlTimestamp#0;class#DatabaseService#0" expanded="false" />
+                <element signature="docComment;method#convertSqlTimestampToJodaDateTime#0;class#DatabaseService#0" expanded="false" />
+                <element signature="method#convertSqlTimestampToJodaDateTime#0;class#DatabaseService#0" expanded="false" />
+                <element signature="method#log#0;class#DatabaseService#0" expanded="false" />
+                <marker date="1511794347116" expanded="false" signature="3011:3116" ph="SELECT itemI... items" />
+                <marker date="1511794347116" expanded="false" signature="4144:4238" ph="SELECT table... tables" />
+                <marker date="1511794347116" expanded="false" signature="5078:5192" ph="SELECT order... " />
+                <marker date="1511794347116" expanded="false" signature="6296:6406" ph="SELECT itemd... itemdeliveries" />
+                <marker date="1511794347116" expanded="false" signature="10382:10521" ph="INSERT INTO missingValue.items... " />
+                <marker date="1511794347116" expanded="false" signature="10914:10988" ph="SELECT * FRO... items" />
+                <marker date="1511794347116" expanded="false" signature="12072:12197" ph="INSERT INTO missingValue.tables... " />
+                <marker date="1511794347116" expanded="false" signature="13401:13554" ph="INSERT INTO missingValue.orders... " />
+                <marker date="1511794347116" expanded="false" signature="14685:14818" ph="INSERT INTO missingValue.itemdeliveries... " />
+                <marker date="1511794347116" expanded="false" signature="15867:16032" ph="UPDATE missi... " />
+                <marker date="1511794347116" expanded="false" signature="17040:17190" ph="UPDATE missi... " />
+                <marker date="1511794347116" expanded="false" signature="19078:19260" ph="UPDATE missi... " />
+                <marker date="1511794347116" expanded="false" signature="20784:20870" ph="DELETE FROM " />
+                <marker date="1511794347116" expanded="false" signature="21242:21343" ph="DELETE FROM " />
+                <marker date="1511794347116" expanded="false" signature="27712:27817" ph="SELECT itemI... items" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="DatabaseService_Test.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/test/java/DatabaseService_Test.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="100">
-              <caret line="77" column="34" lean-forward="false" selection-start-line="77" selection-start-column="34" selection-end-line="77" selection-end-column="34" />
+            <state relative-caret-position="202">
+              <caret line="75" column="23" lean-forward="false" selection-start-line="75" selection-start-column="23" selection-end-line="75" selection-end-column="23" />
               <folding>
                 <element signature="docComment;class#DatabaseService_Test#0" expanded="false" />
-                <element signature="e#1019#1070#0" expanded="false" />
+                <element signature="e#1042#1093#0" expanded="false" />
                 <element signature="method#getOrders#0;class#DatabaseService_Test#0" expanded="false" />
                 <element signature="method#getItems#0;class#DatabaseService_Test#0" expanded="false" />
                 <element signature="method#getTables#0;class#DatabaseService_Test#0" expanded="false" />
@@ -266,6 +150,7 @@
                 <element signature="method#getOrderById#0;class#DatabaseService_Test#0" expanded="false" />
                 <element signature="method#getItemById#0;class#DatabaseService_Test#0" expanded="false" />
                 <element signature="method#getTableById#0;class#DatabaseService_Test#0" expanded="false" />
+                <element signature="method#getItemdeliveryById#0;class#DatabaseService_Test#0" expanded="false" />
                 <element signature="method#addOrder#0;class#DatabaseService_Test#0" expanded="false" />
                 <element signature="method#addItem#0;class#DatabaseService_Test#0" expanded="false" />
                 <element signature="method#addTable#0;class#DatabaseService_Test#0" expanded="false" />
@@ -273,7 +158,6 @@
                 <element signature="n#!!doc;n#updateOrder#0;n#DatabaseService_Test#0" expanded="false" />
                 <element signature="method#updateItem#0;class#DatabaseService_Test#0" expanded="false" />
                 <element signature="method#updateTable#0;class#DatabaseService_Test#0" expanded="false" />
-                <element signature="method#logOrder#0;class#DatabaseService_Test#0" expanded="false" />
                 <element signature="method#logItem#0;class#DatabaseService_Test#0" expanded="false" />
                 <element signature="method#logTable#0;class#DatabaseService_Test#0" expanded="false" />
                 <element signature="method#logItemdelivery#0;class#DatabaseService_Test#0" expanded="false" />
@@ -285,17 +169,8 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="itemdeliveries" pinned="false" current-in-tab="false">
-        <entry file="das://table:/906e415a/293b57dd-5e8e-463b-9df2-00616d662c22/kassensystem.itemdeliveries">
-          <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-            <state>
-              <filtering enabled="true" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="tables" pinned="false" current-in-tab="false">
-        <entry file="das://table:/906e415a/293b57dd-5e8e-463b-9df2-00616d662c22/kassensystem.tables">
+      <file leaf-file-name="orders" pinned="false" current-in-tab="false">
+        <entry file="das://table:/906e415a/293b57dd-5e8e-463b-9df2-00616d662c22/kassensystem.orders">
           <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
             <state>
               <filtering enabled="true" />
@@ -454,6 +329,9 @@
     </navigator>
     <panes>
       <pane id="Scope" />
+      <pane id="AndroidView" />
+      <pane id="PackagesPane" />
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -568,9 +446,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
-      <pane id="AndroidView" />
-      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -921,7 +796,8 @@
       <workItem from="1511630866793" duration="1259000" />
       <workItem from="1511686363683" duration="1910000" />
       <workItem from="1511692446456" duration="17598000" />
-      <workItem from="1511729876005" duration="107000" />
+      <workItem from="1511729876005" duration="693000" />
+      <workItem from="1511774443931" duration="11763000" />
     </task>
     <task id="LOCAL-00001" summary="Client hinzugefügt">
       <created>1509897940236</created>
@@ -966,7 +842,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="254669000" />
+    <option name="totallyTimeSpent" value="267018000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -978,32 +854,32 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1066" extended-state="6" />
+    <frame x="-8" y="-8" width="1382" height="754" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.16666667" sideWeight="0.5154584" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.27558637" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2753404" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.15431164" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.15355521" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.42972535" sideWeight="0.6977612" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32903227" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25456497" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Java Enterprise" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.15698925" sideWeight="0.48454157" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3489499" sideWeight="0.48454157" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.21505377" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Spring" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.16471216" sideWeight="0.49346405" order="0" side_tool="false" content_ui="combo" x="507" y="60" width="352" height="618" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.16717096" sideWeight="0.49346405" order="0" side_tool="false" content_ui="combo" x="507" y="60" width="352" height="618" />
       <window_info id="Bean Validation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.15724947" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.36263737" sideWeight="0.50653595" order="5" side_tool="true" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.26666668" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -1012,8 +888,8 @@
       <window_info id="Dependency Viewer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.20645161" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection Results" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.30537635" sideWeight="0.5" order="14" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25456497" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.26666668" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -1063,7 +939,7 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="79" />
+      <option name="time" value="80" />
     </breakpoint-manager>
     <watches-manager>
       <configuration name="JUnit">
@@ -1164,13 +1040,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../kassensystem_database/src/test/java/entity/OrderTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="48" lean-forward="false" selection-start-line="2" selection-start-column="48" selection-end-line="2" selection-end-column="48" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/../kassensystem_database/src/test/java/entity/OrderTest.java" />
     <entry file="file://$PROJECT_DIR$/src/main/java/dhbw/sa/kassensystem_rest/Main.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="68">
@@ -1229,14 +1099,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/dhbw/sa/kassensystem_rest/database/DatabaseProperties.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/dhbw/sa/kassensystem_rest/database/Gastronomy.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -1249,14 +1111,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/dhbw/sa/kassensystem_rest/database/entity/Item.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1285,14 +1139,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="170">
           <caret line="11" column="13" lean-forward="false" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/dhbw/sa/kassensystem_rest/database/entity/Order.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="222">
-          <caret line="172" column="27" lean-forward="false" selection-start-line="172" selection-start-column="27" selection-end-line="172" selection-end-column="27" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1401,7 +1247,7 @@
         <state relative-caret-position="229">
           <caret line="24" column="17" lean-forward="false" selection-start-line="24" selection-start-column="17" selection-end-line="24" selection-end-column="17" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="imports" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1433,84 +1279,27 @@
         </state>
       </provider>
     </entry>
-    <entry file="das://table:/906e415a/293b57dd-5e8e-463b-9df2-00616d662c22/kassensystem.items">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="das://table:/906e415a/293b57dd-5e8e-463b-9df2-00616d662c22/kassensystem.orders">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="das://table:/906e415a/293b57dd-5e8e-463b-9df2-00616d662c22/kassensystem.tables">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/dhbw/sa/kassensystem_rest/database/DatabaseService.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/dhbw/sa/kassensystem_rest/database/entity/Item.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="618">
-          <caret line="257" column="52" lean-forward="false" selection-start-line="257" selection-start-column="52" selection-end-line="257" selection-end-column="52" />
+        <state relative-caret-position="102">
+          <caret line="45" column="4" lean-forward="true" selection-start-line="45" selection-start-column="4" selection-end-line="45" selection-end-column="4" />
           <folding>
-            <element signature="docComment;class#DatabaseService#0" expanded="false" />
-            <element signature="method#connect#0;class#DatabaseService#0" expanded="false" />
-            <element signature="method#disconnect#0;class#DatabaseService#0" expanded="false" />
-            <element signature="method#getAllItems#0;class#DatabaseService#0" expanded="false" />
-            <element signature="method#getAllTables#0;class#DatabaseService#0" expanded="false" />
-            <element signature="method#getAllOrders#0;class#DatabaseService#0" expanded="false" />
-            <element signature="method#getAllItemdeliveries#0;class#DatabaseService#0" expanded="false" />
-            <element signature="method#getOrderById#0;class#DatabaseService#0" expanded="false" />
-            <element signature="method#getItemById#0;class#DatabaseService#0" expanded="false" />
-            <element signature="method#addItem#0;class#DatabaseService#0" expanded="false" />
-            <element signature="method#addTable#0;class#DatabaseService#0" expanded="false" />
-            <element signature="method#addOrder#0;class#DatabaseService#0" expanded="false" />
-            <element signature="method#addItemdelivery#0;class#DatabaseService#0" expanded="false" />
-            <element signature="method#updateItem#0;class#DatabaseService#0" expanded="false" />
-            <element signature="method#updateTable#0;class#DatabaseService#0" expanded="false" />
-            <element signature="method#updateOrder#0;class#DatabaseService#0" expanded="false" />
-            <element signature="method#deleteItem#0;class#DatabaseService#0" expanded="false" />
-            <element signature="method#deleteTable#0;class#DatabaseService#0" expanded="false" />
-            <element signature="method#deleteOrder#0;class#DatabaseService#0" expanded="false" />
-            <element signature="method#deleteItemdelivery#0;class#DatabaseService#0" expanded="false" />
-            <element signature="docComment;method#printOrder#0;class#DatabaseService#0" expanded="false" />
-            <element signature="method#printOrder#0;class#DatabaseService#0" expanded="false" />
-            <element signature="docComment;method#getItemQuantity#0;class#DatabaseService#0" expanded="false" />
-            <element signature="method#getItemQuantity#0;class#DatabaseService#0" expanded="false" />
-            <element signature="docComment;method#getAllItemsEmpty#0;class#DatabaseService#0" expanded="false" />
-            <element signature="method#getAllItemsEmpty#0;class#DatabaseService#0" expanded="false" />
-            <element signature="docComment;method#getDiffOrder#0;class#DatabaseService#0" expanded="false" />
-            <element signature="method#getDiffOrder#0;class#DatabaseService#0" expanded="false" />
-            <element signature="e#22120#22177#0" expanded="false" />
-            <element signature="docComment;method#getItemQuantity#1;class#DatabaseService#0" expanded="false" />
-            <element signature="method#getItemQuantity#1;class#DatabaseService#0" expanded="false" />
-            <element signature="docComment;method#convertJodaDateTimeToSqlTimestamp#0;class#DatabaseService#0" expanded="false" />
-            <element signature="method#convertJodaDateTimeToSqlTimestamp#0;class#DatabaseService#0" expanded="false" />
-            <element signature="docComment;method#convertSqlTimestampToJodaDateTime#0;class#DatabaseService#0" expanded="false" />
-            <element signature="method#convertSqlTimestampToJodaDateTime#0;class#DatabaseService#0" expanded="false" />
-            <element signature="method#log#0;class#DatabaseService#0" expanded="false" />
-            <marker date="1511721305355" expanded="true" signature="3011:3116" ph="SELECT itemI... items" />
-            <marker date="1511721305355" expanded="false" signature="4144:4238" ph="SELECT table... tables" />
-            <marker date="1511721305355" expanded="false" signature="5078:5192" ph="SELECT order... " />
-            <marker date="1511721305355" expanded="false" signature="6296:6406" ph="SELECT itemd... itemdeliveries" />
-            <marker date="1511721305355" expanded="false" signature="9615:9754" ph="INSERT INTO missingValue.items... " />
-            <marker date="1511721305355" expanded="false" signature="10147:10221" ph="SELECT * FRO... items" />
-            <marker date="1511721305355" expanded="false" signature="10901:11026" ph="INSERT INTO missingValue.tables... " />
-            <marker date="1511721305355" expanded="false" signature="12065:12218" ph="INSERT INTO missingValue.orders... " />
-            <marker date="1511721305355" expanded="false" signature="12953:13086" ph="INSERT INTO missingValue.itemdeliveries... " />
-            <marker date="1511721305355" expanded="false" signature="13643:13808" ph="UPDATE missi... " />
-            <marker date="1511721305355" expanded="false" signature="14313:14463" ph="UPDATE missi... " />
-            <marker date="1511721305355" expanded="false" signature="15844:16026" ph="UPDATE missi... " />
-            <marker date="1511721305355" expanded="false" signature="17550:17636" ph="DELETE FROM " />
-            <marker date="1511721305355" expanded="false" signature="18008:18109" ph="DELETE FROM " />
-            <marker date="1511721305355" expanded="false" signature="20051:20156" ph="SELECT itemI... items" />
+            <element signature="docComment;class#Item#0" expanded="false" />
+            <element signature="docComment;method#Item#0;class#Item#0" expanded="false" />
+            <element signature="method#Item#0;class#Item#0" expanded="false" />
+            <element signature="method#Item#1;class#Item#0" expanded="false" />
+            <element signature="method#Item#2;class#Item#0" expanded="false" />
+            <element signature="docComment;method#Item#3;class#Item#0" expanded="false" />
+            <element signature="method#Item#3;class#Item#0" expanded="false" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/dhbw/sa/kassensystem_rest/database/DatabaseProperties.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="9" column="6" lean-forward="false" selection-start-line="9" selection-start-column="6" selection-end-line="9" selection-end-column="6" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1521,13 +1310,111 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/dhbw/sa/kassensystem_rest/database/entity/Order.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="125">
+          <caret line="28" column="11" lean-forward="false" selection-start-line="28" selection-start-column="11" selection-end-line="28" selection-end-column="11" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="das://table:/906e415a/293b57dd-5e8e-463b-9df2-00616d662c22/kassensystem.tables">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="das://table:/906e415a/293b57dd-5e8e-463b-9df2-00616d662c22/kassensystem.items">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/dhbw/sa/kassensystem_rest/database/DatabaseService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2074">
+          <caret line="728" column="65" lean-forward="false" selection-start-line="728" selection-start-column="65" selection-end-line="728" selection-end-column="65" />
+          <folding>
+            <element signature="docComment;class#DatabaseService#0" expanded="false" />
+            <element signature="method#connect#0;class#DatabaseService#0" expanded="false" />
+            <element signature="method#disconnect#0;class#DatabaseService#0" expanded="false" />
+            <element signature="method#getAllItems#0;class#DatabaseService#0" expanded="false" />
+            <element signature="method#getAllTables#0;class#DatabaseService#0" expanded="false" />
+            <element signature="method#getAllOrders#0;class#DatabaseService#0" expanded="false" />
+            <element signature="method#getAllItemdeliveries#0;class#DatabaseService#0" expanded="false" />
+            <element signature="method#getOrderById#0;class#DatabaseService#0" expanded="false" />
+            <element signature="method#getItemById#0;class#DatabaseService#0" expanded="false" />
+            <element signature="method#getTableById#0;class#DatabaseService#0" expanded="false" />
+            <element signature="method#getItemdeliveryById#0;class#DatabaseService#0" expanded="false" />
+            <element signature="method#addItem#0;class#DatabaseService#0" expanded="false" />
+            <element signature="method#addTable#0;class#DatabaseService#0" expanded="false" />
+            <element signature="method#addItemdelivery#0;class#DatabaseService#0" expanded="false" />
+            <element signature="method#updateItem#0;class#DatabaseService#0" expanded="false" />
+            <element signature="method#updateTable#0;class#DatabaseService#0" expanded="false" />
+            <element signature="method#updateOrder#0;class#DatabaseService#0" expanded="false" />
+            <element signature="method#deleteItem#0;class#DatabaseService#0" expanded="false" />
+            <element signature="method#deleteTable#0;class#DatabaseService#0" expanded="false" />
+            <element signature="method#deleteOrder#0;class#DatabaseService#0" expanded="false" />
+            <element signature="method#deleteItemdelivery#0;class#DatabaseService#0" expanded="false" />
+            <element signature="method#isOrderComplete#0;class#DatabaseService#0" expanded="false" />
+            <element signature="method#isTableComplete#0;class#DatabaseService#0" expanded="false" />
+            <element signature="method#isItemComplete#0;class#DatabaseService#0" expanded="false" />
+            <element signature="method#isItemdeliveryComplete#0;class#DatabaseService#0" expanded="false" />
+            <element signature="method#itemIDsAvailable#0;class#DatabaseService#0" expanded="false" />
+            <element signature="method#itemIsAvailable#0;class#DatabaseService#0" expanded="false" />
+            <element signature="method#orderIsAvailable#0;class#DatabaseService#0" expanded="false" />
+            <element signature="method#tableIsAvailable#0;class#DatabaseService#0" expanded="false" />
+            <element signature="docComment;method#printOrder#0;class#DatabaseService#0" expanded="false" />
+            <element signature="method#printOrder#0;class#DatabaseService#0" expanded="false" />
+            <element signature="docComment;method#getItemQuantity#0;class#DatabaseService#0" expanded="false" />
+            <element signature="method#getItemQuantity#0;class#DatabaseService#0" expanded="false" />
+            <element signature="docComment;method#getAllItemsEmpty#0;class#DatabaseService#0" expanded="false" />
+            <element signature="method#getAllItemsEmpty#0;class#DatabaseService#0" expanded="false" />
+            <element signature="docComment;method#getDiffOrder#0;class#DatabaseService#0" expanded="false" />
+            <element signature="method#getDiffOrder#0;class#DatabaseService#0" expanded="false" />
+            <element signature="e#29781#29838#0" expanded="false" />
+            <element signature="docComment;method#getItemQuantity#1;class#DatabaseService#0" expanded="false" />
+            <element signature="method#getItemQuantity#1;class#DatabaseService#0" expanded="false" />
+            <element signature="docComment;method#convertJodaDateTimeToSqlTimestamp#0;class#DatabaseService#0" expanded="false" />
+            <element signature="method#convertJodaDateTimeToSqlTimestamp#0;class#DatabaseService#0" expanded="false" />
+            <element signature="docComment;method#convertSqlTimestampToJodaDateTime#0;class#DatabaseService#0" expanded="false" />
+            <element signature="method#convertSqlTimestampToJodaDateTime#0;class#DatabaseService#0" expanded="false" />
+            <element signature="method#log#0;class#DatabaseService#0" expanded="false" />
+            <marker date="1511794347116" expanded="false" signature="3011:3116" ph="SELECT itemI... items" />
+            <marker date="1511794347116" expanded="false" signature="4144:4238" ph="SELECT table... tables" />
+            <marker date="1511794347116" expanded="false" signature="5078:5192" ph="SELECT order... " />
+            <marker date="1511794347116" expanded="false" signature="6296:6406" ph="SELECT itemd... itemdeliveries" />
+            <marker date="1511794347116" expanded="false" signature="10382:10521" ph="INSERT INTO missingValue.items... " />
+            <marker date="1511794347116" expanded="false" signature="10914:10988" ph="SELECT * FRO... items" />
+            <marker date="1511794347116" expanded="false" signature="12072:12197" ph="INSERT INTO missingValue.tables... " />
+            <marker date="1511794347116" expanded="false" signature="13401:13554" ph="INSERT INTO missingValue.orders... " />
+            <marker date="1511794347116" expanded="false" signature="14685:14818" ph="INSERT INTO missingValue.itemdeliveries... " />
+            <marker date="1511794347116" expanded="false" signature="15867:16032" ph="UPDATE missi... " />
+            <marker date="1511794347116" expanded="false" signature="17040:17190" ph="UPDATE missi... " />
+            <marker date="1511794347116" expanded="false" signature="19078:19260" ph="UPDATE missi... " />
+            <marker date="1511794347116" expanded="false" signature="20784:20870" ph="DELETE FROM " />
+            <marker date="1511794347116" expanded="false" signature="21242:21343" ph="DELETE FROM " />
+            <marker date="1511794347116" expanded="false" signature="27712:27817" ph="SELECT itemI... items" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="das://table:/906e415a/293b57dd-5e8e-463b-9df2-00616d662c22/kassensystem.orders">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/DatabaseService_Test.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="100">
-          <caret line="77" column="34" lean-forward="false" selection-start-line="77" selection-start-column="34" selection-end-line="77" selection-end-column="34" />
+        <state relative-caret-position="202">
+          <caret line="75" column="23" lean-forward="false" selection-start-line="75" selection-start-column="23" selection-end-line="75" selection-end-column="23" />
           <folding>
             <element signature="docComment;class#DatabaseService_Test#0" expanded="false" />
-            <element signature="e#1019#1070#0" expanded="false" />
+            <element signature="e#1042#1093#0" expanded="false" />
             <element signature="method#getOrders#0;class#DatabaseService_Test#0" expanded="false" />
             <element signature="method#getItems#0;class#DatabaseService_Test#0" expanded="false" />
             <element signature="method#getTables#0;class#DatabaseService_Test#0" expanded="false" />
@@ -1535,6 +1422,7 @@
             <element signature="method#getOrderById#0;class#DatabaseService_Test#0" expanded="false" />
             <element signature="method#getItemById#0;class#DatabaseService_Test#0" expanded="false" />
             <element signature="method#getTableById#0;class#DatabaseService_Test#0" expanded="false" />
+            <element signature="method#getItemdeliveryById#0;class#DatabaseService_Test#0" expanded="false" />
             <element signature="method#addOrder#0;class#DatabaseService_Test#0" expanded="false" />
             <element signature="method#addItem#0;class#DatabaseService_Test#0" expanded="false" />
             <element signature="method#addTable#0;class#DatabaseService_Test#0" expanded="false" />
@@ -1542,7 +1430,6 @@
             <element signature="n#!!doc;n#updateOrder#0;n#DatabaseService_Test#0" expanded="false" />
             <element signature="method#updateItem#0;class#DatabaseService_Test#0" expanded="false" />
             <element signature="method#updateTable#0;class#DatabaseService_Test#0" expanded="false" />
-            <element signature="method#logOrder#0;class#DatabaseService_Test#0" expanded="false" />
             <element signature="method#logItem#0;class#DatabaseService_Test#0" expanded="false" />
             <element signature="method#logTable#0;class#DatabaseService_Test#0" expanded="false" />
             <element signature="method#logItemdelivery#0;class#DatabaseService_Test#0" expanded="false" />

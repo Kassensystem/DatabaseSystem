@@ -7,6 +7,7 @@ import dhbw.sa.kassensystem_rest.database.entity.Table;
 import org.joda.time.DateTime;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 
 /** Testfälle für die Klasse DatabaseService
@@ -70,7 +71,13 @@ public class DatabaseService_Test {
         getOrders();
         */
 
-        getItemdeliveryById(0);
+        //int ID = 4;
+        String itemIDs = "12;13;15";
+        int tableID = 8;
+        double price = 3.3;
+        DateTime date = DateTime.now();
+        boolean paid = true;
+        addOrder(new Order(itemIDs, tableID, price, date, paid));
 
     }
 
