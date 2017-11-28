@@ -1,1 +1,1 @@
-Dokumentation: https://kassensystem.github.io/kassensystem_rest/
+Dokumentation: https://kassensystem.github.io/DatabaseSystem/
