@@ -278,11 +278,15 @@ public class DatabaseService implements DatabaseService_Interface{
         this.orders = this.getAllOrders();
         this.itemdeliveries = this.getAllItemdeliveries();
 
-        //Vollständigkeit der Order ueberpruefen
         if(item.getItemID() != 0) {
             logErr("ID may not be set by the user.");
             logErr("Item was not added to the Database!");
             throw new DataException("Es darf keine ID übergeben werden. Die ID wird vom Datenbank-Server gewählt!");
+        }
+        //Vollständigkeit der Order ueberpruefen
+        if(item.getQuantity() == 0) {
+            logErr("When adding item the quantity may not be zero.");
+            throw new DataException("Es wurde keine Anzahl gesetzt!");
         }
         isItemComplete(item);
 
@@ -651,7 +655,7 @@ public class DatabaseService implements DatabaseService_Interface{
 
         String missingAttributs = "";
 
-        if(order.getItems() == null || order.getItems() == "") {
+        if(order.getItems() == null || order.getItems().equals("")) {
             missingAttributs += "Artikel ";
             logErr("Item-IDs missing.");
         }
@@ -660,7 +664,7 @@ public class DatabaseService implements DatabaseService_Interface{
             logErr("Table-ID missing.");
         }
 
-        if(missingAttributs != "") {
+        if(!missingAttributs.isEmpty()) {
             logErr("Order was not added to the database!");
             throw new DataException("Die Bestellung ist unvollständig! Die folgenden Parameter fehlen: " + missingAttributs);
         }
@@ -683,8 +687,8 @@ public class DatabaseService implements DatabaseService_Interface{
 
         String missingAttributs = "";
 
-        if(table.getName() == "" || table.getName() == null) {
-            missingAttributs += " Tisch";
+        if(table.getName().isEmpty()) {
+            missingAttributs += " Name";
             logErr("Table missing.");
         }
         //Nur Verfügbarkeit von neuen Artikeln darf nicht auf false gesetzt werden
@@ -692,7 +696,7 @@ public class DatabaseService implements DatabaseService_Interface{
             missingAttributs += "Available ";
             logErr("New Table cannot be set unavailable.");
         }
-        if(missingAttributs != "") {
+        if(!missingAttributs.isEmpty()) {
             logErr("Table was not added to the database!");
             throw new DataException("Der Tisch ist unvollständig! Die folgenden Parameter fehlen: " + missingAttributs);
         }
@@ -703,7 +707,7 @@ public class DatabaseService implements DatabaseService_Interface{
 
         String missingAttributs = "";
 
-        if(item.getName() == "" || item.getName() == null) {
+        if(item.getName().isEmpty() || item.getName() == null) {
             missingAttributs += "Name ";
             logErr("Name is missing.");
         }
@@ -712,7 +716,7 @@ public class DatabaseService implements DatabaseService_Interface{
             missingAttributs += "Available ";
             logErr("New Item cannot be set unavailable.");
         }
-        if(missingAttributs != "") {
+        if(!missingAttributs.isEmpty()) {
             logErr("Item was not added to the Database!");
             throw new DataException("Der Artikel ist unvollständig! Folgende Attribute fehlen: " + missingAttributs);
         }
@@ -732,7 +736,7 @@ public class DatabaseService implements DatabaseService_Interface{
             logErr("Quantity missing.");
         }
 
-        if(missingAttributs != "") {
+        if(!missingAttributs.isEmpty()) {
             logErr("Itemdelivery was not added to the database!");
             throw new DataException("Der Wareneingang ist unvollständig! Die folgenden Parameter fehlen: " + missingAttributs);
         }
