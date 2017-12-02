@@ -1,4 +1,4 @@
-package dhbw.sa.kassensystem_rest.printer;
+package dhbw.sa.kassensystem_rest.database.printer;
 
 
 import dhbw.sa.kassensystem_rest.database.entity.Item;

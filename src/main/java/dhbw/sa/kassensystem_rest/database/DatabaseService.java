@@ -6,11 +6,10 @@ import dhbw.sa.kassensystem_rest.database.entity.Order;
 import dhbw.sa.kassensystem_rest.database.entity.Table;
 import dhbw.sa.kassensystem_rest.exceptions.DataException;
 import dhbw.sa.kassensystem_rest.exceptions.MySQLServerConnectionException;
-import dhbw.sa.kassensystem_rest.printer.PrinterService;
+import dhbw.sa.kassensystem_rest.database.printer.PrinterService;
 import org.joda.time.DateTime;
 import org.springframework.stereotype.Service;
 
-import javax.validation.constraints.Null;
 import java.sql.*;
 import java.util.ArrayList;
 

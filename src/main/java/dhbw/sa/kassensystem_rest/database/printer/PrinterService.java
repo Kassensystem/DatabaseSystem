@@ -1,4 +1,4 @@
-package dhbw.sa.kassensystem_rest.printer;
+package dhbw.sa.kassensystem_rest.database.printer;
 
 
 import dhbw.sa.kassensystem_rest.database.Gastronomy;
@@ -33,9 +33,9 @@ public class PrinterService {
 
     /**
      * Druckt über einen formatierten Text die Bestellung aus.
-     * @param order die zu druckende Bestellung.
-     * @param allItems alle Items aus der Datenbank, aus denen die erforderlichen Informationen erhalten weren.
-     * @param allTables alle Tische aus der Datenbank, aus denen die erforderlichen Informationen erhalten weren.
+     * @param order Die zu druckende Bestellung.
+     * @param allItems Alle Items aus der Datenbank, aus denen die erforderlichen Informationen erhalten weren.
+     * @param allTables Alle Tische aus der Datenbank, aus denen die erforderlichen Informationen erhalten weren.
      * @param kitchenReceipt Indikator, ob es sich um einen Küchen- oder Kundenbeleg handelt.
      */
     public void printOrder(Order order, ArrayList<Item> allItems, ArrayList<Table> allTables, boolean kitchenReceipt) {
