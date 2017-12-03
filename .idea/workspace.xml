@@ -10,9 +10,63 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="776fb8f0-9a4c-4f54-9c91-bf08f53f8a96" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/artifacts/kassensystem_database_jar/kassensystem_database.jar" afterPath="$PROJECT_DIR$/out/artifacts/kassensystem_database_jar/kassensystem_database.jar" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/artifacts/kassensystem_database_jar.xml" afterPath="$PROJECT_DIR$/.idea/artifacts/kassensystem_database_jar.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/allclasses-frame.html" afterPath="$PROJECT_DIR$/docs/allclasses-frame.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/allclasses-noframe.html" afterPath="$PROJECT_DIR$/docs/allclasses-noframe.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/constant-values.html" afterPath="$PROJECT_DIR$/docs/constant-values.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/deprecated-list.html" afterPath="$PROJECT_DIR$/docs/deprecated-list.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/dhbw/sa/kassensystem_rest/Main.html" afterPath="$PROJECT_DIR$/docs/dhbw/sa/kassensystem_rest/Main.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/dhbw/sa/kassensystem_rest/database/DatabaseService.html" afterPath="$PROJECT_DIR$/docs/dhbw/sa/kassensystem_rest/database/DatabaseService.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/dhbw/sa/kassensystem_rest/database/DatabaseService_Interface.html" afterPath="$PROJECT_DIR$/docs/dhbw/sa/kassensystem_rest/database/DatabaseService_Interface.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/dhbw/sa/kassensystem_rest/database/Gastronomy.html" afterPath="$PROJECT_DIR$/docs/dhbw/sa/kassensystem_rest/database/Gastronomy.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/dhbw/sa/kassensystem_rest/database/entity/Item.html" afterPath="$PROJECT_DIR$/docs/dhbw/sa/kassensystem_rest/database/entity/Item.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/dhbw/sa/kassensystem_rest/database/entity/Itemdelivery.html" afterPath="$PROJECT_DIR$/docs/dhbw/sa/kassensystem_rest/database/entity/Itemdelivery.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/dhbw/sa/kassensystem_rest/database/entity/Order.html" afterPath="$PROJECT_DIR$/docs/dhbw/sa/kassensystem_rest/database/entity/Order.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/dhbw/sa/kassensystem_rest/database/entity/Table.html" afterPath="$PROJECT_DIR$/docs/dhbw/sa/kassensystem_rest/database/entity/Table.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/dhbw/sa/kassensystem_rest/database/entity/package-frame.html" afterPath="$PROJECT_DIR$/docs/dhbw/sa/kassensystem_rest/database/entity/package-frame.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/dhbw/sa/kassensystem_rest/database/entity/package-summary.html" afterPath="$PROJECT_DIR$/docs/dhbw/sa/kassensystem_rest/database/entity/package-summary.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/dhbw/sa/kassensystem_rest/database/entity/package-tree.html" afterPath="$PROJECT_DIR$/docs/dhbw/sa/kassensystem_rest/database/entity/package-tree.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/dhbw/sa/kassensystem_rest/database/package-frame.html" afterPath="$PROJECT_DIR$/docs/dhbw/sa/kassensystem_rest/database/package-frame.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/dhbw/sa/kassensystem_rest/database/package-summary.html" afterPath="$PROJECT_DIR$/docs/dhbw/sa/kassensystem_rest/database/package-summary.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/dhbw/sa/kassensystem_rest/database/package-tree.html" afterPath="$PROJECT_DIR$/docs/dhbw/sa/kassensystem_rest/database/package-tree.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/dhbw/sa/kassensystem_rest/exceptions/DataException.html" afterPath="$PROJECT_DIR$/docs/dhbw/sa/kassensystem_rest/exceptions/DataException.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/dhbw/sa/kassensystem_rest/exceptions/MySQLServerConnectionException.html" afterPath="$PROJECT_DIR$/docs/dhbw/sa/kassensystem_rest/exceptions/MySQLServerConnectionException.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/dhbw/sa/kassensystem_rest/exceptions/NoContentException.html" afterPath="$PROJECT_DIR$/docs/dhbw/sa/kassensystem_rest/exceptions/NoContentException.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/dhbw/sa/kassensystem_rest/exceptions/OrderNotFoundException.html" afterPath="$PROJECT_DIR$/docs/dhbw/sa/kassensystem_rest/exceptions/OrderNotFoundException.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/dhbw/sa/kassensystem_rest/exceptions/package-frame.html" afterPath="$PROJECT_DIR$/docs/dhbw/sa/kassensystem_rest/exceptions/package-frame.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/dhbw/sa/kassensystem_rest/exceptions/package-summary.html" afterPath="$PROJECT_DIR$/docs/dhbw/sa/kassensystem_rest/exceptions/package-summary.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/dhbw/sa/kassensystem_rest/exceptions/package-tree.html" afterPath="$PROJECT_DIR$/docs/dhbw/sa/kassensystem_rest/exceptions/package-tree.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/dhbw/sa/kassensystem_rest/package-frame.html" afterPath="$PROJECT_DIR$/docs/dhbw/sa/kassensystem_rest/package-frame.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/dhbw/sa/kassensystem_rest/package-summary.html" afterPath="$PROJECT_DIR$/docs/dhbw/sa/kassensystem_rest/package-summary.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/dhbw/sa/kassensystem_rest/package-tree.html" afterPath="$PROJECT_DIR$/docs/dhbw/sa/kassensystem_rest/package-tree.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/dhbw/sa/kassensystem_rest/restApi/client/RestApiClient.html" afterPath="$PROJECT_DIR$/docs/dhbw/sa/kassensystem_rest/restApi/client/RestApiClient.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/dhbw/sa/kassensystem_rest/restApi/client/package-frame.html" afterPath="$PROJECT_DIR$/docs/dhbw/sa/kassensystem_rest/restApi/client/package-frame.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/dhbw/sa/kassensystem_rest/restApi/client/package-summary.html" afterPath="$PROJECT_DIR$/docs/dhbw/sa/kassensystem_rest/restApi/client/package-summary.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/dhbw/sa/kassensystem_rest/restApi/client/package-tree.html" afterPath="$PROJECT_DIR$/docs/dhbw/sa/kassensystem_rest/restApi/client/package-tree.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/dhbw/sa/kassensystem_rest/restApi/controller/RestApiController.html" afterPath="$PROJECT_DIR$/docs/dhbw/sa/kassensystem_rest/restApi/controller/RestApiController.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/dhbw/sa/kassensystem_rest/restApi/controller/package-frame.html" afterPath="$PROJECT_DIR$/docs/dhbw/sa/kassensystem_rest/restApi/controller/package-frame.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/dhbw/sa/kassensystem_rest/restApi/controller/package-summary.html" afterPath="$PROJECT_DIR$/docs/dhbw/sa/kassensystem_rest/restApi/controller/package-summary.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/dhbw/sa/kassensystem_rest/restApi/controller/package-tree.html" afterPath="$PROJECT_DIR$/docs/dhbw/sa/kassensystem_rest/restApi/controller/package-tree.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/help-doc.html" afterPath="$PROJECT_DIR$/docs/help-doc.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/index-files/index-1.html" afterPath="$PROJECT_DIR$/docs/index-files/index-1.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/index-files/index-10.html" afterPath="$PROJECT_DIR$/docs/index-files/index-10.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/index-files/index-11.html" afterPath="$PROJECT_DIR$/docs/index-files/index-11.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/index-files/index-12.html" afterPath="$PROJECT_DIR$/docs/index-files/index-12.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/index-files/index-13.html" afterPath="$PROJECT_DIR$/docs/index-files/index-13.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/index-files/index-14.html" afterPath="$PROJECT_DIR$/docs/index-files/index-14.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/index-files/index-2.html" afterPath="$PROJECT_DIR$/docs/index-files/index-2.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/index-files/index-3.html" afterPath="$PROJECT_DIR$/docs/index-files/index-3.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/index-files/index-4.html" afterPath="$PROJECT_DIR$/docs/index-files/index-4.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/index-files/index-5.html" afterPath="$PROJECT_DIR$/docs/index-files/index-5.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/index-files/index-6.html" afterPath="$PROJECT_DIR$/docs/index-files/index-6.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/index-files/index-7.html" afterPath="$PROJECT_DIR$/docs/index-files/index-7.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/index-files/index-8.html" afterPath="$PROJECT_DIR$/docs/index-files/index-8.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/index-files/index-9.html" afterPath="$PROJECT_DIR$/docs/index-files/index-9.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/index.html" afterPath="$PROJECT_DIR$/docs/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/overview-frame.html" afterPath="$PROJECT_DIR$/docs/overview-frame.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/overview-summary.html" afterPath="$PROJECT_DIR$/docs/overview-summary.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/overview-tree.html" afterPath="$PROJECT_DIR$/docs/overview-tree.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/package-list" afterPath="$PROJECT_DIR$/docs/package-list" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/serialized-form.html" afterPath="$PROJECT_DIR$/docs/serialized-form.html" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -54,8 +108,6 @@
               <folding>
                 <element signature="docComment;class#RestApiController#0" expanded="false" />
                 <element signature="e#890#905#0" expanded="false" />
-                <element signature="e#1642#1643#0" expanded="true" />
-                <element signature="e#1695#1696#0" expanded="true" />
                 <element signature="method#updateOrder#0;class#RestApiController#0" expanded="false" />
               </folding>
             </state>
@@ -282,6 +334,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
+      <pane id="AndroidView" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -424,10 +478,8 @@
           <select />
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
       <pane id="Scratches" />
-      <pane id="AndroidView" />
-      <pane id="Scope" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -794,6 +846,7 @@
       <workItem from="1512252097725" duration="1129000" />
       <workItem from="1512325484638" duration="1551000" />
       <workItem from="1512327561042" duration="31000" />
+      <workItem from="1512329694494" duration="52000" />
     </task>
     <task id="LOCAL-00001" summary="Client hinzugefügt">
       <created>1509897940236</created>
@@ -838,7 +891,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="301971000" />
+    <option name="totallyTimeSpent" value="302023000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -851,30 +904,32 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1066" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.16666667" sideWeight="0.5154584" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3903177" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.44310722" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.48817205" sideWeight="0.6977612" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32903227" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Java Enterprise" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.16666667" sideWeight="0.5154584" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3903177" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.21075268" sideWeight="0.48454157" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.21505377" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Spring" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
-      <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.23560767" sideWeight="0.49346405" order="0" side_tool="false" content_ui="combo" x="507" y="60" width="352" height="618" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.23827292" sideWeight="0.49346405" order="0" side_tool="false" content_ui="combo" x="507" y="60" width="352" height="618" />
       <window_info id="Bean Validation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.15724947" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.36263737" sideWeight="0.50653595" order="5" side_tool="true" content_ui="tabs" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.44310722" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.26666668" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.48817205" sideWeight="0.6977612" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -884,7 +939,6 @@
       <window_info id="Inspection Results" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.30537635" sideWeight="0.5" order="14" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25442833" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.26666668" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -1223,7 +1277,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="170">
           <caret line="11" column="13" lean-forward="false" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1231,7 +1284,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="170">
           <caret line="11" column="23" lean-forward="false" selection-start-line="11" selection-start-column="23" selection-end-line="11" selection-end-column="23" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1391,8 +1443,6 @@
           <folding>
             <element signature="docComment;class#RestApiController#0" expanded="false" />
             <element signature="e#890#905#0" expanded="false" />
-            <element signature="e#1642#1643#0" expanded="true" />
-            <element signature="e#1695#1696#0" expanded="true" />
             <element signature="method#updateOrder#0;class#RestApiController#0" expanded="false" />
           </folding>
         </state>

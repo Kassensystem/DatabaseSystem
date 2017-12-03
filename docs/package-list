@@ -1,7 +1,7 @@
 dhbw.sa.kassensystem_rest
 dhbw.sa.kassensystem_rest.database
 dhbw.sa.kassensystem_rest.database.entity
-dhbw.sa.kassensystem_rest.exceptions
 dhbw.sa.kassensystem_rest.database.printer
+dhbw.sa.kassensystem_rest.exceptions
 dhbw.sa.kassensystem_rest.restApi.client
 dhbw.sa.kassensystem_rest.restApi.controller
