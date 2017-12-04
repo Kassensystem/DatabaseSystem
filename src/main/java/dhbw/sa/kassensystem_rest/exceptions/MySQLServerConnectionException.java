@@ -8,10 +8,10 @@ import org.springframework.web.bind.annotation.ResponseStatus;
  *
  * @author Marvin Mai
  */
-@ResponseStatus(value= HttpStatus.NOT_FOUND, reason="Verbindung zur Datenbank fehlgeschlagen!")
+@ResponseStatus(value= HttpStatus.NOT_FOUND)
 public class MySQLServerConnectionException extends RuntimeException{
 
     public MySQLServerConnectionException() {
-
+        super("Verbindung zur Datenbank fehlgeschlagen!");
     }
 }

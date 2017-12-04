@@ -24,7 +24,8 @@ public class DatabaseService_Test {
 
     public static void main(String[] args) {
 
-        dbs.printOrderById(45);
+        Order order = new Order(5, "1;2;3;", 3, 3.33, DateTime.now(), false);
+        System.out.println(order.getOrderID());
 
     }
 

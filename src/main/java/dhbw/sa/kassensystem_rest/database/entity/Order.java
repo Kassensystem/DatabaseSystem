@@ -84,6 +84,7 @@ public class Order {
         this.date = date;
         this.paid = paid;
     }
+
     public Order(String itemIDs, int tableID, double price, boolean paid) {
 
         if(itemIDs == null)

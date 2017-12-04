@@ -74,6 +74,8 @@ public class DatabaseService implements DatabaseService_Interface{
     public ArrayList<Item> getAllItems() throws MySQLServerConnectionException {
         this.items.clear();
 
+        checkConnection();
+
         logInf("Getting Items from MySQL-Database.");
 
         this.itemdeliveries = this.getAllItemdeliveries();
@@ -101,12 +103,15 @@ public class DatabaseService implements DatabaseService_Interface{
             return this.items;
         } catch (SQLException e) {
             e.printStackTrace();
+            this.connect();
             throw new MySQLServerConnectionException();
         }
     }
     @Override
     public ArrayList<Table> getAllTables() throws MySQLServerConnectionException {
         this.tables.clear();
+
+        checkConnection();
 
         logInf("Getting Tables from MySQL-Database.");
 
@@ -126,12 +131,15 @@ public class DatabaseService implements DatabaseService_Interface{
             return this.tables;
         } catch (SQLException e) {
             e.printStackTrace();
+            this.connect();
             throw new MySQLServerConnectionException();
         }
     }
     @Override
     public ArrayList<Order> getAllOrders() throws MySQLServerConnectionException  {
         this.orders.clear();
+
+        checkConnection();
 
         logInf("Getting Orders from MySQL-Database.");
 
@@ -155,12 +163,15 @@ public class DatabaseService implements DatabaseService_Interface{
             return this.orders;
         } catch (SQLException e) {
             e.printStackTrace();
+            this.connect();
             throw new MySQLServerConnectionException();
         }
     }
     @Override
     public ArrayList<Itemdelivery> getAllItemdeliveries() throws MySQLServerConnectionException {
         this.itemdeliveries.clear();
+
+        checkConnection();
 
         logInf("Getting Itemdeliveries from MySQL-Database.");
 
@@ -180,6 +191,7 @@ public class DatabaseService implements DatabaseService_Interface{
             return this.itemdeliveries;
         } catch (SQLException e) {
             e.printStackTrace();
+            this.connect();
             throw new MySQLServerConnectionException();
         }
     }
@@ -271,6 +283,8 @@ public class DatabaseService implements DatabaseService_Interface{
     @Override
     public void addItem(Item item) throws MySQLServerConnectionException, DataException {
 
+        checkConnection();
+
         logInf("Adding Item to MySQL-Database.");
 
         this.items = this.getAllItems();
@@ -312,11 +326,14 @@ public class DatabaseService implements DatabaseService_Interface{
             addItemdelivery(itemdelivery);
         } catch(SQLException e) {
             e.printStackTrace();
+            this.connect();
             throw new MySQLServerConnectionException();
         }
     }
     @Override
     public void addTable(Table table) throws MySQLServerConnectionException, DataException {
+
+        checkConnection();
 
         logInf("Adding Table to MySQL-Database.");
 
@@ -340,11 +357,14 @@ public class DatabaseService implements DatabaseService_Interface{
             pst.executeUpdate();
         } catch(SQLException e) {
             e.printStackTrace();
+            this.connect();
             throw new MySQLServerConnectionException();
         }
     }
     @Override
     public void addOrder(Order order) throws MySQLServerConnectionException, DataException {
+
+        checkConnection();
 
         logInf("Adding Order to MySQL-Database.");
 
@@ -380,12 +400,15 @@ public class DatabaseService implements DatabaseService_Interface{
             pst.executeUpdate();
         } catch(SQLException e) {
             e.printStackTrace();
+            this.connect();
             throw new MySQLServerConnectionException();
         }
     }
     @Override
     public void addItemdelivery(Itemdelivery itemdelivery) throws MySQLServerConnectionException,
             DataException {
+
+        checkConnection();
 
         logInf("Adding Itemdelivery to MySQL-Database.");
 
@@ -409,6 +432,7 @@ public class DatabaseService implements DatabaseService_Interface{
             pst.executeUpdate();
         } catch(SQLException e) {
             e.printStackTrace();
+            this.connect();
             throw new MySQLServerConnectionException();
         }
     }
@@ -417,6 +441,8 @@ public class DatabaseService implements DatabaseService_Interface{
     @Override
     public void updateItem(int itemID, Item item) throws NullPointerException, DataException,
             MySQLServerConnectionException {
+
+        checkConnection();
 
         logInf("Updating Item with ID " + itemID + ".");
 
@@ -447,12 +473,15 @@ public class DatabaseService implements DatabaseService_Interface{
             pst.executeUpdate();
         } catch(SQLException e) {
             e.printStackTrace();
+            this.connect();
             throw new MySQLServerConnectionException();
         }
     }
     @Override
     public void updateTable(int tableID, Table table) throws NullPointerException, DataException,
             MySQLServerConnectionException {
+
+        checkConnection();
 
         logInf("Updating Table with ID " + tableID + ".");
 
@@ -482,12 +511,15 @@ public class DatabaseService implements DatabaseService_Interface{
             pst.executeUpdate();
         } catch(SQLException e) {
             e.printStackTrace();
+            this.connect();
             throw new MySQLServerConnectionException();
         }
     }
     @Override
     public void updateOrder(int orderID, Order order) throws NullPointerException, DataException,
             MySQLServerConnectionException {
+
+        checkConnection();
 
         logInf("Updating Order with ID " + orderID + ".");
 
@@ -521,7 +553,8 @@ public class DatabaseService implements DatabaseService_Interface{
         Order newOrder = order;
         Order diffOrder = getDiffOrder(oldOrder, newOrder);
 
-        printOrder(diffOrder, true);
+        if(!diffOrder.getItems().equals(""))
+            printOrder(diffOrder, true);
 
         try {
             String query =  "UPDATE " + dbp.getDatabase() + ".orders " +
@@ -537,6 +570,7 @@ public class DatabaseService implements DatabaseService_Interface{
             pst.executeUpdate();
         } catch(SQLException e) {
             e.printStackTrace();
+            this.connect();
             throw new MySQLServerConnectionException();
         }
     }
@@ -596,6 +630,7 @@ public class DatabaseService implements DatabaseService_Interface{
             pst.executeUpdate();
         } catch(SQLException e) {
             e.printStackTrace();
+            this.connect();
             throw new MySQLServerConnectionException();
         }
     }
@@ -622,6 +657,7 @@ public class DatabaseService implements DatabaseService_Interface{
             pst.executeUpdate();
         } catch(SQLException e) {
             e.printStackTrace();
+            this.connect();
             throw new MySQLServerConnectionException();
         }
     }
@@ -967,5 +1003,12 @@ public class DatabaseService implements DatabaseService_Interface{
         }
         String logString = DateTime.now().toString("yyyy-MM-dd kk:mm:ss.SSS") + "  " + messageStatus + " " + message;
         System.out.println(logString);
+    }
+
+    private void checkConnection() {
+        try {
+            if(connection.isClosed())
+                this.connect();
+        } catch (SQLException e) {}
     }
 }
