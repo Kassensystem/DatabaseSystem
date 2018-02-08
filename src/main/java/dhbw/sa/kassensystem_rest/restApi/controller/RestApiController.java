@@ -1,11 +1,10 @@
 package dhbw.sa.kassensystem_rest.restApi.controller;
 
-import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
 import dhbw.sa.kassensystem_rest.database.DatabaseService;
+import dhbw.sa.kassensystem_rest.database.entity.Category;
 import dhbw.sa.kassensystem_rest.database.entity.Item;
 import dhbw.sa.kassensystem_rest.database.entity.Order;
 import dhbw.sa.kassensystem_rest.database.entity.Table;
-import dhbw.sa.kassensystem_rest.exceptions.DataException;
 import dhbw.sa.kassensystem_rest.exceptions.MySQLServerConnectionException;
 import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,8 +16,6 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * Der RestApiController stellt einen Server dar, über den Funktionen des DatabaseServices angesprochen werden können.
@@ -62,6 +59,12 @@ public class RestApiController {
     @RequestMapping("/tables")
     public ArrayList<Table> getAllTables() {
         return databaseService.getAllTables();
+    }
+
+    @RequestMapping("/categories")
+    public ArrayList<Category> getAllCategories() {
+        // TODO
+        return null;
     }
 
     /*POST/PUT*/

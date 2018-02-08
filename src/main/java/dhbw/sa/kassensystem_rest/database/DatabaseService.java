@@ -1,9 +1,6 @@
 package dhbw.sa.kassensystem_rest.database;
 
-import dhbw.sa.kassensystem_rest.database.entity.Item;
-import dhbw.sa.kassensystem_rest.database.entity.Itemdelivery;
-import dhbw.sa.kassensystem_rest.database.entity.Order;
-import dhbw.sa.kassensystem_rest.database.entity.Table;
+import dhbw.sa.kassensystem_rest.database.entity.*;
 import dhbw.sa.kassensystem_rest.exceptions.DataException;
 import dhbw.sa.kassensystem_rest.exceptions.MySQLServerConnectionException;
 import dhbw.sa.kassensystem_rest.database.printer.PrinterService;
@@ -194,6 +191,11 @@ public class DatabaseService implements DatabaseService_Interface{
             this.connect();
             throw new MySQLServerConnectionException();
         }
+    }
+    @Override
+    public ArrayList<Category> getAllCategories() {
+        // TODO
+        return null;
     }
 
     //Datenbankinhalte mit Angabe der ID erhalten
