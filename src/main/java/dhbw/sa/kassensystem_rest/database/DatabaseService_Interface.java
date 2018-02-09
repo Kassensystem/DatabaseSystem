@@ -1,9 +1,6 @@
 package dhbw.sa.kassensystem_rest.database;
 
-import dhbw.sa.kassensystem_rest.database.entity.Item;
-import dhbw.sa.kassensystem_rest.database.entity.Itemdelivery;
-import dhbw.sa.kassensystem_rest.database.entity.Order;
-import dhbw.sa.kassensystem_rest.database.entity.Table;
+import dhbw.sa.kassensystem_rest.database.entity.*;
 import dhbw.sa.kassensystem_rest.exceptions.DataException;
 import dhbw.sa.kassensystem_rest.exceptions.MySQLServerConnectionException;
 
@@ -58,6 +55,8 @@ public interface DatabaseService_Interface {
      * @return Wareneingaenge der Datenbank.
      */
     ArrayList<Itemdelivery> getAllItemdeliveries();
+
+    ArrayList<Category> getAllCategories();
 
     /**
      * Liefert eine Bestellung in Abhängigkeit von einer ID.
