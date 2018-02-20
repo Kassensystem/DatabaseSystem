@@ -192,6 +192,11 @@ public class DatabaseService implements DatabaseService_Interface{
             throw new MySQLServerConnectionException();
         }
     }
+    @Override
+    public ArrayList<OrderedItem> getAllOrderedItems() {
+        // TODO
+        return null;
+    }
 
     //Datenbankinhalte mit Angabe der ID erhalten
     public Order getOrderById(int orderID) throws NullPointerException {

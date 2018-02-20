@@ -3,6 +3,7 @@ package dhbw.sa.kassensystem_rest.restApi.controller;
 import dhbw.sa.kassensystem_rest.database.DatabaseService;
 import dhbw.sa.kassensystem_rest.database.entity.Item;
 import dhbw.sa.kassensystem_rest.database.entity.Order;
+import dhbw.sa.kassensystem_rest.database.entity.OrderedItem;
 import dhbw.sa.kassensystem_rest.database.entity.Table;
 import dhbw.sa.kassensystem_rest.exceptions.MySQLServerConnectionException;
 import org.joda.time.DateTime;
@@ -60,10 +61,9 @@ public class RestApiController {
         return databaseService.getAllTables();
     }
 
-    @RequestMapping("/categories")
-    public ArrayList<Category> getAllCategories() {
-        // TODO
-        return null;
+    @RequestMapping("/orderedItems")
+    public ArrayList<OrderedItem> getAllOrderedItems() {
+        return databaseService.getAllOrderedItems();
     }
 
     /*POST/PUT*/
@@ -76,9 +76,12 @@ public class RestApiController {
     @RequestMapping(value = "/order/", method = RequestMethod.POST)
     public ResponseEntity<?> createOrder(@RequestBody Order order) {
         try {
+            // TODO Rückgabe
             order.setDate(DateTime.now());
             databaseService.addOrder(order);
-            return new ResponseEntity(HttpStatus.OK);
+            // TODO Method für das Ermitteln der letzten hinzugefügten OrderID
+            int lastOrderID = 87;
+            return new ResponseEntity(lastOrderID, HttpStatus.OK);
         } catch (Exception e) {
             e.printStackTrace();
             ResponseEntity<?> response = new ResponseEntity(e.getMessage(), HttpStatus.NOT_FOUND);

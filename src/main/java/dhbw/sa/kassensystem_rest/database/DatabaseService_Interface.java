@@ -56,6 +56,12 @@ public interface DatabaseService_Interface {
      */
     ArrayList<Itemdelivery> getAllItemdeliveries();
 
+    /**
+     * TODO
+     * @return
+     */
+    ArrayList<OrderedItem> getAllOrderedItems();
+
 
     /**
      * Liefert eine Bestellung in Abhängigkeit von einer ID.
