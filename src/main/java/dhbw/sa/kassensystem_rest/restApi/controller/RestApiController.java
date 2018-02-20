@@ -1,7 +1,6 @@
 package dhbw.sa.kassensystem_rest.restApi.controller;
 
 import dhbw.sa.kassensystem_rest.database.DatabaseService;
-import dhbw.sa.kassensystem_rest.database.entity.Category;
 import dhbw.sa.kassensystem_rest.database.entity.Item;
 import dhbw.sa.kassensystem_rest.database.entity.Order;
 import dhbw.sa.kassensystem_rest.database.entity.Table;

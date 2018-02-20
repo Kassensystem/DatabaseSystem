@@ -56,7 +56,6 @@ public interface DatabaseService_Interface {
      */
     ArrayList<Itemdelivery> getAllItemdeliveries();
 
-    ArrayList<Category> getAllCategories();
 
     /**
      * Liefert eine Bestellung in Abhängigkeit von einer ID.

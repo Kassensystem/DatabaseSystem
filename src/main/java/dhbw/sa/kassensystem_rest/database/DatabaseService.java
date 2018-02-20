@@ -192,11 +192,6 @@ public class DatabaseService implements DatabaseService_Interface{
             throw new MySQLServerConnectionException();
         }
     }
-    @Override
-    public ArrayList<Category> getAllCategories() {
-        // TODO
-        return null;
-    }
 
     //Datenbankinhalte mit Angabe der ID erhalten
     public Order getOrderById(int orderID) throws NullPointerException {
