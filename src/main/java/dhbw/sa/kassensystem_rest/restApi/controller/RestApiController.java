@@ -60,12 +60,6 @@ public class RestApiController {
         return databaseService.getAllTables();
     }
 
-    @RequestMapping("/categories")
-    public ArrayList<Category> getAllCategories() {
-        // TODO
-        return null;
-    }
-
     /*POST/PUT*/
 
     /**
