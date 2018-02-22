@@ -34,6 +34,7 @@ public class DatabaseService implements DatabaseService_Interface{
     private Connection connection = null;
 
     private ArrayList<Item> items = new ArrayList<>();
+    private ArrayList<OrderedItem> orderedItems = new ArrayList<>();
     private ArrayList<Table> tables = new ArrayList<>();
     private ArrayList<Order> orders = new ArrayList<>();
     private ArrayList<Itemdelivery> itemdeliveries = new ArrayList<>();
@@ -141,21 +142,20 @@ public class DatabaseService implements DatabaseService_Interface{
         logInf("Getting Orders from MySQL-Database.");
 
         try {
-            String query = "SELECT orderID, itemIDs, price, date, tableID, paid " +
+            String query = "SELECT orderID, price, date, tableID, paid " +
                     "FROM " + dbp.getDatabase() + ".orders";
             PreparedStatement pst = connection.prepareStatement(query);
             ResultSet rs = pst.executeQuery();
 
             while(rs.next()) {
                 int orderID = rs.getInt("orderID");
-                String itemIdString = rs.getString("itemIDs");
                 int tableID = rs.getInt("tableID");
                 double price = rs.getFloat("price");
                 price = round(price);
                 DateTime dateTime = convertSqlTimestampToJodaDateTime(rs.getTimestamp("date"));
                 boolean paid = rs.getBoolean("paid");
 
-                this.orders.add(new Order(orderID, itemIdString, tableID, price, dateTime, paid));
+                this.orders.add(new Order(orderID, tableID, price, dateTime, paid));
             }
             return this.orders;
         } catch (SQLException e) {
@@ -390,15 +390,14 @@ public class DatabaseService implements DatabaseService_Interface{
             printOrder(order, true);
 
         try {
-            String query =  "INSERT INTO " + dbp.getDatabase() + ".orders(orderID, itemIDs, price, date, tableID, paid)" +
+            String query =  "INSERT INTO " + dbp.getDatabase() + ".orders(orderID, price, date, tableID, paid)" +
                             "VALUES(DEFAULT, ?, ?, ?, ?, ?)";
             PreparedStatement pst = connection.prepareStatement(query);
 
-            pst.setString(1, order.getItems());
-            pst.setDouble(2, order.getPrice());
-            pst.setObject(3, convertJodaDateTimeToSqlTimestamp(order.getDate()) );
-            pst.setInt(4, order.getTable());
-            pst.setBoolean(5, order.isPaid());
+            pst.setDouble(1, order.getPrice());
+            pst.setObject(2, convertJodaDateTimeToSqlTimestamp(order.getDate()) );
+            pst.setInt(3, order.getTable());
+            pst.setBoolean(4, order.isPaid());
             pst.executeUpdate();
         } catch(SQLException e) {
             e.printStackTrace();
@@ -546,29 +545,25 @@ public class DatabaseService implements DatabaseService_Interface{
         if(this.getOrderById(orderID) == null)
             throw new DataException("Bestellung mit der ID " + orderID + " existiert nicht!");
 
-        if(order.isPaid())
+        /*if(order.isPaid())
             //Kundenbeleg ausdrucken, wenn bezahlt wird
-            printOrder(order, false);
+            printOrder(order, false);*/
 
         //Bei jedem Update die Differenz zur bisherigen Bestellung erkennen und in einem Kuechenbeleg ausdrucken
-        Order oldOrder = this.getOrderById(orderID);
-        Order newOrder = order;
-        Order diffOrder = getDiffOrder(oldOrder, newOrder);
-
-        if(!diffOrder.getItems().equals(""))
-            printOrder(diffOrder, true);
+        // TODO Ausdrucken der DifferenzOrder auf neues System anpassen
+        // Das Ausdrucken passiert nun beim Hinzufügen von orderedItems. Dabei wird eine Liste von orderedItems
+        // übertragen. Anschließend werden diese Übertragenen Items ausgedruckt.
 
         try {
             String query =  "UPDATE " + dbp.getDatabase() + ".orders " +
-                            "SET itemIDs = ?, price = ?, date = ?, tableID = ?, paid = ? " +
+                            "SET price = ?, date = ?, tableID = ?, paid = ? " +
                             "WHERE orderID = " + orderID;
             PreparedStatement pst = connection.prepareStatement(query);
 
-            pst.setString(1, order.getItems());
-            pst.setDouble(2, order.getPrice());
-            pst.setObject(3, convertJodaDateTimeToSqlTimestamp(order.getDate()) );
-            pst.setInt(4, order.getTable());
-            pst.setBoolean(5, order.isPaid());
+            pst.setDouble(1, order.getPrice());
+            pst.setObject(2, convertJodaDateTimeToSqlTimestamp(order.getDate()) );
+            pst.setInt(3, order.getTable());
+            pst.setBoolean(4, order.isPaid());
             pst.executeUpdate();
         } catch(SQLException e) {
             e.printStackTrace();
@@ -692,10 +687,6 @@ public class DatabaseService implements DatabaseService_Interface{
 
         String missingAttributs = "";
 
-        if(order.getItems() == null || order.getItems().equals("")) {
-            missingAttributs += "Artikel ";
-            logErr("Item-IDs missing.");
-        }
         if(order.getTable() == 0) {
             missingAttributs += "Tisch ";
             logErr("Table-ID missing.");
@@ -706,11 +697,6 @@ public class DatabaseService implements DatabaseService_Interface{
             throw new DataException("Die Bestellung ist unvollständig! Die folgenden Parameter fehlen: " + missingAttributs);
         }
 
-        if(!itemIDsAvailable(order)) {
-            logErr("One or multiple Item-IDs do not exist in the database!");
-            logErr("Order was not added to the Database!");
-            throw new DataException("Eine oder mehrere angegebene Artikel-IDs existieren nicht in der Datenbank.");
-        }
         if(!tableIsAvailable(order.getTable(), this.tables)) {
             logErr("The Table-ID does not exist in the database!");
             logErr("Order was not added to the database!");
@@ -788,21 +774,6 @@ public class DatabaseService implements DatabaseService_Interface{
 
     }
 
-    //Überprüfen ob ein Datenbankeintrag mit einer vorgegebenen ID existiert
-    private boolean itemIDsAvailable(Order newOrder) {
-        this.items = this.getAllItems();
-        ArrayList<Item> orderItems = newOrder.getItems(this.items);
-
-        for(Item orderItem: orderItems) {
-
-            if(!(orderItem == null) && itemIsAvailable(orderItem.getItemID(), this.items))
-                continue;
-            else {
-                return false;
-            }
-        }
-        return true;
-    }
     private boolean itemIsAvailable(int itemID, ArrayList<Item> items) {
         for(Item i: items) {
             if(i.getItemID() == itemID)
@@ -840,7 +811,7 @@ public class DatabaseService implements DatabaseService_Interface{
      */
     private void printOrder(Order order, boolean kitchenReceipt) {
         PrinterService printerService = new PrinterService();
-        printerService.printOrder(order,  this.items, this.tables, kitchenReceipt);
+        printerService.printOrder(order,  this.items, this.orderedItems, this.tables, kitchenReceipt);
     }
 
     /**
@@ -857,12 +828,9 @@ public class DatabaseService implements DatabaseService_Interface{
         }
         //Ermitteln der Warenausgaenge
         int itemorders = 0;
-        for(Order o: this.orders) {
-            for(Item i: o.getItems(this.itemsWithoutQuantity)) {
-                if(i.getItemID() == itemID)
-                    itemorders++;
-            }
-        }
+        // TODO berechnung der Warenausgänge implementieren
+
+
         return itemdeliveries - itemorders;
     }
 
@@ -891,57 +859,6 @@ public class DatabaseService implements DatabaseService_Interface{
             e.printStackTrace();
         }
         return null;
-    }
-
-    /**
-     * Ermittelt die hinzugefuegten Items von einer neuen Order im Vergleich zu einer alten.
-     * @param oldOrder die alte Order.
-     * @param newOrder die neue Order, die die alte ersetzt.
-     * @return Order, die diejenigen Items beinhaltet, die in der neuen Order hinzugefuegt wurden.
-     */
-    private static Order getDiffOrder(Order oldOrder, Order newOrder) {
-        int orderID = oldOrder.getOrderID();
-        int tableID = oldOrder.getTable();
-        double price = newOrder.getPrice();
-        DateTime date = newOrder.getDate();
-        boolean paid = newOrder.isPaid();
-
-        String itemIDs = "";
-        ArrayList<Integer> oldItemIDs = Order.splitItemIDString(oldOrder.getItems());
-        ArrayList<Integer> newItemIDs = Order.splitItemIDString(newOrder.getItems());
-        ArrayList<Integer> addedItemIDs = new ArrayList<>();
-        ArrayList<Integer> removedItemIDs = new ArrayList<>();
-
-        ArrayList<Integer> allItemIDs = new ArrayList<>();
-        allItemIDs.addAll(oldItemIDs);
-        allItemIDs.addAll(newItemIDs);
-
-        ArrayList<Integer> alreadyCheckedItemIDs = new ArrayList<>();
-        for(Integer id: allItemIDs) {
-            if(!alreadyCheckedItemIDs.contains(id)) {
-                // Wenn die aktuelle itemID noch nicht ueberprueft wurde,
-                // diese den bereits ueberprueften hinzufuegen
-                alreadyCheckedItemIDs.add(id);
-                // Ermitteln, wie oft die gerade untersuchte id in den alten ids vorkommt
-                int oldQuantity = getItemQuantity(id, oldItemIDs);
-                int newQuantity = getItemQuantity(id, newItemIDs);
-                int diffQuantity = newQuantity - oldQuantity;
-                if (diffQuantity > 0) {
-                    // Es wurden von der aktuell untersuchten id welche hinzugefuegt
-                    for(int i = 0; i < diffQuantity; i++) {
-                        addedItemIDs.add(id);
-                    }
-                } else if(diffQuantity < 0) {
-                    // Es wurden von der aktuell untersuchten id welche erntfernt
-                    for(int i = 0; i < -diffQuantity; i++) {
-                        removedItemIDs.add(id);
-                    }
-                }
-            }
-        }
-        itemIDs = Order.joinIntIDsIntoString(addedItemIDs);
-
-        return new Order(orderID, itemIDs, tableID, price, date, paid);
     }
 
     /**

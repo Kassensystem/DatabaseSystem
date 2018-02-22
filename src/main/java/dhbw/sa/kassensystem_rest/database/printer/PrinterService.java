@@ -4,6 +4,7 @@ package dhbw.sa.kassensystem_rest.database.printer;
 import dhbw.sa.kassensystem_rest.database.Gastronomy;
 import dhbw.sa.kassensystem_rest.database.entity.Item;
 import dhbw.sa.kassensystem_rest.database.entity.Order;
+import dhbw.sa.kassensystem_rest.database.entity.OrderedItem;
 import dhbw.sa.kassensystem_rest.database.entity.Table;
 
 import javax.print.*;
@@ -27,19 +28,18 @@ import java.util.ArrayList;
 
 public class PrinterService {
 
-    //TODO Ergänzen eines Datensatzes in der Datenbank, um Druckernamen einstellbar zu machen
     /** @param printerName Name des Druckers, wie er im Betriebssystem angezeigt wird.*/
     private final String printerName = "EPSON TM-T88V Receipt";
 
     /**
      * Druckt über einen formatierten Text die Bestellung aus.
      * @param order Die zu druckende Bestellung.
-     * @param allItems Alle Items aus der Datenbank, aus denen die erforderlichen Informationen erhalten weren.
-     * @param allTables Alle Tische aus der Datenbank, aus denen die erforderlichen Informationen erhalten weren.
+     * @param allItems Alle Items aus der Datenbank, aus denen die erforderlichen Informationen erhalten werden.
+     * @param allTables Alle Tische aus der Datenbank, aus denen die erforderlichen Informationen erhalten werden.
      * @param kitchenReceipt Indikator, ob es sich um einen Küchen- oder Kundenbeleg handelt.
      */
-    public void printOrder(Order order, ArrayList<Item> allItems, ArrayList<Table> allTables, boolean kitchenReceipt) {
-        PrintableOrder printableOrder = getPrintableOrder(order, allItems, allTables);
+    public void printOrder(Order order, ArrayList<Item> allItems, ArrayList<OrderedItem> orderedItems, ArrayList<Table> allTables, boolean kitchenReceipt) {
+        PrintableOrder printableOrder = getPrintableOrder(order, allItems, orderedItems, allTables);
 
         String formattedOrderText = getFormattedOrder(printableOrder, kitchenReceipt);
 
@@ -89,11 +89,11 @@ public class PrinterService {
      * @param allTables alle Tische der Datenbank.
      * @return eine {@link PrintableOrder} mit den Daten der Bestellung.
      */
-    private PrintableOrder getPrintableOrder(Order order, ArrayList<Item> allItems, ArrayList<Table> allTables) {
+    private PrintableOrder getPrintableOrder(Order order, ArrayList<Item> allItems, ArrayList<OrderedItem> orderedItems, ArrayList<Table> allTables) {
         PrintableOrder printableOrder = new PrintableOrder();
 
         //Items
-        ArrayList<Item> orderItems = order.getItems(allItems);
+        ArrayList<Item> orderItems = allItems;
         //Table-Name
         String tableName = order.getTable(allTables).getName();
         //Date
@@ -102,6 +102,7 @@ public class PrinterService {
         //printableOrder zusammenstellen
         printableOrder.setOrderID(order.getOrderID());
         printableOrder.setItems(orderItems);
+        printableOrder.setOrderedItems(orderedItems);
         printableOrder.setTableName(tableName);
         printableOrder.setPrice(order.getPrice());
         printableOrder.setDate(dateString);
@@ -130,7 +131,18 @@ public class PrinterService {
                         + "Ihre Bestellung:\n");
 
         DecimalFormat df = new DecimalFormat("#0.00");
-        for(Item i: printableOrder.getItems()) {
+        for(OrderedItem oi: printableOrder.getOrderedItems()) {
+            Item i = null;
+
+            //Item zum zugehörigen OrderedItem ermitteln
+            // TODO testen
+            for(Item item: printableOrder.getItems()) {
+                if(item.getItemID() == oi.getItemID()) {
+                    i = item;
+                    break;
+                }
+            }
+
             double price = i.getRetailprice();
 
             formattedOrderText
@@ -138,6 +150,7 @@ public class PrinterService {
                     .append("\t\t")
                     .append(df.format(price))
                     .append(" EUR\n");
+            // TODO Hier Kommentar des OrderedItems hinzufügen
         }
 
         double mwst = Math.round(printableOrder.getPrice()*0.199 * 100d) / 100d;

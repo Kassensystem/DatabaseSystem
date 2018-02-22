@@ -22,7 +22,7 @@ public class RestApiClient_Test {
         try {
             ArrayList<Order> allOrders = restApiClient.getAllOrders();
             for (Order o: allOrders) {
-                System.out.println(o.getOrderID() + "\t" + o.getItems() + "\t" + o.getTable() + "\t" + o.getPrice());
+                System.out.println(o.getOrderID() + "\t" + o.getTable() + "\t" + o.getPrice());
             }
             return allOrders;
         } catch (Exception e) {
@@ -93,7 +93,6 @@ public class RestApiClient_Test {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        String itemIDs = Order.joinIDsIntoString(orderItems);
         //Table festlegen
         Table table = new Table();
         try {
@@ -105,6 +104,6 @@ public class RestApiClient_Test {
             e.printStackTrace();
         }
 
-        return new Order(itemIDs, table.getTableID(), price, DateTime.now(), true);
+        return new Order(table.getTableID(), price, DateTime.now(), true);
     }
 }

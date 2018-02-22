@@ -24,7 +24,7 @@ public class DatabaseService_Test {
 
     public static void main(String[] args) {
 
-        Order order = new Order(5, "1;2;3;", 3, 3.33, DateTime.now(), false);
+        Order order = new Order(5,3, 3.33, DateTime.now(), false);
         System.out.println(order.getOrderID());
 
     }
@@ -179,7 +179,7 @@ public class DatabaseService_Test {
 
     /****Logging****/
     private static void logOrder(Order o) {
-        System.out.println(o.getOrderID() + "\t" + o.getItems()
+        System.out.println(o.getOrderID() + "\t"
                 + "\t" + o.getPrice() + "\t" + o.getDate().toString("dd.MM.yyyy kk:mm:ss")
                 + "\t" + o.getTable() + "\t" + o.isPaid());
     }
@@ -198,11 +198,11 @@ public class DatabaseService_Test {
     /****Dummys****/
     private static Order dummyOrder() {
         int i = dummyCounter++;
-        return new Order(i+";"+i+1+";", 3+i, i*1.5, DateTime.now(), false);
+        return new Order( 3+i, i*1.5, DateTime.now(), false);
     }
     private static Order dummyUpdateOrder() {
         int i = dummyCounter++;
-        return new Order(i+";"+i+1+";", updateNumber, i*1.5, DateTime.now(), false);
+        return new Order(updateNumber, i*1.5, DateTime.now(), false);
     }
     private static Item dummyItem() {
         int i = dummyCounter++;
