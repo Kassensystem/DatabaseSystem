@@ -66,6 +66,11 @@ public class RestApiController {
         return databaseService.getAllOrderedItems();
     }
 
+    @RequestMapping("/orderedItems/{orderID}")
+    public ArrayList<OrderedItem> getOrderedItemByOrderId(@PathVariable("orderID") int orderId) {
+        return databaseService.getOrderedItemsByOrderId(orderId);
+    }
+
     /*POST/PUT*/
 
     /**

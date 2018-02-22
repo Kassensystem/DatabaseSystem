@@ -222,6 +222,69 @@ public class DatabaseService implements DatabaseService_Interface{
         }
     }
 
+    public ArrayList<OrderedItem> getOrderedItemsByOrderId(int orderID) {
+        // TODO
+
+        checkConnection();
+
+        ArrayList<OrderedItem> orderedItems = new ArrayList<>();
+
+        logInf("Getting OrderedItems from MySQL-Database.");
+
+        try {
+            String query = "SELECT orderedItemID, orderID, itemID, itemPaid " +
+                    "FROM " + dbp.getDatabase() + ".ordereditems " +
+                    "WHERE orderID = " + orderID;
+            PreparedStatement pst = connection.prepareStatement(query);
+            ResultSet rs = pst.executeQuery();
+
+            while(rs.next()) {
+                //get each orderedItem from DB
+                int orderedItemID = rs.getInt("orderedItemID");
+                orderID = rs.getInt("orderID");
+                int itemID = rs.getInt("itemID");
+                boolean itemPaid = rs.getBoolean("itemPaid");
+                orderedItems.add(new OrderedItem(orderedItemID, orderID, itemID, itemPaid));
+        }
+        return orderedItems;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            this.connect();
+            throw new MySQLServerConnectionException();
+        }
+    }
+
+    public ArrayList<OrderedItem> getOrderedItemsByItemId(int itemID) {
+
+        checkConnection();
+
+        ArrayList<OrderedItem> orderedItems = new ArrayList<>();
+
+        logInf("Getting OrderedItems from MySQL-Database.");
+
+        try {
+            String query = "SELECT orderedItemID, orderID, itemID, itemPaid " +
+                    "FROM " + dbp.getDatabase() + ".ordereditems " +
+                    "WHERE itemID = " + itemID;
+            PreparedStatement pst = connection.prepareStatement(query);
+            ResultSet rs = pst.executeQuery();
+
+            while(rs.next()) {
+                //get each orderedItem from DB
+                int orderedItemID = rs.getInt("orderedItemID");
+                int orderID = rs.getInt("orderID");
+                itemID = rs.getInt("itemID");
+                boolean itemPaid = rs.getBoolean("itemPaid");
+                orderedItems.add(new OrderedItem(orderedItemID, orderID, itemID, itemPaid));
+            }
+            return orderedItems;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            this.connect();
+            throw new MySQLServerConnectionException();
+        }
+    }
+
     //Datenbankinhalte mit Angabe der ID erhalten
     public Order getOrderById(int orderID) throws NullPointerException {
 
@@ -597,9 +660,9 @@ public class DatabaseService implements DatabaseService_Interface{
     }
     //Deleting data from database
     /*
-      Beim Loeschen eines Items oder Tables wird dieser nur als nicht verfuegbar markiert,
+      Beim Löschen eines Items oder Tables wird dieser nur als nicht verfügbar markiert,
       verbleiben aber in der Datenbank.
-      Somit ist sichergestellt, dass fuer bisherige Orders alle Daten verfuegbar bleiben.
+      Somit ist sichergestellt, dass für bisherige Orders alle Daten verfügbar bleiben.
      */
     @Override
     public void deleteItem(int itemID) throws NullPointerException, DataException,
@@ -845,17 +908,17 @@ public class DatabaseService implements DatabaseService_Interface{
      */
     private int getItemQuantity(int itemID) {
         //Ermitteln der Wareneingaenge
-        int itemdeliveries = 0;
+        int itemDeliveries = 0;
         for(Itemdelivery i: this.itemdeliveries) {
             if(i.getItemID() == itemID)
-                itemdeliveries += i.getQuantity();
+                itemDeliveries += i.getQuantity();
         }
         //Ermitteln der Warenausgaenge
-        int itemorders = 0;
+        int itemOrders = 0;
         // TODO berechnung der Warenausgänge implementieren
 
 
-        return itemdeliveries - itemorders;
+        return itemDeliveries - itemOrders;
     }
 
     /**
