@@ -6,14 +6,15 @@ public class OrderedItem {
     private int itemID;
     private boolean itemPaid;
 
-    public int getOrderedItemID() {
-        return orderedItemID;
-    }
-
-    public OrderedItem(int orderID, int itemID, boolean itemPaid) {
+    public OrderedItem(int orderedItemID, int orderID, int itemID, boolean itemPaid) {
+        this.orderedItemID = orderedItemID;
         this.orderID = orderID;
         this.itemID = itemID;
         this.itemPaid = itemPaid;
+    }
+
+    public int getOrderedItemID() {
+        return orderedItemID;
     }
 
     public int getOrderID() {

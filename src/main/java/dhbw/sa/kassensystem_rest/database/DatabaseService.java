@@ -194,8 +194,32 @@ public class DatabaseService implements DatabaseService_Interface{
     }
     @Override
     public ArrayList<OrderedItem> getAllOrderedItems() {
-        // TODO
-        return null;
+        this.orderedItems.clear();
+
+        checkConnection();
+
+        logInf("Getting OrderedItems from MySQL-Database.");
+
+        try {
+            String query = "SELECT orderedItemID, orderID, itemID, itemPaid " +
+                    "FROM " + dbp.getDatabase() + ".ordereditems";
+            PreparedStatement pst = connection.prepareStatement(query);
+            ResultSet rs = pst.executeQuery();
+
+            while(rs.next()) {
+                //get each orderedItem from DB
+                int orderedItemID = rs.getInt("orderedItemID");
+                int orderID = rs.getInt("orderID");
+                int itemID = rs.getInt("itemID");
+                boolean itemPaid = rs.getBoolean("itemPaid");
+                orderedItems.add(new OrderedItem(orderedItemID, orderID, itemID, itemPaid));
+            }
+            return this.orderedItems;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            this.connect();
+            throw new MySQLServerConnectionException();
+        }
     }
 
     //Datenbankinhalte mit Angabe der ID erhalten
