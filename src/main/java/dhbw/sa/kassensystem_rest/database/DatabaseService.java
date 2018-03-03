@@ -19,7 +19,8 @@ import java.util.ArrayList;
  */
 
 @Service
-public class DatabaseService implements DatabaseService_Interface{
+public class DatabaseService implements DatabaseService_Interface
+{
     /*
      *  items Alle in der Datenbank befindlichen Items werden hier gespeichert.
      *  tables Alle in der Datenbank befindlichen Tables werden hier gespeichert.
@@ -40,7 +41,8 @@ public class DatabaseService implements DatabaseService_Interface{
     private ArrayList<Itemdelivery> itemdeliveries = new ArrayList<>();
     private ArrayList<Item> itemsWithoutQuantity = new ArrayList<>();
 
-    public DatabaseService() {
+    public DatabaseService()
+	{
         this.connect();
     }
 
@@ -69,7 +71,8 @@ public class DatabaseService implements DatabaseService_Interface{
 
     //Getting Table-Data from the database
     @Override
-    public ArrayList<Item> getAllItems() throws MySQLServerConnectionException {
+    public ArrayList<Item> getAllItems() throws MySQLServerConnectionException
+	{
         this.items.clear();
 
         checkConnection();
@@ -106,7 +109,8 @@ public class DatabaseService implements DatabaseService_Interface{
         }
     }
     @Override
-    public ArrayList<Table> getAllTables() throws MySQLServerConnectionException {
+    public ArrayList<Table> getAllTables() throws MySQLServerConnectionException
+	{
         this.tables.clear();
 
         checkConnection();
@@ -134,7 +138,8 @@ public class DatabaseService implements DatabaseService_Interface{
         }
     }
     @Override
-    public ArrayList<Order> getAllOrders() throws MySQLServerConnectionException  {
+    public ArrayList<Order> getAllOrders() throws MySQLServerConnectionException
+	{
         this.orders.clear();
 
         checkConnection();
@@ -165,7 +170,8 @@ public class DatabaseService implements DatabaseService_Interface{
         }
     }
     @Override
-    public ArrayList<Itemdelivery> getAllItemdeliveries() throws MySQLServerConnectionException {
+    public ArrayList<Itemdelivery> getAllItemdeliveries() throws MySQLServerConnectionException
+	{
         this.itemdeliveries.clear();
 
         checkConnection();
@@ -193,7 +199,8 @@ public class DatabaseService implements DatabaseService_Interface{
         }
     }
     @Override
-    public ArrayList<OrderedItem> getAllOrderedItems() {
+    public ArrayList<OrderedItem> getAllOrderedItems()
+	{
         this.orderedItems.clear();
 
         checkConnection();
@@ -222,7 +229,8 @@ public class DatabaseService implements DatabaseService_Interface{
         }
     }
 
-    public ArrayList<OrderedItem> getOrderedItemsByOrderId(int orderID) {
+    public ArrayList<OrderedItem> getOrderedItemsByOrderId(int orderID)
+	{
         // TODO
 
         checkConnection();
@@ -254,8 +262,8 @@ public class DatabaseService implements DatabaseService_Interface{
         }
     }
 
-    public ArrayList<OrderedItem> getOrderedItemsByItemId(int itemID) {
-
+    public ArrayList<OrderedItem> getOrderedItemsByItemId(int itemID)
+	{
         checkConnection();
 
         ArrayList<OrderedItem> orderedItems = new ArrayList<>();
@@ -286,8 +294,8 @@ public class DatabaseService implements DatabaseService_Interface{
     }
 
     //Datenbankinhalte mit Angabe der ID erhalten
-    public Order getOrderById(int orderID) throws NullPointerException {
-
+    public Order getOrderById(int orderID) throws NullPointerException
+	{
         if(orderID == 0) {
             logErr("Order-ID may not be null.");
             throw new NullPointerException("No Order-ID given.");
@@ -304,8 +312,8 @@ public class DatabaseService implements DatabaseService_Interface{
         throw new NullPointerException("Order-ID " + orderID + " not found.");
     }
 
-    public Item getItemById(int itemID) throws NullPointerException {
-
+    public Item getItemById(int itemID) throws NullPointerException
+	{
         this.itemdeliveries = this.getAllItemdeliveries();
         this.orders = this.getAllOrders();
         this.items = this.getAllItems();
@@ -327,7 +335,8 @@ public class DatabaseService implements DatabaseService_Interface{
         throw new NullPointerException("Item-ID " + itemID + " not found.");
     }
 
-    public Table getTableById(int tableID) throws NullPointerException {
+    public Table getTableById(int tableID) throws NullPointerException
+	{
 
         if(tableID == 0) {
             logErr("Table-ID may not be null.");
@@ -347,8 +356,8 @@ public class DatabaseService implements DatabaseService_Interface{
         throw new NullPointerException("Table-ID " + tableID + " not found.");
     }
 
-    public Itemdelivery getItemdeliveryById(int itemdeliveryID) throws NullPointerException {
-
+    public Itemdelivery getItemdeliveryById(int itemdeliveryID) throws NullPointerException
+	{
         if(itemdeliveryID == 0) {
             logErr("Itemdelivery-ID may not be null.");
             throw new NullPointerException("No Itemdelivery-ID given.");
@@ -370,8 +379,8 @@ public class DatabaseService implements DatabaseService_Interface{
 
     //Adding data to the database
     @Override
-    public void addItem(Item item) throws MySQLServerConnectionException, DataException {
-
+    public void addItem(Item item) throws MySQLServerConnectionException, DataException
+	{
         checkConnection();
 
         logInf("Adding Item to MySQL-Database.");
@@ -420,8 +429,8 @@ public class DatabaseService implements DatabaseService_Interface{
         }
     }
     @Override
-    public void addTable(Table table) throws MySQLServerConnectionException, DataException {
-
+    public void addTable(Table table) throws MySQLServerConnectionException, DataException
+	{
         checkConnection();
 
         logInf("Adding Table to MySQL-Database.");
@@ -451,8 +460,8 @@ public class DatabaseService implements DatabaseService_Interface{
         }
     }
     @Override
-    public void addOrder(Order order) throws MySQLServerConnectionException, DataException {
-
+    public void addOrder(Order order) throws MySQLServerConnectionException, DataException
+	{
         checkConnection();
 
         logInf("Adding Order to MySQL-Database.");
@@ -494,8 +503,8 @@ public class DatabaseService implements DatabaseService_Interface{
     }
     @Override
     public void addItemdelivery(Itemdelivery itemdelivery) throws MySQLServerConnectionException,
-            DataException {
-
+            DataException
+	{
         checkConnection();
 
         logInf("Adding Itemdelivery to MySQL-Database.");
@@ -528,8 +537,8 @@ public class DatabaseService implements DatabaseService_Interface{
     //Updating data in database
     @Override
     public void updateItem(int itemID, Item item) throws NullPointerException, DataException,
-            MySQLServerConnectionException {
-
+            MySQLServerConnectionException
+	{
         checkConnection();
 
         logInf("Updating Item with ID " + itemID + ".");
@@ -567,8 +576,8 @@ public class DatabaseService implements DatabaseService_Interface{
     }
     @Override
     public void updateTable(int tableID, Table table) throws NullPointerException, DataException,
-            MySQLServerConnectionException {
-
+            MySQLServerConnectionException
+	{
         checkConnection();
 
         logInf("Updating Table with ID " + tableID + ".");
@@ -605,8 +614,8 @@ public class DatabaseService implements DatabaseService_Interface{
     }
     @Override
     public void updateOrder(int orderID, Order order) throws NullPointerException, DataException,
-            MySQLServerConnectionException {
-
+            MySQLServerConnectionException
+	{
         checkConnection();
 
         logInf("Updating Order with ID " + orderID + ".");
@@ -666,8 +675,8 @@ public class DatabaseService implements DatabaseService_Interface{
      */
     @Override
     public void deleteItem(int itemID) throws NullPointerException, DataException,
-            MySQLServerConnectionException {
-
+            MySQLServerConnectionException
+	{
         logInf("Setting Item with ID " + itemID + " to unavailable.");
 
         Item item = this.getItemById(itemID);
@@ -678,8 +687,8 @@ public class DatabaseService implements DatabaseService_Interface{
     }
     @Override
     public void deleteTable(int tableID) throws NullPointerException, DataException,
-            MySQLServerConnectionException {
-
+            MySQLServerConnectionException
+	{
         logInf("Setting Table with ID " + tableID + " to unavailable.");
 
         Table table = this.getTableById(tableID);
@@ -690,8 +699,8 @@ public class DatabaseService implements DatabaseService_Interface{
     }
     @Override
     public void deleteOrder(int orderID) throws NullPointerException, DataException,
-            MySQLServerConnectionException {
-
+            MySQLServerConnectionException
+	{
         logInf("Deleting Order with ID " + orderID + ".");
 
         this.orders = this.getAllOrders();
@@ -720,8 +729,8 @@ public class DatabaseService implements DatabaseService_Interface{
     }
     @Override
     public void deleteItemdelivery(int itemdeliveryID) throws NullPointerException, DataException,
-            MySQLServerConnectionException {
-
+            MySQLServerConnectionException
+	{
         logInf("Deleting Itemdelivery with ID " + itemdeliveryID + ".");
 
         this.itemdeliveries = this.getAllItemdeliveries();
@@ -749,8 +758,8 @@ public class DatabaseService implements DatabaseService_Interface{
     //Drucken einer Order
 
     public void printOrderById(int orderID) throws NullPointerException, DataException,
-            MySQLServerConnectionException {
-
+            MySQLServerConnectionException
+	{
         this.orders = this.getAllOrders();
         this.items = this.getAllItems();
         this.tables = this.getAllTables();
@@ -770,8 +779,8 @@ public class DatabaseService implements DatabaseService_Interface{
     }
 
     // Vollständigkeit der Daten von Objekten überprüfen
-    private boolean isOrderComplete(Order order) {
-
+    private boolean isOrderComplete(Order order)
+	{
         String missingAttributs = "";
 
         if(order.getTable() == 0) {
@@ -793,8 +802,8 @@ public class DatabaseService implements DatabaseService_Interface{
         return true;
 
     }
-    private boolean isTableComplete(Table table) {
-
+    private boolean isTableComplete(Table table)
+	{
         String missingAttributs = "";
 
         if(table.getName().isEmpty()) {
@@ -813,8 +822,8 @@ public class DatabaseService implements DatabaseService_Interface{
         return true;
 
     }
-    private boolean isItemComplete(Item item) {
-
+    private boolean isItemComplete(Item item)
+	{
         String missingAttributs = "";
 
         if(item.getName().isEmpty() || item.getName() == null) {
@@ -833,8 +842,8 @@ public class DatabaseService implements DatabaseService_Interface{
         return true;
 
     }
-    private boolean isItemdeliveryComplete(Itemdelivery itemdelivery) {
-
+    private boolean isItemdeliveryComplete(Itemdelivery itemdelivery)
+	{
         String missingAttributs = "";
 
         if(itemdelivery.getItemID() == 0) {
@@ -861,28 +870,32 @@ public class DatabaseService implements DatabaseService_Interface{
 
     }
 
-    private boolean itemIsAvailable(int itemID, ArrayList<Item> items) {
+    private boolean itemIsAvailable(int itemID, ArrayList<Item> items)
+	{
         for(Item i: items) {
             if(i.getItemID() == itemID)
                 return true;
         }
         return false;
     }
-    private boolean orderIsAvailable(int orderID, ArrayList<Order> orders) {
+    private boolean orderIsAvailable(int orderID, ArrayList<Order> orders)
+	{
         for(Order o: orders) {
             if(orderID == o.getOrderID())
                 return true;
         }
         return false;
     }
-    private boolean tableIsAvailable(int tableID, ArrayList<Table> tables) {
+    private boolean tableIsAvailable(int tableID, ArrayList<Table> tables)
+	{
         for(Table t: tables) {
             if(tableID == t.getTableID())
                 return true;
         }
         return false;
     }
-    private boolean itemdeliveryIsAvailable(int itemdeliveryID, ArrayList<Itemdelivery> itemdeliveries) {
+    private boolean itemdeliveryIsAvailable(int itemdeliveryID, ArrayList<Itemdelivery> itemdeliveries)
+	{
         for(Itemdelivery i: itemdeliveries) {
             if(itemdeliveryID == i.getItemdeliveryID())
                 return true;
@@ -896,7 +909,8 @@ public class DatabaseService implements DatabaseService_Interface{
      * @param kitchenReceipt sagt dem PrinterService, ob es sich um einen Kuechenbeleg oder Kundenbeleg handelt. Layout
      *                       des ausgedruckten Belegs wird dementsprechend geaendert.
      */
-    private void printOrder(Order order, boolean kitchenReceipt) {
+    private void printOrder(Order order, boolean kitchenReceipt)
+	{
         PrinterService printerService = new PrinterService();
         printerService.printOrder(order,  this.items, this.orderedItems, this.tables, kitchenReceipt);
     }
@@ -906,7 +920,8 @@ public class DatabaseService implements DatabaseService_Interface{
      * @param itemID des items, dessen Haeufigkeit ermittelt werden soll.
      * @return aktuelle Verfuegbarkeit des items.
      */
-    private int getItemQuantity(int itemID) {
+    private int getItemQuantity(int itemID)
+	{
         //Ermitteln der Wareneingaenge
         int itemDeliveries = 0;
         for(Itemdelivery i: this.itemdeliveries) {
@@ -924,7 +939,8 @@ public class DatabaseService implements DatabaseService_Interface{
     /**
      * @return eine Liste von allen Items der Datenbank ohne die Anzahl zu bestimmen
      */
-    private ArrayList<Item> getAllItemsEmpty()  {
+    private ArrayList<Item> getAllItemsEmpty()
+	{
         ArrayList<Item> emptyItems = new ArrayList<>();
         try {
             String query = "SELECT itemID, name, retailprice, available " +
@@ -954,7 +970,8 @@ public class DatabaseService implements DatabaseService_Interface{
      * @param itemIDs ArrayList von Integers mit itemIDs.
      * @return wie oft die id in den itemIDs vorkommt.
      */
-    private static int getItemQuantity(int id, ArrayList<Integer> itemIDs) {
+    private static int getItemQuantity(int id, ArrayList<Integer> itemIDs)
+	{
         if(!itemIDs.contains(id))
             return 0;
         int quantity = 0;
@@ -965,7 +982,8 @@ public class DatabaseService implements DatabaseService_Interface{
         return quantity;
     }
 
-    private double round(double number) {
+    private double round(double number)
+	{
         return (double) Math.round(number * 100d) / 100d;
     }
 
@@ -976,7 +994,8 @@ public class DatabaseService implements DatabaseService_Interface{
      * @param dateTime zu konvertierendes joda.time.DateTime
      * @return Timestamp
      */
-    private Object convertJodaDateTimeToSqlTimestamp(DateTime dateTime) {
+    private Object convertJodaDateTimeToSqlTimestamp(DateTime dateTime)
+	{
         // Convert sql-Timestamp to joda.DateTime
         return new Timestamp(dateTime.getMillis());
     }
@@ -986,20 +1005,24 @@ public class DatabaseService implements DatabaseService_Interface{
      * @param sqlTimestamp zu konvertierender Timestamp
      * @return jode.time.DateTime
      */
-    private DateTime convertSqlTimestampToJodaDateTime(Timestamp sqlTimestamp) {
+    private DateTime convertSqlTimestampToJodaDateTime(Timestamp sqlTimestamp)
+	{
         //Convert joda.DateTime to sql-Timestamp
         return new DateTime(sqlTimestamp);
     }
 
-    private void logErr(String errorMessage) {
+    private void logErr(String errorMessage)
+	{
         log(errorMessage, "ERROR");
     }
 
-    private void logInf(String message) {
+    private void logInf(String message)
+	{
         log(message, "INFO");
     }
 
-    private void log(String message, String status) {
+    private void log(String message, String status)
+	{
         String messageStatus = "";
         switch(status) {
             case "INFO": messageStatus = "MYSQL-Info";
@@ -1011,7 +1034,8 @@ public class DatabaseService implements DatabaseService_Interface{
         System.out.println(logString);
     }
 
-    private void checkConnection() {
+    private void checkConnection()
+	{
         try {
             if(connection.isClosed())
                 this.connect();
