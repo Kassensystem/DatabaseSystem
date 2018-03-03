@@ -1,6 +1,6 @@
 package dhbw.sa.kassensystem_rest.restApi.controller;
 
-import dhbw.sa.kassensystem_rest.database.DatabaseService;
+import dhbw.sa.kassensystem_rest.database.databaseservice.DatabaseService;
 import dhbw.sa.kassensystem_rest.database.entity.Item;
 import dhbw.sa.kassensystem_rest.database.entity.Order;
 import dhbw.sa.kassensystem_rest.database.entity.OrderedItem;
@@ -67,7 +67,7 @@ public class RestApiController {
     }
 
     @RequestMapping("/orderedItems/{orderID}")
-    public ArrayList<OrderedItem> getOrderedItemByOrderId(@PathVariable("orderID") int orderId) {
+    public ArrayList<OrderedItem> getOrderedItemsByOrderId(@PathVariable("orderID") int orderId) {
         return databaseService.getOrderedItemsByOrderId(orderId);
     }
 

@@ -1,5 +1,5 @@
 
-import dhbw.sa.kassensystem_rest.database.DatabaseService;
+import dhbw.sa.kassensystem_rest.database.databaseservice.DatabaseService;
 import dhbw.sa.kassensystem_rest.database.entity.Item;
 import dhbw.sa.kassensystem_rest.database.entity.Itemdelivery;
 import dhbw.sa.kassensystem_rest.database.entity.Order;
@@ -7,7 +7,6 @@ import dhbw.sa.kassensystem_rest.database.entity.Table;
 import org.joda.time.DateTime;
 
 import java.util.ArrayList;
-import java.util.Date;
 
 
 /** Testfälle für die Klasse DatabaseService
@@ -209,6 +208,6 @@ public class DatabaseService_Test {
         return new Item("TestItem", i*1.5, i*3, true);
     }
     private static Table dummyTable() {
-        return new Table("TestTable", true);
+        return new Table("TestTable", 9, true);
     }
 }

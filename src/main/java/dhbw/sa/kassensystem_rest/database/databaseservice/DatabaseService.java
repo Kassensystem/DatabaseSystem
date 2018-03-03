@@ -1,4 +1,4 @@
-package dhbw.sa.kassensystem_rest.database;
+package dhbw.sa.kassensystem_rest.database.databaseservice;
 
 import dhbw.sa.kassensystem_rest.database.entity.*;
 import dhbw.sa.kassensystem_rest.exceptions.DataException;
@@ -9,6 +9,9 @@ import org.springframework.stereotype.Service;
 
 import java.sql.*;
 import java.util.ArrayList;
+
+import static dhbw.sa.kassensystem_rest.database.databaseservice.Log.logErr;
+import static dhbw.sa.kassensystem_rest.database.databaseservice.Log.logInf;
 
 /**
  * {@inheritDoc}
@@ -32,32 +35,18 @@ public class DatabaseService implements DatabaseService_Interface
 
     private final DatabaseProperties dbp = new DatabaseProperties();
 
-    private Connection connection = null;
+    private Connection connection;
 
     private ArrayList<Item> items = new ArrayList<>();
-    private ArrayList<OrderedItem> orderedItems = new ArrayList<>();
     private ArrayList<Table> tables = new ArrayList<>();
     private ArrayList<Order> orders = new ArrayList<>();
     private ArrayList<Itemdelivery> itemdeliveries = new ArrayList<>();
-    private ArrayList<Item> itemsWithoutQuantity = new ArrayList<>();
 
     public DatabaseService()
 	{
-        this.connect();
+        connection = DatabaseService_Interface.connect();
     }
 
-    @Override
-    public void connect() {
-        logInf("Connecting database...");
-
-        try{
-            connection = DriverManager.getConnection(dbp.getUrl(), dbp.getUsername(), dbp.getPassword());
-            logInf("Database connected!");
-        }catch(SQLException e) {
-            logErr("Verbindung zur Datenbank fehlgeschlagen!");
-            throw new MySQLServerConnectionException();
-        }
-    }
     @Override
     public void disconnect() {
         if(connection != null) {
@@ -81,7 +70,6 @@ public class DatabaseService implements DatabaseService_Interface
 
         this.itemdeliveries = this.getAllItemdeliveries();
         this.orders = this.getAllOrders();
-        this.itemsWithoutQuantity = this.getAllItemsEmpty();
 
         try {
             String query = "SELECT itemID, name, retailprice, available " +
@@ -104,38 +92,20 @@ public class DatabaseService implements DatabaseService_Interface
             return this.items;
         } catch (SQLException e) {
             e.printStackTrace();
-            this.connect();
+            DatabaseService_Interface.connect();
             throw new MySQLServerConnectionException();
         }
     }
     @Override
     public ArrayList<Table> getAllTables() throws MySQLServerConnectionException
 	{
-        this.tables.clear();
+		checkConnection();
 
-        checkConnection();
+		logInf("Getting Tables from MySQL-Database.");
 
-        logInf("Getting Tables from MySQL-Database.");
+		this.tables = DBService_Table.getAllTables(connection);
 
-        try {
-            String query = "SELECT tableID, name, available " +
-                    "FROM " + dbp.getDatabase() + ".tables";
-            PreparedStatement pst = connection.prepareStatement(query);
-            ResultSet rs = pst.executeQuery();
-
-            while(rs.next()) {
-                //get each table from DB
-                int tableID = rs.getInt("tableID");
-                String name = rs.getString("name");
-                boolean available = rs.getBoolean("available");
-                tables.add(new Table(tableID, name, available));
-            }
-            return this.tables;
-        } catch (SQLException e) {
-            e.printStackTrace();
-            this.connect();
-            throw new MySQLServerConnectionException();
-        }
+        return this.tables;
     }
     @Override
     public ArrayList<Order> getAllOrders() throws MySQLServerConnectionException
@@ -165,7 +135,7 @@ public class DatabaseService implements DatabaseService_Interface
             return this.orders;
         } catch (SQLException e) {
             e.printStackTrace();
-            this.connect();
+			DatabaseService_Interface.connect();
             throw new MySQLServerConnectionException();
         }
     }
@@ -194,72 +164,29 @@ public class DatabaseService implements DatabaseService_Interface
             return this.itemdeliveries;
         } catch (SQLException e) {
             e.printStackTrace();
-            this.connect();
+			DatabaseService_Interface.connect();
             throw new MySQLServerConnectionException();
         }
     }
     @Override
     public ArrayList<OrderedItem> getAllOrderedItems()
 	{
-        this.orderedItems.clear();
-
         checkConnection();
 
         logInf("Getting OrderedItems from MySQL-Database.");
 
-        try {
-            String query = "SELECT orderedItemID, orderID, itemID, itemPaid " +
-                    "FROM " + dbp.getDatabase() + ".ordereditems";
-            PreparedStatement pst = connection.prepareStatement(query);
-            ResultSet rs = pst.executeQuery();
-
-            while(rs.next()) {
-                //get each orderedItem from DB
-                int orderedItemID = rs.getInt("orderedItemID");
-                int orderID = rs.getInt("orderID");
-                int itemID = rs.getInt("itemID");
-                boolean itemPaid = rs.getBoolean("itemPaid");
-                orderedItems.add(new OrderedItem(orderedItemID, orderID, itemID, itemPaid));
-            }
-            return this.orderedItems;
-        } catch (SQLException e) {
-            e.printStackTrace();
-            this.connect();
-            throw new MySQLServerConnectionException();
-        }
+        return DBService_OrderedItem.getAllOrderedItems(connection);
     }
 
     public ArrayList<OrderedItem> getOrderedItemsByOrderId(int orderID)
 	{
-        // TODO
-
         checkConnection();
 
         ArrayList<OrderedItem> orderedItems = new ArrayList<>();
 
         logInf("Getting OrderedItems from MySQL-Database.");
 
-        try {
-            String query = "SELECT orderedItemID, orderID, itemID, itemPaid " +
-                    "FROM " + dbp.getDatabase() + ".ordereditems " +
-                    "WHERE orderID = " + orderID;
-            PreparedStatement pst = connection.prepareStatement(query);
-            ResultSet rs = pst.executeQuery();
-
-            while(rs.next()) {
-                //get each orderedItem from DB
-                int orderedItemID = rs.getInt("orderedItemID");
-                orderID = rs.getInt("orderID");
-                int itemID = rs.getInt("itemID");
-                boolean itemPaid = rs.getBoolean("itemPaid");
-                orderedItems.add(new OrderedItem(orderedItemID, orderID, itemID, itemPaid));
-        }
-        return orderedItems;
-        } catch (SQLException e) {
-            e.printStackTrace();
-            this.connect();
-            throw new MySQLServerConnectionException();
-        }
+        return DBService_OrderedItem.getOrderedItemsByOrderId(connection, orderID);
     }
 
     public ArrayList<OrderedItem> getOrderedItemsByItemId(int itemID)
@@ -271,7 +198,7 @@ public class DatabaseService implements DatabaseService_Interface
         logInf("Getting OrderedItems from MySQL-Database.");
 
         try {
-            String query = "SELECT orderedItemID, orderID, itemID, itemPaid " +
+            String query = "SELECT orderedItemID, orderID, itemID, itemPaid, itemProduced " +
                     "FROM " + dbp.getDatabase() + ".ordereditems " +
                     "WHERE itemID = " + itemID;
             PreparedStatement pst = connection.prepareStatement(query);
@@ -283,12 +210,13 @@ public class DatabaseService implements DatabaseService_Interface
                 int orderID = rs.getInt("orderID");
                 itemID = rs.getInt("itemID");
                 boolean itemPaid = rs.getBoolean("itemPaid");
-                orderedItems.add(new OrderedItem(orderedItemID, orderID, itemID, itemPaid));
+                boolean itemProduced = rs.getBoolean("itemProduced");
+                orderedItems.add(new OrderedItem(orderedItemID, orderID, itemID, itemPaid, itemProduced));
             }
             return orderedItems;
         } catch (SQLException e) {
             e.printStackTrace();
-            this.connect();
+			DatabaseService_Interface.connect();
             throw new MySQLServerConnectionException();
         }
     }
@@ -337,7 +265,6 @@ public class DatabaseService implements DatabaseService_Interface
 
     public Table getTableById(int tableID) throws NullPointerException
 	{
-
         if(tableID == 0) {
             logErr("Table-ID may not be null.");
             throw new NullPointerException("No Table-ID given.");
@@ -345,12 +272,9 @@ public class DatabaseService implements DatabaseService_Interface
 
         logInf("Getting Table with ID " + tableID + ".");
 
-        this.tables = this.getAllTables();
-
-        for(Table t: this.tables) {
-            if(t.getTableID() == tableID)
-                return t;
-        }
+        Table table = DBService_Table.getTableById(connection, tableID);
+		if(table != null)
+			return table;
 
         logErr("Table with ID " + tableID + " doesn't exist in the database.");
         throw new NullPointerException("Table-ID " + tableID + " not found.");
@@ -424,7 +348,7 @@ public class DatabaseService implements DatabaseService_Interface
             addItemdelivery(itemdelivery);
         } catch(SQLException e) {
             e.printStackTrace();
-            this.connect();
+			DatabaseService_Interface.connect();
             throw new MySQLServerConnectionException();
         }
     }
@@ -455,7 +379,7 @@ public class DatabaseService implements DatabaseService_Interface
             pst.executeUpdate();
         } catch(SQLException e) {
             e.printStackTrace();
-            this.connect();
+			DatabaseService_Interface.connect();
             throw new MySQLServerConnectionException();
         }
     }
@@ -497,7 +421,7 @@ public class DatabaseService implements DatabaseService_Interface
             pst.executeUpdate();
         } catch(SQLException e) {
             e.printStackTrace();
-            this.connect();
+			DatabaseService_Interface.connect();
             throw new MySQLServerConnectionException();
         }
     }
@@ -529,7 +453,7 @@ public class DatabaseService implements DatabaseService_Interface
             pst.executeUpdate();
         } catch(SQLException e) {
             e.printStackTrace();
-            this.connect();
+			DatabaseService_Interface.connect();
             throw new MySQLServerConnectionException();
         }
     }
@@ -570,7 +494,7 @@ public class DatabaseService implements DatabaseService_Interface
             pst.executeUpdate();
         } catch(SQLException e) {
             e.printStackTrace();
-            this.connect();
+			DatabaseService_Interface.connect();
             throw new MySQLServerConnectionException();
         }
     }
@@ -608,7 +532,7 @@ public class DatabaseService implements DatabaseService_Interface
             pst.executeUpdate();
         } catch(SQLException e) {
             e.printStackTrace();
-            this.connect();
+			DatabaseService_Interface.connect();
             throw new MySQLServerConnectionException();
         }
     }
@@ -663,7 +587,7 @@ public class DatabaseService implements DatabaseService_Interface
             pst.executeUpdate();
         } catch(SQLException e) {
             e.printStackTrace();
-            this.connect();
+			DatabaseService_Interface.connect();
             throw new MySQLServerConnectionException();
         }
     }
@@ -723,7 +647,7 @@ public class DatabaseService implements DatabaseService_Interface
             pst.executeUpdate();
         } catch(SQLException e) {
             e.printStackTrace();
-            this.connect();
+			DatabaseService_Interface.connect();
             throw new MySQLServerConnectionException();
         }
     }
@@ -750,7 +674,7 @@ public class DatabaseService implements DatabaseService_Interface
             pst.executeUpdate();
         } catch(SQLException e) {
             e.printStackTrace();
-            this.connect();
+			DatabaseService_Interface.connect();
             throw new MySQLServerConnectionException();
         }
     }
@@ -912,7 +836,8 @@ public class DatabaseService implements DatabaseService_Interface
     private void printOrder(Order order, boolean kitchenReceipt)
 	{
         PrinterService printerService = new PrinterService();
-        printerService.printOrder(order,  this.items, this.orderedItems, this.tables, kitchenReceipt);
+        printerService.printOrder(order,  this.items,
+				DBService_OrderedItem.getAllOrderedItems(connection), this.tables, kitchenReceipt);
     }
 
     /**
@@ -922,46 +847,48 @@ public class DatabaseService implements DatabaseService_Interface
      */
     private int getItemQuantity(int itemID)
 	{
-        //Ermitteln der Wareneingaenge
-        int itemDeliveries = 0;
-        for(Itemdelivery i: this.itemdeliveries) {
-            if(i.getItemID() == itemID)
-                itemDeliveries += i.getQuantity();
-        }
-        //Ermitteln der Warenausgaenge
-        int itemOrders = 0;
-        // TODO berechnung der Warenausgänge implementieren
+		//Ermitteln der Wareneingänge
+		int itemDeliveries = 0;
 
+		checkConnection();
+		try {
+			String query = "SELECT quantity AS \"Quantity of Itemdeliveries\"" +
+					"FROM " + dbp.getDatabase() + ".itemdeliveries " +
+					"WHERE itemID = " + itemID;
+			PreparedStatement pst = connection.prepareStatement(query);
+			ResultSet rs = pst.executeQuery();
+
+			while(rs.next()) {
+				itemDeliveries += rs.getInt("Quantity of Itemdeliveries");
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+			DatabaseService_Interface.connect();
+			throw new MySQLServerConnectionException();
+		}
+
+		//Ermitteln der Warenausgänge
+		int itemOrders = 0;
+
+		try {
+			String query = "SELECT COUNT(*) AS \"Quantity of Orders\"" +
+					"FROM " + dbp.getDatabase() + ".ordereditems " +
+					"WHERE itemID = " + itemID;
+			PreparedStatement pst = connection.prepareStatement(query);
+			ResultSet rs = pst.executeQuery();
+
+			while(rs.next()) {
+				itemOrders = rs.getInt("Quantity of Orders");
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+			DatabaseService_Interface.connect();
+			throw new MySQLServerConnectionException();
+		}
 
         return itemDeliveries - itemOrders;
-    }
-
-    /**
-     * @return eine Liste von allen Items der Datenbank ohne die Anzahl zu bestimmen
-     */
-    private ArrayList<Item> getAllItemsEmpty()
-	{
-        ArrayList<Item> emptyItems = new ArrayList<>();
-        try {
-            String query = "SELECT itemID, name, retailprice, available " +
-                    "FROM " + dbp.getDatabase() + ".items";
-            PreparedStatement pst = connection.prepareStatement(query);
-            ResultSet rs = pst.executeQuery();
-
-            while(rs.next()) {
-                //get each Item from DB without quantity
-                int itemID = rs.getInt("itemID");
-                String name = rs.getString("name");
-                double retailprice = rs.getFloat("retailprice");
-                retailprice = round(retailprice);
-                boolean available = rs.getBoolean("available");
-                emptyItems.add(new Item(itemID, name, retailprice, available));
-            }
-            return emptyItems;
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return null;
     }
 
     /**
@@ -1011,34 +938,11 @@ public class DatabaseService implements DatabaseService_Interface
         return new DateTime(sqlTimestamp);
     }
 
-    private void logErr(String errorMessage)
-	{
-        log(errorMessage, "ERROR");
-    }
-
-    private void logInf(String message)
-	{
-        log(message, "INFO");
-    }
-
-    private void log(String message, String status)
-	{
-        String messageStatus = "";
-        switch(status) {
-            case "INFO": messageStatus = "MYSQL-Info";
-            break;
-            case "ERROR": messageStatus = "MYSQL-ERROR";
-            break;
-        }
-        String logString = DateTime.now().toString("yyyy-MM-dd kk:mm:ss.SSS") + "  " + messageStatus + " " + message;
-        System.out.println(logString);
-    }
-
     private void checkConnection()
 	{
         try {
             if(connection.isClosed())
-                this.connect();
+				DatabaseService_Interface.connect();
         } catch (SQLException e) {}
     }
 }

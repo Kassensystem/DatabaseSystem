@@ -1,10 +1,16 @@
-package dhbw.sa.kassensystem_rest.database;
+package dhbw.sa.kassensystem_rest.database.databaseservice;
 
 import dhbw.sa.kassensystem_rest.database.entity.*;
 import dhbw.sa.kassensystem_rest.exceptions.DataException;
 import dhbw.sa.kassensystem_rest.exceptions.MySQLServerConnectionException;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 import java.util.ArrayList;
+
+import static dhbw.sa.kassensystem_rest.database.databaseservice.Log.logErr;
+import static dhbw.sa.kassensystem_rest.database.databaseservice.Log.logInf;
 
 /**
  * Der DatabaseService stellt die Schnittstelle zu einer MySQL-Datenbank dar.
@@ -19,12 +25,28 @@ import java.util.ArrayList;
  * @author Marvin Mai
  */
 
-public interface DatabaseService_Interface {
+public interface DatabaseService_Interface
+{
+
     /**
      * Stellt eine Verbindung zur MySQL-Datenbank her.
      * @throws IllegalStateException wenn die Datenbank nicht erreichbar ist.
      */
-    void connect();
+    static Connection connect() {
+		logInf("Connecting database...");
+
+		Connection connection;
+
+		try{
+			connection = DriverManager.getConnection(DatabaseProperties.getUrl(), DatabaseProperties.getUsername(),
+					DatabaseProperties.getPassword());
+			logInf("Database connected!");
+		}catch(SQLException e) {
+			logErr("Verbindung zur Datenbank fehlgeschlagen!");
+			throw new MySQLServerConnectionException();
+		}
+		return connection;
+	}
 
     /**
      * Beendet eine bestehende Verbindung mit einem MySQL-Server.

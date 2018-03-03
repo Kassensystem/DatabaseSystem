@@ -87,58 +87,70 @@
     <column id="26" parent="10" name="itemPaid">
       <Position>4</Position>
       <DataType>tinyint(1)|0</DataType>
+      <DefaultExpression>&apos;0&apos;</DefaultExpression>
     </column>
-    <key id="27" parent="10" name="PRIMARY">
+    <column id="27" parent="10" name="itemProduced">
+      <Position>5</Position>
+      <DataType>tinyint(1)|0</DataType>
+      <NotNull>1</NotNull>
+      <DefaultExpression>&apos;0&apos;</DefaultExpression>
+    </column>
+    <key id="28" parent="10" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>orderedItemID</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="28" parent="11" name="orderID">
+    <column id="29" parent="11" name="orderID">
       <Position>1</Position>
       <DataType>int(11)|0</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
     </column>
-    <column id="29" parent="11" name="price">
+    <column id="30" parent="11" name="price">
       <Position>2</Position>
       <DataType>float|0</DataType>
     </column>
-    <column id="30" parent="11" name="date">
+    <column id="31" parent="11" name="date">
       <Position>3</Position>
       <DataType>datetime|0</DataType>
     </column>
-    <column id="31" parent="11" name="tableID">
+    <column id="32" parent="11" name="tableID">
       <Position>4</Position>
       <DataType>int(11)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="32" parent="11" name="paid">
+    <column id="33" parent="11" name="paid">
       <Position>5</Position>
       <DataType>tinyint(1)|0</DataType>
     </column>
-    <key id="33" parent="11" name="PRIMARY">
+    <key id="34" parent="11" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>orderID</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="34" parent="12" name="tableID">
+    <column id="35" parent="12" name="tableID">
       <Position>1</Position>
       <DataType>int(11)|0</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
     </column>
-    <column id="35" parent="12" name="name">
+    <column id="36" parent="12" name="name">
       <Position>2</Position>
       <DataType>char(30)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="36" parent="12" name="available">
+    <column id="37" parent="12" name="seats">
       <Position>3</Position>
+      <DataType>int(11)|0</DataType>
+      <DefaultExpression>&apos;0&apos;</DefaultExpression>
+    </column>
+    <column id="38" parent="12" name="available">
+      <Position>4</Position>
       <DataType>tinyint(1)|0</DataType>
       <NotNull>1</NotNull>
       <DefaultExpression>&apos;1&apos;</DefaultExpression>
     </column>
-    <key id="37" parent="12" name="PRIMARY">
+    <key id="39" parent="12" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>tableID</ColNames>
       <Primary>1</Primary>
