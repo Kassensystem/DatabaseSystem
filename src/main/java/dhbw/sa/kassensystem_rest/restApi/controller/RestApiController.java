@@ -81,7 +81,6 @@ public class RestApiController {
     @RequestMapping(value = "/order/", method = RequestMethod.POST)
     public ResponseEntity<?> createOrder(@RequestBody Order order) {
         try {
-            // TODO Rückgabe
             order.setDate(DateTime.now());
             databaseService.addOrder(order);
             // TODO Method für das Ermitteln der letzten hinzugefügten OrderID
