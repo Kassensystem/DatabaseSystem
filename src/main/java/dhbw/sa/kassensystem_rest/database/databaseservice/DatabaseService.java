@@ -299,6 +299,24 @@ public class DatabaseService implements DatabaseService_Interface
 
     }
 
+    public OrderedItem getOrderedItemById(int orderedItemID) throws NullPointerException
+	{
+		if(orderedItemID == 0) {
+			logErr("OrderedItem-ID may not be null.");
+			throw new NullPointerException("No OrderedItem-ID given.");
+		}
+
+		logInf("Getting OrderedItem with ID " + orderedItemID + ".");
+
+		OrderedItem orderedItem = DBService_OrderedItem.getOrderedItemById(connection, orderedItemID);
+
+		if(orderedItem != null)
+			return orderedItem;
+
+		logErr("OrderedItem with ID " + orderedItemID + " doesn't exist in the database.");
+		throw new NullPointerException("OrderedItem-ID " + orderedItemID + " not found.");
+	}
+
     //Adding data to the database
     @Override
     public void addItem(Item item) throws MySQLServerConnectionException, DataException
@@ -583,7 +601,35 @@ public class DatabaseService implements DatabaseService_Interface
             throw new MySQLServerConnectionException();
         }
     }
-    //Deleting data from database
+
+	@Override
+	public void updateOrderedItem(int orderedItemID, OrderedItem orderedItem)
+	{
+		checkConnection();
+
+		logInf("Updating OrderedItem with ID " + orderedItemID + ".");
+
+		if(orderedItemID == 0) {
+			logErr("OrderedItem-ID may not be null.");
+			throw new NullPointerException("No OrderedItem-ID given.");
+		}
+
+		//Existenz OrderedItems mit der OrderedItemID überprüfen
+		if(!orderedItemIsAvailable(orderedItemID)) {
+			logErr("OrderedItem with ID " + orderedItemID + " does not exist in the database! ");
+			throw new DataException("Bestellter Artikel mit der ID " + orderedItemID + " existiert nicht in der Datenbank!");
+		}
+
+		isOrderedItemComplete(orderedItem);
+
+		//Kontrollieren ob ID existiert
+		if(!orderedItemIsAvailable(orderedItemID))
+			throw new DataException("Bestellter Artikel mit der ID " + orderedItemID + " existiert nicht!");
+
+		DBService_OrderedItem.updateOrderedItem(connection, orderedItem, orderedItemID);
+	}
+
+	//Deleting data from database
     /*
       Beim Löschen eines Items oder Tables wird dieser nur als nicht verfügbar markiert,
       verbleiben aber in der Datenbank.
@@ -653,7 +699,8 @@ public class DatabaseService implements DatabaseService_Interface
 
         //Existenz einer Order mit der OrderID überprüfen
         if(!itemdeliveryIsAvailable(itemdeliveryID, this.itemdeliveries)) {
-            logErr("Itemdelivery with ID " + itemdeliveryID + " does not exist in the database! Nothing was deleted.");
+            logErr("Itemdelivery with ID " + itemdeliveryID + " does not exist in the database!" +
+					" Nothing was deleted.");
             throw new DataException("Wareneingang mit der ID " + itemdeliveryID + " existiert nicht in der Datenbank! " +
                     "Es konnte nichts gelöscht werden.");
         }
@@ -671,7 +718,23 @@ public class DatabaseService implements DatabaseService_Interface
         }
     }
 
-    //Drucken einer Order
+	@Override
+	public void deleteOrderedItem(int orderedItemID)
+	{
+		logInf("Deleting OrderedItem with ID " + orderedItemID + ".");
+
+		//Existenz einer OrderedItem mit der orderedItemID überprüfen
+		if(!orderedItemIsAvailable(orderedItemID)) {
+			logErr("OrderedItem with ID " + orderedItemID + " does not exist in the database!" +
+					" Nothing was deleted.");
+			throw new DataException("Bestellter Artikel mit der ID " + orderedItemID + " existiert nicht in der Datenbank! " +
+					"Es konnte nichts gelöscht werden.");
+		}
+
+		DBService_OrderedItem.deleteOrderedItem(connection, orderedItemID);
+	}
+
+	//Drucken einer Order
 
     public void printOrderById(int orderID) throws NullPointerException, DataException,
             MySQLServerConnectionException
@@ -839,6 +902,9 @@ public class DatabaseService implements DatabaseService_Interface
         }
         return false;
     }
+    private boolean orderedItemIsAvailable(int orderedItemID) {
+		return DBService_OrderedItem.orderedItemIsAvailable(connection, orderedItemID);
+	}
 
     /**
      * Druckt eine Order aus.

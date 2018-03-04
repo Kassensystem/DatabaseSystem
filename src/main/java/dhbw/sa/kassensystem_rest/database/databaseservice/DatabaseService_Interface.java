@@ -161,6 +161,13 @@ public interface DatabaseService_Interface
      */
     void updateOrder(int orderID, Order order);
 
+	/**
+	 * Aktualisiert die Daten eines OrderedItem,
+	 * @param orderedItemID ID des zu aktualisierenden OrderdItems.
+	 * @param orderedItem Neue OrderedItem Daten.
+	 */
+	void updateOrderedItem(int orderedItemID, OrderedItem orderedItem);
+
     //Deleting data from the database
 
     /**
@@ -186,6 +193,12 @@ public interface DatabaseService_Interface
      * @param itemdeliveryID ID des zu loeschenden Wareneingangs.
      */
     void deleteItemdelivery(int itemdeliveryID);
+
+	/**
+	 * Löscht ein OrderedItem aus der Datenbank.
+	 * @param orderedItemID Die ID des zu löschen OrderedItems.
+	 */
+	void deleteOrderedItem(int orderedItemID);
 
     /**
      * Ausdrucken einer Bestellung in Abhängigkeit von einer ID;
