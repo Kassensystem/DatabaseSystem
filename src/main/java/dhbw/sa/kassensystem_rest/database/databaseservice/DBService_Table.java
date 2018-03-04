@@ -11,6 +11,23 @@ import java.util.ArrayList;
 
 public class DBService_Table
 {
+	static void addTable(Connection connection, Table table)
+	{
+		try {
+			String query =  "INSERT INTO " + DatabaseProperties.getDatabase() + ".tables(tableID, name, seats, available) " +
+					"VALUES(DEFAULT, ?, ?, ?)";
+			PreparedStatement pst = connection.prepareStatement(query);
+
+			pst.setString(1, table.getName());
+			pst.setInt(2, table.getSeats());
+			pst.setBoolean(3, table.isAvailable());
+			pst.executeUpdate();
+		} catch(SQLException e) {
+			e.printStackTrace();
+			DatabaseService_Interface.connect();
+			throw new MySQLServerConnectionException();
+		}
+	}
 
 	static ArrayList<Table> getAllTables(Connection connection)
 	{
@@ -38,11 +55,6 @@ public class DBService_Table
 		}
 	}
 
-	static void updateTable(Connection connection, Table table, int tableID)
-	{
-
-	}
-
 	static Table getTableById(Connection connection, int tableID)
 	{
 		Table table = null;
@@ -64,6 +76,25 @@ public class DBService_Table
 			}
 			return table;
 		} catch (SQLException e) {
+			e.printStackTrace();
+			DatabaseService_Interface.connect();
+			throw new MySQLServerConnectionException();
+		}
+	}
+
+	static void updateTable(Connection connection, Table table, int tableID)
+	{
+		try {
+			String query =  "UPDATE " + DatabaseProperties.getDatabase() + ".tables " +
+					"SET name = ?, seats = ?, available = ? " +
+					"WHERE tableID = " + tableID;
+			PreparedStatement pst = connection.prepareStatement(query);
+
+			pst.setString(1, table.getName());
+			pst.setInt(2, table.getSeats());
+			pst.setBoolean(3, table.isAvailable());
+			pst.executeUpdate();
+		} catch(SQLException e) {
 			e.printStackTrace();
 			DatabaseService_Interface.connect();
 			throw new MySQLServerConnectionException();

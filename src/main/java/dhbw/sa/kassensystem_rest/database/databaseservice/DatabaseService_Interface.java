@@ -127,10 +127,16 @@ public interface DatabaseService_Interface
     void addOrder(Order order);
 
     /**
-     * Fuegt der Datenbank einen neuen Wareneingang hinzu.
+     * Fügt der Datenbank einen neuen Wareneingang hinzu.
      * @param itemdelivery neuer Wareneingang.
      */
     void addItemdelivery(Itemdelivery itemdelivery);
+
+	/**
+	 * Fügt der Datenbank ein neues OrderedItem hinzu.
+	 * @param orderedItem Das hinzuzufügende OrderedItem.
+	 */
+	void addOrderedItem(OrderedItem orderedItem);
 
     //Updating data in database
 

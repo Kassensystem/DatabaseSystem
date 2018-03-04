@@ -30,10 +30,8 @@ public class DatabaseService implements DatabaseService_Interface
      *  orders Alle in der Datenbank befindlichen Orders werden hier gespeichert.
      *  itemdeliveries Alle in der Datenbank befindlichen itemdeliveries werden hier gespeichert.
      *  connection Eine Instanz einer Verbindung zur Datenbank.
-     *  dbp Beinhaltet eine Beschreibung der Daten die zur Verbindung zur Datenbank noetig sind.
+     *  DatabaseProperties Beinhaltet eine Beschreibung der Daten die zur Verbindung zur Datenbank noetig sind.
      */
-
-    private final DatabaseProperties dbp = new DatabaseProperties();
 
     private Connection connection;
 
@@ -73,7 +71,7 @@ public class DatabaseService implements DatabaseService_Interface
 
         try {
             String query = "SELECT itemID, name, retailprice, available " +
-                    "FROM " + dbp.getDatabase() + ".items";
+                    "FROM " + DatabaseProperties.getDatabase() + ".items";
             PreparedStatement pst = connection.prepareStatement(query);
             ResultSet rs = pst.executeQuery();
 
@@ -118,7 +116,7 @@ public class DatabaseService implements DatabaseService_Interface
 
         try {
             String query = "SELECT orderID, price, date, tableID, paid " +
-                    "FROM " + dbp.getDatabase() + ".orders";
+                    "FROM " + DatabaseProperties.getDatabase() + ".orders";
             PreparedStatement pst = connection.prepareStatement(query);
             ResultSet rs = pst.executeQuery();
 
@@ -150,7 +148,7 @@ public class DatabaseService implements DatabaseService_Interface
 
         try {
             String query = "SELECT itemdeliveryID, itemID, quantity " +
-                    "FROM " + dbp.getDatabase() + ".itemdeliveries";
+                    "FROM " + DatabaseProperties.getDatabase() + ".itemdeliveries";
             PreparedStatement pst = connection.prepareStatement(query);
             ResultSet rs = pst.executeQuery();
 
@@ -199,7 +197,7 @@ public class DatabaseService implements DatabaseService_Interface
 
         try {
             String query = "SELECT orderedItemID, orderID, itemID, itemPaid, itemProduced " +
-                    "FROM " + dbp.getDatabase() + ".ordereditems " +
+                    "FROM " + DatabaseProperties.getDatabase() + ".ordereditems " +
                     "WHERE itemID = " + itemID;
             PreparedStatement pst = connection.prepareStatement(query);
             ResultSet rs = pst.executeQuery();
@@ -326,7 +324,7 @@ public class DatabaseService implements DatabaseService_Interface
         isItemComplete(item);
 
         try {
-            String query =  "INSERT INTO " + dbp.getDatabase() + ".items(itemID, name, retailprice, available) " +
+            String query =  "INSERT INTO " + DatabaseProperties.getDatabase() + ".items(itemID, name, retailprice, available) " +
                             "VALUES(DEFAULT, ?, ?, ?)";
             PreparedStatement pst = connection.prepareStatement(query);
 
@@ -336,7 +334,7 @@ public class DatabaseService implements DatabaseService_Interface
             pst.executeUpdate();
 
             //ID des neu erzeugten Items ermitteln, um anschließend hierfuer einen neuen Wareneingang anzulegen
-            query = "SELECT * FROM " + dbp.getDatabase() + ".items ORDER BY itemID DESC LIMIT 1";
+            query = "SELECT * FROM " + DatabaseProperties.getDatabase() + ".items ORDER BY itemID DESC LIMIT 1";
             pst = connection.prepareStatement(query);
             ResultSet rs = pst.executeQuery();
 
@@ -369,19 +367,7 @@ public class DatabaseService implements DatabaseService_Interface
         }
         isTableComplete(table);
 
-        try {
-            String query =  "INSERT INTO " + dbp.getDatabase() + ".tables(tableID, name, available) " +
-                            "VALUES(DEFAULT, ?, ?)";
-            PreparedStatement pst = connection.prepareStatement(query);
-
-            pst.setString(1, table.getName());
-            pst.setBoolean(2, table.isAvailable());
-            pst.executeUpdate();
-        } catch(SQLException e) {
-            e.printStackTrace();
-			DatabaseService_Interface.connect();
-            throw new MySQLServerConnectionException();
-        }
+        DBService_Table.addTable(connection, table);
     }
     @Override
     public void addOrder(Order order) throws MySQLServerConnectionException, DataException
@@ -410,7 +396,7 @@ public class DatabaseService implements DatabaseService_Interface
             printOrder(order, true);
 
         try {
-            String query =  "INSERT INTO " + dbp.getDatabase() + ".orders(orderID, price, date, tableID, paid)" +
+            String query =  "INSERT INTO " + DatabaseProperties.getDatabase() + ".orders(orderID, price, date, tableID, paid)" +
                             "VALUES(DEFAULT, ?, ?, ?, ?, ?)";
             PreparedStatement pst = connection.prepareStatement(query);
 
@@ -444,7 +430,7 @@ public class DatabaseService implements DatabaseService_Interface
         isItemdeliveryComplete(itemdelivery);
 
         try {
-            String query =  "INSERT INTO " + dbp.getDatabase() + ".itemdeliveries(itemdeliveryID, itemID, quantity) " +
+            String query =  "INSERT INTO " + DatabaseProperties.getDatabase() + ".itemdeliveries(itemdeliveryID, itemID, quantity) " +
                     "VALUES(DEFAULT, ?, ?)";
             PreparedStatement pst = connection.prepareStatement(query);
 
@@ -458,7 +444,26 @@ public class DatabaseService implements DatabaseService_Interface
         }
     }
 
-    //Updating data in database
+	@Override
+	public void addOrderedItem(OrderedItem orderedItem) throws MySQLServerConnectionException,
+			DataException
+	{
+		checkConnection();
+
+		logInf("Adding OrderedItem to MySQL-Database.");
+
+		//Vollständigkeit der Order ueberpruefen
+		if(orderedItem.getOrderedItemID() != 0) {
+			logErr("ID may not be set by the user.");
+			logErr("OrderedItem was not added to the Database!");
+			throw new DataException("Es darf keine ID übergeben werden. Die ID wird vom Datenbank-Server gewählt!");
+		}
+		isOrderedItemComplete(orderedItem);
+
+		DBService_OrderedItem.addOrderedItem(connection, orderedItem);
+	}
+
+	//Updating data in database
     @Override
     public void updateItem(int itemID, Item item) throws NullPointerException, DataException,
             MySQLServerConnectionException
@@ -483,7 +488,7 @@ public class DatabaseService implements DatabaseService_Interface
         isItemComplete(item);
 
         try {
-            String query =  "UPDATE " + dbp.getDatabase() + ".items " +
+            String query =  "UPDATE " + DatabaseProperties.getDatabase() + ".items " +
                             "SET name = ?, retailprice = ?, available = ? " +
                             "WHERE itemID = " + itemID;
             PreparedStatement pst = connection.prepareStatement(query);
@@ -521,20 +526,7 @@ public class DatabaseService implements DatabaseService_Interface
 
         isTableComplete(table);
 
-        try {
-            String query =  "UPDATE " + dbp.getDatabase() + ".tables " +
-                            "SET name = ?, available = ? " +
-                            "WHERE tableID = " + tableID;
-            PreparedStatement pst = connection.prepareStatement(query);
-
-            pst.setString(1, table.getName());
-            pst.setBoolean(2, table.isAvailable());
-            pst.executeUpdate();
-        } catch(SQLException e) {
-            e.printStackTrace();
-			DatabaseService_Interface.connect();
-            throw new MySQLServerConnectionException();
-        }
+        DBService_Table.updateTable(connection, table, tableID);
     }
     @Override
     public void updateOrder(int orderID, Order order) throws NullPointerException, DataException,
@@ -575,7 +567,7 @@ public class DatabaseService implements DatabaseService_Interface
         // übertragen. Anschließend werden diese Übertragenen Items ausgedruckt.
 
         try {
-            String query =  "UPDATE " + dbp.getDatabase() + ".orders " +
+            String query =  "UPDATE " + DatabaseProperties.getDatabase() + ".orders " +
                             "SET price = ?, date = ?, tableID = ?, paid = ? " +
                             "WHERE orderID = " + orderID;
             PreparedStatement pst = connection.prepareStatement(query);
@@ -640,7 +632,7 @@ public class DatabaseService implements DatabaseService_Interface
           Loeschen einer Order loescht diese unwiederruflich aus der Datenbank.
          */
         try {
-            String query =  "DELETE FROM " + dbp.getDatabase() + ".orders " +
+            String query =  "DELETE FROM " + DatabaseProperties.getDatabase() + ".orders " +
                     "WHERE orderID = " + orderID;
             PreparedStatement pst = connection.prepareStatement(query);
 
@@ -667,7 +659,7 @@ public class DatabaseService implements DatabaseService_Interface
         }
 
         try {
-            String query =  "DELETE FROM " + dbp.getDatabase() + ".itemdeliveries " +
+            String query =  "DELETE FROM " + DatabaseProperties.getDatabase() + ".itemdeliveries " +
                     "WHERE itemdeliveryID = " + itemdeliveryID;
             PreparedStatement pst = connection.prepareStatement(query);
 
@@ -793,6 +785,27 @@ public class DatabaseService implements DatabaseService_Interface
         return true;
 
     }
+    private boolean isOrderedItemComplete(OrderedItem orderedItem)
+	{
+		String missingAttributs = "";
+
+
+		if(orderedItem.getOrderID() == 0) {
+			missingAttributs += " OrderID";
+			logErr("OrderID missing.");
+		}
+		if(orderedItem.getItemID() == 0) {
+			missingAttributs += " ItemID";
+			logErr("ItemID missing.");
+		}
+
+		if(!missingAttributs.isEmpty()) {
+			logErr("OrderedItem was not added to the database!");
+			throw new DataException("Der bestellte Artikel ist unvollständig! Die folgenden Parameter fehlen: " + missingAttributs);
+		}
+
+		return true;
+	}
 
     private boolean itemIsAvailable(int itemID, ArrayList<Item> items)
 	{
@@ -853,7 +866,7 @@ public class DatabaseService implements DatabaseService_Interface
 		checkConnection();
 		try {
 			String query = "SELECT quantity AS \"Quantity of Itemdeliveries\"" +
-					"FROM " + dbp.getDatabase() + ".itemdeliveries " +
+					"FROM " + DatabaseProperties.getDatabase() + ".itemdeliveries " +
 					"WHERE itemID = " + itemID;
 			PreparedStatement pst = connection.prepareStatement(query);
 			ResultSet rs = pst.executeQuery();
@@ -873,7 +886,7 @@ public class DatabaseService implements DatabaseService_Interface
 
 		try {
 			String query = "SELECT COUNT(*) AS \"Quantity of Orders\"" +
-					"FROM " + dbp.getDatabase() + ".ordereditems " +
+					"FROM " + DatabaseProperties.getDatabase() + ".ordereditems " +
 					"WHERE itemID = " + itemID;
 			PreparedStatement pst = connection.prepareStatement(query);
 			ResultSet rs = pst.executeQuery();

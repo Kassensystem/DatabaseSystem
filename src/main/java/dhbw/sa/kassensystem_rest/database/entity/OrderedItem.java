@@ -1,5 +1,10 @@
 package dhbw.sa.kassensystem_rest.database.entity;
 
+/**
+ * Ein OrderedItem ist ein bestellter Artikel der zu einer Bestellung gehört.
+ * Für jeden Artikel, der zu einer Bestellung gehört, wird ein OrderedItem erstellt
+ * und in der Datenbank abgelegt.
+ */
 public class OrderedItem {
     private int orderedItemID;
     private int orderID;
@@ -7,6 +12,14 @@ public class OrderedItem {
     private boolean itemPaid;
     private boolean itemProduced;
 
+	/**
+	 * Konstruktor zum Abrufen eines vollständigen OrderedItems aus der Datenbank.
+	 * @param orderedItemID
+	 * @param orderID
+	 * @param itemID
+	 * @param itemPaid
+	 * @param itemProduced
+	 */
 	public OrderedItem(int orderedItemID, int orderID, int itemID, boolean itemPaid, boolean itemProduced) {
         this.orderedItemID = orderedItemID;
         this.orderID = orderID;
@@ -14,6 +27,18 @@ public class OrderedItem {
         this.itemPaid = itemPaid;
         this.itemProduced = itemProduced;
     }
+
+	/**
+	 * Konstruktor zum Hinzufügen eines neuen OrderedItems in die Datenbank.
+	 * @param orderID
+	 * @param itemID
+	 */
+	public OrderedItem(int orderID, int itemID) {
+		this.orderID = orderID;
+		this.itemID = itemID;
+		this.itemPaid = false;
+		this.itemProduced = false;
+	}
 
     public int getOrderedItemID() {
         return orderedItemID;
@@ -40,9 +65,9 @@ public class OrderedItem {
         this.itemPaid = true;
     }
 
-	public void setItemProduced(boolean itemProduced)
+	public void itemIsProduced()
 	{
-		this.itemProduced = itemProduced;
+		this.itemProduced = true;
 	}
 
 }

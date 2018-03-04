@@ -66,4 +66,22 @@ public class DBService_OrderedItem
 			throw new MySQLServerConnectionException();
 		}
 	}
+
+	public static void addOrderedItem(Connection connection, OrderedItem orderedItem)
+	{
+		try {
+			String query =  "INSERT INTO " + DatabaseProperties.getDatabase() +
+					".orderedItems(orderedItemId, orderID, itemID, itemPaid, itemProduced) " +
+					"VALUES(DEFAULT, ?, ?, DEFAULT, DEFAULT)";
+			PreparedStatement pst = connection.prepareStatement(query);
+
+			pst.setInt(1, orderedItem.getOrderID());
+			pst.setInt(2, orderedItem.getItemID());
+			pst.executeUpdate();
+		} catch(SQLException e) {
+			e.printStackTrace();
+			DatabaseService_Interface.connect();
+			throw new MySQLServerConnectionException();
+		}
+	}
 }

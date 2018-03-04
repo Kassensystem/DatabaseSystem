@@ -71,6 +71,11 @@ public class RestApiController {
         return databaseService.getOrderedItemsByOrderId(orderId);
     }
 
+    // TODO Hinzufügen aller nötigen Methoden, die für die Kommunikation im optimierten DB-System mit der
+	// TODO Android App benötigt werden.
+	// TODO (ermitteln ob eine offene Bestellung für einen Tisch exisitiert,
+	// TODO ...)
+
     /*POST/PUT*/
 
     /**
@@ -92,6 +97,13 @@ public class RestApiController {
             return response;
         }
     }
+
+
+    @RequestMapping(value = "/orderedItem", method = RequestMethod.POST)
+    public ResponseEntity<?> createOrderedItems(@RequestBody ArrayList<OrderedItem> orderedItems) {
+    	// TODO
+		return null;
+	}
 
     /**
      * Updatet eine bereits existierende Bestellung in der Datenbank.
