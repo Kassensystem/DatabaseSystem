@@ -11,8 +11,7 @@ import java.util.ArrayList;
 
 public class DBService_OrderedItem
 {
-
-	public static ArrayList<OrderedItem> getAllOrderedItems(Connection connection)
+	static ArrayList<OrderedItem> getAllOrderedItems(Connection connection)
 	{
 		ArrayList<OrderedItem> orderedItems = new ArrayList<>();
 
@@ -39,7 +38,7 @@ public class DBService_OrderedItem
 		}
 	}
 
-	public static ArrayList<OrderedItem> getOrderedItemsByOrderId(Connection connection, int orderID)
+	static ArrayList<OrderedItem> getOrderedItemsByOrderId(Connection connection, int orderID)
 	{
 		ArrayList<OrderedItem> orderedItems = new ArrayList<>();
 
@@ -67,7 +66,35 @@ public class DBService_OrderedItem
 		}
 	}
 
-	public static OrderedItem getOrderedItemById(Connection connection, int orderedItemID)
+	static ArrayList<OrderedItem> getOrderedItemsByItemId(Connection connection, int itemID)
+	{
+		ArrayList<OrderedItem> orderedItems = new ArrayList<>();
+
+		try {
+			String query = "SELECT orderedItemID, orderID, itemID, itemPaid, itemProduced " +
+					"FROM " + DatabaseProperties.getDatabase() + ".ordereditems " +
+					"WHERE itemID = " + itemID;
+			PreparedStatement pst = connection.prepareStatement(query);
+			ResultSet rs = pst.executeQuery();
+
+			while(rs.next()) {
+				//get each orderedItem from DB
+				int orderedItemID = rs.getInt("orderedItemID");
+				int orderID = rs.getInt("orderID");
+				itemID = rs.getInt("itemID");
+				boolean itemPaid = rs.getBoolean("itemPaid");
+				boolean itemProduced = rs.getBoolean("itemProduced");
+				orderedItems.add(new OrderedItem(orderedItemID, orderID, itemID, itemPaid, itemProduced));
+			}
+			return orderedItems;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			DatabaseService_Interface.connect();
+			throw new MySQLServerConnectionException();
+		}
+	}
+
+	static OrderedItem getOrderedItemById(Connection connection, int orderedItemID)
 	{
 		try {
 			String query = "SELECT orderedItemID, orderID, itemID, itemPaid, itemProduced " +
@@ -93,7 +120,7 @@ public class DBService_OrderedItem
 		return null;
 	}
 
-	public static void addOrderedItem(Connection connection, OrderedItem orderedItem)
+	static void addOrderedItem(Connection connection, OrderedItem orderedItem)
 	{
 		try {
 			String query =  "INSERT INTO " + DatabaseProperties.getDatabase() +
@@ -111,7 +138,7 @@ public class DBService_OrderedItem
 		}
 	}
 
-	public static void updateOrderedItem(Connection connection, OrderedItem orderedItem, int orderedItemID)
+	static void updateOrderedItem(Connection connection, OrderedItem orderedItem, int orderedItemID)
 	{
 		try {
 			String query =  "UPDATE " + DatabaseProperties.getDatabase() + ".orderedItems " +
@@ -131,7 +158,7 @@ public class DBService_OrderedItem
 		}
 	}
 
-	public static void deleteOrderedItem(Connection connection, int orderedItemID)
+	static void deleteOrderedItem(Connection connection, int orderedItemID)
 	{
 		try {
 			String query =  "DELETE FROM " + DatabaseProperties.getDatabase() + ".orderedItems " +
@@ -146,7 +173,7 @@ public class DBService_OrderedItem
 		}
 	}
 
-	public static boolean orderedItemIsAvailable(Connection connection, int orderedItemID) {
+	static boolean existsOrderedItemWithID(Connection connection, int orderedItemID) {
 		try {
 			String query = "SELECT orderedItemID from " + DatabaseProperties.getDatabase() + ".orderedItems " +
 					"WHERE orderedItemID = " + orderedItemID;

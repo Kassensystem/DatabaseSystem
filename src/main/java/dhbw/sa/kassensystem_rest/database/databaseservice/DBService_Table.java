@@ -100,4 +100,23 @@ public class DBService_Table
 			throw new MySQLServerConnectionException();
 		}
 	}
+
+	static boolean existsTableWithID(Connection connection, int tableID)
+	{
+		try {
+			String query = "SELECT talbeID from " + DatabaseProperties.getDatabase() + ".tables " +
+					"WHERE tableID = " + tableID;
+			PreparedStatement pst = connection.prepareStatement(query);
+			ResultSet rs = pst.executeQuery();
+
+			if(rs.next() && rs.getInt("tableID") != 0)
+				return true;
+
+		} catch(SQLException e) {
+			e.printStackTrace();
+			DatabaseService_Interface.connect();
+			throw new MySQLServerConnectionException();
+		}
+		return false;
+	}
 }
