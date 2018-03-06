@@ -124,7 +124,7 @@ public interface DatabaseService_Interface
      * Fuegt der Datenbank eine neue Bestellung hinzu.
      * @param order neue Bestellung.
      */
-    void addOrder(Order order);
+    int addOrder(Order order);
 
     /**
      * Fügt der Datenbank einen neuen Wareneingang hinzu.

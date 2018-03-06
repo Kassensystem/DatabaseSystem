@@ -254,7 +254,7 @@ public class DatabaseService implements DatabaseService_Interface
         DBService_Table.addTable(connection, table);
     }
     @Override
-    public void addOrder(Order order) throws MySQLServerConnectionException, DataException
+    public int addOrder(Order order) throws MySQLServerConnectionException, DataException
 	{
         checkConnection();
 
@@ -276,7 +276,7 @@ public class DatabaseService implements DatabaseService_Interface
         else
             printOrder(order, true);
 
-        DBService_Order.addOrder(connection, order);
+        return DBService_Order.addOrder(connection, order);
     }
     @Override
     public void addItemdelivery(Itemdelivery itemdelivery) throws MySQLServerConnectionException,

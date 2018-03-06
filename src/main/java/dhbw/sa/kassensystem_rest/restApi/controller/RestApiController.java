@@ -84,13 +84,13 @@ public class RestApiController {
      * @return ResponseEntity, das Erstellen entweder bestätigt oder eine Fehlermeldung liefert.
      */
     @RequestMapping(value = "/order/", method = RequestMethod.POST)
-    public ResponseEntity<?> createOrder(@RequestBody Order order) {
+    public ResponseEntity<?> createOrder(@RequestBody Order order)
+	{
         try {
             order.setDate(DateTime.now());
-            databaseService.addOrder(order);
-            // TODO Method für das Ermitteln der letzten hinzugefügten OrderID
-            int lastOrderID = 87;
-            return new ResponseEntity(lastOrderID, HttpStatus.OK);
+            int orderID = databaseService.addOrder(order);
+
+            return new ResponseEntity(orderID, HttpStatus.OK);
         } catch (Exception e) {
             e.printStackTrace();
             ResponseEntity<?> response = new ResponseEntity(e.getMessage(), HttpStatus.NOT_FOUND);
@@ -100,9 +100,17 @@ public class RestApiController {
 
 
     @RequestMapping(value = "/orderedItem", method = RequestMethod.POST)
-    public ResponseEntity<?> createOrderedItems(@RequestBody ArrayList<OrderedItem> orderedItems) {
-    	// TODO
-		return null;
+    public ResponseEntity<?> createOrderedItems(@RequestBody ArrayList<OrderedItem> orderedItems)
+	{
+		try {
+			for(OrderedItem o: orderedItems) {
+				databaseService.addOrderedItem(o);
+			}
+			return new ResponseEntity(HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new ResponseEntity(e, HttpStatus.NOT_FOUND);
+		}
 	}
 
     /**
@@ -112,7 +120,8 @@ public class RestApiController {
      * @return ResponseEntity, das Updaten entweder bestätigt oder eine Fehlermeldung liefert.
      */
     @RequestMapping(value = "/order/{orderID}", method = RequestMethod.PUT)
-    public ResponseEntity<?> updateOrder(@PathVariable("orderID") int orderID, @RequestBody Order order) {
+    public ResponseEntity<?> updateOrder(@PathVariable("orderID") int orderID, @RequestBody Order order)
+	{
         try {
             order.setDate(DateTime.now());
             databaseService.updateOrder(orderID, order);

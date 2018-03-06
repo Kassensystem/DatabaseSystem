@@ -69,7 +69,7 @@ public class DBService_Order
 		return null;
 	}
 
-	static void addOrder(Connection connection, Order order)
+	static int addOrder(Connection connection, Order order)
 	{
 		try {
 			String query =  "INSERT INTO " + DatabaseProperties.getDatabase() + ".orders(orderID, price, date, tableID)" +
@@ -80,11 +80,24 @@ public class DBService_Order
 			pst.setObject(2, convertJodaDateTimeToSqlTimestamp(order.getDate()) );
 			pst.setInt(3, order.getTable());
 			pst.executeUpdate();
+
+			//Ermitteln der nun belegten orderID
+
+			query = "SELECT * FROM " + DatabaseProperties.getDatabase() +
+					".orders ORDER BY orderID DESC LIMIT 1";
+			pst = connection.prepareStatement(query);
+			ResultSet rs = pst.executeQuery();
+
+			while(rs.next()) {
+				return rs.getInt("orderID");
+			}
+
 		} catch(SQLException e) {
 			e.printStackTrace();
 			DatabaseService_Interface.connect();
 			throw new MySQLServerConnectionException();
 		}
+		return 0;
 	}
 
 	static void updateOrder(Connection connection, Order order, int orderID)
