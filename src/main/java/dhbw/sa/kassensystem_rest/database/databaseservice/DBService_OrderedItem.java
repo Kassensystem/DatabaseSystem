@@ -173,7 +173,8 @@ public class DBService_OrderedItem
 		}
 	}
 
-	static boolean existsOrderedItemWithID(Connection connection, int orderedItemID) {
+	static boolean existsOrderedItemWithID(Connection connection, int orderedItemID)
+	{
 		try {
 			String query = "SELECT orderedItemID from " + DatabaseProperties.getDatabase() + ".orderedItems " +
 					"WHERE orderedItemID = " + orderedItemID;

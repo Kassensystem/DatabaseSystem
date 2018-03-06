@@ -35,11 +35,6 @@ public class DatabaseService implements DatabaseService_Interface
 
     private Connection connection;
 
-    private ArrayList<Item> items = new ArrayList<>();
-    private ArrayList<Table> tables = new ArrayList<>();
-    private ArrayList<Order> orders = new ArrayList<>();
-    private ArrayList<Itemdelivery> itemdeliveries = new ArrayList<>();
-
     public DatabaseService()
 	{
         connection = DatabaseService_Interface.connect();
@@ -87,34 +82,11 @@ public class DatabaseService implements DatabaseService_Interface
     @Override
     public ArrayList<Order> getAllOrders() throws MySQLServerConnectionException
 	{
-        this.orders.clear();
-
         checkConnection();
 
         logInf("Getting Orders from MySQL-Database.");
 
-        try {
-            String query = "SELECT orderID, date, tableID, paid " +
-                    "FROM " + DatabaseProperties.getDatabase() + ".orders";
-            PreparedStatement pst = connection.prepareStatement(query);
-            ResultSet rs = pst.executeQuery();
-
-            while(rs.next()) {
-                int orderID = rs.getInt("orderID");
-                int tableID = rs.getInt("tableID");
-                double price = DBService_Order.getPrice(connection, orderID);
-                price = round(price);
-                DateTime dateTime = convertSqlTimestampToJodaDateTime(rs.getTimestamp("date"));
-                boolean paid = rs.getBoolean("paid");
-
-                this.orders.add(new Order(orderID, tableID, price, dateTime, paid));
-            }
-            return this.orders;
-        } catch (SQLException e) {
-            e.printStackTrace();
-			DatabaseService_Interface.connect();
-            throw new MySQLServerConnectionException();
-        }
+        return DBService_Order.getAllOrders(connection);
     }
     @Override
     public ArrayList<Itemdelivery> getAllItemdeliveries() throws MySQLServerConnectionException
@@ -139,8 +111,6 @@ public class DatabaseService implements DatabaseService_Interface
 	{
         checkConnection();
 
-        ArrayList<OrderedItem> orderedItems = new ArrayList<>();
-
         logInf("Getting OrderedItems from MySQL-Database.");
 
         return DBService_OrderedItem.getOrderedItemsByOrderId(connection, orderID);
@@ -149,8 +119,6 @@ public class DatabaseService implements DatabaseService_Interface
     public ArrayList<OrderedItem> getOrderedItemsByItemId(int itemID)
 	{
         checkConnection();
-
-        ArrayList<OrderedItem> orderedItems = new ArrayList<>();
 
         logInf("Getting OrderedItems from MySQL-Database.");
 
@@ -167,10 +135,9 @@ public class DatabaseService implements DatabaseService_Interface
 
         logInf("Getting Order with ID " + orderID + ".");
 
-        for(Order o: this.getAllOrders()) {
-            if(o.getOrderID() == orderID)
-                return o;
-        }
+        Order order = DBService_Order.getOrderByID(connection, orderID);
+        if(order != null)
+        	return order;
 
         logErr("Order with ID " + orderID + " doesn't exist in the database.");
         throw new NullPointerException("Order-ID " + orderID + " not found.");
@@ -238,7 +205,6 @@ public class DatabaseService implements DatabaseService_Interface
 		logInf("Getting OrderedItem with ID " + orderedItemID + ".");
 
 		OrderedItem orderedItem = DBService_OrderedItem.getOrderedItemById(connection, orderedItemID);
-
 		if(orderedItem != null)
 			return orderedItem;
 
@@ -294,10 +260,6 @@ public class DatabaseService implements DatabaseService_Interface
 
         logInf("Adding Order to MySQL-Database.");
 
-        this.orders = this.getAllOrders();
-        this.items = this.getAllItems();
-        this.tables = this.getAllTables();
-
         //Vollständigkeit der Order ueberpruefen
         if(order.getOrderID() != 0) {
             logErr("ID may not be set by the user.");
@@ -306,28 +268,15 @@ public class DatabaseService implements DatabaseService_Interface
         }
         isOrderComplete(order);
 
-        if(order.isPaid()) {
+        // TODO Ausdrucklogik überarbeiten:
+        if(DBService_Order.isOrderPaid(connection, order.getOrderID())) {
             printOrder(order, true);
             printOrder(order, false);
         }
         else
             printOrder(order, true);
 
-        try {
-            String query =  "INSERT INTO " + DatabaseProperties.getDatabase() + ".orders(orderID, price, date, tableID, paid)" +
-                            "VALUES(DEFAULT, ?, ?, ?, ?, ?)";
-            PreparedStatement pst = connection.prepareStatement(query);
-
-            pst.setDouble(1, order.getPrice());
-            pst.setObject(2, convertJodaDateTimeToSqlTimestamp(order.getDate()) );
-            pst.setInt(3, order.getTable());
-            pst.setBoolean(4, order.isPaid());
-            pst.executeUpdate();
-        } catch(SQLException e) {
-            e.printStackTrace();
-			DatabaseService_Interface.connect();
-            throw new MySQLServerConnectionException();
-        }
+        DBService_Order.addOrder(connection, order);
     }
     @Override
     public void addItemdelivery(Itemdelivery itemdelivery) throws MySQLServerConnectionException,
@@ -398,8 +347,6 @@ public class DatabaseService implements DatabaseService_Interface
 
         logInf("Updating Table with ID " + tableID + ".");
 
-        this.tables = this.getAllTables();
-
         if(tableID == 0) {
             logErr("Table-ID may not be null.");
             throw new NullPointerException("No Table-ID given.");
@@ -423,17 +370,13 @@ public class DatabaseService implements DatabaseService_Interface
 
         logInf("Updating Order with ID " + orderID + ".");
 
-        this.orders = this.getAllOrders();
-        this.items = this.getAllItems();
-        this.tables = this.getAllTables();
-
         if(orderID == 0) {
             logErr("Order-ID may not be null.");
             throw new NullPointerException("No Order-ID given.");
         }
 
         //Existenz einer Order mit der OrderID überprüfen
-        if(!orderIsAvailable(orderID, this.orders)) {
+        if(!orderIsAvailable(orderID)) {
             logErr("Order with ID " + orderID + " does not exist in the database! ");
             throw new DataException("Bestellung mit der ID " + orderID + " existiert nicht in der Datenbank!");
         }
@@ -453,22 +396,7 @@ public class DatabaseService implements DatabaseService_Interface
         // Das Ausdrucken passiert nun beim Hinzufügen von orderedItems. Dabei wird eine Liste von orderedItems
         // übertragen. Anschließend werden diese Übertragenen Items ausgedruckt.
 
-        try {
-            String query =  "UPDATE " + DatabaseProperties.getDatabase() + ".orders " +
-                            "SET price = ?, date = ?, tableID = ?, paid = ? " +
-                            "WHERE orderID = " + orderID;
-            PreparedStatement pst = connection.prepareStatement(query);
-
-            pst.setDouble(1, order.getPrice());
-            pst.setObject(2, convertJodaDateTimeToSqlTimestamp(order.getDate()) );
-            pst.setInt(3, order.getTable());
-            pst.setBoolean(4, order.isPaid());
-            pst.executeUpdate();
-        } catch(SQLException e) {
-            e.printStackTrace();
-			DatabaseService_Interface.connect();
-            throw new MySQLServerConnectionException();
-        }
+		DBService_Order.updateOrder(connection, order, orderID);
     }
 
 	@Override
@@ -534,29 +462,14 @@ public class DatabaseService implements DatabaseService_Interface
 	{
         logInf("Deleting Order with ID " + orderID + ".");
 
-        this.orders = this.getAllOrders();
-
         //Existenz einer Order mit der OrderID überprüfen
-        if(!orderIsAvailable(orderID, this.orders)) {
+        if(!orderIsAvailable(orderID)) {
             logErr("Order with ID " + orderID + " does not exist in the database! Nothing was deleted.");
             throw new DataException("Bestellung mit der ID " + orderID + " existiert nicht in der Datenbank! " +
                     "Es konnte nichts gelöscht werden.");
         }
 
-        /*
-          Loeschen einer Order loescht diese unwiederruflich aus der Datenbank.
-         */
-        try {
-            String query =  "DELETE FROM " + DatabaseProperties.getDatabase() + ".orders " +
-                    "WHERE orderID = " + orderID;
-            PreparedStatement pst = connection.prepareStatement(query);
-
-            pst.executeUpdate();
-        } catch(SQLException e) {
-            e.printStackTrace();
-			DatabaseService_Interface.connect();
-            throw new MySQLServerConnectionException();
-        }
+        DBService_Order.deleteOrder(connection, orderID);
     }
     @Override
     public void deleteItemdelivery(int itemdeliveryID) throws NullPointerException, DataException,
@@ -596,17 +509,13 @@ public class DatabaseService implements DatabaseService_Interface
     public void printOrderById(int orderID) throws NullPointerException, DataException,
             MySQLServerConnectionException
 	{
-        this.orders = this.getAllOrders();
-        this.items = this.getAllItems();
-        this.tables = this.getAllTables();
-
         if(orderID == 0) {
             logErr("Order-ID is null.");
             throw new NullPointerException("No Order-ID given.");
         }
 
         //Existenz einer Order mit der OrderID überprüfen
-        if(!orderIsAvailable(orderID, this.orders)) {
+        if(!orderIsAvailable(orderID)) {
             logErr("Order with ID " + orderID + " does not exist in the database!");
             throw new DataException("Bestellung mit der ID " + orderID + " existiert nicht in der Datenbank! Es kann nichts gedruckt werden.");
         }
@@ -615,7 +524,7 @@ public class DatabaseService implements DatabaseService_Interface
     }
 
     // Vollständigkeit der Daten von Objekten überprüfen
-    private boolean isOrderComplete(Order order)
+    private void isOrderComplete(Order order)
 	{
         String missingAttributs = "";
 
@@ -634,9 +543,6 @@ public class DatabaseService implements DatabaseService_Interface
             logErr("Order was not added to the database!");
             throw new DataException("Die angegebene Table-ID existiert nicht in der Datenbank!");
         }
-
-        return true;
-
     }
     private boolean isTableComplete(Table table)
 	{
@@ -732,13 +638,10 @@ public class DatabaseService implements DatabaseService_Interface
         return DBService_Item.existsItemWithID(connection, itemID);
 
     }
-    private boolean orderIsAvailable(int orderID, ArrayList<Order> orders)
+    private boolean orderIsAvailable(int orderID)
 	{
-        for(Order o: orders) {
-            if(orderID == o.getOrderID())
-                return true;
-        }
-        return false;
+
+        return DBService_Order.existsOrderWithID(connection, orderID);
     }
     private boolean existsTableWithID(int tableID)
 	{
@@ -763,8 +666,8 @@ public class DatabaseService implements DatabaseService_Interface
     private void printOrder(Order order, boolean kitchenReceipt)
 	{
         PrinterService printerService = new PrinterService();
-        printerService.printOrder(order,  this.items,
-				DBService_OrderedItem.getAllOrderedItems(connection), this.tables, kitchenReceipt);
+        printerService.printOrder(order,  this.getAllItems(),
+				DBService_OrderedItem.getAllOrderedItems(connection), this.getAllTables(), kitchenReceipt);
     }
 
     /**
@@ -797,7 +700,7 @@ public class DatabaseService implements DatabaseService_Interface
      * @param dateTime zu konvertierendes joda.time.DateTime
      * @return Timestamp
      */
-    private Object convertJodaDateTimeToSqlTimestamp(DateTime dateTime)
+    static Object convertJodaDateTimeToSqlTimestamp(DateTime dateTime)
 	{
         // Convert sql-Timestamp to joda.DateTime
         return new Timestamp(dateTime.getMillis());
@@ -808,7 +711,7 @@ public class DatabaseService implements DatabaseService_Interface
      * @param sqlTimestamp zu konvertierender Timestamp
      * @return jode.time.DateTime
      */
-    private DateTime convertSqlTimestampToJodaDateTime(Timestamp sqlTimestamp)
+    static DateTime convertSqlTimestampToJodaDateTime(Timestamp sqlTimestamp)
 	{
         //Convert joda.DateTime to sql-Timestamp
         return new DateTime(sqlTimestamp);
