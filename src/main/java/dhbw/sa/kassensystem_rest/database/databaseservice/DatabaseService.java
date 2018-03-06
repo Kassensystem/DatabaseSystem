@@ -94,7 +94,7 @@ public class DatabaseService implements DatabaseService_Interface
         logInf("Getting Orders from MySQL-Database.");
 
         try {
-            String query = "SELECT orderID, price, date, tableID, paid " +
+            String query = "SELECT orderID, date, tableID, paid " +
                     "FROM " + DatabaseProperties.getDatabase() + ".orders";
             PreparedStatement pst = connection.prepareStatement(query);
             ResultSet rs = pst.executeQuery();
@@ -102,7 +102,7 @@ public class DatabaseService implements DatabaseService_Interface
             while(rs.next()) {
                 int orderID = rs.getInt("orderID");
                 int tableID = rs.getInt("tableID");
-                double price = rs.getFloat("price");
+                double price = DBService_Order.getPrice(connection, orderID);
                 price = round(price);
                 DateTime dateTime = convertSqlTimestampToJodaDateTime(rs.getTimestamp("date"));
                 boolean paid = rs.getBoolean("paid");

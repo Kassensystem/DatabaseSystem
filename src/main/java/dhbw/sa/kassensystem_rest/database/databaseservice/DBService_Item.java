@@ -70,6 +70,26 @@ public class DBService_Item
 		return null;
 	}
 
+	static float getRetailprice(Connection connection, int itemID)
+	{
+		try
+		{
+			String query = "SELECT retailprice " +
+					"FROM " + DatabaseProperties.getDatabase() + ".items " +
+					"WHERE itemID = " + itemID;
+			PreparedStatement pst = connection.prepareStatement(query);
+			ResultSet rs = pst.executeQuery();
+
+			while(rs.next()) {
+				return rs.getFloat("retailprice");
+			}
+		} catch (SQLException e)
+		{
+			e.printStackTrace();
+		}
+		return 0;
+	}
+
 	static void addItem(Connection connection, Item item)
 	{
 		try {
