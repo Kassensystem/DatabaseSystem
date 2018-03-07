@@ -104,7 +104,7 @@ public class DBService_Table
 	static boolean existsTableWithID(Connection connection, int tableID)
 	{
 		try {
-			String query = "SELECT talbeID from " + DatabaseProperties.getDatabase() + ".tables " +
+			String query = "SELECT tableID from " + DatabaseProperties.getDatabase() + ".tables " +
 					"WHERE tableID = " + tableID;
 			PreparedStatement pst = connection.prepareStatement(query);
 			ResultSet rs = pst.executeQuery();

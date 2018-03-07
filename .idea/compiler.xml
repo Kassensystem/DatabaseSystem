@@ -6,11 +6,11 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="springBoot" />
+        <module name="kassensystem_rest" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="springBoot" target="1.8" />
+    <bytecodeTargetLevel target="1.8">
+      <module name="kassensystem_rest" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>

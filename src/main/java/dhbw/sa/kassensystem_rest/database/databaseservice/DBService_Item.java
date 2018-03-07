@@ -46,7 +46,7 @@ public class DBService_Item
 	{
 		try {
 			String query = "SELECT itemID, name, retailprice, available " +
-					"FROM " + DatabaseProperties.getDatabase() + ".items" +
+					"FROM " + DatabaseProperties.getDatabase() + ".items " +
 					"WHERE itemID = " + itemID;
 			PreparedStatement pst = connection.prepareStatement(query);
 			ResultSet rs = pst.executeQuery();

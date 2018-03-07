@@ -1,3 +1,5 @@
+package java;
+
 import dhbw.sa.kassensystem_rest.database.databaseservice.DatabaseService;
 import dhbw.sa.kassensystem_rest.database.printer.PrinterService;
 
