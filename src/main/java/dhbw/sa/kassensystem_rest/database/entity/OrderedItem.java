@@ -1,16 +1,23 @@
 package dhbw.sa.kassensystem_rest.database.entity;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import jdk.nashorn.internal.objects.annotations.Constructor;
+import org.springframework.stereotype.Component;
+
 /**
  * Ein OrderedItem ist ein bestellter Artikel der zu einer Bestellung gehört.
  * Für jeden Artikel, der zu einer Bestellung gehört, wird ein OrderedItem erstellt
  * und in der Datenbank abgelegt.
  */
+@Component
 public class OrderedItem {
-    private int orderedItemID;
-    private int orderID;
-    private int itemID;
-    private boolean itemPaid;
-    private boolean itemProduced;
+	@JsonProperty private int orderedItemID;
+	@JsonProperty private int orderID;
+	@JsonProperty private int itemID;
+	@JsonProperty private boolean itemPaid;
+	@JsonProperty private boolean itemProduced;
+
+	public OrderedItem() {}
 
 	/**
 	 * Konstruktor zum Abrufen eines vollständigen OrderedItems aus der Datenbank.
@@ -20,7 +27,11 @@ public class OrderedItem {
 	 * @param itemPaid
 	 * @param itemProduced
 	 */
-	public OrderedItem(int orderedItemID, int orderID, int itemID, boolean itemPaid, boolean itemProduced) {
+	public OrderedItem(@JsonProperty("orderedItemID")int orderedItemID,
+					   @JsonProperty("orderID") int orderID,
+					   @JsonProperty("itemID") int itemID,
+					   @JsonProperty("itemPaid") boolean itemPaid,
+					   @JsonProperty("itemProduced") boolean itemProduced) {
         this.orderedItemID = orderedItemID;
         this.orderID = orderID;
         this.itemID = itemID;

@@ -1,5 +1,7 @@
 package dhbw.sa.kassensystem_rest.restApi.controller;
 
+import dhbw.sa.kassensystem_rest.database.databaseservice.DBService_Order;
+import dhbw.sa.kassensystem_rest.database.databaseservice.DBService_OrderedItem;
 import dhbw.sa.kassensystem_rest.database.databaseservice.DatabaseService;
 import dhbw.sa.kassensystem_rest.database.entity.Item;
 import dhbw.sa.kassensystem_rest.database.entity.Order;
@@ -9,12 +11,14 @@ import dhbw.sa.kassensystem_rest.exceptions.MySQLServerConnectionException;
 import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.net.URI;
 import java.util.ArrayList;
 
 /**
@@ -88,9 +92,14 @@ public class RestApiController {
 	{
         try {
             order.setDate(DateTime.now());
-            int orderID = databaseService.addOrder(order);
+            Integer orderID = databaseService.addOrder(order);
 
-            return new ResponseEntity(orderID, HttpStatus.OK);
+            // Header bearbeiten
+			HttpHeaders responseHeaders = new HttpHeaders();
+			URI uri = new URI(orderID.toString());
+			responseHeaders.setLocation(uri);
+
+            return new ResponseEntity(responseHeaders, HttpStatus.OK);
         } catch (Exception e) {
             e.printStackTrace();
             ResponseEntity<?> response = new ResponseEntity(e.getMessage(), HttpStatus.NOT_FOUND);
@@ -104,7 +113,10 @@ public class RestApiController {
 	{
 		try {
 			for(OrderedItem o: orderedItems) {
-				databaseService.addOrderedItem(o);
+				if (!databaseService.existsOrderedItemWithID(o.getOrderedItemID()))
+				{
+					databaseService.addOrderedItem(o);
+				}
 			}
 			return new ResponseEntity(HttpStatus.OK);
 		} catch (Exception e) {

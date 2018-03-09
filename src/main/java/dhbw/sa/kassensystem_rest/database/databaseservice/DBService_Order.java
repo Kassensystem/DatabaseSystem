@@ -72,13 +72,12 @@ public class DBService_Order
 	static int addOrder(Connection connection, Order order)
 	{
 		try {
-			String query =  "INSERT INTO " + DatabaseProperties.getDatabase() + ".orders(orderID, price, date, tableID)" +
-					"VALUES(DEFAULT, ?, ?, ?, ?)";
+			String query =  "INSERT INTO " + DatabaseProperties.getDatabase() + ".orders(orderID, date, tableID)" +
+					"VALUES(DEFAULT, ?, ?)";
 			PreparedStatement pst = connection.prepareStatement(query);
 
-			pst.setDouble(1, order.getPrice());
-			pst.setObject(2, convertJodaDateTimeToSqlTimestamp(order.getDate()) );
-			pst.setInt(3, order.getTable());
+			pst.setObject(1, convertJodaDateTimeToSqlTimestamp(order.getDate()) );
+			pst.setInt(2, order.getTable());
 			pst.executeUpdate();
 
 			//Ermitteln der nun belegten orderID
@@ -104,13 +103,12 @@ public class DBService_Order
 	{
 		try {
 			String query =  "UPDATE " + DatabaseProperties.getDatabase() + ".orders " +
-					"SET price = ?, date = ?, tableID = ? " +
+					"SET date = ?, tableID = ? " +
 					"WHERE orderID = " + orderID;
 			PreparedStatement pst = connection.prepareStatement(query);
 
-			pst.setDouble(1, order.getPrice());
-			pst.setObject(2, convertJodaDateTimeToSqlTimestamp(order.getDate()) );
-			pst.setInt(3, order.getTable());
+			pst.setObject(1, convertJodaDateTimeToSqlTimestamp(order.getDate()) );
+			pst.setInt(2, order.getTable());
 			pst.executeUpdate();
 		} catch(SQLException e) {
 			e.printStackTrace();

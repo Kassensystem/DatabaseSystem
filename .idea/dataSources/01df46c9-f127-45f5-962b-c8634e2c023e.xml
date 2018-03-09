@@ -87,7 +87,6 @@
     <column id="26" parent="10" name="itemProduced">
       <Position>5</Position>
       <DataType>tinyint(1)|0</DataType>
-      <NotNull>1</NotNull>
       <DefaultExpression>&apos;0&apos;</DefaultExpression>
     </column>
     <key id="27" parent="10" name="PRIMARY">

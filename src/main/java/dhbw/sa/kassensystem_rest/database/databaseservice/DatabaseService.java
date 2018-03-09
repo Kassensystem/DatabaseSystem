@@ -652,9 +652,13 @@ public class DatabaseService implements DatabaseService_Interface
 	{
         return DBService_Itemdelivery.existsItemdeliveryWithID(connection, itemdeliveryID);
     }
-    private boolean existsOrderedItemWithID(int orderedItemID)
+    public boolean existsOrderedItemWithID(int orderedItemID)
 	{
 		return DBService_OrderedItem.existsOrderedItemWithID(connection, orderedItemID);
+	}
+
+	public float getOrderPrice(int orderID) {
+    	return DBService_Order.getPrice(connection, orderID);
 	}
 
     /**
