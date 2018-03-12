@@ -144,6 +144,21 @@ public class RestApiController {
         }
     }
 
+    @RequestMapping(value = "/orderedItem", method = RequestMethod.PUT)
+	public ResponseEntity<?> updateOrderedItems(@RequestBody ArrayList<OrderedItem> orderedItems)
+	{
+		for (OrderedItem o: orderedItems)
+		{
+			try {
+				databaseService.updateOrderedItem(o.getOrderedItemID(), o);
+				return new ResponseEntity(HttpStatus.OK);
+			} catch (Exception e) {
+				e.printStackTrace();
+				return new ResponseEntity(e, HttpStatus.NOT_FOUND);
+			}
+		}
+		return null;
+	}
 
     //Exception-Handling
 
