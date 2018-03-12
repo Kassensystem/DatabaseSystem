@@ -12,13 +12,15 @@ import java.util.ArrayList;
 
 public class DBService_Item
 {
-	static ArrayList<Item> getAllItems(Connection connection)
+	static ArrayList<Item> getAllItems(Connection connection, boolean onlyAvailable)
 	{
 		ArrayList<Item> items = new ArrayList<>();
 
 		try {
 			String query = "SELECT itemID, name, retailprice, available " +
 					"FROM " + DatabaseProperties.getDatabase() + ".items";
+			if(onlyAvailable)
+				query += " WHERE available = TRUE";
 			PreparedStatement pst = connection.prepareStatement(query);
 			ResultSet rs = pst.executeQuery();
 

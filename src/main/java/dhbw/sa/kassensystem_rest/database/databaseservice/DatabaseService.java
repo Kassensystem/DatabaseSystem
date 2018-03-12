@@ -68,8 +68,16 @@ public class DatabaseService implements DatabaseService_Interface
 
         logInf("Getting Items from MySQL-Database.");
 
-        return DBService_Item.getAllItems(connection);
+        return DBService_Item.getAllItems(connection, false);
     }
+    public ArrayList<Item> getAllAvailableItems() throws MySQLServerConnectionException
+	{
+		checkConnection();
+
+		logInf("Getting Items from MySQL-Database.");
+
+		return DBService_Item.getAllItems(connection, true);
+	}
     @Override
     public ArrayList<Table> getAllTables() throws MySQLServerConnectionException
 	{
@@ -77,8 +85,16 @@ public class DatabaseService implements DatabaseService_Interface
 
 		logInf("Getting Tables from MySQL-Database.");
 
-		return DBService_Table.getAllTables(connection);
+		return DBService_Table.getAllTables(connection, false);
     }
+    public ArrayList<Table> getAllAvailableTables() throws MySQLServerConnectionException
+	{
+		checkConnection();
+
+		logInf("Getting Tables from MySQL-Database.");
+
+		return DBService_Table.getAllTables(connection, true);
+	}
     @Override
     public ArrayList<Order> getAllOrders() throws MySQLServerConnectionException
 	{

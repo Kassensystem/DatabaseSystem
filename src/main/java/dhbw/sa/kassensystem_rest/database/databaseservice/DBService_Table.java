@@ -29,13 +29,15 @@ public class DBService_Table
 		}
 	}
 
-	static ArrayList<Table> getAllTables(Connection connection)
+	static ArrayList<Table> getAllTables(Connection connection, boolean onlyAvailable)
 	{
 		ArrayList<Table> tables = new ArrayList<>();
 
 		try {
 			String query = "SELECT tableID, name, seats, available " +
 					"FROM " + DatabaseProperties.getDatabase() + ".tables";
+			if(onlyAvailable)
+				query += " WHERE available = TRUE";
 			PreparedStatement pst = connection.prepareStatement(query);
 			ResultSet rs = pst.executeQuery();
 

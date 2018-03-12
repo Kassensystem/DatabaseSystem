@@ -44,7 +44,7 @@ public class RestApiController {
      */
     @RequestMapping("/items")
     public ArrayList<Item> getAllItems() {
-        return databaseService.getAllItems();
+        return databaseService.getAllAvailableItems();
     }
 
     /**
@@ -62,7 +62,7 @@ public class RestApiController {
      */
     @RequestMapping("/tables")
     public ArrayList<Table> getAllTables() {
-        return databaseService.getAllTables();
+        return databaseService.getAllAvailableTables();
     }
 
     @RequestMapping("/orderedItems")
