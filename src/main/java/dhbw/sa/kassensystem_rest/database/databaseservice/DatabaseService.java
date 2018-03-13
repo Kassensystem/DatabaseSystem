@@ -4,6 +4,7 @@ import dhbw.sa.kassensystem_rest.database.entity.*;
 import dhbw.sa.kassensystem_rest.exceptions.DataException;
 import dhbw.sa.kassensystem_rest.exceptions.MySQLServerConnectionException;
 import dhbw.sa.kassensystem_rest.database.printer.PrinterService;
+import javafx.print.Printer;
 import org.joda.time.DateTime;
 import org.springframework.stereotype.Service;
 
@@ -24,15 +25,6 @@ import static dhbw.sa.kassensystem_rest.database.databaseservice.Log.logInf;
 @Service
 public class DatabaseService implements DatabaseService_Interface
 {
-    /*
-     *  items Alle in der Datenbank befindlichen Items werden hier gespeichert.
-     *  tables Alle in der Datenbank befindlichen Tables werden hier gespeichert.
-     *  orders Alle in der Datenbank befindlichen Orders werden hier gespeichert.
-     *  itemdeliveries Alle in der Datenbank befindlichen itemdeliveries werden hier gespeichert.
-     *  connection Eine Instanz einer Verbindung zur Datenbank.
-     *  DatabaseProperties Beinhaltet eine Beschreibung der Daten die zur Verbindung zur Datenbank noetig sind.
-     */
-
     private Connection connection;
 
     public DatabaseService()
@@ -284,14 +276,6 @@ public class DatabaseService implements DatabaseService_Interface
         }
         isOrderComplete(order);
 
-        // TODO Ausdrucklogik überarbeiten:
-        if(DBService_Order.isOrderPaid(connection, order.getOrderID())) {
-            printOrder(order, true);
-            printOrder(order, false);
-        }
-        else
-            printOrder(order, true);
-
         return DBService_Order.addOrder(connection, order);
     }
     @Override
@@ -536,8 +520,29 @@ public class DatabaseService implements DatabaseService_Interface
             throw new DataException("Bestellung mit der ID " + orderID + " existiert nicht in der Datenbank! Es kann nichts gedruckt werden.");
         }
 
-        this.printOrder(getOrderById(orderID), false);
+        this.printReceipt(orderID);
     }
+
+	/**
+	 * Druckt für den Kunden einen Beleg aus.
+	 * @param orderID Die ID der Bestellung, die ausgedruckt werden soll.
+	 */
+	public void printReceipt(int orderID)
+	{
+		PrinterService printerService = new PrinterService();
+		printerService.printReceipt(orderID);
+	}
+
+	/**
+	 * Druckt eine Order für die Küche aus mit den neu hinzugefügten orderedItems.
+	 * @param orderID ID der auszudruckenden Order.
+	 * @param orderedItems Die neu hinzugefügten Artikel, die in der Küche zubereitet werden sollen.
+	 */
+	public void printOrder(int orderID, ArrayList<OrderedItem> orderedItems)
+	{
+		PrinterService printerService = new PrinterService();
+		printerService.printOrder(orderID, orderedItems);
+	}
 
     // Vollständigkeit der Daten von Objekten überprüfen
     private void isOrderComplete(Order order)
@@ -676,19 +681,6 @@ public class DatabaseService implements DatabaseService_Interface
 	public float getOrderPrice(int orderID) {
     	return DBService_Order.getPrice(connection, orderID);
 	}
-
-    /**
-     * Druckt eine Order aus.
-     * @param order die auszudruckende Order.
-     * @param kitchenReceipt sagt dem PrinterService, ob es sich um einen Kuechenbeleg oder Kundenbeleg handelt. Layout
-     *                       des ausgedruckten Belegs wird dementsprechend geaendert.
-     */
-    private void printOrder(Order order, boolean kitchenReceipt)
-	{
-        PrinterService printerService = new PrinterService();
-        printerService.printOrder(order,  this.getAllItems(),
-				DBService_OrderedItem.getAllOrderedItems(connection), this.getAllTables(), kitchenReceipt);
-    }
 
     /**
      * Ermittelt die Haeufigkeit einer ID in einer Liste von IDs.

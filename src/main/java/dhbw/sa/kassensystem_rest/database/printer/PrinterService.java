@@ -2,10 +2,10 @@ package dhbw.sa.kassensystem_rest.database.printer;
 
 
 import dhbw.sa.kassensystem_rest.database.Gastronomy;
+import dhbw.sa.kassensystem_rest.database.databaseservice.DatabaseService;
 import dhbw.sa.kassensystem_rest.database.entity.Item;
 import dhbw.sa.kassensystem_rest.database.entity.Order;
 import dhbw.sa.kassensystem_rest.database.entity.OrderedItem;
-import dhbw.sa.kassensystem_rest.database.entity.Table;
 
 import javax.print.*;
 import javax.print.attribute.HashPrintRequestAttributeSet;
@@ -14,7 +14,7 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 /**
- * Service zum Ausdrucken einer Bestellung, die in einer PrintableOrder gespeichert wurde.
+ * Service zum Ausdrucken einer Bestellung, die in einer PrintableReceipt gespeichert wurde.
  *
  * Die folgenden Hardwarekomponenten sind für diesen Service erforderlich:
  * Modell des Druckers:
@@ -30,142 +30,207 @@ public class PrinterService {
 
     /** @param printerName Name des Druckers, wie er im Betriebssystem angezeigt wird.*/
     private final String printerName = "EPSON TM-T88V Receipt";
+    private DatabaseService databaseService = new DatabaseService();
 
+    // Interface zum Ausdrucken einer Order oder Receipt
     /**
-     * Druckt über einen formatierten Text die Bestellung aus.
-     * @param order Die zu druckende Bestellung.
-     * @param allItems Alle Items aus der Datenbank, aus denen die erforderlichen Informationen erhalten werden.
-     * @param allTables Alle Tische aus der Datenbank, aus denen die erforderlichen Informationen erhalten werden.
-     * @param kitchenReceipt Indikator, ob es sich um einen Küchen- oder Kundenbeleg handelt.
-     */
-    public void printOrder(Order order, ArrayList<Item> allItems, ArrayList<OrderedItem> orderedItems, ArrayList<Table> allTables, boolean kitchenReceipt) {
-        PrintableOrder printableOrder = getPrintableOrder(order, allItems, orderedItems, allTables);
+     * Druckt über einen formatierten Text die Bestellung für die Küche aus.
+	 * @param orderID ID der zu druckenden Bestellung.
+	 * @param orderedItems Neu bestellte Artikel.
+	 */
+    public void printOrder(int orderID, ArrayList<OrderedItem> orderedItems)
+	{
+        PrintableOrder printableOrder = getPrintableOrder(orderID, orderedItems);
 
-        String formattedOrderText = getFormattedOrder(printableOrder, kitchenReceipt);
+        String formattedOrderText = getFormattedOrder(printableOrder);
 
         printString(formattedOrderText);
+
+        databaseService.disconnect();
     }
 
+	/**
+	 * Druckt einen Kundenbeleg aus.
+	 * @param orderID Die ID der zu druckenden Bestellung.
+	 */
+    public void printReceipt(int orderID)
+	{
+		PrintableReceipt printableReceipt = getPrintableReceipt(orderID);
+
+		String formattedReceiptText = getFormattedReceipt(printableReceipt);
+
+		printString(formattedReceiptText);
+
+		databaseService.disconnect();
+	}
+
+	// Funktionen zum Ermitteln aller zum Drucken benötigten Daten
+	/**
+	 * Sammelt Daten für eine {@Link printableOrder}, um einen Küchenbeleg ausdrucken zu können.
+	 * @param orderID Die ID der Order, für die neue bestellte Artikel zur Zubereitung in der Küche
+	 *                ausgedruckt werden sollen.
+	 * @param orderedItems Die neue hinzugefügten bestellten Artikel.
+	 * @return Eine {@Link PrintableOrder}, die alle auszudruckenden Informationen enthält.
+	 */
+	private PrintableOrder getPrintableOrder(int orderID, ArrayList<OrderedItem> orderedItems)
+	{
+		Order order = databaseService.getOrderById(orderID);
+
+		// Date
+		String dateString = order.getDate().toString("dd.MM.yyyy kk:mm:ss");
+		// Table-Name
+		String tableName = databaseService.getTableById(order.getTable()).getName();
+		// Printable Order
+		ArrayList<PrintableOrderedItem> printableOrderedItems = new ArrayList<>();
+		for(OrderedItem o: orderedItems)
+		{
+			// Alle noch nicht in der DB existierenden OrderedItems den auszudruckenden OrderedItems hinzufügen.
+			// Nur diese sollen an die Küche ausgedruckt werden.
+			if (!databaseService.existsOrderedItemWithID(o.getOrderedItemID()))
+			{
+				String name = databaseService.getItemById(o.getItemID()).getName();
+				printableOrderedItems.add(new PrintableOrderedItem(name));
+			}
+		}
+
+		return new PrintableOrder(dateString, tableName, printableOrderedItems);
+	}
+
+	/**
+	 * Sammelt Daten für eine {@link PrintableReceipt}, um einen Kundenbeleg ausdrucken zu können.
+	 * @param orderID Die ID der zu druckenden Bestellung.
+	 * @return Eine {@link PrintableReceipt}, die alle auszudruckenden Informationen enthält.
+	 */
+	private PrintableReceipt getPrintableReceipt(int orderID)
+	{
+		Order order = databaseService.getOrderById(orderID);
+
+		// Date
+		String dateString = order.getDate().toString("dd.MM.yyyy kk:mm:ss");
+		// Table-Name
+		String tableName = databaseService.getTableById(order.getTable()).getName();
+		// PrintableOrderedItems
+		ArrayList<PrintableOrderedItem> printableOrderedItems = new ArrayList<>();
+		for(OrderedItem o: databaseService.getOrderedItemsByOrderId(order.getOrderID()))
+		{
+			Item item = databaseService.getItemById(o.getItemID());
+			String name = item.getName();
+			double price = item.getRetailprice();
+			printableOrderedItems.add(new PrintableOrderedItem(name, price));
+		}
+		// Preis
+		double price = databaseService.getOrderPrice(order.getOrderID());
+
+		return new PrintableReceipt(dateString, tableName, printableOrderedItems, price);
+	}
+
+	// Formatierung der zu Druckenden Daten
     /**
-     * Druckt über einen printJob einen String, in dem die Bestellung formatiert wurde.
-     * @param text formatierter Text der Bestellung.
+     * Formatiert eine {@link PrintableReceipt} in einen Text, der entsprechend des Layouts des Belegs formattiert wird.
+     * @param printableReceipt Daten der Order in ausdruckbarem Format.
+     * @return Die Order formatiert in einen Text, der als Beleg ausgedruckt werden kann.
      */
-    private void printString(String text) {
-        // find the printService of name printerName
-        DocFlavor flavor = DocFlavor.BYTE_ARRAY.AUTOSENSE;
-        PrintRequestAttributeSet pras = new HashPrintRequestAttributeSet();
+    private String getFormattedReceipt(PrintableReceipt printableReceipt)
+	{
+        StringBuilder formattedReceiptText = new StringBuilder("");
 
-        PrintService printService[] = PrintServiceLookup.lookupPrintServices(flavor, pras);
-        PrintService service = findPrintService(printerName, printService);
+		formattedReceiptText.append("----------Kundenbeleg-------------\n\n");
 
-        assert service != null;
-        DocPrintJob job = service.createPrintJob();
-
-        try {
-
-            // important for umlaut chars
-            byte[] textBytes = text.getBytes("CP437");
-            byte[] commandBytes = {29, 86, 65, 0, 0};
-
-            byte[] bytes = new byte[textBytes.length + commandBytes.length];
-
-            System.arraycopy(textBytes, 0, bytes, 0, textBytes.length);
-            System.arraycopy(commandBytes, 0, bytes, textBytes.length, commandBytes.length);
-
-            Doc doc = new SimpleDoc(bytes, flavor, null);
-
-
-            job.print(doc, null);
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    /**
-     * Formatiert eine Bestellung in eine {@link PrintableOrder}
-     * @param order zu druckende Bestellung.
-     * @param allItems alle Items der Datenbank.
-     * @param allTables alle Tische der Datenbank.
-     * @return eine {@link PrintableOrder} mit den Daten der Bestellung.
-     */
-    private PrintableOrder getPrintableOrder(Order order, ArrayList<Item> allItems, ArrayList<OrderedItem> orderedItems, ArrayList<Table> allTables) {
-        PrintableOrder printableOrder = new PrintableOrder();
-
-        //Items
-        ArrayList<Item> orderItems = allItems;
-        //Table-Name
-        String tableName = order.getTable(allTables).getName();
-        //Date
-        String dateString = order.getDate().toString("dd.MM.yyyy kk:mm:ss");
-
-        //printableOrder zusammenstellen
-        printableOrder.setOrderID(order.getOrderID());
-        printableOrder.setItems(orderItems);
-        printableOrder.setOrderedItems(orderedItems);
-        printableOrder.setTableName(tableName);
-        printableOrder.setPrice(order.getPrice());
-        printableOrder.setDate(dateString);
-
-        return printableOrder;
-    }
-
-    /**
-     * Formatiert eine {@link PrintableOrder} in einen Text, der entsprechend dem Layout des Belegs formattiert wurde.
-     * @param printableOrder Daten der Order in ausdruckbarem Format.
-     * @param kitchenReceipt ändert den Beleg zu einem Küchen- oder Kundenbeleg
-     * @return die Order formatiert in einen Text, der als Beleg ausgedruckt werden kann.
-     */
-    private String getFormattedOrder(PrintableOrder printableOrder, boolean kitchenReceipt) {
-        StringBuilder formattedOrderText = new StringBuilder("");
-
-        if(kitchenReceipt)
-            formattedOrderText.append("----------Küchenbeleg-------------\n\n");
-        else
-            formattedOrderText.append("----------Kundenbeleg-------------\n\n");
-
-        formattedOrderText.append(Gastronomy.getName() + "\n"
+        formattedReceiptText.append(Gastronomy.getName() + "\n"
                         + Gastronomy.getAdress() + "\n"
                         + Gastronomy.getTelephonenumber() + "\n"
                         + "\n"
                         + "Ihre Bestellung:\n");
 
         DecimalFormat df = new DecimalFormat("#0.00");
-        for(OrderedItem oi: printableOrder.getOrderedItems()) {
-            Item i = null;
-
-            //Item zum zugehörigen OrderedItem ermitteln
-            // TODO testen
-            for(Item item: printableOrder.getItems()) {
-                if(item.getItemID() == oi.getItemID()) {
-                    i = item;
-                    break;
-                }
-            }
-
-            double price = i.getRetailprice();
-
-            formattedOrderText
-                    .append(i.getName())
+        for(PrintableOrderedItem o: printableReceipt.getPrintableOrderedItems())
+        {
+            formattedReceiptText
+                    .append(o.getName())
                     .append("\t\t")
-                    .append(df.format(price))
+                    .append(df.format(o.getPrice()))
                     .append(" EUR\n");
-            // TODO Hier Kommentar des OrderedItems hinzufügen
         }
 
-        double mwst = Math.round(printableOrder.getPrice()*0.199 * 100d) / 100d;
+        double mwst = Math.round(printableReceipt.getPrice()*0.199 * 100d) / 100d;
 
-        formattedOrderText
-                .append("________________________\n" + "Summe\t\t")
-                .append(df.format(printableOrder.getPrice())).append(" EUR\n")
-                .append("inkl. MWST 19%\t").append(df.format(mwst)).append(" EUR\n").append("\n").append("Sie saßen an Tisch ")
-                .append(printableOrder.getTableName()).append(".\n").append("Vielen Dank für Ihren Besuch!\n")
-                .append(printableOrder.getDate()).append("\n\n");
+        formattedReceiptText
+                .append("________________________\n")
+				.append("Summe\t\t").append(df.format(printableReceipt.getPrice())).append(" EUR\n")
+                .append("inkl. MWST 19%\t").append(df.format(mwst)).append(" EUR\n")
+				.append("\n")
+				.append("Sie saßen an Tisch ").append(printableReceipt.getTableName()).append(".\n")
+				.append("Vielen Dank für Ihren Besuch!\n")
+                .append(printableReceipt.getDate()).append("\n\n");
 
-        return formattedOrderText.toString();
+        return formattedReceiptText.toString();
     }
 
-    private PrintService findPrintService(String printerName, PrintService[] services) {
+	/**
+	 * Formatiert eine {@Link PrintableOrder} in einen formatierten Text, der anschließend ausgedruckt werden kann.
+	 * @param printableOrder PrintableOrder, die die zu formatierenden Daten enthält.
+	 * @return Einen formatierten Text, der ausgedruckt werden kann.
+	 */
+	private String getFormattedOrder(PrintableOrder printableOrder)
+	{
+		StringBuilder formattedOrderText = new StringBuilder("");
+
+		formattedOrderText.append("\t\tKÜCHE\n\n");
+
+		for(PrintableOrderedItem p: printableOrder.getOrderedItems())
+		{
+			formattedOrderText.append(p.getName()).append("\n");
+		}
+
+		formattedOrderText
+				.append("\n")
+				.append(printableOrder.getTableName())
+				.append(printableOrder.getDate())
+				.append("\n\n");
+
+		return formattedOrderText.toString();
+	}
+
+    // Druckerfunktionen
+	/**
+	 * Druckt über einen printJob einen String, in dem die Bestellung formatiert wurde.
+	 * @param text formatierter Text der Bestellung.
+	 */
+	private void printString(String text)
+	{
+		// find the printService of name printerName
+		DocFlavor flavor = DocFlavor.BYTE_ARRAY.AUTOSENSE;
+		PrintRequestAttributeSet pras = new HashPrintRequestAttributeSet();
+
+		PrintService printService[] = PrintServiceLookup.lookupPrintServices(flavor, pras);
+		PrintService service = findPrintService(printerName, printService);
+
+		assert service != null;
+		DocPrintJob job = service.createPrintJob();
+
+		try {
+
+			// important for umlaut chars
+			byte[] textBytes = text.getBytes("CP437");
+			byte[] commandBytes = {29, 86, 65, 0, 0};
+
+			byte[] bytes = new byte[textBytes.length + commandBytes.length];
+
+			System.arraycopy(textBytes, 0, bytes, 0, textBytes.length);
+			System.arraycopy(commandBytes, 0, bytes, textBytes.length, commandBytes.length);
+
+			Doc doc = new SimpleDoc(bytes, flavor, null);
+
+
+			job.print(doc, null);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+    private PrintService findPrintService(String printerName, PrintService[] services)
+	{
         for (PrintService service : services) {
             if (service.getName().equalsIgnoreCase(printerName)) {
                 return service;

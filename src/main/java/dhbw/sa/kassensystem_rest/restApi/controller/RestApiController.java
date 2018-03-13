@@ -1,7 +1,5 @@
 package dhbw.sa.kassensystem_rest.restApi.controller;
 
-import dhbw.sa.kassensystem_rest.database.databaseservice.DBService_Order;
-import dhbw.sa.kassensystem_rest.database.databaseservice.DBService_OrderedItem;
 import dhbw.sa.kassensystem_rest.database.databaseservice.DatabaseService;
 import dhbw.sa.kassensystem_rest.database.entity.Item;
 import dhbw.sa.kassensystem_rest.database.entity.Order;
@@ -106,7 +104,10 @@ public class RestApiController {
     public ResponseEntity<?> createOrderedItems(@RequestBody ArrayList<OrderedItem> orderedItems)
 	{
 		try {
+			// Ausdrucken der hinzugefügten OrderedItems
+			databaseService.printOrder(orderedItems.get(0).getOrderID(), orderedItems);
 			for(OrderedItem o: orderedItems) {
+				// alle noch nicht existierenden OrderedItems der DB hinzufügen
 				if (!databaseService.existsOrderedItemWithID(o.getOrderedItemID()))
 				{
 					databaseService.addOrderedItem(o);
@@ -117,6 +118,13 @@ public class RestApiController {
 			e.printStackTrace();
 			return new ResponseEntity(e, HttpStatus.NOT_FOUND);
 		}
+	}
+
+	@RequestMapping(value = "/printOrder/{orderID}", method = RequestMethod.POST)
+	public ResponseEntity<?> printReceipe(@RequestBody int orderID)
+	{
+		databaseService.printReceipt(orderID);
+		return new ResponseEntity(HttpStatus.OK);
 	}
 
     /**
