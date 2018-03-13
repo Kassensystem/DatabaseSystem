@@ -75,11 +75,6 @@ public class RestApiController {
         return databaseService.getOrderedItemsByOrderId(orderId);
     }
 
-    // TODO Hinzufügen aller nötigen Methoden, die für die Kommunikation im optimierten DB-System mit der
-	// TODO Android App benötigt werden.
-	// TODO (ermitteln ob eine offene Bestellung für einen Tisch exisitiert,
-	// TODO ...)
-
     /*POST/PUT*/
 
     /**
@@ -106,7 +101,6 @@ public class RestApiController {
             return response;
         }
     }
-
 
     @RequestMapping(value = "/orderedItem", method = RequestMethod.POST)
     public ResponseEntity<?> createOrderedItems(@RequestBody ArrayList<OrderedItem> orderedItems)
@@ -147,17 +141,17 @@ public class RestApiController {
     @RequestMapping(value = "/orderedItem", method = RequestMethod.PUT)
 	public ResponseEntity<?> updateOrderedItems(@RequestBody ArrayList<OrderedItem> orderedItems)
 	{
-		for (OrderedItem o: orderedItems)
-		{
-			try {
+
+		try {
+			for (OrderedItem o: orderedItems)
+			{
 				databaseService.updateOrderedItem(o.getOrderedItemID(), o);
-				return new ResponseEntity(HttpStatus.OK);
-			} catch (Exception e) {
-				e.printStackTrace();
-				return new ResponseEntity(e, HttpStatus.NOT_FOUND);
 			}
+			return new ResponseEntity(HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new ResponseEntity(e, HttpStatus.NOT_FOUND);
 		}
-		return null;
 	}
 
     //Exception-Handling
@@ -165,12 +159,12 @@ public class RestApiController {
     @ExceptionHandler(MySQLServerConnectionException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
     public @ResponseBody String handleIndexNotFoundException(MySQLServerConnectionException e,
-                                                    HttpServletRequest request, HttpServletResponse resp) {
+                                                    HttpServletRequest request, HttpServletResponse resp)
+	{
 
         String response = e.getMessage();
 
         return response;
     }
-
 
 }

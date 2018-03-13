@@ -70,7 +70,6 @@ public class RestApiClient_Test {
     }
 
     static void updateOrder(int orderID, Order testOrder) {
-        // TODO
         try {
             restApiClient.updateOrder(orderID, testOrder);
         } catch (Exception e) {
