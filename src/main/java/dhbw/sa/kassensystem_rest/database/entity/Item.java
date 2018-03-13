@@ -15,7 +15,6 @@ public class Item {
     private double retailprice;
     private int quantity;
     private boolean available;
-    private int categoryID;
 
     /**
      * Default-Constructor
@@ -102,8 +101,6 @@ public class Item {
     public boolean isAvailable() {
         return this.available;
     }
-
-    public int getCategoryID() { return this.categoryID; }
 
     /*Setter*/
 

@@ -1,19 +1,22 @@
 package dhbw.sa.kassensystem_rest.restApi.controller;
 
-import dhbw.sa.kassensystem_rest.database.DatabaseService;
+import dhbw.sa.kassensystem_rest.database.databaseservice.DatabaseService;
 import dhbw.sa.kassensystem_rest.database.entity.Item;
 import dhbw.sa.kassensystem_rest.database.entity.Order;
+import dhbw.sa.kassensystem_rest.database.entity.OrderedItem;
 import dhbw.sa.kassensystem_rest.database.entity.Table;
 import dhbw.sa.kassensystem_rest.exceptions.MySQLServerConnectionException;
 import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.net.URI;
 import java.util.ArrayList;
 
 /**
@@ -39,7 +42,7 @@ public class RestApiController {
      */
     @RequestMapping("/items")
     public ArrayList<Item> getAllItems() {
-        return databaseService.getAllItems();
+        return databaseService.getAllAvailableItems();
     }
 
     /**
@@ -57,9 +60,20 @@ public class RestApiController {
      */
     @RequestMapping("/tables")
     public ArrayList<Table> getAllTables() {
-        return databaseService.getAllTables();
+        return databaseService.getAllAvailableTables();
     }
 
+
+    @RequestMapping("/orderedItems")
+    public ArrayList<OrderedItem> getAllOrderedItems() {
+        return databaseService.getAllOrderedItems();
+    }
+
+    @RequestMapping("/orderedItems/{orderID}")
+    public ArrayList<OrderedItem> getOrderedItemsByOrderId(@PathVariable("orderID") int orderId) {
+        return databaseService.getOrderedItemsByOrderId(orderId);
+    }
+  
     /*POST/PUT*/
 
     /**
@@ -68,17 +82,51 @@ public class RestApiController {
      * @return ResponseEntity, das Erstellen entweder bestätigt oder eine Fehlermeldung liefert.
      */
     @RequestMapping(value = "/order/", method = RequestMethod.POST)
-    public ResponseEntity<?> createOrder(@RequestBody Order order) {
+    public ResponseEntity<?> createOrder(@RequestBody Order order)
+	{
         try {
             order.setDate(DateTime.now());
-            databaseService.addOrder(order);
-            return new ResponseEntity(HttpStatus.OK);
+            Integer orderID = databaseService.addOrder(order);
+
+            // Header bearbeiten
+			HttpHeaders responseHeaders = new HttpHeaders();
+			URI uri = new URI(orderID.toString());
+			responseHeaders.setLocation(uri);
+
+            return new ResponseEntity(responseHeaders, HttpStatus.OK);
         } catch (Exception e) {
             e.printStackTrace();
             ResponseEntity<?> response = new ResponseEntity(e.getMessage(), HttpStatus.NOT_FOUND);
             return response;
         }
     }
+
+    @RequestMapping(value = "/orderedItem", method = RequestMethod.POST)
+    public ResponseEntity<?> createOrderedItems(@RequestBody ArrayList<OrderedItem> orderedItems)
+	{
+		try {
+			// Ausdrucken der hinzugefügten OrderedItems
+			databaseService.printOrder(orderedItems.get(0).getOrderID(), orderedItems);
+			for(OrderedItem o: orderedItems) {
+				// alle noch nicht existierenden OrderedItems der DB hinzufügen
+				if (!databaseService.existsOrderedItemWithID(o.getOrderedItemID()))
+				{
+					databaseService.addOrderedItem(o);
+				}
+			}
+			return new ResponseEntity(HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new ResponseEntity(e, HttpStatus.NOT_FOUND);
+		}
+	}
+
+	@RequestMapping(value = "/printOrder/{orderID}", method = RequestMethod.POST)
+	public ResponseEntity<?> printReceipe(@RequestBody int orderID)
+	{
+		databaseService.printReceipt(orderID);
+		return new ResponseEntity(HttpStatus.OK);
+	}
 
     /**
      * Updatet eine bereits existierende Bestellung in der Datenbank.
@@ -87,7 +135,8 @@ public class RestApiController {
      * @return ResponseEntity, das Updaten entweder bestätigt oder eine Fehlermeldung liefert.
      */
     @RequestMapping(value = "/order/{orderID}", method = RequestMethod.PUT)
-    public ResponseEntity<?> updateOrder(@PathVariable("orderID") int orderID, @RequestBody Order order) {
+    public ResponseEntity<?> updateOrder(@PathVariable("orderID") int orderID, @RequestBody Order order)
+	{
         try {
             order.setDate(DateTime.now());
             databaseService.updateOrder(orderID, order);
@@ -98,18 +147,33 @@ public class RestApiController {
         }
     }
 
+    @RequestMapping(value = "/orderedItem", method = RequestMethod.PUT)
+	public ResponseEntity<?> updateOrderedItems(@RequestBody ArrayList<OrderedItem> orderedItems)
+	{
+
+		try {
+			for (OrderedItem o: orderedItems)
+			{
+				databaseService.updateOrderedItem(o.getOrderedItemID(), o);
+			}
+			return new ResponseEntity(HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new ResponseEntity(e, HttpStatus.NOT_FOUND);
+		}
+	}
 
     //Exception-Handling
 
     @ExceptionHandler(MySQLServerConnectionException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
     public @ResponseBody String handleIndexNotFoundException(MySQLServerConnectionException e,
-                                                    HttpServletRequest request, HttpServletResponse resp) {
+                                                    HttpServletRequest request, HttpServletResponse resp)
+	{
 
         String response = e.getMessage();
 
         return response;
     }
-
 
 }

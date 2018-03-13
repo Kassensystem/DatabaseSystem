@@ -1,13 +1,10 @@
 
-import dhbw.sa.kassensystem_rest.database.DatabaseService;
-import dhbw.sa.kassensystem_rest.database.entity.Item;
-import dhbw.sa.kassensystem_rest.database.entity.Itemdelivery;
-import dhbw.sa.kassensystem_rest.database.entity.Order;
-import dhbw.sa.kassensystem_rest.database.entity.Table;
+import dhbw.sa.kassensystem_rest.database.databaseservice.DBService_OrderedItem;
+import dhbw.sa.kassensystem_rest.database.databaseservice.DatabaseService;
+import dhbw.sa.kassensystem_rest.database.entity.*;
 import org.joda.time.DateTime;
 
 import java.util.ArrayList;
-import java.util.Date;
 
 
 /** Testfälle für die Klasse DatabaseService
@@ -23,11 +20,18 @@ public class DatabaseService_Test {
     private static int updateNumber = 999;
 
     public static void main(String[] args) {
+		//getOrders();
+		//getItems();
+		//getTables();
+		//getItemdeliveries();
+		//getOrderedItems();
+		//getOrderedItemByOrderId(6);
+		//getOrdereditemById(2);
+		//addOrderedItem(new OrderedItem(10, 16));
+		//updateOrderedItem(new OrderedItem(5, 10, 16, true, true));
+		//deleteOrderedItem(8);
 
-        Order order = new Order(5, "1;2;3;", 3, 3.33, DateTime.now(), false);
-        System.out.println(order.getOrderID());
-
-    }
+	}
 
     //region Test der Get-Methoden
     private static ArrayList<Order> getOrders() {
@@ -70,6 +74,26 @@ public class DatabaseService_Test {
         }
         return allItemdeliveries;
     }
+    private static ArrayList<OrderedItem> getOrderedItems() {
+		System.out.println("-------------All-OrderedItems-Test---------------");
+
+		ArrayList<OrderedItem> allOrderedItems = dbs.getAllOrderedItems();
+
+		for(OrderedItem o: allOrderedItems) {
+			logOrderedItem(o);
+		}
+		return allOrderedItems;
+	}
+	private static ArrayList<OrderedItem> getOrderedItemByOrderId(int orderID) {
+		System.out.println("-------------OrderedItem-By-OrderID-Test---------------");
+
+		ArrayList<OrderedItem> orderedItems = dbs.getOrderedItemsByOrderId(orderID);
+
+		for(OrderedItem o: orderedItems) {
+			logOrderedItem(o);
+		}
+		return orderedItems;
+	}
 
     private static Order getOrderById(int orderID) {
         System.out.println("-----------------Order-By-ID-Test-----------------");
@@ -106,7 +130,16 @@ public class DatabaseService_Test {
         logItemdelivery(i);
 
         return i;
-    }
+}
+ 	private static OrderedItem getOrdereditemById(int orderedItemID) {
+		System.out.println("-----------------OrderedItem-By-ID-Test-----------------");
+
+		OrderedItem o = dbs.getOrderedItemById(orderedItemID);
+
+		logOrderedItem(o);
+
+		return o;
+	}
     //endregion
 
     //region Test der Add-Methoden
@@ -138,6 +171,13 @@ public class DatabaseService_Test {
 
         dbs.addItemdelivery(i);
     }
+    private static void addOrderedItem(OrderedItem o) {
+		System.out.println("-----------------Add-OrderedItem-Test-----------------");
+
+		logOrderedItem(o);
+
+		dbs.addOrderedItem(o);
+	}
     //endregion
 
     //region Test der Update-Methoden
@@ -162,6 +202,13 @@ public class DatabaseService_Test {
 
         dbs.updateTable(updateTable.getTableID(), updateTable);
     }
+    private static void updateOrderedItem(OrderedItem updateOrderedItem) {
+		System.out.println("-----------------Update-OrderedItem-Test-----------------");
+
+		logOrderedItem(updateOrderedItem);
+
+		dbs.updateOrderedItem(updateOrderedItem.getOrderedItemID(), updateOrderedItem);
+	}
     //endregion
 
     //region Test der Delete-Methoden
@@ -175,11 +222,16 @@ public class DatabaseService_Test {
 
         dbs.deleteItemdelivery(itemdeliveryID);
     }
+    private static void deleteOrderedItem(int orderedItemID) {
+		System.out.println("-----------------Delete-OrderedItem-Test-----------------");
+
+		dbs.deleteOrderedItem(orderedItemID);
+	}
     //endregion
 
     /****Logging****/
     private static void logOrder(Order o) {
-        System.out.println(o.getOrderID() + "\t" + o.getItems()
+        System.out.println(o.getOrderID() + "\t"
                 + "\t" + o.getPrice() + "\t" + o.getDate().toString("dd.MM.yyyy kk:mm:ss")
                 + "\t" + o.getTable() + "\t" + o.isPaid());
     }
@@ -194,21 +246,25 @@ public class DatabaseService_Test {
     private static void logItemdelivery(Itemdelivery i) {
         System.out.println(i.getItemdeliveryID() + "\t" + i.getItemID() + "\t" + i.getQuantity());
     }
+    private static void logOrderedItem(OrderedItem o) {
+		System.out.println(o.getOrderedItemID() + "\t" + o.getOrderID() + "\t" + o.getItemID() + "\t" + o.isItemPaid() +
+		"\t" + o.isItemProduced());
+	}
 
     /****Dummys****/
     private static Order dummyOrder() {
         int i = dummyCounter++;
-        return new Order(i+";"+i+1+";", 3+i, i*1.5, DateTime.now(), false);
+        return new Order( 3+i, i*1.5, DateTime.now(), false);
     }
     private static Order dummyUpdateOrder() {
         int i = dummyCounter++;
-        return new Order(i+";"+i+1+";", updateNumber, i*1.5, DateTime.now(), false);
+        return new Order(updateNumber, i*1.5, DateTime.now(), false);
     }
     private static Item dummyItem() {
         int i = dummyCounter++;
         return new Item("TestItem", i*1.5, i*3, true);
     }
     private static Table dummyTable() {
-        return new Table("TestTable", true);
+        return new Table("TestTable", 9, true);
     }
 }
