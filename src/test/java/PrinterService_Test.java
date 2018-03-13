@@ -1,7 +1,10 @@
-package java;
+
 
 import dhbw.sa.kassensystem_rest.database.databaseservice.DatabaseService;
+import dhbw.sa.kassensystem_rest.database.entity.OrderedItem;
 import dhbw.sa.kassensystem_rest.database.printer.PrinterService;
+
+import java.util.ArrayList;
 
 public class PrinterService_Test {
     private static DatabaseService dbs = new DatabaseService();
@@ -10,8 +13,10 @@ public class PrinterService_Test {
 
         //PrinterTest
         PrinterService printerService = new PrinterService();
-        //printerService.printOrder(dbs.getOrderById(4), dbs.getAllItems(), dbs.getAllTables());
-        //printerService.printOrder(dbs.getOrderById(4), dbs.getAllItems(), dbs.getAllTables(), false);
-        //printerService.printOrder(dbs.getOrderById(3), dbs.getAllItems(), dbs.getAllTables());
+        ArrayList<OrderedItem> orderedItems = new ArrayList<>();
+        orderedItems.add(new OrderedItem(38, 3));
+		orderedItems.add(new OrderedItem(38, 4));
+		orderedItems.add(new OrderedItem(38, 5));
+        printerService.printOrder(38, orderedItems);
     }
 }
