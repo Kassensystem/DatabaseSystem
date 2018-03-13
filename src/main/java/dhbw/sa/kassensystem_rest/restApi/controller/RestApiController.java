@@ -63,6 +63,7 @@ public class RestApiController {
         return databaseService.getAllAvailableTables();
     }
 
+
     @RequestMapping("/orderedItems")
     public ArrayList<OrderedItem> getAllOrderedItems() {
         return databaseService.getAllOrderedItems();
@@ -72,7 +73,7 @@ public class RestApiController {
     public ArrayList<OrderedItem> getOrderedItemsByOrderId(@PathVariable("orderID") int orderId) {
         return databaseService.getOrderedItemsByOrderId(orderId);
     }
-
+  
     /*POST/PUT*/
 
     /**
