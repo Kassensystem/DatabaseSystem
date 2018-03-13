@@ -4,10 +4,13 @@ import dhbw.sa.kassensystem_rest.database.entity.*;
 import dhbw.sa.kassensystem_rest.exceptions.DataException;
 import dhbw.sa.kassensystem_rest.exceptions.MySQLServerConnectionException;
 import dhbw.sa.kassensystem_rest.database.printer.PrinterService;
+import dhbw.sa.kassensystem_rest.exceptions.NotAuthentificatedException;
 import javafx.print.Printer;
 import org.joda.time.DateTime;
 import org.springframework.stereotype.Service;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.sql.*;
 import java.util.ArrayList;
 
@@ -542,6 +545,37 @@ public class DatabaseService implements DatabaseService_Interface
 	{
 		PrinterService printerService = new PrinterService();
 		printerService.printOrder(orderID, orderedItems);
+	}
+
+	public boolean authentificate(String loginname, String passwordHash)
+			throws NotAuthentificatedException
+	{
+		return DBService_LoginData.authentificate(connection, loginname, passwordHash);
+	}
+
+	/**
+	 * Verschlüsselt ein Passwort als 256bit Hash-Code. Im GUI wird das Password eingegegeben und mit dieser
+	 * Funktion in einen Hash-Code gewandelt. Dieser wird in der Datenbank abgelegt.
+	 * Diese Verschlüsselungs-Funktion muss mit der in der Android-App verwendeten übereinstimmen.
+	 * @param password Das zu verschlüsselnde Passwort.
+	 * @return Den Hash-Code als String
+	 */
+	public String generateHash(String password)
+	{
+		try
+		{
+			String encryptedString;
+
+			MessageDigest messageDigest = MessageDigest.getInstance("SHA-256");
+			messageDigest.update(password.getBytes());
+			encryptedString = new String(messageDigest.digest());
+
+			return encryptedString;
+		} catch (NoSuchAlgorithmException e)
+		{
+			e.printStackTrace();
+		}
+		return null;
 	}
 
     // Vollständigkeit der Daten von Objekten überprüfen

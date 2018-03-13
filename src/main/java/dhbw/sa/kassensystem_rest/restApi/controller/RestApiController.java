@@ -6,6 +6,7 @@ import dhbw.sa.kassensystem_rest.database.entity.Order;
 import dhbw.sa.kassensystem_rest.database.entity.OrderedItem;
 import dhbw.sa.kassensystem_rest.database.entity.Table;
 import dhbw.sa.kassensystem_rest.exceptions.MySQLServerConnectionException;
+import dhbw.sa.kassensystem_rest.exceptions.NotAuthentificatedException;
 import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
@@ -41,7 +42,10 @@ public class RestApiController {
      * @return Liste aller Artikel der Datenbank.
      */
     @RequestMapping("/items")
-    public ArrayList<Item> getAllItems() {
+    public ArrayList<Item> getAllItems
+		(@RequestHeader("loginname") String loginname, @RequestHeader("passwordhash") String passwordhash)
+	{
+		authentificate(loginname, passwordhash);
         return databaseService.getAllAvailableItems();
     }
 
@@ -50,7 +54,10 @@ public class RestApiController {
      * @return Liste aller Bestellungen der Datenbank.
      */
     @RequestMapping("/orders")
-    public ArrayList<Order> getAllOrders() {
+    public ArrayList<Order> getAllOrders
+		(@RequestHeader("loginname") String loginname, @RequestHeader("passwordhash") String passwordhash)
+	{
+		authentificate(loginname, passwordhash);
         return databaseService.getAllOrders();
     }
 
@@ -59,18 +66,28 @@ public class RestApiController {
      * @return Liste aller Tische der Datenbank.
      */
     @RequestMapping("/tables")
-    public ArrayList<Table> getAllTables() {
+    public ArrayList<Table> getAllTables
+		(@RequestHeader("loginname") String loginname, @RequestHeader("passwordhash") String passwordhash)
+	{
+		authentificate(loginname, passwordhash);
         return databaseService.getAllAvailableTables();
     }
 
 
     @RequestMapping("/orderedItems")
-    public ArrayList<OrderedItem> getAllOrderedItems() {
+    public ArrayList<OrderedItem> getAllOrderedItems
+			(@RequestHeader("loginname") String loginname, @RequestHeader("passwordhash") String passwordhash)
+	{
+		authentificate(loginname, passwordhash);
         return databaseService.getAllOrderedItems();
     }
 
     @RequestMapping("/orderedItems/{orderID}")
-    public ArrayList<OrderedItem> getOrderedItemsByOrderId(@PathVariable("orderID") int orderId) {
+    public ArrayList<OrderedItem> getOrderedItemsByOrderId
+			(@PathVariable("orderID") int orderId,
+			 @RequestHeader("loginname") String loginname, @RequestHeader("passwordhash") String passwordhash)
+	{
+		authentificate(loginname, passwordhash);
         return databaseService.getOrderedItemsByOrderId(orderId);
     }
   
@@ -82,8 +99,11 @@ public class RestApiController {
      * @return ResponseEntity, das Erstellen entweder bestätigt oder eine Fehlermeldung liefert.
      */
     @RequestMapping(value = "/order/", method = RequestMethod.POST)
-    public ResponseEntity<?> createOrder(@RequestBody Order order)
+    public ResponseEntity<?> createOrder
+			(@RequestBody Order order,
+			 @RequestHeader("loginname") String loginname, @RequestHeader("passwordhash") String passwordhash)
 	{
+		authentificate(loginname, passwordhash);
         try {
             order.setDate(DateTime.now());
             Integer orderID = databaseService.addOrder(order);
@@ -102,8 +122,11 @@ public class RestApiController {
     }
 
     @RequestMapping(value = "/orderedItem", method = RequestMethod.POST)
-    public ResponseEntity<?> createOrderedItems(@RequestBody ArrayList<OrderedItem> orderedItems)
+    public ResponseEntity<?> createOrderedItems
+			(@RequestBody ArrayList<OrderedItem> orderedItems,
+			 @RequestHeader("loginname") String loginname, @RequestHeader("passwordhash") String passwordhash)
 	{
+		authentificate(loginname, passwordhash);
 		try {
 			// Ausdrucken der hinzugefügten OrderedItems
 			databaseService.printOrder(orderedItems.get(0).getOrderID(), orderedItems);
@@ -122,8 +145,11 @@ public class RestApiController {
 	}
 
 	@RequestMapping(value = "/printOrder/{orderID}", method = RequestMethod.POST)
-	public ResponseEntity<?> printReceipe(@RequestBody int orderID)
+	public ResponseEntity<?> printReceipe
+			(@RequestBody int orderID,
+			 @RequestHeader("loginname") String loginname, @RequestHeader("passwordhash") String passwordhash)
 	{
+		authentificate(loginname, passwordhash);
 		databaseService.printReceipt(orderID);
 		return new ResponseEntity(HttpStatus.OK);
 	}
@@ -135,8 +161,11 @@ public class RestApiController {
      * @return ResponseEntity, das Updaten entweder bestätigt oder eine Fehlermeldung liefert.
      */
     @RequestMapping(value = "/order/{orderID}", method = RequestMethod.PUT)
-    public ResponseEntity<?> updateOrder(@PathVariable("orderID") int orderID, @RequestBody Order order)
+    public ResponseEntity<?> updateOrder
+			(@PathVariable("orderID") int orderID, @RequestBody Order order,
+			 @RequestHeader("loginname") String loginname, @RequestHeader("passwordhash") String passwordhash)
 	{
+		authentificate(loginname, passwordhash);
         try {
             order.setDate(DateTime.now());
             databaseService.updateOrder(orderID, order);
@@ -148,9 +177,11 @@ public class RestApiController {
     }
 
     @RequestMapping(value = "/orderedItem", method = RequestMethod.PUT)
-	public ResponseEntity<?> updateOrderedItems(@RequestBody ArrayList<OrderedItem> orderedItems)
+	public ResponseEntity<?> updateOrderedItems
+			(@RequestBody ArrayList<OrderedItem> orderedItems,
+			 @RequestHeader("loginname") String loginname, @RequestHeader("passwordhash") String passwordhash)
 	{
-
+		authentificate(loginname, passwordhash);
 		try {
 			for (OrderedItem o: orderedItems)
 			{
@@ -161,6 +192,14 @@ public class RestApiController {
 			e.printStackTrace();
 			return new ResponseEntity(e, HttpStatus.NOT_FOUND);
 		}
+	}
+
+	private boolean authentificate(String loginname, String passwordHash)
+			throws NotAuthentificatedException
+	{
+		if (databaseService.authentificate(loginname, passwordHash))
+			return true;
+		return false;
 	}
 
     //Exception-Handling
