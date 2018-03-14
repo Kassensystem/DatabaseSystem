@@ -52,7 +52,7 @@ public class DatabaseService implements DatabaseService_Interface
 		} catch (SQLException e) {}
 	}
 
-    //Getting Table-Data from the database
+    // Getting Table-Data from the database
     @Override
     public ArrayList<Item> getAllItems() throws MySQLServerConnectionException
 	{
@@ -62,6 +62,7 @@ public class DatabaseService implements DatabaseService_Interface
 
         return DBService_Item.getAllItems(connection, false);
     }
+
     public ArrayList<Item> getAllAvailableItems() throws MySQLServerConnectionException
 	{
 		checkConnection();
@@ -70,6 +71,7 @@ public class DatabaseService implements DatabaseService_Interface
 
 		return DBService_Item.getAllItems(connection, true);
 	}
+
     @Override
     public ArrayList<Table> getAllTables() throws MySQLServerConnectionException
 	{
@@ -79,6 +81,7 @@ public class DatabaseService implements DatabaseService_Interface
 
 		return DBService_Table.getAllTables(connection, false);
     }
+
     public ArrayList<Table> getAllAvailableTables() throws MySQLServerConnectionException
 	{
 		checkConnection();
@@ -87,6 +90,7 @@ public class DatabaseService implements DatabaseService_Interface
 
 		return DBService_Table.getAllTables(connection, true);
 	}
+
     @Override
     public ArrayList<Order> getAllOrders() throws MySQLServerConnectionException
 	{
@@ -96,6 +100,7 @@ public class DatabaseService implements DatabaseService_Interface
 
         return DBService_Order.getAllOrders(connection);
     }
+
     @Override
     public ArrayList<Itemdelivery> getAllItemdeliveries() throws MySQLServerConnectionException
 	{
@@ -105,6 +110,7 @@ public class DatabaseService implements DatabaseService_Interface
 
 		return DBService_Itemdelivery.getAllItemdeliveries(connection);
     }
+
     @Override
     public ArrayList<OrderedItem> getAllOrderedItems()
 	{
@@ -114,6 +120,7 @@ public class DatabaseService implements DatabaseService_Interface
 
         return DBService_OrderedItem.getAllOrderedItems(connection, false);
     }
+
     public ArrayList<OrderedItem> getAllUnproducedOrderedItems()
 	{
 		checkConnection();
@@ -141,7 +148,6 @@ public class DatabaseService implements DatabaseService_Interface
         return DBService_OrderedItem.getOrderedItemsByItemId(connection, itemID);
     }
 
-    //Datenbankinhalte mit Angabe der ID erhalten
     public Order getOrderById(int orderID) throws NullPointerException
 	{
         if(orderID == 0) {
@@ -228,6 +234,7 @@ public class DatabaseService implements DatabaseService_Interface
 		throw new NullPointerException("OrderedItem-ID " + orderedItemID + " not found.");
 	}
 
+
     //Adding data to the database
     @Override
     public void addItem(Item item) throws MySQLServerConnectionException, DataException
@@ -250,6 +257,7 @@ public class DatabaseService implements DatabaseService_Interface
 
         DBService_Item.addItem(connection, item);
     }
+
     @Override
     public void addTable(Table table) throws MySQLServerConnectionException, DataException
 	{
@@ -269,6 +277,7 @@ public class DatabaseService implements DatabaseService_Interface
 
         DBService_Table.addTable(connection, table);
     }
+
     @Override
     public int addOrder(Order order) throws MySQLServerConnectionException, DataException
 	{
@@ -286,6 +295,7 @@ public class DatabaseService implements DatabaseService_Interface
 
         return DBService_Order.addOrder(connection, order);
     }
+
     @Override
     public void addItemdelivery(Itemdelivery itemdelivery) throws MySQLServerConnectionException,
             DataException
