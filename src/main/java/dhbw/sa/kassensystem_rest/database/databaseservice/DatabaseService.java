@@ -112,8 +112,16 @@ public class DatabaseService implements DatabaseService_Interface
 
         logInf("Getting OrderedItems from MySQL-Database.");
 
-        return DBService_OrderedItem.getAllOrderedItems(connection);
+        return DBService_OrderedItem.getAllOrderedItems(connection, false);
     }
+    public ArrayList<OrderedItem> getAllUnproducedOrderedItems()
+	{
+		checkConnection();
+
+		logInf("Getting OrderedItems from MySQL-Database.");
+
+		return DBService_OrderedItem.getAllOrderedItems(connection, true);
+	}
 
     public ArrayList<OrderedItem> getOrderedItemsByOrderId(int orderID)
 	{

@@ -11,13 +11,15 @@ import java.util.ArrayList;
 
 public class DBService_OrderedItem
 {
-	static ArrayList<OrderedItem> getAllOrderedItems(Connection connection)
+	static ArrayList<OrderedItem> getAllOrderedItems(Connection connection, boolean onlyUnproduced)
 	{
 		ArrayList<OrderedItem> orderedItems = new ArrayList<>();
 
 		try {
 			String query = "SELECT orderedItemID, orderID, itemID, itemPaid, itemProduced " +
-					"FROM " + DatabaseProperties.getDatabase() + ".ordereditems";
+					"FROM " + DatabaseProperties.getDatabase() + ".ordereditems ";
+			if(onlyUnproduced)
+				query += "WHERE itemProduced = FALSE";
 			PreparedStatement pst = connection.prepareStatement(query);
 			ResultSet rs = pst.executeQuery();
 
