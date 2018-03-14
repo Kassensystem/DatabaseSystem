@@ -80,114 +80,122 @@
       <DataType>char(200)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="27" parent="11" name="orderedItemID">
+    <index id="27" parent="10" name="logindata_waiterID_uindex">
+      <ColNames>waiterID</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="28" parent="10" name="logindata_waiterID_uindex">
+      <ColNames>waiterID</ColNames>
+      <UnderlyingIndexName>logindata_waiterID_uindex</UnderlyingIndexName>
+    </key>
+    <column id="29" parent="11" name="orderedItemID">
       <Position>1</Position>
       <DataType>int(11)|0</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
     </column>
-    <column id="28" parent="11" name="orderID">
+    <column id="30" parent="11" name="orderID">
       <Position>2</Position>
       <DataType>int(11)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="29" parent="11" name="itemID">
+    <column id="31" parent="11" name="itemID">
       <Position>3</Position>
       <DataType>int(11)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="30" parent="11" name="itemPaid">
+    <column id="32" parent="11" name="itemPaid">
       <Position>4</Position>
       <DataType>tinyint(1)|0</DataType>
       <DefaultExpression>&apos;0&apos;</DefaultExpression>
     </column>
-    <column id="31" parent="11" name="itemProduced">
+    <column id="33" parent="11" name="itemProduced">
       <Position>5</Position>
       <DataType>tinyint(1)|0</DataType>
       <DefaultExpression>&apos;0&apos;</DefaultExpression>
     </column>
-    <key id="32" parent="11" name="PRIMARY">
+    <key id="34" parent="11" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>orderedItemID</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="33" parent="12" name="orderID">
+    <column id="35" parent="12" name="orderID">
       <Position>1</Position>
       <DataType>int(11)|0</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
     </column>
-    <column id="34" parent="12" name="date">
+    <column id="36" parent="12" name="date">
       <Position>2</Position>
       <DataType>datetime|0</DataType>
     </column>
-    <column id="35" parent="12" name="tableID">
+    <column id="37" parent="12" name="tableID">
       <Position>3</Position>
       <DataType>int(11)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <key id="36" parent="12" name="PRIMARY">
+    <key id="38" parent="12" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>orderID</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="37" parent="13" name="tableID">
+    <column id="39" parent="13" name="tableID">
       <Position>1</Position>
       <DataType>int(11)|0</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
     </column>
-    <column id="38" parent="13" name="name">
+    <column id="40" parent="13" name="name">
       <Position>2</Position>
       <DataType>char(30)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="39" parent="13" name="seats">
+    <column id="41" parent="13" name="seats">
       <Position>3</Position>
       <DataType>int(11)|0</DataType>
       <DefaultExpression>&apos;0&apos;</DefaultExpression>
     </column>
-    <column id="40" parent="13" name="available">
+    <column id="42" parent="13" name="available">
       <Position>4</Position>
       <DataType>tinyint(1)|0</DataType>
       <NotNull>1</NotNull>
       <DefaultExpression>&apos;1&apos;</DefaultExpression>
     </column>
-    <key id="41" parent="13" name="PRIMARY">
+    <key id="43" parent="13" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>tableID</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="42" parent="14" name="waiterID">
+    <column id="44" parent="14" name="waiterID">
       <Position>1</Position>
       <DataType>int(11)|0</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
     </column>
-    <column id="43" parent="14" name="lastname">
+    <column id="45" parent="14" name="lastname">
       <Position>2</Position>
       <DataType>char(20)|0</DataType>
     </column>
-    <column id="44" parent="14" name="prename">
+    <column id="46" parent="14" name="prename">
       <Position>3</Position>
       <DataType>char(20)|0</DataType>
     </column>
-    <column id="45" parent="14" name="employed">
+    <column id="47" parent="14" name="employed">
       <Position>4</Position>
       <DataType>tinyint(1)|0</DataType>
       <NotNull>1</NotNull>
       <DefaultExpression>&apos;1&apos;</DefaultExpression>
     </column>
-    <index id="46" parent="14" name="waiters_waiterID_uindex">
+    <index id="48" parent="14" name="waiters_waiterID_uindex">
       <ColNames>waiterID</ColNames>
       <Unique>1</Unique>
     </index>
-    <key id="47" parent="14" name="PRIMARY">
+    <key id="49" parent="14" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>waiterID</ColNames>
       <Primary>1</Primary>
     </key>
-    <key id="48" parent="14" name="waiters_waiterID_uindex">
+    <key id="50" parent="14" name="waiters_waiterID_uindex">
       <ColNames>waiterID</ColNames>
       <UnderlyingIndexName>waiters_waiterID_uindex</UnderlyingIndexName>
     </key>

@@ -1,19 +1,21 @@
 package dhbw.sa.kassensystem_rest.database.databaseservice;
 
 import dhbw.sa.kassensystem_rest.database.entity.*;
+import dhbw.sa.kassensystem_rest.database.printer.PrinterService;
 import dhbw.sa.kassensystem_rest.exceptions.DataException;
 import dhbw.sa.kassensystem_rest.exceptions.MySQLServerConnectionException;
-import dhbw.sa.kassensystem_rest.database.printer.PrinterService;
 import dhbw.sa.kassensystem_rest.exceptions.NotAuthentificatedException;
-import javafx.print.Printer;
 import org.joda.time.DateTime;
 import org.springframework.stereotype.Service;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 
+import static dhbw.sa.kassensystem_rest.database.databaseservice.Log.log;
 import static dhbw.sa.kassensystem_rest.database.databaseservice.Log.logErr;
 import static dhbw.sa.kassensystem_rest.database.databaseservice.Log.logInf;
 
@@ -55,7 +57,8 @@ public class DatabaseService implements DatabaseService_Interface
 		} catch (SQLException e) {}
 	}
 
-    //Getting Table-Data from the database
+	//region Getting Table-Data from the database
+	// Items
     @Override
     public ArrayList<Item> getAllItems() throws MySQLServerConnectionException
 	{
@@ -65,14 +68,36 @@ public class DatabaseService implements DatabaseService_Interface
 
         return DBService_Item.getAllItems(connection, false);
     }
+
+	@Override
+	public Item getItemById(int itemID) throws NullPointerException
+	{
+		if(itemID == 0) {
+			logErr("Item-ID may not be null.");
+			throw new NullPointerException("No Item-ID given.");
+		}
+
+		logInf("Getting Item with ID " + itemID + ".");
+
+		Item item = DBService_Item.getItemByID(connection, itemID);
+		if(item != null)
+			return item;
+
+		logErr("Item with ID " + itemID + " doesn't exist in the database.");
+		throw new NullPointerException("Item-ID " + itemID + " not found.");
+	}
+
+	@Override
     public ArrayList<Item> getAllAvailableItems() throws MySQLServerConnectionException
 	{
 		checkConnection();
 
-		logInf("Getting Items from MySQL-Database.");
+		logInf("Getting all available Items from MySQL-Database.");
 
 		return DBService_Item.getAllItems(connection, true);
 	}
+
+	// Tables
     @Override
     public ArrayList<Table> getAllTables() throws MySQLServerConnectionException
 	{
@@ -82,14 +107,36 @@ public class DatabaseService implements DatabaseService_Interface
 
 		return DBService_Table.getAllTables(connection, false);
     }
+
+	@Override
+	public Table getTableById(int tableID) throws NullPointerException
+	{
+		if(tableID == 0) {
+			logErr("Table-ID may not be null.");
+			throw new NullPointerException("No Table-ID given.");
+		}
+
+		logInf("Getting Table with ID " + tableID + ".");
+
+		Table table = DBService_Table.getTableById(connection, tableID);
+		if(table != null)
+			return table;
+
+		logErr("Table with ID " + tableID + " doesn't exist in the database.");
+		throw new NullPointerException("Table-ID " + tableID + " not found.");
+	}
+
+	@Override
     public ArrayList<Table> getAllAvailableTables() throws MySQLServerConnectionException
 	{
 		checkConnection();
 
-		logInf("Getting Tables from MySQL-Database.");
+		logInf("Getting all available Tables from MySQL-Database.");
 
 		return DBService_Table.getAllTables(connection, true);
 	}
+
+	// Orders
     @Override
     public ArrayList<Order> getAllOrders() throws MySQLServerConnectionException
 	{
@@ -99,6 +146,36 @@ public class DatabaseService implements DatabaseService_Interface
 
         return DBService_Order.getAllOrders(connection);
     }
+
+	@Override
+	public Order getOrderById(int orderID) throws NullPointerException
+	{
+		if(orderID == 0) {
+			logErr("Order-ID may not be null.");
+			throw new NullPointerException("No Order-ID given.");
+		}
+
+		logInf("Getting Order with ID " + orderID + ".");
+
+		Order order = DBService_Order.getOrderByID(connection, orderID);
+		if(order != null)
+			return order;
+
+		logErr("Order with ID " + orderID + " doesn't exist in the database.");
+		throw new NullPointerException("Order-ID " + orderID + " not found.");
+	}
+
+	@Override
+	public float getOrderPrice(int orderID) throws MySQLServerConnectionException
+	{
+		checkConnection();
+
+		logInf("Getting price of order form MySQL-Database.");
+
+		return DBService_Order.getPrice(connection, orderID);
+	}
+
+	// Itemdeliveries
     @Override
     public ArrayList<Itemdelivery> getAllItemdeliveries() throws MySQLServerConnectionException
 	{
@@ -108,8 +185,29 @@ public class DatabaseService implements DatabaseService_Interface
 
 		return DBService_Itemdelivery.getAllItemdeliveries(connection);
     }
+
+	@Override
+	public Itemdelivery getItemdeliveryById(int itemdeliveryID) throws NullPointerException
+	{
+		if(itemdeliveryID == 0) {
+			logErr("Itemdelivery-ID may not be null.");
+			throw new NullPointerException("No Itemdelivery-ID given.");
+		}
+
+		logInf("Getting Itemdelivery with ID " + itemdeliveryID + ".");
+
+		Itemdelivery itemdelivery = DBService_Itemdelivery.getItemdeliveryByID(connection, itemdeliveryID);
+		if(itemdelivery != null)
+			return itemdelivery;
+
+		logErr("Itemdelivery with ID " + itemdeliveryID + " doesn't exist in the database.");
+		throw new NullPointerException("Itemdelivery-ID " + itemdeliveryID + " not found.");
+
+	}
+
+    // OrderedItems
     @Override
-    public ArrayList<OrderedItem> getAllOrderedItems()
+    public ArrayList<OrderedItem> getAllOrderedItems() throws MySQLServerConnectionException
 	{
         checkConnection();
 
@@ -118,95 +216,8 @@ public class DatabaseService implements DatabaseService_Interface
         return DBService_OrderedItem.getAllOrderedItems(connection);
     }
 
-    public ArrayList<OrderedItem> getOrderedItemsByOrderId(int orderID)
-	{
-        checkConnection();
-
-        logInf("Getting OrderedItems from MySQL-Database.");
-
-        return DBService_OrderedItem.getOrderedItemsByOrderId(connection, orderID);
-    }
-
-    public ArrayList<OrderedItem> getOrderedItemsByItemId(int itemID)
-	{
-        checkConnection();
-
-        logInf("Getting OrderedItems from MySQL-Database.");
-
-        return DBService_OrderedItem.getOrderedItemsByItemId(connection, itemID);
-    }
-
-    //Datenbankinhalte mit Angabe der ID erhalten
-    public Order getOrderById(int orderID) throws NullPointerException
-	{
-        if(orderID == 0) {
-            logErr("Order-ID may not be null.");
-            throw new NullPointerException("No Order-ID given.");
-        }
-
-        logInf("Getting Order with ID " + orderID + ".");
-
-        Order order = DBService_Order.getOrderByID(connection, orderID);
-        if(order != null)
-        	return order;
-
-        logErr("Order with ID " + orderID + " doesn't exist in the database.");
-        throw new NullPointerException("Order-ID " + orderID + " not found.");
-    }
-
-    public Item getItemById(int itemID) throws NullPointerException
-	{
-        if(itemID == 0) {
-            logErr("Item-ID may not be null.");
-            throw new NullPointerException("No Item-ID given.");
-        }
-
-        logInf("Getting Item with ID " + itemID + ".");
-
-		Item item = DBService_Item.getItemByID(connection, itemID);
-		if(item != null)
-			return item;
-
-        logErr("Item with ID " + itemID + " doesn't exist in the database.");
-        throw new NullPointerException("Item-ID " + itemID + " not found.");
-    }
-
-    public Table getTableById(int tableID) throws NullPointerException
-	{
-        if(tableID == 0) {
-            logErr("Table-ID may not be null.");
-            throw new NullPointerException("No Table-ID given.");
-        }
-
-        logInf("Getting Table with ID " + tableID + ".");
-
-        Table table = DBService_Table.getTableById(connection, tableID);
-		if(table != null)
-			return table;
-
-        logErr("Table with ID " + tableID + " doesn't exist in the database.");
-        throw new NullPointerException("Table-ID " + tableID + " not found.");
-    }
-
-    public Itemdelivery getItemdeliveryById(int itemdeliveryID) throws NullPointerException
-	{
-        if(itemdeliveryID == 0) {
-            logErr("Itemdelivery-ID may not be null.");
-            throw new NullPointerException("No Itemdelivery-ID given.");
-        }
-
-        logInf("Getting Itemdelivery with ID " + itemdeliveryID + ".");
-
-        Itemdelivery itemdelivery = DBService_Itemdelivery.getItemdeliveryByID(connection, itemdeliveryID);
-		if(itemdelivery != null)
-			return itemdelivery;
-
-        logErr("Itemdelivery with ID " + itemdeliveryID + " doesn't exist in the database.");
-        throw new NullPointerException("Itemdelivery-ID " + itemdeliveryID + " not found.");
-
-    }
-
-    public OrderedItem getOrderedItemById(int orderedItemID) throws NullPointerException
+	@Override
+	public OrderedItem getOrderedItemById(int orderedItemID) throws NullPointerException
 	{
 		if(orderedItemID == 0) {
 			logErr("OrderedItem-ID may not be null.");
@@ -223,7 +234,60 @@ public class DatabaseService implements DatabaseService_Interface
 		throw new NullPointerException("OrderedItem-ID " + orderedItemID + " not found.");
 	}
 
-    //Adding data to the database
+	@Override
+    public ArrayList<OrderedItem> getOrderedItemsByOrderId(int orderID) throws MySQLServerConnectionException
+	{
+        checkConnection();
+
+        logInf("Getting OrderedItems with Order-ID " + orderID + " from MySQL-Database.");
+
+        return DBService_OrderedItem.getOrderedItemsByOrderId(connection, orderID);
+    }
+
+	@Override
+    public ArrayList<OrderedItem> getOrderedItemsByItemId(int itemID) throws MySQLServerConnectionException
+	{
+        checkConnection();
+
+        logInf("Getting OrderedItems with Item-ID " + itemID + " from MySQL-Database.");
+
+        return DBService_OrderedItem.getOrderedItemsByItemId(connection, itemID);
+    }
+
+    // Waiters
+	@Override
+	public ArrayList<Waiter> getAllWaiters() throws MySQLServerConnectionException
+	{
+		checkConnection();
+
+		logInf("Getting Waiters from MySQL-Database.");
+
+		return DBService_Waiter.getAllWaiters(connection);
+	}
+
+	@Override
+	public Waiter getWaiterByID(int waiterID)
+	{
+		checkConnection();
+
+		logInf("Getting Waiter with ID " + waiterID + ".");
+
+		return DBService_Waiter.getWaiterByID(connection, waiterID);
+	}
+
+	// Logindata
+	@Override
+	public ArrayList<Logindata> getAllLogindata() throws MySQLServerConnectionException
+	{
+		checkConnection();
+
+		logInf("Getting Logindata from MySQL-Database.");
+
+		return DBService_LoginData.getAllLogindata(connection);
+	}
+	//endregion
+
+	//region Adding data to the database
     @Override
     public void addItem(Item item) throws MySQLServerConnectionException, DataException
 	{
@@ -245,6 +309,7 @@ public class DatabaseService implements DatabaseService_Interface
 
         DBService_Item.addItem(connection, item);
     }
+
     @Override
     public void addTable(Table table) throws MySQLServerConnectionException, DataException
 	{
@@ -264,6 +329,7 @@ public class DatabaseService implements DatabaseService_Interface
 
         DBService_Table.addTable(connection, table);
     }
+
     @Override
     public int addOrder(Order order) throws MySQLServerConnectionException, DataException
 	{
@@ -281,6 +347,7 @@ public class DatabaseService implements DatabaseService_Interface
 
         return DBService_Order.addOrder(connection, order);
     }
+
     @Override
     public void addItemdelivery(Itemdelivery itemdelivery) throws MySQLServerConnectionException,
             DataException
@@ -318,7 +385,47 @@ public class DatabaseService implements DatabaseService_Interface
 		DBService_OrderedItem.addOrderedItem(connection, orderedItem);
 	}
 
-	//Updating data in database
+	@Override
+	public void addWaiter(Waiter waiter) throws MySQLServerConnectionException, DataException
+	{
+		checkConnection();
+
+		logInf("Adding Waiter to MySQL-Database.");
+
+		//Vollständigkeit des waiters überprüfen
+		if(waiter.getWaiterID() != 0) {
+			logErr("ID may not be set by the user.");
+			logErr("Waiter was not added to the Database!");
+			throw new DataException("Es darf keine ID übergeben werden. Die ID wird vom Datenbank-Server gewählt!");
+		}
+
+		isWaiterComplete(waiter);
+
+		DBService_Waiter.addWaiter(connection, waiter);
+	}
+
+	@Override
+	public void addLogindata(Logindata logindata) throws MySQLServerConnectionException
+	{
+		checkConnection();
+
+		logInf("Adding Logindata to MySQL-Database.");
+
+		// Existenz der waiterID überprüfen
+		if(!existsWaiterWithID(logindata.getWaiterID())) {
+			logErr("Waiter with ID " + logindata.getWaiterID() + " does not exist in the database! ");
+			throw new DataException("Bedienung mit der ID " + logindata.getWaiterID() +
+					" existiert nicht in der Datenbank!");
+		}
+
+		//Vollständigkeit der Logindata überprüfen
+		isLogindataComplete(logindata);
+
+		DBService_LoginData.addLogindata(connection, logindata);
+	}
+	//endregion
+
+	//region Updating data in database
     @Override
     public void updateItem(int itemID, Item item) throws NullPointerException, DataException,
             MySQLServerConnectionException
@@ -342,6 +449,7 @@ public class DatabaseService implements DatabaseService_Interface
 
         DBService_Item.updateItem(connection, item, itemID);
     }
+
     @Override
     public void updateTable(int tableID, Table table) throws NullPointerException, DataException,
             MySQLServerConnectionException
@@ -365,6 +473,7 @@ public class DatabaseService implements DatabaseService_Interface
 
         DBService_Table.updateTable(connection, table, tableID);
     }
+
     @Override
     public void updateOrder(int orderID, Order order) throws NullPointerException, DataException,
             MySQLServerConnectionException
@@ -429,7 +538,55 @@ public class DatabaseService implements DatabaseService_Interface
 		DBService_OrderedItem.updateOrderedItem(connection, orderedItem, orderedItemID);
 	}
 
-	//Deleting data from database
+	@Override
+	public void updateWaiter(int waiterID, Waiter waiter)
+	{
+		checkConnection();
+
+		logInf("Updating Waiter with ID " + waiterID + ".");
+
+		if(waiterID == 0) {
+			logErr("Waiter-ID may not be null.");
+			throw new NullPointerException("No Waiter-ID given.");
+		}
+
+		// Existenz einer Bedienung mit der ID überprüfen
+		if(!existsWaiterWithID(waiterID)) {
+			logErr("Waiter with ID " + waiter + " does not exist in the database! ");
+			throw new DataException("Bedienung mit der ID " + waiterID + " existiert nicht in der Datenbank!");
+		}
+
+		isWaiterComplete(waiter);
+
+		DBService_Waiter.updateWaiter(connection, waiterID, waiter);
+	}
+
+	@Override
+	public void updateLogindata(Logindata logindata)
+	{
+		checkConnection();
+
+		logInf("Updating Logindata with Waiter-ID " + logindata.getWaiterID() + ".");
+
+		if(logindata.getWaiterID() == 0) {
+			logErr("Waiter-ID may not be null.");
+			throw new NullPointerException("No Waiter-ID given.");
+		}
+
+		// Existenz einer Bedienung mit der ID überprüfen
+		if(!existsLogindataWithWaiterID(logindata.getWaiterID())) {
+			logErr("Logindata with waiter-ID " + logindata.getWaiterID() + " does not exist in the database! ");
+			throw new DataException("Logindaten mit der Bedienungs-ID " + logindata.getWaiterID()
+					+ " existiert nicht in der Datenbank!");
+		}
+
+		isLogindataComplete(logindata);
+
+		DBService_LoginData.updateLogindata(connection, logindata);
+	}
+	//endregion
+
+	//region Deleting data from database
     /*
       Beim Löschen eines Items oder Tables wird dieser nur als nicht verfügbar markiert,
       verbleiben aber in der Datenbank.
@@ -447,6 +604,7 @@ public class DatabaseService implements DatabaseService_Interface
 
         this.updateItem(itemID, item);
     }
+
     @Override
     public void deleteTable(int tableID) throws NullPointerException, DataException,
             MySQLServerConnectionException
@@ -459,6 +617,7 @@ public class DatabaseService implements DatabaseService_Interface
 
         this.updateTable(tableID, table);
     }
+
     @Override
     public void deleteOrder(int orderID) throws NullPointerException, DataException,
             MySQLServerConnectionException
@@ -474,6 +633,7 @@ public class DatabaseService implements DatabaseService_Interface
 
         DBService_Order.deleteOrder(connection, orderID);
     }
+
     @Override
     public void deleteItemdelivery(int itemdeliveryID) throws NullPointerException, DataException,
             MySQLServerConnectionException
@@ -500,15 +660,44 @@ public class DatabaseService implements DatabaseService_Interface
 		if(!existsOrderedItemWithID(orderedItemID)) {
 			logErr("OrderedItem with ID " + orderedItemID + " does not exist in the database!" +
 					" Nothing was deleted.");
-			throw new DataException("Bestellter Artikel mit der ID " + orderedItemID + " existiert nicht in der Datenbank! " +
-					"Es konnte nichts gelöscht werden.");
+			throw new DataException("Bestellter Artikel mit der ID " + orderedItemID +
+					" existiert nicht in der Datenbank! Es konnte nichts gelöscht werden.");
 		}
 
 		DBService_OrderedItem.deleteOrderedItem(connection, orderedItemID);
 	}
 
-	//Drucken einer Order
+	@Override
+	public void deleteWaiter(int waiterID)
+	{
+		logInf("Unemploying Waiter with ID " + waiterID + ".");
 
+		Waiter waiter = this.getWaiterByID(waiterID);
+
+		waiter.setEmployed(false);
+
+		this.updateWaiter(waiterID, waiter);
+	}
+
+	@Override
+	public void deleteLogindata(int waiterID)
+	{
+		logInf("Deleting Logindata with waiter-ID " + waiterID + ".");
+
+		//Existenz eines Logindata mit der waiterID überprüfen
+		if(!existsLogindataWithWaiterID(waiterID)) {
+			logErr("Logindata with waiter-ID " + waiterID + " does not exist in the database!" +
+					" Nothing was deleted.");
+			throw new DataException("Login-Daten mit der Bedienungs-ID " + waiterID +
+					" existieren nicht in der Datenbank! Es konnte nichts gelöscht werden.");
+		}
+
+		DBService_LoginData.deleteLogindata(connection, waiterID);
+	}
+	//endregion
+
+	//region Drucken einer Order
+	@Override
     public void printOrderById(int orderID) throws NullPointerException, DataException,
             MySQLServerConnectionException
 	{
@@ -530,6 +719,7 @@ public class DatabaseService implements DatabaseService_Interface
 	 * Druckt für den Kunden einen Beleg aus.
 	 * @param orderID Die ID der Bestellung, die ausgedruckt werden soll.
 	 */
+	@Override
 	public void printReceipt(int orderID)
 	{
 		PrinterService printerService = new PrinterService();
@@ -541,11 +731,13 @@ public class DatabaseService implements DatabaseService_Interface
 	 * @param orderID ID der auszudruckenden Order.
 	 * @param orderedItems Die neu hinzugefügten Artikel, die in der Küche zubereitet werden sollen.
 	 */
+	@Override
 	public void printOrder(int orderID, ArrayList<OrderedItem> orderedItems)
 	{
 		PrinterService printerService = new PrinterService();
 		printerService.printOrder(orderID, orderedItems);
 	}
+	//endregion
 
 	public boolean authentificate(String loginname, String passwordHash)
 			throws NotAuthentificatedException
@@ -578,7 +770,7 @@ public class DatabaseService implements DatabaseService_Interface
 		return null;
 	}
 
-    // Vollständigkeit der Daten von Objekten überprüfen
+	//region Vollständigkeit der Daten von Objekten überprüfen
     private void isOrderComplete(Order order)
 	{
         String missingAttributs = "";
@@ -599,6 +791,7 @@ public class DatabaseService implements DatabaseService_Interface
             throw new DataException("Die angegebene Table-ID existiert nicht in der Datenbank!");
         }
     }
+
     private boolean isTableComplete(Table table)
 	{
         String missingAttributs = "";
@@ -619,6 +812,7 @@ public class DatabaseService implements DatabaseService_Interface
         return true;
 
     }
+
     private boolean isItemComplete(Item item)
 	{
         String missingAttributs = "";
@@ -639,6 +833,7 @@ public class DatabaseService implements DatabaseService_Interface
         return true;
 
     }
+
     private boolean isItemdeliveryComplete(Itemdelivery itemdelivery)
 	{
         String missingAttributs = "";
@@ -666,6 +861,7 @@ public class DatabaseService implements DatabaseService_Interface
         return true;
 
     }
+
     private boolean isOrderedItemComplete(OrderedItem orderedItem)
 	{
 		String missingAttributs = "";
@@ -688,58 +884,103 @@ public class DatabaseService implements DatabaseService_Interface
 		return true;
 	}
 
+	private boolean isWaiterComplete(Waiter waiter)
+	{
+		String missingAttributs = "";
+
+		if(waiter.getPrename().isEmpty()) {
+			missingAttributs += " Vorname";
+			logErr("Prename missing.");
+		}
+		if(waiter.getLastname().isEmpty()) {
+			missingAttributs += " Nachname";
+			logErr("Lastname missing.");
+		}
+
+		if(!missingAttributs.isEmpty()) {
+			logErr("Waiter was not added to the database!");
+			throw new DataException("Die Bedienung ist unvollständig! Die folgenden Parameter fehlen: "
+					+ missingAttributs);
+		}
+
+		return true;
+	}
+
+	private boolean isLogindataComplete(Logindata logindata)
+	{
+		String missingAttributs = "";
+
+		if(logindata.getWaiterID() == 0) {
+			missingAttributs += " Bedienungs-ID";
+			logErr("WaiterID missing.");
+		}
+		if(logindata.getLoginname().isEmpty()) {
+			missingAttributs += " Login-Name";
+			logErr("Loginname missing.");
+		}
+		if(logindata.getPasswordHash().isEmpty()) {
+			missingAttributs += " Passwort";
+			logErr("Password missing.");
+		}
+
+		if(!missingAttributs.isEmpty()) {
+			logErr("Logindata was not added to the database!");
+			throw new DataException("Die Login-Daten sind unvollständig! Die folgenden Parameter fehlen: "
+					+ missingAttributs);
+		}
+
+		return true;
+	}
+	//endregion
+
+	//region Existenz von Objekten mit ID überprüfen
     private boolean existsItemWithID(int itemID)
 	{
-        return DBService_Item.existsItemWithID(connection, itemID);
 
+        return DBService_Item.existsItemWithID(connection, itemID);
     }
+
     private boolean orderIsAvailable(int orderID)
 	{
 
         return DBService_Order.existsOrderWithID(connection, orderID);
     }
+
     private boolean existsTableWithID(int tableID)
 	{
 
         return DBService_Table.existsTableWithID(connection, tableID);
     }
+
     private boolean existsItemdeliveryWithID(int itemdeliveryID)
 	{
         return DBService_Itemdelivery.existsItemdeliveryWithID(connection, itemdeliveryID);
     }
+
     public boolean existsOrderedItemWithID(int orderedItemID)
 	{
 		return DBService_OrderedItem.existsOrderedItemWithID(connection, orderedItemID);
 	}
 
-	public float getOrderPrice(int orderID) {
-    	return DBService_Order.getPrice(connection, orderID);
+	private boolean existsWaiterWithID(int waiterID)
+	{
+
+		return DBService_Waiter.existsWaiterWithID(connection, waiterID);
 	}
 
-    /**
-     * Ermittelt die Haeufigkeit einer ID in einer Liste von IDs.
-     * @param id ID desjenigen Items, dessen Haeufigkeit in den itemIDs ermittelt werden soll.
-     * @param itemIDs ArrayList von Integers mit itemIDs.
-     * @return wie oft die id in den itemIDs vorkommt.
-     */
-    private static int getItemQuantity(int id, ArrayList<Integer> itemIDs)
+	public boolean existsLogindataWithWaiterID(int waiterID)
 	{
-        if(!itemIDs.contains(id))
-            return 0;
-        int quantity = 0;
-        for(Integer i: itemIDs) {
-            if(i.intValue() == id)
-                quantity++;
-        }
-        return quantity;
-    }
+		return DBService_LoginData.existsLogindataWithWaiterID(connection, waiterID);
+	}
+	//endregion
 
-    static double round(double number)
+	static double round(double number)
 	{
-        return (double) Math.round(number * 100d) / 100d;
-    }
 
-    //Konverter
+		return (double) Math.round(number * 100d) / 100d;
+	}
+
+	//Konverter
 
     /**
      * Konvertiert ein joda.time.DateTime in einen Timestamp, der in der SQL-Datenbank gespeicher weren kann
