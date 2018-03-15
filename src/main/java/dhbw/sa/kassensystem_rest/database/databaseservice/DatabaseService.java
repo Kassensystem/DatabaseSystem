@@ -213,7 +213,7 @@ public class DatabaseService implements DatabaseService_Interface
 
         logInf("Getting OrderedItems from MySQL-Database.");
 
-        return DBService_OrderedItem.getAllOrderedItems(connection);
+        return DBService_OrderedItem.getAllOrderedItems(connection, false);
     }
 
 	@Override
@@ -674,6 +674,11 @@ public class DatabaseService implements DatabaseService_Interface
 		}
 
 		DBService_OrderedItem.deleteOrderedItem(connection, orderedItemID);
+	}
+
+	public void deleteOrderedItemByOrderId(int orderID)
+	{
+		DBService_OrderedItem.deleteOrderedItemByOrderId(connection, orderID);
 	}
 
 	@Override

@@ -153,7 +153,7 @@ public class RestApiController {
 
 	@RequestMapping(value = "/printOrder/{orderID}", method = RequestMethod.POST)
 	public ResponseEntity<?> printReceipe
-			(@RequestBody int orderID,
+			(@PathVariable("orderID") int orderID,
 			 @RequestHeader("loginname") String loginname, @RequestHeader("passwordhash") String passwordhash)
 	{
 		authentificate(loginname, passwordhash);
