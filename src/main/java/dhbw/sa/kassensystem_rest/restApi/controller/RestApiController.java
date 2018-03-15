@@ -43,7 +43,7 @@ public class RestApiController {
      */
     @RequestMapping("/items")
     public ArrayList<Item> getAllItems
-		(@RequestHeader("loginname") String loginname, @RequestHeader("passwordhash") String passwordhash)
+			(@RequestHeader("loginname") String loginname, @RequestHeader("passwordhash") String passwordhash)
 	{
 		authentificate(loginname, passwordhash);
         return databaseService.getAllAvailableItems();
@@ -55,7 +55,7 @@ public class RestApiController {
      */
     @RequestMapping("/orders")
     public ArrayList<Order> getAllOrders
-		(@RequestHeader("loginname") String loginname, @RequestHeader("passwordhash") String passwordhash)
+			(@RequestHeader("loginname") String loginname, @RequestHeader("passwordhash") String passwordhash)
 	{
 		authentificate(loginname, passwordhash);
         return databaseService.getAllOrders();
@@ -67,7 +67,7 @@ public class RestApiController {
      */
     @RequestMapping("/tables")
     public ArrayList<Table> getAllTables
-		(@RequestHeader("loginname") String loginname, @RequestHeader("passwordhash") String passwordhash)
+			(@RequestHeader("loginname") String loginname, @RequestHeader("passwordhash") String passwordhash)
 	{
 		authentificate(loginname, passwordhash);
         return databaseService.getAllAvailableTables();
@@ -83,8 +83,10 @@ public class RestApiController {
     }
 
     @RequestMapping("/unproducedOrderedItems")
-	public ArrayList<OrderedItem> getAllUnproducedOrderedItems()
+	public ArrayList<OrderedItem> getAllUnproducedOrderedItems
+			(@RequestHeader("loginname") String loginname, @RequestHeader("passwordhash") String passwordhash)
 	{
+		authentificate(loginname, passwordhash);
 		return databaseService.getAllUnproducedOrderedItems();
 	}
 
@@ -96,13 +98,6 @@ public class RestApiController {
 		authentificate(loginname, passwordhash);
         return databaseService.getOrderedItemsByOrderId(orderId);
     }
-
-	@RequestMapping("/unproducedOrderedItems")
-	public ArrayList<OrderedItem> getAllUnproducedOrderedItems()
-	{
-		return databaseService.getAllUnproducedOrderedItems();
-	}
-
   
     /*POST/PUT*/
 
