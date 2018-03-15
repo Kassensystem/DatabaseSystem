@@ -98,8 +98,8 @@ public class RestApiController {
      * @param order neu zu erstellende Bestellung.
      * @return ResponseEntity, das Erstellen entweder bestätigt oder eine Fehlermeldung liefert.
      */
-    @RequestMapping(value = "/order/", method = RequestMethod.POST)
-    public ResponseEntity<?> createOrder
+    @RequestMapping(value = "/order", method = RequestMethod.POST)
+    public ResponseEntity<Integer> createOrder
 			(@RequestBody Order order,
 			 @RequestHeader("loginname") String loginname, @RequestHeader("passwordhash") String passwordhash)
 	{
@@ -108,15 +108,15 @@ public class RestApiController {
             order.setDate(DateTime.now());
             Integer orderID = databaseService.addOrder(order);
 
-            // Header bearbeiten
+            /*// Header bearbeiten
 			HttpHeaders responseHeaders = new HttpHeaders();
 			URI uri = new URI(orderID.toString());
-			responseHeaders.setLocation(uri);
+			responseHeaders.setLocation(uri);*/
 
-            return new ResponseEntity(responseHeaders, HttpStatus.OK);
+            return new ResponseEntity(orderID, HttpStatus.OK);
         } catch (Exception e) {
             e.printStackTrace();
-            ResponseEntity<?> response = new ResponseEntity(e.getMessage(), HttpStatus.NOT_FOUND);
+            ResponseEntity<Integer> response = new ResponseEntity(e.getMessage(), HttpStatus.NOT_FOUND);
             return response;
         }
     }

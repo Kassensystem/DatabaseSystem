@@ -71,15 +71,16 @@ public class Logindata
 	 */
 	public static String encryptPassword(String password)
 	{
-		try
-		{
-			MessageDigest messageDigest = MessageDigest.getInstance("SHA-256");
-			messageDigest.update(password.getBytes());
-			return new String(messageDigest.digest());
-		} catch (NoSuchAlgorithmException e)
-		{
-			e.printStackTrace();
-		}
-		return null;
+//		try
+//		{
+////			MessageDigest messageDigest = MessageDigest.getInstance("SHA-256");
+////			messageDigest.update(password.getBytes());
+////			return new String(messageDigest.digest());
+//		} catch (NoSuchAlgorithmException e)
+//		{
+//			e.printStackTrace();
+//		}
+//		return null;
+		return String.valueOf(password.hashCode());
 	}
 }
