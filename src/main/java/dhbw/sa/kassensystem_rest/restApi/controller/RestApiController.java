@@ -82,6 +82,12 @@ public class RestApiController {
         return databaseService.getAllOrderedItems();
     }
 
+    @RequestMapping("/unproducedOrderedItems")
+	public ArrayList<OrderedItem> getAllUnproducedOrderedItems()
+	{
+		return databaseService.getAllUnproducedOrderedItems();
+	}
+
     @RequestMapping("/orderedItems/{orderID}")
     public ArrayList<OrderedItem> getOrderedItemsByOrderId
 			(@PathVariable("orderID") int orderId,
@@ -135,15 +141,21 @@ public class RestApiController {
 	{
 		authentificate(loginname, passwordhash);
 		try {
-			// Ausdrucken der hinzugefügten OrderedItems
-			databaseService.printOrder(orderedItems.get(0).getOrderID(), orderedItems);
+			ArrayList<OrderedItem> newOrderedItems = new ArrayList<>();
+
 			for(OrderedItem o: orderedItems) {
 				// alle noch nicht existierenden OrderedItems der DB hinzufügen
 				if (!databaseService.existsOrderedItemWithID(o.getOrderedItemID()))
 				{
 					databaseService.addOrderedItem(o);
+					newOrderedItems.add(o);
 				}
 			}
+
+			// Ausdrucken der hinzugefügten OrderedItems
+			if (!newOrderedItems.isEmpty())
+				databaseService.printOrder(newOrderedItems.get(0).getOrderID(), newOrderedItems);
+
 			return new ResponseEntity(HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();

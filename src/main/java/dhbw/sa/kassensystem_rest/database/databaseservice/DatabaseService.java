@@ -146,7 +146,6 @@ public class DatabaseService implements DatabaseService_Interface
 
         return DBService_Order.getAllOrders(connection);
     }
-
 	@Override
 	public Order getOrderById(int orderID) throws NullPointerException
 	{
@@ -193,7 +192,7 @@ public class DatabaseService implements DatabaseService_Interface
 			logErr("Itemdelivery-ID may not be null.");
 			throw new NullPointerException("No Itemdelivery-ID given.");
 		}
-
+    
 		logInf("Getting Itemdelivery with ID " + itemdeliveryID + ".");
 
 		Itemdelivery itemdelivery = DBService_Itemdelivery.getItemdeliveryByID(connection, itemdeliveryID);
@@ -215,6 +214,7 @@ public class DatabaseService implements DatabaseService_Interface
 
         return DBService_OrderedItem.getAllOrderedItems(connection, false);
     }
+
 
 	@Override
 	public OrderedItem getOrderedItemById(int orderedItemID) throws NullPointerException
@@ -297,8 +297,9 @@ public class DatabaseService implements DatabaseService_Interface
 	//endregion
 
 	//region Adding data to the database
-    @Override
-    public void addItem(Item item) throws MySQLServerConnectionException, DataException
+  //Adding data to the database
+  @Override
+  public void addItem(Item item) throws MySQLServerConnectionException, DataException
 	{
         checkConnection();
 
@@ -321,7 +322,7 @@ public class DatabaseService implements DatabaseService_Interface
 
     @Override
     public void addTable(Table table) throws MySQLServerConnectionException, DataException
-	{
+	  {
         checkConnection();
 
         logInf("Adding Table to MySQL-Database.");
