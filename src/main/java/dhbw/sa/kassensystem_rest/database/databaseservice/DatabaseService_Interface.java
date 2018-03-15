@@ -27,6 +27,9 @@ import static dhbw.sa.kassensystem_rest.database.databaseservice.Log.logInf;
 
 public interface DatabaseService_Interface
 {
+	/*
+	TODO Java-Doc-Kommentare der neuen Methoden ausschreiben.
+	 */
 
     /**
      * Stellt eine Verbindung zur MySQL-Datenbank her.
@@ -53,61 +56,134 @@ public interface DatabaseService_Interface
      */
     void disconnect();
 
-    //Getting Table-Data from the database
+	//region Getting Table-Data from the database
+	// Items
     /**
      * Fragt die Artikel der Datenbank ab.
      * @return Artikel der Datenbank.
      */
     ArrayList<Item> getAllItems();
 
+	/**
+	 * Liefert ein {@link Item} in Abhängigkeit von einer ID.
+	 * @param itemID ID des Artikels.
+	 * @return Item mit angegebener ID.
+	 */
+	Item getItemById(int itemID);
+
+	/**
+	 * TODO
+	 * @return
+	 */
+	ArrayList<Item> getAllAvailableItems();
+
+	// Tables
     /**
      * Fragt die Tische der Datenbank ab.
      * @return Tische der Datenbank.
      */
     ArrayList<Table> getAllTables();
 
+	/**
+	 * Liefert eine {@link Table} in Abhängigkeit von einer ID.
+	 * @param tableID ID des Tisches.
+	 * @return Table mit angegebener ID.
+	 */
+	Table getTableById(int tableID);
+
+	/**
+	 * TODO
+	 * @return
+	 */
+	ArrayList<Table> getAllAvailableTables();
+
+	// Orders
     /**
      * Fragt die Bestellungen der Datenbank ab.
      * @return Bestellungen der Datenbank.
      */
     ArrayList<Order> getAllOrders();
 
+	/**
+	 * Liefert eine Bestellung in Abhängigkeit von einer ID.
+	 * @param orderID ID der Bestellung.
+	 * @return Order mit angegebener ID.
+	 */
+	Order getOrderById(int orderID);
+
+	/**
+	 * TODO
+	 * @param orderID
+	 * @return
+	 */
+	float getOrderPrice(int orderID);
+
+	// Itemdeliveries
     /**
      * Fragt die Wareneingaenge der Datenbank ab.
      * @return Wareneingaenge der Datenbank.
      */
     ArrayList<Itemdelivery> getAllItemdeliveries();
 
+	/**
+	 * TODO
+	 * @param itemdeliveryID
+	 * @return
+	 */
+	Itemdelivery getItemdeliveryById(int itemdeliveryID);
+
+	// OrderedItems
     /**
      * TODO
      * @return
      */
     ArrayList<OrderedItem> getAllOrderedItems();
 
+	/**
+	 * TODO
+	 * @param orderedItemID
+	 * @return
+	 */
+	OrderedItem getOrderedItemById(int orderedItemID);
 
-    /**
-     * Liefert eine Bestellung in Abhängigkeit von einer ID.
-     * @param orderID ID der Bestellung.
-     * @return Order mit angegebener ID.
-     */
-    Order getOrderById(int orderID);
+	/**
+	 * TODO
+	 * @param orderID
+	 * @return
+	 */
+	ArrayList<OrderedItem> getOrderedItemsByOrderId(int orderID);
 
-    /**
-     * Liefert ein {@link Item} in Abhängigkeit von einer ID.
-     * @param itemID ID des Artikels.
-     * @return Item mit angegebener ID.
-     */
-    Item getItemById(int itemID);
+	/**
+	 * TODO
+	 * @param itemID
+	 * @return
+	 */
+	ArrayList<OrderedItem> getOrderedItemsByItemId(int itemID);
 
-    /**
-     * Liefert eine {@link Table} in Abhängigkeit von einer ID.
-     * @param tableID ID des Tisches.
-     * @return Table mit angegebener ID.
-     */
-    Table getTableById(int tableID);
+	// Waiters
 
-    //Adding data to the database
+	/**
+	 * TODO
+	 * @return
+	 */
+	ArrayList<Waiter> getAllWaiters();
 
+	/**
+	 * TODO
+	 * @param waiterID
+	 * @return
+	 */
+	Waiter getWaiterByID(int waiterID);
+
+	// Logindata
+	/**
+	 * TODO
+	 * @return
+	 */
+	ArrayList<Logindata> getAllLogindata();
+	//endregion
+
+	//region Adding data to the database
     /**
      * Fuegt der Datenbank einen neuen Artikel hinzu.
      * @param item neuer Artikel.
@@ -138,8 +214,20 @@ public interface DatabaseService_Interface
 	 */
 	void addOrderedItem(OrderedItem orderedItem);
 
-    //Updating data in database
+	/**
+	 * TODO
+	 * @param waiter
+	 */
+	void addWaiter(Waiter waiter);
 
+	/**
+	 * TODO
+	 * @param logindata
+	 */
+	void addLogindata(Logindata logindata);
+	//endregion
+
+	//region Updating data in database
     /**
      * Aktualisiert die Daten eines Artikels.
      * @param itemID ID des zu aktualisierenden Artikels.
@@ -168,8 +256,21 @@ public interface DatabaseService_Interface
 	 */
 	void updateOrderedItem(int orderedItemID, OrderedItem orderedItem);
 
-    //Deleting data from the database
+	/**
+	 * TODO
+	 * @param waiterID
+	 * @param waiter
+	 */
+	void updateWaiter(int waiterID, Waiter waiter);
 
+	/**
+	 * TODO
+	 * @param logindata
+	 */
+	void updateLogindata(Logindata logindata);
+	//endregion
+
+	//region Deleting data from the database
     /**
      * Markiert einen Artikel als nicht verfuegbar. Daten werden nicht geloescht.
      * @param itemID ID des als nicht verfuegbar zu markierenden Artikels,
@@ -200,10 +301,39 @@ public interface DatabaseService_Interface
 	 */
 	void deleteOrderedItem(int orderedItemID);
 
+	/**
+	 * TODO
+	 * @param waiterID
+	 */
+	void deleteWaiter(int waiterID);
+
+	/**
+	 * TODO
+	 * @param waiterID
+	 */
+	void deleteLogindata(int waiterID);
+	//endregion
+
+	//region Drucken einer Order
     /**
      * Ausdrucken einer Bestellung in Abhängigkeit von einer ID;
      * @param orderID ID der auszudruckenden Order.
      */
     public void printOrderById(int orderID);
+
+	/**
+	 * TODO
+	 * @param orderID
+	 */
+	void printReceipt(int orderID);
+
+	/**
+	 * TODO
+	 * @param orderID
+	 * @param orderedItems
+	 */
+	void printOrder(int orderID, ArrayList<OrderedItem> orderedItems);
+	//endregion
+
 
 }

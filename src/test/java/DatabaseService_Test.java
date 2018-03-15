@@ -16,20 +16,25 @@ import java.util.ArrayList;
 
 public class DatabaseService_Test {
     private static DatabaseService dbs = new DatabaseService();
-    private static int dummyCounter = 1;
+    private static int dummyCounter = 3;
     private static int updateNumber = 999;
 
     public static void main(String[] args) {
-		//getOrders();
-		//getItems();
-		//getTables();
-		//getItemdeliveries();
-		//getOrderedItems();
-		//getOrderedItemByOrderId(6);
-		//getOrdereditemById(2);
-		//addOrderedItem(new OrderedItem(10, 16));
-		//updateOrderedItem(new OrderedItem(5, 10, 16, true, true));
-		//deleteOrderedItem(8);
+//		getOrders();
+//		getItems();
+//		getTables();
+//		getItemdeliveries();
+//		getOrderedItems();
+//		getWaiters();
+//		getLogindata();
+//
+//		getOrderedItemByOrderId(6);
+//		getOrdereditemById(2);
+//		addOrderedItem(new OrderedItem(10, 16));
+//		updateOrderedItem(new OrderedItem(5, 10, 16, true, true));
+//		deleteOrderedItem(8);
+//		addWaiter(dummyWaiter());
+//		addLogindata(dummyLogindata());
 
 	}
 
@@ -93,6 +98,26 @@ public class DatabaseService_Test {
 			logOrderedItem(o);
 		}
 		return orderedItems;
+	}
+	private static ArrayList<Waiter> getWaiters() {
+		System.out.println("----------------All-Waiters-Test----------------");
+
+		ArrayList<Waiter> allWaiters = dbs.getAllWaiters();
+
+		for(Waiter w: allWaiters) {
+			logWaiter(w);
+		}
+		return allWaiters;
+	}
+	private static ArrayList<Logindata> getLogindata() {
+		System.out.println("----------------All-Logindata-Test----------------");
+
+		ArrayList<Logindata> allLogindata = dbs.getAllLogindata();
+
+		for(Logindata l: allLogindata) {
+			logLogindata(l);
+		}
+		return allLogindata;
 	}
 
     private static Order getOrderById(int orderID) {
@@ -178,6 +203,20 @@ public class DatabaseService_Test {
 
 		dbs.addOrderedItem(o);
 	}
+	private static void addWaiter(Waiter w) {
+		System.out.println("-----------Add-Waiter-Test---------------");
+
+		logWaiter(w);
+
+		dbs.addWaiter(w);
+	}
+	private static void addLogindata(Logindata l) {
+		System.out.println("-----------Add-Login-Data-Test----------------");
+
+		logLogindata(l);
+
+		dbs.addLogindata(l);
+	}
     //endregion
 
     //region Test der Update-Methoden
@@ -250,6 +289,12 @@ public class DatabaseService_Test {
 		System.out.println(o.getOrderedItemID() + "\t" + o.getOrderID() + "\t" + o.getItemID() + "\t" + o.isItemPaid() +
 		"\t" + o.isItemProduced());
 	}
+	private static void logWaiter(Waiter w) {
+		System.out.println(w.getWaiterID() + "\t" + w.getPrename() + "\t" + w.getLastname());
+	}
+	private static void logLogindata(Logindata l) {
+		System.out.println(l.getWaiterID() + "\t" + l.getLoginname() + "\t" + l.getPasswordHash());
+	}
 
     /****Dummys****/
     private static Order dummyOrder() {
@@ -267,4 +312,12 @@ public class DatabaseService_Test {
     private static Table dummyTable() {
         return new Table("TestTable", 9, true);
     }
+    private static Waiter dummyWaiter() {
+    	int i = dummyCounter++;
+    	return new Waiter("name" + i, "prename" + i);
+	}
+	private static Logindata dummyLogindata() {
+    	int i = dummyCounter++;
+    	return new Logindata(i, "loginname" + i, Logindata.encryptPassword("passwort" + i));
+	}
 }

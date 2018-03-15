@@ -175,6 +175,21 @@ public class DBService_OrderedItem
 		}
 	}
 
+	static void deleteOrderedItemByOrderId(Connection connection, int orderID)
+	{
+		try {
+			String query =  "DELETE FROM " + DatabaseProperties.getDatabase() + ".orderedItems " +
+					"WHERE orderID = " + orderID;
+			PreparedStatement pst = connection.prepareStatement(query);
+
+			pst.executeUpdate();
+		} catch(SQLException e) {
+			e.printStackTrace();
+			DatabaseService_Interface.connect();
+			throw new MySQLServerConnectionException();
+		}
+	}
+
 	static boolean existsOrderedItemWithID(Connection connection, int orderedItemID)
 	{
 		try {

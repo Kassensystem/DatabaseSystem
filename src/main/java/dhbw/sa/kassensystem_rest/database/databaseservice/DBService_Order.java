@@ -133,6 +133,8 @@ public class DBService_Order
 			DatabaseService_Interface.connect();
 			throw new MySQLServerConnectionException();
 		}
+
+		DBService_OrderedItem.deleteOrderedItemByOrderId(connection, orderID);
 	}
 
 	static boolean isOrderPaid(Connection connection, int orderID)
