@@ -90,6 +90,13 @@ public class RestApiController {
 		authentificate(loginname, passwordhash);
         return databaseService.getOrderedItemsByOrderId(orderId);
     }
+
+	@RequestMapping("/unproducedOrderedItems")
+	public ArrayList<OrderedItem> getAllUnproducedOrderedItems()
+	{
+		return databaseService.getAllUnproducedOrderedItems();
+	}
+
   
     /*POST/PUT*/
 
