@@ -234,6 +234,15 @@ public class DatabaseService implements DatabaseService_Interface
 		throw new NullPointerException("OrderedItem-ID " + orderedItemID + " not found.");
 	}
 
+	public ArrayList<OrderedItem> getAllUnproducedOrderedItems()
+	{
+		checkConnection();
+
+		logInf("Getting OrderedItems from MySQL-Database.");
+
+		return DBService_OrderedItem.getAllOrderedItems(connection, true);
+	}
+
 	@Override
     public ArrayList<OrderedItem> getOrderedItemsByOrderId(int orderID) throws MySQLServerConnectionException
 	{
