@@ -299,11 +299,11 @@ public class DatabaseService_Test {
     /****Dummys****/
     private static Order dummyOrder() {
         int i = dummyCounter++;
-        return new Order( 3+i, i*1.5, DateTime.now(), false);
+        return new Order( 3+i, i*1.5, DateTime.now(), false, 0);
     }
     private static Order dummyUpdateOrder() {
         int i = dummyCounter++;
-        return new Order(updateNumber, i*1.5, DateTime.now(), false);
+        return new Order(updateNumber, i*1.5, DateTime.now(), false, 0);
     }
     private static Item dummyItem() {
         int i = dummyCounter++;

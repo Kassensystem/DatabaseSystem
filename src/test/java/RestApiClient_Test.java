@@ -103,6 +103,6 @@ public class RestApiClient_Test {
             e.printStackTrace();
         }
 
-        return new Order(table.getTableID(), price, DateTime.now(), true);
+        return new Order(table.getTableID(), price, DateTime.now(), true, 0);
     }
 }
