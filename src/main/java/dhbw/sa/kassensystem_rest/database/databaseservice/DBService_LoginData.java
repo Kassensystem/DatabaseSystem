@@ -136,4 +136,26 @@ public class DBService_LoginData
 			throw new MySQLServerConnectionException();
 		}
 	}
+
+	static int getWaiterIdByLogindata(Connection connection, String loginname, String passwordhash)
+	{
+		try
+		{
+			String query = "SELECT waiterID " +
+					"FROM " + DatabaseProperties.getDatabase() + ".logindata " +
+					"WHERE loginname = '" + loginname + "' " +
+					"AND  passwordhash = '" + passwordhash + "'";
+			PreparedStatement pst = connection.prepareStatement(query);
+			ResultSet rs = pst.executeQuery();
+
+			while(rs.next())
+			{
+				return rs.getInt("waiterID");
+			}
+		} catch (Exception e)
+		{
+			e.printStackTrace();
+		}
+		throw new NotAuthentificatedException("Mit den Logindaten scheint keine Bedienung zu existieren!");
+	}
 }

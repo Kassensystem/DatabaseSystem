@@ -19,7 +19,7 @@ public class DBService_Order
 		ArrayList<Order> orders = new ArrayList<>();
 
 		try {
-			String query = "SELECT orderID, date, tableID " +
+			String query = "SELECT orderID, date, tableID, waiterID " +
 					"FROM " + DatabaseProperties.getDatabase() + ".orders";
 			PreparedStatement pst = connection.prepareStatement(query);
 			ResultSet rs = pst.executeQuery();
@@ -27,12 +27,13 @@ public class DBService_Order
 			while(rs.next()) {
 				int orderID = rs.getInt("orderID");
 				int tableID = rs.getInt("tableID");
+				int waiterID = rs.getInt("waiterID");
 				double price = DBService_Order.getPrice(connection, orderID);
 				price = DatabaseService.round(price);
 				DateTime dateTime = DatabaseService.convertSqlTimestampToJodaDateTime(rs.getTimestamp("date"));
 				boolean paid = isOrderPaid(connection, orderID);
 
-				orders.add(new Order(orderID, tableID, price, dateTime, paid));
+				orders.add(new Order(orderID, tableID, price, dateTime, paid, waiterID));
 			}
 			return orders;
 		} catch (SQLException e) {
@@ -45,7 +46,7 @@ public class DBService_Order
 	static Order getOrderByID(Connection connection, int orderID)
 	{
 		try {
-			String query = "SELECT orderID, date, tableID " +
+			String query = "SELECT orderID, date, tableID, waiterID " +
 					"FROM " + DatabaseProperties.getDatabase() + ".orders " +
 					"WHERE orderID = " + orderID;
 			PreparedStatement pst = connection.prepareStatement(query);
@@ -54,12 +55,13 @@ public class DBService_Order
 			while(rs.next()) {
 				orderID = rs.getInt("orderID");
 				int tableID = rs.getInt("tableID");
+				int waiterID = rs.getInt("waiterID");
 				double price = DBService_Order.getPrice(connection, orderID);
 				price = DatabaseService.round(price);
 				DateTime dateTime = DatabaseService.convertSqlTimestampToJodaDateTime(rs.getTimestamp("date"));
 				boolean paid = isOrderPaid(connection, orderID);
 
-				return new Order(orderID, tableID, price, dateTime, paid);
+				return new Order(orderID, tableID, price, dateTime, paid, waiterID);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -72,12 +74,14 @@ public class DBService_Order
 	static int addOrder(Connection connection, Order order)
 	{
 		try {
-			String query =  "INSERT INTO " + DatabaseProperties.getDatabase() + ".orders(orderID, date, tableID)" +
-					"VALUES(DEFAULT, ?, ?)";
+			String query =  "INSERT INTO " + DatabaseProperties.getDatabase() +
+					".orders(orderID, date, tableID, waiterID)" +
+					"VALUES(DEFAULT, ?, ?, ?)";
 			PreparedStatement pst = connection.prepareStatement(query);
 
 			pst.setObject(1, convertJodaDateTimeToSqlTimestamp(order.getDate()) );
 			pst.setInt(2, order.getTable());
+			pst.setInt(3, order.getWaiterID());
 			pst.executeUpdate();
 
 			//Ermitteln der nun belegten orderID
@@ -103,12 +107,13 @@ public class DBService_Order
 	{
 		try {
 			String query =  "UPDATE " + DatabaseProperties.getDatabase() + ".orders " +
-					"SET date = ?, tableID = ? " +
+					"SET date = ?, tableID = ?, waiterID = ? " +
 					"WHERE orderID = " + orderID;
 			PreparedStatement pst = connection.prepareStatement(query);
 
 			pst.setObject(1, convertJodaDateTimeToSqlTimestamp(order.getDate()) );
 			pst.setInt(2, order.getTable());
+			pst.setInt(3, order.getWaiterID());
 			pst.executeUpdate();
 		} catch(SQLException e) {
 			e.printStackTrace();

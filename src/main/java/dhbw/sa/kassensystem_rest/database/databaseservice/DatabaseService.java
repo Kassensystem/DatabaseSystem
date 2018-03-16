@@ -760,6 +760,12 @@ public class DatabaseService implements DatabaseService_Interface
 		return DBService_LoginData.authentificate(connection, loginname, passwordHash);
 	}
 
+	public int getWaiterIdByLoginData(String loginname, String passwordhash)
+			throws NotAuthentificatedException
+	{
+		return DBService_LoginData.getWaiterIdByLogindata(connection, loginname, passwordhash);
+	}
+
 	/**
 	 * Verschlüsselt ein Passwort als 256bit Hash-Code. Im GUI wird das Password eingegegeben und mit dieser
 	 * Funktion in einen Hash-Code gewandelt. Dieser wird in der Datenbank abgelegt.

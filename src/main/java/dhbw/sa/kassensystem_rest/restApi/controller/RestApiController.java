@@ -1,5 +1,6 @@
 package dhbw.sa.kassensystem_rest.restApi.controller;
 
+import dhbw.sa.kassensystem_rest.database.databaseservice.DBService_LoginData;
 import dhbw.sa.kassensystem_rest.database.databaseservice.DatabaseService;
 import dhbw.sa.kassensystem_rest.database.entity.Item;
 import dhbw.sa.kassensystem_rest.database.entity.Order;
@@ -114,12 +115,10 @@ public class RestApiController {
 		authentificate(loginname, passwordhash);
         try {
             order.setDate(DateTime.now());
+            // Anhand der Logindaten die waiterID des zugehörigen waiters ermitteln
+			int waiterID = databaseService.getWaiterIdByLoginData(loginname, passwordhash);
+            order.setWaiterID(waiterID);
             Integer orderID = databaseService.addOrder(order);
-
-            /*// Header bearbeiten
-			HttpHeaders responseHeaders = new HttpHeaders();
-			URI uri = new URI(orderID.toString());
-			responseHeaders.setLocation(uri);*/
 
             return new ResponseEntity(orderID, HttpStatus.OK);
         } catch (Exception e) {
