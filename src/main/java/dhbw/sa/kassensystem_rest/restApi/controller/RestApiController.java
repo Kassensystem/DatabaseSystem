@@ -208,6 +208,13 @@ public class RestApiController {
 		}
 	}
 
+	@RequestMapping(value = "/login", method = RequestMethod.GET)
+	public boolean login
+			(@RequestHeader("loginname") String loginname, @RequestHeader("passwordhash") String passwordhash)
+	{
+		return authentificate(loginname, passwordhash);
+	}
+
 	private boolean authentificate(String loginname, String passwordHash)
 			throws NotAuthentificatedException
 	{
