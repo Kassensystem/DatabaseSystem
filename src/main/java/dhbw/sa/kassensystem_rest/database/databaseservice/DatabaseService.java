@@ -215,7 +215,6 @@ public class DatabaseService implements DatabaseService_Interface
         return DBService_OrderedItem.getAllOrderedItems(connection, false);
     }
 
-
 	@Override
 	public OrderedItem getOrderedItemById(int orderedItemID) throws NullPointerException
 	{
@@ -711,7 +710,7 @@ public class DatabaseService implements DatabaseService_Interface
 	}
 	//endregion
 
-	//region Drucken einer Order
+	//region Drucken
 	@Override
     public void printOrderById(int orderID) throws NullPointerException, DataException,
             MySQLServerConnectionException
@@ -751,6 +750,13 @@ public class DatabaseService implements DatabaseService_Interface
 	{
 		PrinterService printerService = new PrinterService();
 		printerService.printOrder(orderID, orderedItems);
+	}
+
+	public void printLogindata(String loginname, String password, Waiter waiter)
+	{
+		PrinterService printerService = new PrinterService();
+
+		printerService.printLogindata(loginname, password, waiter);
 	}
 	//endregion
 
@@ -992,6 +998,10 @@ public class DatabaseService implements DatabaseService_Interface
 	public boolean existsLogindataWithWaiterID(int waiterID)
 	{
 		return DBService_LoginData.existsLogindataWithWaiterID(connection, waiterID);
+	}
+	public boolean existsLogindataWithLoginname(String loginname)
+	{
+		return DBService_LoginData.existsLogindataWithLoginname(connection, loginname);
 	}
 	//endregion
 

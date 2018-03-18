@@ -3,9 +3,8 @@ package dhbw.sa.kassensystem_rest.database.printer;
 
 import dhbw.sa.kassensystem_rest.database.Gastronomy;
 import dhbw.sa.kassensystem_rest.database.databaseservice.DatabaseService;
-import dhbw.sa.kassensystem_rest.database.entity.Item;
-import dhbw.sa.kassensystem_rest.database.entity.Order;
-import dhbw.sa.kassensystem_rest.database.entity.OrderedItem;
+import dhbw.sa.kassensystem_rest.database.entity.*;
+import org.joda.time.DateTime;
 
 import javax.print.*;
 import javax.print.attribute.HashPrintRequestAttributeSet;
@@ -62,6 +61,13 @@ public class PrinterService {
 		printString(formattedReceiptText);
 
 		databaseService.disconnect();
+	}
+
+	public void printLogindata(String loginname, String password, Waiter waiter)
+	{
+		String formattedLogindata = getFormattedLogindata(loginname, password, waiter);
+
+		printString(formattedLogindata);
 	}
 
 	// Funktionen zum Ermitteln aller zum Drucken benötigten Daten
@@ -189,6 +195,17 @@ public class PrinterService {
 				.append("\n\n");
 
 		return formattedOrderText.toString();
+	}
+
+	private String getFormattedLogindata(String loginname, String password, Waiter waiter)
+	{
+		StringBuilder txt = new StringBuilder("");
+
+		txt.append("Login-Daten\n" + DateTime.now().toString("dd.MM.yyyy kk:mm:ss") + "\n")
+			.append("Benutzername:\t" + loginname + "\n")
+			.append("Password:\t\t" + password + "\n\n");
+
+		return txt.toString();
 	}
 
     // Druckerfunktionen

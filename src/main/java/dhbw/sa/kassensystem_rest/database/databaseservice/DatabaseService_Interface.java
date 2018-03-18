@@ -46,6 +46,7 @@ public interface DatabaseService_Interface
 			logInf("Database connected!");
 		}catch(SQLException e) {
 			logErr("Verbindung zur Datenbank fehlgeschlagen!");
+			e.printStackTrace();
 			throw new MySQLServerConnectionException();
 		}
 		return connection;

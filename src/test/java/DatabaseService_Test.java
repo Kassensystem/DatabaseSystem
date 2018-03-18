@@ -20,7 +20,7 @@ public class DatabaseService_Test {
     private static int updateNumber = 999;
 
     public static void main(String[] args) {
-//		getOrders();
+		getOrders();
 //		getItems();
 //		getTables();
 //		getItemdeliveries();

@@ -122,6 +122,26 @@ public class DBService_LoginData
 		return false;
 	}
 
+	static boolean existsLogindataWithLoginname(Connection connection, String loginname)
+	{
+		try {
+			String query = "SELECT waiterID from " + DatabaseProperties.getDatabase() + ".logindata " +
+					"WHERE loginname = '" + loginname + "'";
+			PreparedStatement pst = connection.prepareStatement(query);
+			ResultSet rs = pst.executeQuery();
+
+			if(rs.next())
+			{
+				return true;
+			}
+		} catch(SQLException e) {
+			e.printStackTrace();
+			DatabaseService_Interface.connect();
+			throw new MySQLServerConnectionException();
+		}
+		return false;
+	}
+
 	static void deleteLogindata(Connection connection, int waiterID)
 	{
 		try {
