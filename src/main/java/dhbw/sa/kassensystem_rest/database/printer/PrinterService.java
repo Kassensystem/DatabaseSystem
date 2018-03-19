@@ -95,7 +95,7 @@ public class PrinterService {
 			if (!databaseService.existsOrderedItemWithID(o.getOrderedItemID()))
 			{
 				String name = databaseService.getItemById(o.getItemID()).getName();
-				printableOrderedItems.add(new PrintableOrderedItem(name));
+				printableOrderedItems.add(new PrintableOrderedItem(name, o.getComment()));
 			}
 		}
 
@@ -122,7 +122,8 @@ public class PrinterService {
 			Item item = databaseService.getItemById(o.getItemID());
 			String name = item.getName();
 			double price = item.getRetailprice();
-			printableOrderedItems.add(new PrintableOrderedItem(name, price));
+			String comment = o.getComment();
+			printableOrderedItems.add(new PrintableOrderedItem(name, price, comment));
 		}
 		// Preis
 		double price = databaseService.getOrderPrice(order.getOrderID());
@@ -156,6 +157,9 @@ public class PrinterService {
                     .append("\t\t")
                     .append(df.format(o.getPrice()))
                     .append(" EUR\n");
+
+			if(o.getComment() != null)
+				formattedReceiptText.append("\t" + o.getComment() + "\n");
         }
 
         double mwst = Math.round(printableReceipt.getPrice()*0.199 * 100d) / 100d;
@@ -185,12 +189,15 @@ public class PrinterService {
 
 		for(PrintableOrderedItem p: printableOrder.getOrderedItems())
 		{
-			formattedOrderText.append(p.getName()).append("\n");
+			formattedOrderText
+					.append(p.getName()).append("\n");
+			if(p.getComment() != null)
+					formattedOrderText.append("\t" + p.getComment() + "\n");
 		}
 
 		formattedOrderText
 				.append("\n")
-				.append(printableOrder.getTableName())
+				.append("Tisch " + printableOrder.getTableName() + "\n")
 				.append(printableOrder.getDate())
 				.append("\n\n");
 
@@ -203,7 +210,7 @@ public class PrinterService {
 
 		txt.append("Login-Daten\n" + DateTime.now().toString("dd.MM.yyyy kk:mm:ss") + "\n")
 			.append("Benutzername:\t" + loginname + "\n")
-			.append("Password:\t\t" + password + "\n\n");
+			.append("Passwort:\t" + password + "\n");
 
 		return txt.toString();
 	}

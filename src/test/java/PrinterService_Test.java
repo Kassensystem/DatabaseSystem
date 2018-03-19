@@ -14,9 +14,9 @@ public class PrinterService_Test {
         //PrinterTest
         PrinterService printerService = new PrinterService();
         ArrayList<OrderedItem> orderedItems = new ArrayList<>();
-        orderedItems.add(new OrderedItem(38, 3));
-		orderedItems.add(new OrderedItem(38, 4));
-		orderedItems.add(new OrderedItem(38, 5));
+        orderedItems.add(new OrderedItem(38, 3, ""));
+		orderedItems.add(new OrderedItem(38, 4, ""));
+		orderedItems.add(new OrderedItem(38, 5, ""));
         printerService.printOrder(38, orderedItems);
     }
 }

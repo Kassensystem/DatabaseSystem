@@ -11,13 +11,16 @@ import java.util.ArrayList;
 
 public class DBService_OrderedItem
 {
+	static final String selectAllAttributs =
+			"SELECT orderedItemID, orderID, itemID, itemPaid, itemProduced, comment " +
+			"FROM " + DatabaseProperties.getDatabase() + ".ordereditems ";
+
 	static ArrayList<OrderedItem> getAllOrderedItems(Connection connection, boolean onlyUnproduced)
 	{
 		ArrayList<OrderedItem> orderedItems = new ArrayList<>();
 
 		try {
-			String query = "SELECT orderedItemID, orderID, itemID, itemPaid, itemProduced " +
-					"FROM " + DatabaseProperties.getDatabase() + ".ordereditems ";
+			String query = selectAllAttributs;
 			if(onlyUnproduced)
 				query += "WHERE itemProduced = FALSE";
 			PreparedStatement pst = connection.prepareStatement(query);
@@ -30,7 +33,10 @@ public class DBService_OrderedItem
 				int itemID = rs.getInt("itemID");
 				boolean itemPaid = rs.getBoolean("itemPaid");
 				boolean itemProduced = rs.getBoolean("itemProduced");
-				orderedItems.add(new OrderedItem(orderedItemID, orderID, itemID, itemPaid, itemProduced));
+				String comment = rs.getString("comment");
+				orderedItems.add(
+						new OrderedItem(orderedItemID, orderID, itemID, itemPaid, itemProduced, comment)
+				);
 			}
 			return orderedItems;
 		} catch (SQLException e) {
@@ -45,8 +51,7 @@ public class DBService_OrderedItem
 		ArrayList<OrderedItem> orderedItems = new ArrayList<>();
 
 		try {
-			String query = "SELECT orderedItemID, orderID, itemID, itemPaid, itemProduced " +
-					"FROM " + DatabaseProperties.getDatabase() + ".ordereditems " +
+			String query = selectAllAttributs +
 					"WHERE orderID = " + orderID;
 			PreparedStatement pst = connection.prepareStatement(query);
 			ResultSet rs = pst.executeQuery();
@@ -58,7 +63,10 @@ public class DBService_OrderedItem
 				int itemID = rs.getInt("itemID");
 				boolean itemPaid = rs.getBoolean("itemPaid");
 				boolean itemProduced = rs.getBoolean("itemProduced");
-				orderedItems.add(new OrderedItem(orderedItemID, orderID, itemID, itemPaid, itemProduced));
+				String comment = rs.getString("comment");
+				orderedItems.add(
+						new OrderedItem(orderedItemID, orderID, itemID, itemPaid, itemProduced, comment)
+				);
 			}
 			return orderedItems;
 		} catch (SQLException e) {
@@ -73,8 +81,7 @@ public class DBService_OrderedItem
 		ArrayList<OrderedItem> orderedItems = new ArrayList<>();
 
 		try {
-			String query = "SELECT orderedItemID, orderID, itemID, itemPaid, itemProduced " +
-					"FROM " + DatabaseProperties.getDatabase() + ".ordereditems " +
+			String query = selectAllAttributs +
 					"WHERE itemID = " + itemID;
 			PreparedStatement pst = connection.prepareStatement(query);
 			ResultSet rs = pst.executeQuery();
@@ -86,7 +93,10 @@ public class DBService_OrderedItem
 				itemID = rs.getInt("itemID");
 				boolean itemPaid = rs.getBoolean("itemPaid");
 				boolean itemProduced = rs.getBoolean("itemProduced");
-				orderedItems.add(new OrderedItem(orderedItemID, orderID, itemID, itemPaid, itemProduced));
+				String comment = rs.getString("comment");
+				orderedItems.add(
+						new OrderedItem(orderedItemID, orderID, itemID, itemPaid, itemProduced, comment)
+				);
 			}
 			return orderedItems;
 		} catch (SQLException e) {
@@ -99,8 +109,7 @@ public class DBService_OrderedItem
 	static OrderedItem getOrderedItemById(Connection connection, int orderedItemID)
 	{
 		try {
-			String query = "SELECT orderedItemID, orderID, itemID, itemPaid, itemProduced " +
-					"FROM " + DatabaseProperties.getDatabase() + ".ordereditems " +
+			String query = selectAllAttributs +
 					"WHERE orderedItemID = " + orderedItemID;
 			PreparedStatement pst = connection.prepareStatement(query);
 			ResultSet rs = pst.executeQuery();
@@ -112,7 +121,8 @@ public class DBService_OrderedItem
 				int itemID = rs.getInt("itemID");
 				boolean itemPaid = rs.getBoolean("itemPaid");
 				boolean itemProduced = rs.getBoolean("itemProduced");
-				return new OrderedItem(orderedItemID, orderID, itemID, itemPaid, itemProduced);
+				String comment = rs.getString("comment");
+				return new OrderedItem(orderedItemID, orderID, itemID, itemPaid, itemProduced, comment);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -126,12 +136,13 @@ public class DBService_OrderedItem
 	{
 		try {
 			String query =  "INSERT INTO " + DatabaseProperties.getDatabase() +
-					".orderedItems(orderedItemId, orderID, itemID, itemPaid, itemProduced) " +
-					"VALUES(DEFAULT, ?, ?, DEFAULT, DEFAULT)";
+					".orderedItems(orderedItemId, orderID, itemID, itemPaid, itemProduced, comment) " +
+					"VALUES(DEFAULT, ?, ?, DEFAULT, DEFAULT, ?)";
 			PreparedStatement pst = connection.prepareStatement(query);
 
 			pst.setInt(1, orderedItem.getOrderID());
 			pst.setInt(2, orderedItem.getItemID());
+			pst.setString(3, orderedItem.getComment());
 			pst.executeUpdate();
 		} catch(SQLException e) {
 			e.printStackTrace();
@@ -144,7 +155,7 @@ public class DBService_OrderedItem
 	{
 		try {
 			String query =  "UPDATE " + DatabaseProperties.getDatabase() + ".orderedItems " +
-					"SET orderID = ?, itemID = ?, itemPaid = ?, itemProduced = ? " +
+					"SET orderID = ?, itemID = ?, itemPaid = ?, itemProduced = ?, comment = ? " +
 					"WHERE orderedItemID = " + orderedItemID;
 			PreparedStatement pst = connection.prepareStatement(query);
 
@@ -152,6 +163,7 @@ public class DBService_OrderedItem
 			pst.setInt(2, orderedItem.getItemID());
 			pst.setBoolean(3, orderedItem.isItemPaid());
 			pst.setBoolean(4, orderedItem.isItemProduced());
+			pst.setString(5, orderedItem.getComment());
 			pst.executeUpdate();
 		} catch(SQLException e) {
 			e.printStackTrace();
@@ -183,6 +195,7 @@ public class DBService_OrderedItem
 			PreparedStatement pst = connection.prepareStatement(query);
 
 			pst.executeUpdate();
+
 		} catch(SQLException e) {
 			e.printStackTrace();
 			DatabaseService_Interface.connect();

@@ -16,6 +16,7 @@ public class OrderedItem {
 	@JsonProperty private int itemID;
 	@JsonProperty private boolean itemPaid;
 	@JsonProperty private boolean itemProduced;
+	@JsonProperty private String comment;
 
 	public OrderedItem() {}
 
@@ -31,12 +32,14 @@ public class OrderedItem {
 					   @JsonProperty("orderID") int orderID,
 					   @JsonProperty("itemID") int itemID,
 					   @JsonProperty("itemPaid") boolean itemPaid,
-					   @JsonProperty("itemProduced") boolean itemProduced) {
+					   @JsonProperty("itemProduced") boolean itemProduced,
+					   @JsonProperty("comment") String comment) {
         this.orderedItemID = orderedItemID;
         this.orderID = orderID;
         this.itemID = itemID;
         this.itemPaid = itemPaid;
         this.itemProduced = itemProduced;
+        this.comment = comment;
     }
 
 	/**
@@ -44,11 +47,12 @@ public class OrderedItem {
 	 * @param orderID
 	 * @param itemID
 	 */
-	public OrderedItem(int orderID, int itemID) {
+	public OrderedItem(int orderID, int itemID, String comment) {
 		this.orderID = orderID;
 		this.itemID = itemID;
 		this.itemPaid = false;
 		this.itemProduced = false;
+		this.comment = comment;
 	}
 
     public int getOrderedItemID() {
@@ -81,4 +85,13 @@ public class OrderedItem {
 		this.itemProduced = true;
 	}
 
+	public String getComment()
+	{
+		return comment;
+	}
+
+	public void setComment(String comment)
+	{
+		this.comment = comment;
+	}
 }

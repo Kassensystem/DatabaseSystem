@@ -2,10 +2,7 @@ package dhbw.sa.kassensystem_rest.restApi.controller;
 
 import dhbw.sa.kassensystem_rest.database.databaseservice.DBService_LoginData;
 import dhbw.sa.kassensystem_rest.database.databaseservice.DatabaseService;
-import dhbw.sa.kassensystem_rest.database.entity.Item;
-import dhbw.sa.kassensystem_rest.database.entity.Order;
-import dhbw.sa.kassensystem_rest.database.entity.OrderedItem;
-import dhbw.sa.kassensystem_rest.database.entity.Table;
+import dhbw.sa.kassensystem_rest.database.entity.*;
 import dhbw.sa.kassensystem_rest.exceptions.MySQLServerConnectionException;
 import dhbw.sa.kassensystem_rest.exceptions.NotAuthentificatedException;
 import org.joda.time.DateTime;
@@ -205,6 +202,17 @@ public class RestApiController {
 			e.printStackTrace();
 			return new ResponseEntity(e, HttpStatus.NOT_FOUND);
 		}
+	}
+
+	@RequestMapping(value = "/changeLoginPassword", method = RequestMethod.PUT)
+	public boolean updateLogindata(@RequestBody String newPassword,
+			@RequestHeader("loginname") String loginname, @RequestHeader("passwordhash") String passwordhash)
+	{
+		authentificate(loginname, passwordhash);
+		int waiterID = databaseService.getWaiterIdByLoginData(loginname, passwordhash);
+		databaseService.updateLogindata(new Logindata(waiterID, loginname, newPassword));
+
+		return true;
 	}
 
 	@RequestMapping(value = "/login", method = RequestMethod.GET)

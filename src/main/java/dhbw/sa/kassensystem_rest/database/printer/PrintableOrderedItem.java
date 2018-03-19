@@ -4,16 +4,19 @@ public class PrintableOrderedItem
 {
 	private String name;
 	private double price;
+	private String comment;
 
-	PrintableOrderedItem(String name, double price)
+	PrintableOrderedItem(String name, double price, String comment)
 	{
 		this.name = name;
 		this.price = price;
+		this.comment = comment;
 	}
 
-	PrintableOrderedItem(String name)
+	PrintableOrderedItem(String name, String comment)
 	{
 		this.name = name;
+		this.comment = comment;
 		this.price = 0;
 	}
 
@@ -25,5 +28,10 @@ public class PrintableOrderedItem
 	public double getPrice()
 	{
 		return price;
+	}
+
+	public String getComment()
+	{
+		return comment;
 	}
 }

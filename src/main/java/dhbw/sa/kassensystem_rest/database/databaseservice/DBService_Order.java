@@ -73,33 +73,42 @@ public class DBService_Order
 
 	static int addOrder(Connection connection, Order order)
 	{
-		try {
-			String query =  "INSERT INTO " + DatabaseProperties.getDatabase() +
-					".orders(orderID, date, tableID, waiterID)" +
-					"VALUES(DEFAULT, ?, ?, ?)";
-			PreparedStatement pst = connection.prepareStatement(query);
+		// Ermitteln ob für den Tisch der Order bereits eine order in der DB existiert
+		int orderID = getOrderWithTableID(connection, order.getTable());
 
-			pst.setObject(1, convertJodaDateTimeToSqlTimestamp(order.getDate()) );
-			pst.setInt(2, order.getTable());
-			pst.setInt(3, order.getWaiterID());
-			pst.executeUpdate();
+		if (orderID == 0)
+		{
+			try {
+				String query =  "INSERT INTO " + DatabaseProperties.getDatabase() +
+						".orders(orderID, date, tableID, waiterID)" +
+						"VALUES(DEFAULT, ?, ?, ?)";
+				PreparedStatement pst = connection.prepareStatement(query);
 
-			//Ermitteln der nun belegten orderID
+				pst.setObject(1, convertJodaDateTimeToSqlTimestamp(order.getDate()) );
+				pst.setInt(2, order.getTable());
+				pst.setInt(3, order.getWaiterID());
+				pst.executeUpdate();
 
-			query = "SELECT * FROM " + DatabaseProperties.getDatabase() +
-					".orders ORDER BY orderID DESC LIMIT 1";
-			pst = connection.prepareStatement(query);
-			ResultSet rs = pst.executeQuery();
+				//Ermitteln der nun belegten orderID
 
-			while(rs.next()) {
-				return rs.getInt("orderID");
+				query = "SELECT * FROM " + DatabaseProperties.getDatabase() +
+						".orders ORDER BY orderID DESC LIMIT 1";
+				pst = connection.prepareStatement(query);
+				ResultSet rs = pst.executeQuery();
+
+				while(rs.next()) {
+					return rs.getInt("orderID");
+				}
+
+			} catch(SQLException e) {
+				e.printStackTrace();
+				DatabaseService_Interface.connect();
+				throw new MySQLServerConnectionException();
 			}
-
-		} catch(SQLException e) {
-			e.printStackTrace();
-			DatabaseService_Interface.connect();
-			throw new MySQLServerConnectionException();
 		}
+		else
+			return orderID;
+
 		return 0;
 	}
 
@@ -207,5 +216,29 @@ public class DBService_Order
 			throw new MySQLServerConnectionException();
 		}
 		return false;
+	}
+
+	public static int getOrderWithTableID(Connection connection, int tableID)
+	{
+		try {
+			String query = "SELECT orderID from " + DatabaseProperties.getDatabase() + ".orders " +
+					"WHERE tableID = " + tableID;
+			PreparedStatement pst = connection.prepareStatement(query);
+			ResultSet rs = pst.executeQuery();
+
+			if(rs.next())
+			{
+				int orderID = rs.getInt("orderID");
+
+				if(!DBService_Order.isOrderPaid(connection, orderID) && orderID != 0)
+					return rs.getInt("orderID");
+			}
+
+		} catch(SQLException e) {
+			e.printStackTrace();
+			DatabaseService_Interface.connect();
+			throw new MySQLServerConnectionException();
+		}
+		return 0;
 	}
 }
