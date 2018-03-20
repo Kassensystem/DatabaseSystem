@@ -242,6 +242,15 @@ public class DatabaseService implements DatabaseService_Interface
 		return DBService_OrderedItem.getAllOrderedItems(connection, true);
 	}
 
+	public ArrayList<OrderedItem> getAllUnproducedOrderedItemsByItemId(int itemID)
+	{
+		checkConnection();
+
+		logInf("Getting unproduced OrderedItems from MySQL-Database with Item-ID " + itemID + ".");
+
+		return DBService_OrderedItem.getAllUnproducedOrderedItemsByItemId(connection, itemID);
+	}
+
 	@Override
     public ArrayList<OrderedItem> getOrderedItemsByOrderId(int orderID) throws MySQLServerConnectionException
 	{
@@ -757,6 +766,13 @@ public class DatabaseService implements DatabaseService_Interface
 		PrinterService printerService = new PrinterService();
 
 		printerService.printLogindata(loginname, password, waiter);
+	}
+
+	public void printDataConflict(ArrayList<OrderedItem> orderedItems)
+	{
+		PrinterService printerService = new PrinterService();
+
+		printerService.printDataConflict(orderedItems);
 	}
 	//endregion
 

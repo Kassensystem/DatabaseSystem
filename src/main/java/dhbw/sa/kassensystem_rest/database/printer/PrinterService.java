@@ -9,6 +9,7 @@ import org.joda.time.DateTime;
 import javax.print.*;
 import javax.print.attribute.HashPrintRequestAttributeSet;
 import javax.print.attribute.PrintRequestAttributeSet;
+import java.lang.reflect.Array;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 
@@ -70,6 +71,13 @@ public class PrinterService {
 		printString(formattedLogindata);
 	}
 
+	public void printDataConflict(ArrayList<OrderedItem> orderedItems)
+	{
+		String formattedText = getFormattedDataConflicts(getPrintableDataConflicts(orderedItems));
+
+		printString(formattedText);
+	}
+
 	// Funktionen zum Ermitteln aller zum Drucken benötigten Daten
 	/**
 	 * Sammelt Daten für eine {@Link printableOrder}, um einen Küchenbeleg ausdrucken zu können.
@@ -129,6 +137,21 @@ public class PrinterService {
 		double price = databaseService.getOrderPrice(order.getOrderID());
 
 		return new PrintableReceipt(dateString, tableName, printableOrderedItems, price);
+	}
+
+	private ArrayList<PrintableDataConflict> getPrintableDataConflicts(ArrayList<OrderedItem> orderedItems)
+	{
+		ArrayList<PrintableDataConflict> printableDataConflicts = new ArrayList<>();
+		String tableName;
+		String itemName;
+		for(OrderedItem o: orderedItems)
+		{
+			tableName = databaseService.getTableById(databaseService.getOrderById(o.getOrderID()).getTable()).getName();
+			itemName = databaseService.getItemById(o.getItemID()).getName();
+			printableDataConflicts.add(new PrintableDataConflict(tableName, itemName));
+		}
+
+		return printableDataConflicts;
 	}
 
 	// Formatierung der zu Druckenden Daten
@@ -211,6 +234,20 @@ public class PrinterService {
 		txt.append("Login-Daten\n" + DateTime.now().toString("dd.MM.yyyy kk:mm:ss") + "\n")
 			.append("Benutzername:\t" + loginname + "\n")
 			.append("Passwort:\t" + password + "\n");
+
+		return txt.toString();
+	}
+
+	private String getFormattedDataConflicts(ArrayList<PrintableDataConflict> printableDataConflicts)
+	{
+		StringBuilder txt = new StringBuilder("");
+
+		txt.append("Die folgenden Tische informieren:\n");
+
+		for(PrintableDataConflict p: printableDataConflicts)
+		{
+			txt.append(p.getTableName() + "\t" + p.getItemName() + "\n");
+		}
 
 		return txt.toString();
 	}

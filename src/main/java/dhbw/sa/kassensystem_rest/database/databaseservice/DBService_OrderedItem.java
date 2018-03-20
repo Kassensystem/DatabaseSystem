@@ -46,6 +46,36 @@ public class DBService_OrderedItem
 		}
 	}
 
+	static ArrayList<OrderedItem> getAllUnproducedOrderedItemsByItemId(Connection connection, int itemID)
+	{
+		ArrayList<OrderedItem> orderedItems = new ArrayList<>();
+
+		try {
+			String query = selectAllAttributs;
+			query += "WHERE itemID = " + itemID + " and itemProduced = FALSE";
+			PreparedStatement pst = connection.prepareStatement(query);
+			ResultSet rs = pst.executeQuery();
+
+			while(rs.next()) {
+				//get each orderedItem from DB
+				int orderedItemID = rs.getInt("orderedItemID");
+				int orderID = rs.getInt("orderID");
+				itemID = rs.getInt("itemID");
+				boolean itemPaid = rs.getBoolean("itemPaid");
+				boolean itemProduced = rs.getBoolean("itemProduced");
+				String comment = rs.getString("comment");
+				orderedItems.add(
+						new OrderedItem(orderedItemID, orderID, itemID, itemPaid, itemProduced, comment)
+				);
+			}
+			return orderedItems;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			DatabaseService_Interface.connect();
+			throw new MySQLServerConnectionException();
+		}
+	}
+
 	static ArrayList<OrderedItem> getOrderedItemsByOrderId(Connection connection, int orderID)
 	{
 		ArrayList<OrderedItem> orderedItems = new ArrayList<>();
