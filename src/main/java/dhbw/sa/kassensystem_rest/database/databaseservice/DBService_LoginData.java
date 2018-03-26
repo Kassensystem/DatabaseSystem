@@ -3,6 +3,7 @@ package dhbw.sa.kassensystem_rest.database.databaseservice;
 import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
 import dhbw.sa.kassensystem_rest.database.entity.Logindata;
 import dhbw.sa.kassensystem_rest.database.entity.Order;
+import dhbw.sa.kassensystem_rest.database.entity.Waiter;
 import dhbw.sa.kassensystem_rest.exceptions.MySQLServerConnectionException;
 import dhbw.sa.kassensystem_rest.exceptions.NotAuthentificatedException;
 import org.joda.time.DateTime;
@@ -46,7 +47,7 @@ public class DBService_LoginData
 	{
 		try
 		{
-			String query = "SELECT passwordhash " +
+			String query = "SELECT passwordhash,  waiterID" +
 					"FROM " + DatabaseProperties.getDatabase() + ".logindata " +
 					"WHERE loginname = '" + loginname + "'";
 			PreparedStatement pst = connection.prepareStatement(query);
@@ -55,7 +56,9 @@ public class DBService_LoginData
 			while(rs.next())
 			{
 				String dbPasswordHash = rs.getString("passwordhash");
-				if(dbPasswordHash.equals(passwordHash))
+				int waiterID = rs.getInt("watierID");
+				Waiter waiter = DBService_Waiter.getWaiterByID(connection, waiterID);
+				if(dbPasswordHash.equals(passwordHash) && waiter.isEmployed())
 					return true;
 			}
 		} catch (Exception e)
