@@ -77,7 +77,7 @@ public class DatabaseService implements DatabaseService_Interface
 			throw new NullPointerException("No Item-ID given.");
 		}
 
-		logInf("Getting Item with ID " + itemID + ".");
+		//logInf("Getting Item with ID " + itemID + ".");
 
 		Item item = DBService_Item.getItemByID(connection, itemID);
 		if(item != null)
@@ -287,7 +287,7 @@ public class DatabaseService implements DatabaseService_Interface
 	{
 		checkConnection();
 
-		logInf("Getting Waiter with ID " + waiterID + ".");
+		//logInf("Getting Waiter with ID " + waiterID + ".");
 
 		return DBService_Waiter.getWaiterByID(connection, waiterID);
 	}

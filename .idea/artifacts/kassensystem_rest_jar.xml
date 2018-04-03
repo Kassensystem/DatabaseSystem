@@ -1,0 +1,84 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="kassensystem_rest:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/kassensystem_rest_jar</output-path>
+    <root id="archive" name="kassensystem_rest.jar">
+      <element id="module-output" name="kassensystem_rest" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/springframework/boot/spring-boot-starter-tomcat/1.5.8.RELEASE/spring-boot-starter-tomcat-1.5.8.RELEASE.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/apache/tomcat/tomcat-annotations-api/8.5.23/tomcat-annotations-api-8.5.23.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/com/fasterxml/jackson/core/jackson-annotations/2.8.0/jackson-annotations-2.8.0.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/com/fasterxml/jackson/datatype/jackson-datatype-joda/2.8.10/jackson-datatype-joda-2.8.10.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/springframework/spring-expression/4.3.12.RELEASE/spring-expression-4.3.12.RELEASE.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/springframework/boot/spring-boot-starter-web/1.5.8.RELEASE/spring-boot-starter-web-1.5.8.RELEASE.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/jboss/logging/jboss-logging/3.3.1.Final/jboss-logging-3.3.1.Final.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/com/fasterxml/jackson/core/jackson-databind/2.8.10/jackson-databind-2.8.10.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/springframework/spring-webmvc/4.3.12.RELEASE/spring-webmvc-4.3.12.RELEASE.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/apache/tomcat/embed/tomcat-embed-core/8.5.23/tomcat-embed-core-8.5.23.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/opentest4j/opentest4j/1.0.0/opentest4j-1.0.0.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/springframework/boot/spring-boot-autoconfigure/1.5.8.RELEASE/spring-boot-autoconfigure-1.5.8.RELEASE.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/junit/jupiter/junit-jupiter-api/5.1.0/junit-jupiter-api-5.1.0.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/springframework/spring-beans/4.3.12.RELEASE/spring-beans-4.3.12.RELEASE.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/yaml/snakeyaml/1.17/snakeyaml-1.17.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/springframework/spring-core/4.3.12.RELEASE/spring-core-4.3.12.RELEASE.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/slf4j/log4j-over-slf4j/1.7.25/log4j-over-slf4j-1.7.25.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/springframework/boot/spring-boot-starter/1.5.8.RELEASE/spring-boot-starter-1.5.8.RELEASE.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/springframework/boot/spring-boot-starter-logging/1.5.8.RELEASE/spring-boot-starter-logging-1.5.8.RELEASE.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/springframework/spring-aop/4.3.12.RELEASE/spring-aop-4.3.12.RELEASE.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/apache/tomcat/embed/tomcat-embed-websocket/8.5.23/tomcat-embed-websocket-8.5.23.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/javax/validation/validation-api/1.1.0.Final/validation-api-1.1.0.Final.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/springframework/spring-web/4.3.12.RELEASE/spring-web-4.3.12.RELEASE.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/com/fasterxml/classmate/1.3.4/classmate-1.3.4.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/slf4j/jul-to-slf4j/1.7.25/jul-to-slf4j-1.7.25.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/com/fasterxml/jackson/core/jackson-core/2.8.10/jackson-core-2.8.10.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/springframework/spring-context/4.3.12.RELEASE/spring-context-4.3.12.RELEASE.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/mysql/mysql-connector-java/5.1.26/mysql-connector-java-5.1.26.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/joda-time/joda-time/2.9.9/joda-time-2.9.9.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/ch/qos/logback/logback-core/1.1.11/logback-core-1.1.11.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/hibernate/hibernate-validator/5.3.5.Final/hibernate-validator-5.3.5.Final.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/slf4j/jcl-over-slf4j/1.7.25/jcl-over-slf4j-1.7.25.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/ch/qos/logback/logback-classic/1.1.11/logback-classic-1.1.11.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/springframework/boot/spring-boot/1.5.8.RELEASE/spring-boot-1.5.8.RELEASE.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/junit/platform/junit-platform-commons/1.1.0/junit-platform-commons-1.1.0.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/apiguardian/apiguardian-api/1.0.0/apiguardian-api-1.0.0.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/apache/tomcat/embed/tomcat-embed-el/8.5.23/tomcat-embed-el-8.5.23.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/slf4j/slf4j-api/1.7.25/slf4j-api-1.7.25.jar" path-in-jar="/" />
+      <element id="library" level="project" name="Maven: org.springframework.boot:spring-boot-starter-web:1.5.8.RELEASE" />
+      <element id="library" level="project" name="Maven: org.springframework.boot:spring-boot-starter:1.5.8.RELEASE" />
+      <element id="library" level="project" name="Maven: org.springframework.boot:spring-boot:1.5.8.RELEASE" />
+      <element id="library" level="project" name="Maven: org.springframework.boot:spring-boot-autoconfigure:1.5.8.RELEASE" />
+      <element id="library" level="project" name="Maven: org.springframework.boot:spring-boot-starter-logging:1.5.8.RELEASE" />
+      <element id="library" level="project" name="Maven: ch.qos.logback:logback-classic:1.1.11" />
+      <element id="library" level="project" name="Maven: ch.qos.logback:logback-core:1.1.11" />
+      <element id="library" level="project" name="Maven: org.slf4j:slf4j-api:1.7.25" />
+      <element id="library" level="project" name="Maven: org.slf4j:jcl-over-slf4j:1.7.25" />
+      <element id="library" level="project" name="Maven: org.slf4j:jul-to-slf4j:1.7.25" />
+      <element id="library" level="project" name="Maven: org.slf4j:log4j-over-slf4j:1.7.25" />
+      <element id="library" level="project" name="Maven: org.springframework:spring-core:4.3.12.RELEASE" />
+      <element id="library" level="project" name="Maven: org.yaml:snakeyaml:1.17" />
+      <element id="library" level="project" name="Maven: org.springframework.boot:spring-boot-starter-tomcat:1.5.8.RELEASE" />
+      <element id="library" level="project" name="Maven: org.apache.tomcat.embed:tomcat-embed-core:8.5.23" />
+      <element id="library" level="project" name="Maven: org.apache.tomcat:tomcat-annotations-api:8.5.23" />
+      <element id="library" level="project" name="Maven: org.apache.tomcat.embed:tomcat-embed-el:8.5.23" />
+      <element id="library" level="project" name="Maven: org.apache.tomcat.embed:tomcat-embed-websocket:8.5.23" />
+      <element id="library" level="project" name="Maven: org.hibernate:hibernate-validator:5.3.5.Final" />
+      <element id="library" level="project" name="Maven: javax.validation:validation-api:1.1.0.Final" />
+      <element id="library" level="project" name="Maven: org.jboss.logging:jboss-logging:3.3.1.Final" />
+      <element id="library" level="project" name="Maven: com.fasterxml:classmate:1.3.4" />
+      <element id="library" level="project" name="Maven: com.fasterxml.jackson.core:jackson-databind:2.8.10" />
+      <element id="library" level="project" name="Maven: org.springframework:spring-web:4.3.12.RELEASE" />
+      <element id="library" level="project" name="Maven: org.springframework:spring-aop:4.3.12.RELEASE" />
+      <element id="library" level="project" name="Maven: org.springframework:spring-beans:4.3.12.RELEASE" />
+      <element id="library" level="project" name="Maven: org.springframework:spring-context:4.3.12.RELEASE" />
+      <element id="library" level="project" name="Maven: org.springframework:spring-webmvc:4.3.12.RELEASE" />
+      <element id="library" level="project" name="Maven: org.springframework:spring-expression:4.3.12.RELEASE" />
+      <element id="library" level="project" name="Maven: com.fasterxml.jackson.datatype:jackson-datatype-joda:2.8.10" />
+      <element id="library" level="project" name="Maven: com.fasterxml.jackson.core:jackson-annotations:2.8.0" />
+      <element id="library" level="project" name="Maven: com.fasterxml.jackson.core:jackson-core:2.8.10" />
+      <element id="library" level="project" name="Maven: joda-time:joda-time:2.9.9" />
+      <element id="library" level="project" name="Maven: mysql:mysql-connector-java:5.1.26" />
+      <element id="library" level="project" name="Maven: org.junit.jupiter:junit-jupiter-api:5.1.0" />
+      <element id="library" level="project" name="Maven: org.apiguardian:apiguardian-api:1.0.0" />
+      <element id="library" level="project" name="Maven: org.opentest4j:opentest4j:1.0.0" />
+      <element id="library" level="project" name="Maven: org.junit.platform:junit-platform-commons:1.1.0" />
+    </root>
+  </artifact>
+</component>
