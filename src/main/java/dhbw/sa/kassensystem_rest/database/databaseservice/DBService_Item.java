@@ -13,9 +13,9 @@ import java.util.ArrayList;
 /**
  * Klasse mit Methoden zum Einsehen und Bearbeiten der Item-Tabelle.
  *
- * @auther Marvin Mai
+ * @author Marvin Mai
  */
-public class DBService_Item
+class DBService_Item
 {
 	static ArrayList<Item> getAllItems(Connection connection, boolean onlyAvailable)
 	{

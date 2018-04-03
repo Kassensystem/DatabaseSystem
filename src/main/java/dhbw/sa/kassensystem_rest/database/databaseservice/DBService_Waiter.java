@@ -1,6 +1,5 @@
 package dhbw.sa.kassensystem_rest.database.databaseservice;
 
-import dhbw.sa.kassensystem_rest.database.entity.Logindata;
 import dhbw.sa.kassensystem_rest.database.entity.Waiter;
 import dhbw.sa.kassensystem_rest.exceptions.MySQLServerConnectionException;
 
@@ -13,11 +12,11 @@ import java.util.ArrayList;
 /**
  * Klasse mit Methoden zum Einsehen und Bearbeiten der Waiter-Tabelle.
  *
- * @auther Marvin Mai
+ * @author Marvin Mai
  */
-public class DBService_Waiter
+class DBService_Waiter
 {
-	static final String selectAllAttributs = "SELECT waiterID, lastname, prename, employed " +
+	private static final String selectAllAttributs = "SELECT waiterID, lastname, prename, employed " +
 			"FROM " + DatabaseProperties.getDatabase() + ".waiters ";
 
 	static ArrayList<Waiter> getAllWaiters(Connection connection)

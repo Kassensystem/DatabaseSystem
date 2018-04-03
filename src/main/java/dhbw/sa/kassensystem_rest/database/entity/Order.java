@@ -78,13 +78,7 @@ public class Order {
         this.waiterID = waiterID;
     }
 
-	/**
-	 *
-	 * @param tableID
-	 * @param price
-	 * @param paid
-	 */
-    public Order(int tableID, double price, boolean paid) {
+	public Order(int tableID, double price, boolean paid) {
         this.tableID = tableID;
         this.price = price;
         this.paid = paid;

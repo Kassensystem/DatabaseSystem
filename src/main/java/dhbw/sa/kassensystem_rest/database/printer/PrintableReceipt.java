@@ -1,8 +1,6 @@
 package dhbw.sa.kassensystem_rest.database.printer;
 
 
-import dhbw.sa.kassensystem_rest.database.entity.Item;
-
 import java.util.ArrayList;
 
 /**
@@ -13,10 +11,10 @@ import java.util.ArrayList;
  */
 class PrintableReceipt
 {
-	private String date;
-	private String tableName;
-	private ArrayList<PrintableOrderedItem> orderedItems;
-	private double price;
+	private final String date;
+	private final String tableName;
+	private final ArrayList<PrintableOrderedItem> orderedItems;
+	private final double price;
 
 	public PrintableReceipt(String date, String tableName, ArrayList<PrintableOrderedItem> orderedItems, double price)
 	{

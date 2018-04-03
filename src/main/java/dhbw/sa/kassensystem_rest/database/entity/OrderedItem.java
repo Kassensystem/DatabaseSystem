@@ -1,7 +1,6 @@
 package dhbw.sa.kassensystem_rest.database.entity;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jdk.nashorn.internal.objects.annotations.Constructor;
 import org.springframework.stereotype.Component;
 
 /**

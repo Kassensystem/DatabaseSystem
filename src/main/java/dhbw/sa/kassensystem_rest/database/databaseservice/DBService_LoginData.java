@@ -1,12 +1,9 @@
 package dhbw.sa.kassensystem_rest.database.databaseservice;
 
-import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
 import dhbw.sa.kassensystem_rest.database.entity.Logindata;
-import dhbw.sa.kassensystem_rest.database.entity.Order;
 import dhbw.sa.kassensystem_rest.database.entity.Waiter;
 import dhbw.sa.kassensystem_rest.exceptions.MySQLServerConnectionException;
 import dhbw.sa.kassensystem_rest.exceptions.NotAuthentificatedException;
-import org.joda.time.DateTime;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -17,7 +14,7 @@ import java.util.ArrayList;
 /**
  * Klasse mit Methoden zum Einsehen und Bearbeiten der LoginData-Tabelle.
  *
- * @auther Marvin Mai
+ * @author Marvin Mai
  */
 public class DBService_LoginData
 {
@@ -61,9 +58,9 @@ public class DBService_LoginData
 			while(rs.next())
 			{
 				String dbPasswordHash = rs.getString("passwordhash");
-				int waiterID = rs.getInt("watierID");
+				int waiterID = rs.getInt("waiterID");
 				Waiter waiter = DBService_Waiter.getWaiterByID(connection, waiterID);
-				if(dbPasswordHash.equals(passwordHash) && waiter.isEmployed())
+				if(dbPasswordHash.equals(passwordHash) && (waiter != null && waiter.isEmployed()))
 					return true;
 			}
 		} catch (Exception e)

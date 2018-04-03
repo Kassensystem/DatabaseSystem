@@ -8,10 +8,10 @@ package dhbw.sa.kassensystem_rest.database.databaseservice;
 class DatabaseProperties
 {
 	// Die folgenden Attribute müssen beim Einrichten der Datenbank verwendet werden:
-    private static String url = "jdbc:mysql://localhost:3306/?verifyServerCertificate=false&useSSL=true";
-    private static String database = "Kassensystem";
-    private static String username = "DatabaseService";
-    private static String password = "password";
+    private static final String url = "jdbc:mysql://localhost:3306/?verifyServerCertificate=false&useSSL=true";
+    private static final String database = "Kassensystem";
+    private static final String username = "DatabaseService";
+    private static final String password = "password";
 
     DatabaseProperties() {}
 

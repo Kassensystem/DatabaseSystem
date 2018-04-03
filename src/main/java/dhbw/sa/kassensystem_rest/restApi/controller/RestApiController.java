@@ -1,6 +1,5 @@
 package dhbw.sa.kassensystem_rest.restApi.controller;
 
-import dhbw.sa.kassensystem_rest.database.databaseservice.DBService_LoginData;
 import dhbw.sa.kassensystem_rest.database.databaseservice.DatabaseService;
 import dhbw.sa.kassensystem_rest.database.entity.*;
 import dhbw.sa.kassensystem_rest.exceptions.MySQLServerConnectionException;
@@ -8,14 +7,12 @@ import dhbw.sa.kassensystem_rest.exceptions.NotAuthentificatedException;
 import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.net.URI;
 import java.util.ArrayList;
 
 /**
@@ -117,8 +114,7 @@ public class RestApiController {
 			} catch (Exception e)
 			{
 				e.printStackTrace();
-				ResponseEntity<Integer> response = new ResponseEntity(e.getMessage(), HttpStatus.NOT_FOUND);
-				return response;
+				return (ResponseEntity<Integer>) new ResponseEntity(e.getMessage(), HttpStatus.NOT_FOUND);
 			}
 		}
 		return null;
@@ -246,7 +242,7 @@ public class RestApiController {
 	private boolean authentificate(String loginname, String passwordHash)
 			throws NotAuthentificatedException
 	{
-		return databaseService.authentificate(loginname, passwordHash) ? true : false;
+		return databaseService.authentificate(loginname, passwordHash);
 	}
 
     // Exception-Handling
@@ -259,9 +255,7 @@ public class RestApiController {
                                                     HttpServletRequest request, HttpServletResponse resp)
 	{
 
-        String response = e.getMessage();
-
-        return response;
+		return e.getMessage();
     }
 
 }

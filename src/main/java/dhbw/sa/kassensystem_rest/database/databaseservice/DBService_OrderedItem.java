@@ -12,11 +12,11 @@ import java.util.ArrayList;
 /**
  * Klasse mit Methoden zum Einsehen und Bearbeiten der OrderedItem-Tabelle.
  *
- * @auther Marvin Mai
+ * @author Marvin Mai
  */
 public class DBService_OrderedItem
 {
-	static final String selectAllAttributs =
+	private static final String selectAllAttributs =
 			"SELECT orderedItemID, orderID, itemID, itemPaid, itemProduced, comment " +
 			"FROM " + DatabaseProperties.getDatabase() + ".ordereditems ";
 

@@ -20,7 +20,7 @@ import java.util.ArrayList;
 @Deprecated
 public class RestApiClient implements RestApiClient_Interface {
 
-    private String REST_SERVICE_URL;
+    private final String REST_SERVICE_URL;
 
     public RestApiClient() {
         this.REST_SERVICE_URL = "http://localhost:8080/api";

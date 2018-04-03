@@ -1,6 +1,6 @@
 package dhbw.sa.kassensystem_rest.database.printer;
 
-public class PrintableDataConflict
+class PrintableDataConflict
 {
 	private String tableName;
 	private String itemName;

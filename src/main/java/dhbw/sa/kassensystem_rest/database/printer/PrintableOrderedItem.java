@@ -1,10 +1,10 @@
 package dhbw.sa.kassensystem_rest.database.printer;
 
-public class PrintableOrderedItem
+class PrintableOrderedItem
 {
-	private String name;
-	private double price;
-	private String comment;
+	private final String name;
+	private final double price;
+	private final String comment;
 
 	PrintableOrderedItem(String name, double price, String comment)
 	{

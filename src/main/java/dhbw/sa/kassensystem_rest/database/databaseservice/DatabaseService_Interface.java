@@ -70,7 +70,7 @@ public interface DatabaseService_Interface
 
 	/**
 	 * Fragt alle verfügbaren Artikel der Datenbank ab.
-	 * @return
+	 * @return Eine Liste mit allen verfügbaren Artikeln.
 	 */
 	ArrayList<Item> getAllAvailableItems();
 
@@ -109,9 +109,9 @@ public interface DatabaseService_Interface
 	Order getOrderById(int orderID);
 
 	/**
-	 * Berechnet für eine gegebene Order-ID den Preis. Dafür wird für jeden bestellten Artikel ({@Link OrderedItem})
-	 * der Preis des zugehörigen Artikels ({@Link Item}) aufsummiert.
-	 * @param orderID
+	 * Berechnet für eine gegebene Order-ID den Preis. Dafür wird für jeden bestellten Artikel ({@link OrderedItem})
+	 * der Preis des zugehörigen Artikels ({@link Item}) aufsummiert.
+	 * @param orderID ID der Bestellung, deren Preis ermittelt werden soll.
 	 * @return Preis des Artikels.
 	 */
 	float getOrderPrice(int orderID);
@@ -124,15 +124,15 @@ public interface DatabaseService_Interface
     ArrayList<Itemdelivery> getAllItemdeliveries();
 
 	/**
-	 * Ermittelt anhand einer gegebenen Itemdelivery-ID den zugehörigen Wareneingang ({@Link Itemdelivery}).
-	 * @param itemdeliveryID
+	 * Ermittelt anhand einer gegebenen Itemdelivery-ID den zugehörigen Wareneingang ({@link Itemdelivery}).
+	 * @param itemdeliveryID ID des zu ermittelnden Wareneingangs.
 	 * @return Wareneingang mit der ID itemdeliveryID.
 	 */
 	Itemdelivery getItemdeliveryById(int itemdeliveryID);
 
 	// OrderedItems
     /**
-     * Ermittelt alle bestellten Artikel ({@Link OrderedItems}) der Datenbank.
+     * Ermittelt alle bestellten Artikel ({@link OrderedItem}) der Datenbank.
      * @return Alle bestellten Artikel aus der Datenbank.
      */
     ArrayList<OrderedItem> getAllOrderedItems();
@@ -140,7 +140,7 @@ public interface DatabaseService_Interface
 	/**
 	 * Bestellten Artikel anhand einer ID ermitteln.
 	 * @param orderedItemID ID des bestellten Artikels.
-	 * @return Bestellten Artikel {@Link OrderedItem} aus der Datenbank.
+	 * @return Bestellten Artikel {@link OrderedItem} aus der Datenbank.
 	 */
 	OrderedItem getOrderedItemById(int orderedItemID);
 

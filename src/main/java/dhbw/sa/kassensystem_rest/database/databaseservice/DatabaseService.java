@@ -15,7 +15,6 @@ import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 
-import static dhbw.sa.kassensystem_rest.database.databaseservice.Log.log;
 import static dhbw.sa.kassensystem_rest.database.databaseservice.Log.logErr;
 import static dhbw.sa.kassensystem_rest.database.databaseservice.Log.logInf;
 
@@ -23,7 +22,7 @@ import static dhbw.sa.kassensystem_rest.database.databaseservice.Log.logInf;
  * {@inheritDoc}
  *
  * Implementierung des DatabaseService_Interfaces.
- * Für die Dokumentation siehe Interface {@Link DatabaseService_Interface}
+ * Für die Dokumentation siehe Interface {@link DatabaseService_Interface}
  *
  * @author Marvin Mai
  */
@@ -55,7 +54,7 @@ public class DatabaseService implements DatabaseService_Interface
 		try {
 			if(connection.isClosed())
 				DatabaseService_Interface.connect();
-		} catch (SQLException e) {}
+		} catch (SQLException e) {e.printStackTrace();}
 	}
 
 	//region Getting Table-Data from the database
@@ -845,7 +844,7 @@ public class DatabaseService implements DatabaseService_Interface
         }
     }
 
-    private boolean isTableComplete(Table table)
+    private void isTableComplete(Table table)
 	{
         String missingAttributs = "";
 
@@ -854,7 +853,7 @@ public class DatabaseService implements DatabaseService_Interface
             logErr("Table missing.");
         }
         //Nur Verfügbarkeit von neuen Artikeln darf nicht auf false gesetzt werden
-        if(table.isAvailable() == false && table.getTableID() == 0) {
+        if(!table.isAvailable() && table.getTableID() == 0) {
             missingAttributs += "Available ";
             logErr("New Table cannot be set unavailable.");
         }
@@ -862,11 +861,10 @@ public class DatabaseService implements DatabaseService_Interface
             logErr("Table was not added to the database!");
             throw new DataException("Der Tisch ist unvollständig! Die folgenden Parameter fehlen: " + missingAttributs);
         }
-        return true;
 
-    }
+	}
 
-    private boolean isItemComplete(Item item)
+    private void isItemComplete(Item item)
 	{
         String missingAttributs = "";
 
@@ -875,7 +873,7 @@ public class DatabaseService implements DatabaseService_Interface
             logErr("Name is missing.");
         }
         //Nur Verfügbarkeit von neuen Artikeln darf nicht auf false gesetzt werden
-        if(item.isAvailable() == false && item.getItemID() == 0) {
+        if(!item.isAvailable() && item.getItemID() == 0) {
             missingAttributs += "Available ";
             logErr("New Item cannot be set unavailable.");
         }
@@ -883,11 +881,10 @@ public class DatabaseService implements DatabaseService_Interface
             logErr("Item was not added to the Database!");
             throw new DataException("Der Artikel ist unvollständig! Folgende Attribute fehlen: " + missingAttributs);
         }
-        return true;
 
-    }
+	}
 
-    private boolean isItemdeliveryComplete(Itemdelivery itemdelivery)
+    private void isItemdeliveryComplete(Itemdelivery itemdelivery)
 	{
         String missingAttributs = "";
 
@@ -911,11 +908,9 @@ public class DatabaseService implements DatabaseService_Interface
             throw new DataException("Die angegebene Artikel-ID existieren nicht in der Datenbank.");
         }
 
-        return true;
+	}
 
-    }
-
-    private boolean isOrderedItemComplete(OrderedItem orderedItem)
+    private void isOrderedItemComplete(OrderedItem orderedItem)
 	{
 		String missingAttributs = "";
 
@@ -934,10 +929,9 @@ public class DatabaseService implements DatabaseService_Interface
 			throw new DataException("Der bestellte Artikel ist unvollständig! Die folgenden Parameter fehlen: " + missingAttributs);
 		}
 
-		return true;
 	}
 
-	private boolean isWaiterComplete(Waiter waiter)
+	private void isWaiterComplete(Waiter waiter)
 	{
 		String missingAttributs = "";
 
@@ -956,10 +950,9 @@ public class DatabaseService implements DatabaseService_Interface
 					+ missingAttributs);
 		}
 
-		return true;
 	}
 
-	private boolean isLogindataComplete(Logindata logindata)
+	private void isLogindataComplete(Logindata logindata)
 	{
 		String missingAttributs = "";
 
@@ -982,7 +975,6 @@ public class DatabaseService implements DatabaseService_Interface
 					+ missingAttributs);
 		}
 
-		return true;
 	}
 	//endregion
 

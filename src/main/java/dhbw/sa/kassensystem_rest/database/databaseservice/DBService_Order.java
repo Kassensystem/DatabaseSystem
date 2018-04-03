@@ -15,9 +15,9 @@ import static dhbw.sa.kassensystem_rest.database.databaseservice.DatabaseService
 /**
  * Klasse mit Methoden zum Einsehen und Bearbeiten der Order-Tabelle.
  *
- * @auther Marvin Mai
+ * @author Marvin Mai
  */
-public class DBService_Order
+class DBService_Order
 {
 	static ArrayList<Order> getAllOrders(Connection connection)
 	{
@@ -156,7 +156,7 @@ public class DBService_Order
 		DBService_OrderedItem.deleteOrderedItemByOrderId(connection, orderID);
 	}
 
-	static boolean isOrderPaid(Connection connection, int orderID)
+	private static boolean isOrderPaid(Connection connection, int orderID)
 	{
 		try {
 			String query = "SELECT itemPaid from " + DatabaseProperties.getDatabase() + ".orderedItems " +
@@ -223,7 +223,7 @@ public class DBService_Order
 		return false;
 	}
 
-	public static int getOrderWithTableID(Connection connection, int tableID)
+	private static int getOrderWithTableID(Connection connection, int tableID)
 	{
 		try {
 			String query = "SELECT orderID from " + DatabaseProperties.getDatabase() + ".orders " +

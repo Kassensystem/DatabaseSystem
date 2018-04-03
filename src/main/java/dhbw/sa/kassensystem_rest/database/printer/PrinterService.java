@@ -10,7 +10,6 @@ import org.joda.time.DateTime;
 import javax.print.*;
 import javax.print.attribute.HashPrintRequestAttributeSet;
 import javax.print.attribute.PrintRequestAttributeSet;
-import java.lang.reflect.Array;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 
@@ -31,9 +30,9 @@ import java.util.ArrayList;
 
 public class PrinterService {
 
-    /** @param printerName Name des Druckers, wie er im Betriebssystem angezeigt wird.*/
+    /* printerName: Name des Druckers, wie er im Betriebssystem angezeigt wird.*/
     private final String printerName = "EPSON TM-T88V Receipt";
-    private DatabaseService databaseService = new DatabaseService();
+    private final DatabaseService databaseService = new DatabaseService();
 
     // Interface zum Ausdrucken einer Order oder Receipt
     /**
@@ -83,11 +82,11 @@ public class PrinterService {
 
 	// Funktionen zum Ermitteln aller zum Drucken benötigten Daten
 	/**
-	 * Sammelt Daten für eine {@Link printableOrder}, um einen Küchenbeleg ausdrucken zu können.
+	 * Sammelt Daten für eine {@link PrintableOrder}, um einen Küchenbeleg ausdrucken zu können.
 	 * @param orderID Die ID der Order, für die neue bestellte Artikel zur Zubereitung in der Küche
 	 *                ausgedruckt werden sollen.
 	 * @param orderedItems Die neue hinzugefügten bestellten Artikel.
-	 * @return Eine {@Link PrintableOrder}, die alle auszudruckenden Informationen enthält.
+	 * @return Eine {@link PrintableOrder}, die alle auszudruckenden Informationen enthält.
 	 */
 	private PrintableOrder getPrintableOrder(int orderID, ArrayList<OrderedItem> orderedItems)
 	{
@@ -169,11 +168,11 @@ public class PrinterService {
 
 		formattedReceiptText.append("----------Kundenbeleg-------------\n\n");
 
-        formattedReceiptText.append(Gastronomy.getName() + "\n"
-                        + Gastronomy.getAdress() + "\n"
-                        + Gastronomy.getTelephonenumber() + "\n"
-                        + "\n"
-                        + "Ihre Bestellung:\n");
+        formattedReceiptText
+				.append(Gastronomy.getName()).append("\n")
+				.append(Gastronomy.getAdress()).append("\n")
+				.append(Gastronomy.getTelephonenumber()).append("\n")
+				.append("\n").append("Ihre Bestellung:\n");
 
         DecimalFormat df = new DecimalFormat("#0.00");
         for(PrintableOrderedItem o: printableReceipt.getPrintableOrderedItems())
@@ -185,7 +184,7 @@ public class PrinterService {
                     .append(" EUR\n");
 
 			if(o.getComment() != null)
-				formattedReceiptText.append("\t" + o.getComment() + "\n");
+				formattedReceiptText.append("\t").append(o.getComment()).append("\n");
         }
 
         double mwst = Math.round(printableReceipt.getPrice()*0.199 * 100d) / 100d;
@@ -203,7 +202,7 @@ public class PrinterService {
     }
 
 	/**
-	 * Formatiert eine {@Link PrintableOrder} in einen formatierten Text, der anschließend ausgedruckt werden kann.
+	 * Formatiert eine {@link PrintableOrder} in einen formatierten Text, der anschließend ausgedruckt werden kann.
 	 * @param printableOrder PrintableOrder, die die zu formatierenden Daten enthält.
 	 * @return Einen formatierten Text, der ausgedruckt werden kann.
 	 */
@@ -218,12 +217,11 @@ public class PrinterService {
 			formattedOrderText
 					.append(p.getName()).append("\n");
 			if(p.getComment() != null)
-					formattedOrderText.append("\t" + p.getComment() + "\n");
+					formattedOrderText.append("\t").append(p.getComment()).append("\n");
 		}
 
 		formattedOrderText
-				.append("\n")
-				.append("Tisch " + printableOrder.getTableName() + "\n")
+				.append("\n").append("Tisch ").append(printableOrder.getTableName()).append("\n")
 				.append(printableOrder.getDate())
 				.append("\n\n");
 
@@ -232,13 +230,10 @@ public class PrinterService {
 
 	private String getFormattedLogindata(String loginname, String password, Waiter waiter)
 	{
-		StringBuilder txt = new StringBuilder("");
-
-		txt.append("Login-Daten\n" + DateTime.now().toString("dd.MM.yyyy kk:mm:ss") + "\n")
-			.append("Benutzername:\t" + loginname + "\n")
-			.append("Passwort:\t" + password + "\n");
-
-		return txt.toString();
+		return "Login-Daten\n"
+				+ DateTime.now().toString("dd.MM.yyyy kk:mm:ss") + "\n"
+				+ "Benutzername:\t" + loginname + "\n"
+				+ "Passwort:\t" + password + "\n";
 	}
 
 	private String getFormattedDataConflicts(ArrayList<PrintableDataConflict> printableDataConflicts)
@@ -249,7 +244,7 @@ public class PrinterService {
 
 		for(PrintableDataConflict p: printableDataConflicts)
 		{
-			txt.append(p.getTableName() + "\t" + p.getItemName() + "\n");
+			txt.append(p.getTableName()).append("\t").append(p.getItemName()).append("\n");
 		}
 
 		return txt.toString();

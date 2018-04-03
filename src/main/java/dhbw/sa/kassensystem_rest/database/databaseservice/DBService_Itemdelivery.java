@@ -12,9 +12,9 @@ import java.util.ArrayList;
 /**
  * Klasse mit Methoden zum Einsehen und Bearbeiten der Itemdelivery-Tabelle.
  *
- * @auther Marvin Mai
+ * @author Marvin Mai
  */
-public class DBService_Itemdelivery
+class DBService_Itemdelivery
 {
 	static ArrayList<Itemdelivery> getAllItemdeliveries(Connection connection)
 	{

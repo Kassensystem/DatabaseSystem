@@ -7,7 +7,7 @@ import org.joda.time.DateTime;
  *
  * @author Marvin Mai
  */
-public class Log
+class Log
 {
 
 	public static void logErr(String errorMessage)
@@ -20,7 +20,7 @@ public class Log
 		log(message, "INFO");
 	}
 
-	public static void log(String message, String status)
+	private static void log(String message, String status)
 	{
 		String messageStatus = "";
 		switch(status) {

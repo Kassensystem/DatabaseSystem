@@ -2,11 +2,11 @@ package dhbw.sa.kassensystem_rest.database.printer;
 
 import java.util.ArrayList;
 
-public class PrintableOrder
+class PrintableOrder
 {
-	private String date;
-	private String tableName;
-	private ArrayList<PrintableOrderedItem> orderedItems;
+	private final String date;
+	private final String tableName;
+	private final ArrayList<PrintableOrderedItem> orderedItems;
 
 	PrintableOrder(String date, String tableName, ArrayList<PrintableOrderedItem> orderedItems)
 	{

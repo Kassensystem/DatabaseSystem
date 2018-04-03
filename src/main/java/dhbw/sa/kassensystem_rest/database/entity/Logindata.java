@@ -1,8 +1,5 @@
 package dhbw.sa.kassensystem_rest.database.entity;
 
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-
 /**
  * Diese Klasse ist ein Modell eines Eintrages in der Datenbanktabelle "Logindata".
  * Sie wird verwendet, um neue Logindata-Einträge zu erzeugen oder diese aus der Datenbank abzurufen.
@@ -13,8 +10,8 @@ import java.security.NoSuchAlgorithmException;
  */
 public class Logindata
 {
-	private int waiterID;
-	private String loginname;
+	private final int waiterID;
+	private final String loginname;
 	private String passwordHash;
 
 	/**
@@ -63,7 +60,7 @@ public class Logindata
 	 */
 	public void setAndEncryptPassword(String password)
 	{
-		this.passwordHash = this.encryptPassword(password);
+		this.passwordHash = encryptPassword(password);
 	}
 
 	/**
