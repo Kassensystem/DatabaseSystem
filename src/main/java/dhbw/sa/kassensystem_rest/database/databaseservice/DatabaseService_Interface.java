@@ -27,10 +27,6 @@ import static dhbw.sa.kassensystem_rest.database.databaseservice.Log.logInf;
 
 public interface DatabaseService_Interface
 {
-	/*
-	TODO Java-Doc-Kommentare der neuen Methoden ausschreiben.
-	 */
-
     /**
      * Stellt eine Verbindung zur MySQL-Datenbank her.
      * @throws IllegalStateException wenn die Datenbank nicht erreichbar ist.
@@ -73,7 +69,7 @@ public interface DatabaseService_Interface
 	Item getItemById(int itemID);
 
 	/**
-	 * TODO
+	 * Fragt alle verfügbaren Artikel der Datenbank ab.
 	 * @return
 	 */
 	ArrayList<Item> getAllAvailableItems();
@@ -93,8 +89,8 @@ public interface DatabaseService_Interface
 	Table getTableById(int tableID);
 
 	/**
-	 * TODO
-	 * @return
+	 * Liefert alle als verfügbar markierten Tische der Datenbank.
+	 * @return Eine Liste aller verfügbaren Tische
 	 */
 	ArrayList<Table> getAllAvailableTables();
 
@@ -113,9 +109,10 @@ public interface DatabaseService_Interface
 	Order getOrderById(int orderID);
 
 	/**
-	 * TODO
+	 * Berechnet für eine gegebene Order-ID den Preis. Dafür wird für jeden bestellten Artikel ({@Link OrderedItem})
+	 * der Preis des zugehörigen Artikels ({@Link Item}) aufsummiert.
 	 * @param orderID
-	 * @return
+	 * @return Preis des Artikels.
 	 */
 	float getOrderPrice(int orderID);
 
@@ -127,59 +124,59 @@ public interface DatabaseService_Interface
     ArrayList<Itemdelivery> getAllItemdeliveries();
 
 	/**
-	 * TODO
+	 * Ermittelt anhand einer gegebenen Itemdelivery-ID den zugehörigen Wareneingang ({@Link Itemdelivery}).
 	 * @param itemdeliveryID
-	 * @return
+	 * @return Wareneingang mit der ID itemdeliveryID.
 	 */
 	Itemdelivery getItemdeliveryById(int itemdeliveryID);
 
 	// OrderedItems
     /**
-     * TODO
-     * @return
+     * Ermittelt alle bestellten Artikel ({@Link OrderedItems}) der Datenbank.
+     * @return Alle bestellten Artikel aus der Datenbank.
      */
     ArrayList<OrderedItem> getAllOrderedItems();
 
 	/**
-	 * TODO
-	 * @param orderedItemID
-	 * @return
+	 * Bestellten Artikel anhand einer ID ermitteln.
+	 * @param orderedItemID ID des bestellten Artikels.
+	 * @return Bestellten Artikel {@Link OrderedItem} aus der Datenbank.
 	 */
 	OrderedItem getOrderedItemById(int orderedItemID);
 
 	/**
-	 * TODO
-	 * @param orderID
-	 * @return
+	 * Ermittelt alle bestellten Artikel, die zu einer Bestellung gehören.
+	 * @param orderID ID der Bestellung.
+	 * @return Eine Liste mit den bestellten Artikeln der Bestellung.
 	 */
 	ArrayList<OrderedItem> getOrderedItemsByOrderId(int orderID);
 
 	/**
-	 * TODO
-	 * @param itemID
-	 * @return
+	 * Ermittelt alle bestellten Artikel, die zu einem vorgegebenen Artikel gehören.
+	 * @param itemID Die ID des Artikels.
+	 * @return Eine Liste aller bestellten Artikel, die den Artikel mit der itemID beinhalten.
 	 */
 	ArrayList<OrderedItem> getOrderedItemsByItemId(int itemID);
 
 	// Waiters
 
 	/**
-	 * TODO
-	 * @return
+	 * Ermittelt alle Bedienungen, die sich in der MySQl-Datenbank befinden.
+	 * @return Eine Liste mit allen Bedienungen.
 	 */
 	ArrayList<Waiter> getAllWaiters();
 
 	/**
-	 * TODO
-	 * @param waiterID
-	 * @return
+	 * Ermittelt eine Bedienung, die zu einer vorgegebenen ID gehört.
+	 * @param waiterID ID der zu ermittelnden Bedienung.
+	 * @return Die Bedienung mit der waiterID.
 	 */
 	Waiter getWaiterByID(int waiterID);
 
 	// Logindata
 	/**
-	 * TODO
-	 * @return
+	 * Liefert alle Login-Daten, die sich in der Datenbank befinden.
+	 * @return Eine Liste mit allen Login-Daten.
 	 */
 	ArrayList<Logindata> getAllLogindata();
 	//endregion
@@ -216,14 +213,14 @@ public interface DatabaseService_Interface
 	void addOrderedItem(OrderedItem orderedItem);
 
 	/**
-	 * TODO
-	 * @param waiter
+	 * Fügt der MySQL-Datenbank eine neue Bedienung hinzu.
+	 * @param waiter Die hinzuzufügende Bedienung.
 	 */
 	void addWaiter(Waiter waiter);
 
 	/**
-	 * TODO
-	 * @param logindata
+	 * Fügt der Datenbank einen neuen Login-Daten-Eintrag hinzu.
+	 * @param logindata Der hinzuzufügende Login-Daten-Satz
 	 */
 	void addLogindata(Logindata logindata);
 	//endregion
@@ -258,15 +255,15 @@ public interface DatabaseService_Interface
 	void updateOrderedItem(int orderedItemID, OrderedItem orderedItem);
 
 	/**
-	 * TODO
-	 * @param waiterID
-	 * @param waiter
+	 * Aktualisiert eine Bedienung in der Datenbank mit den Daten eines neuen Bedienungs-Datensatzes.
+	 * @param waiterID ID der zu aktualisierenden Bedienung.
+	 * @param waiter Die neuen Daten, mit denen die Daten mit der waiterID aktualisiert werden sollen.
 	 */
 	void updateWaiter(int waiterID, Waiter waiter);
 
 	/**
-	 * TODO
-	 * @param logindata
+	 * Aktualisiert einen Login-Daten-Satz in der Datenbank mit den Daten eines neuen Login-Daten-Satzes.
+	 * @param logindata Die neuen Login-Daten, mit denen die alten Daten ersetzt werden sollen.
 	 */
 	void updateLogindata(Logindata logindata);
 	//endregion
@@ -303,37 +300,55 @@ public interface DatabaseService_Interface
 	void deleteOrderedItem(int orderedItemID);
 
 	/**
-	 * TODO
-	 * @param waiterID
+	 * Setzt den Eintrag der Bedienung auf unemployed, also employed = false.
+	 * @param waiterID Die ID der zu kündigenden Bedienung.
 	 */
 	void deleteWaiter(int waiterID);
 
 	/**
-	 * TODO
-	 * @param waiterID
+	 * Löscht einen Login-Daten-Satz aus der Datenbank.
+	 * @param waiterID Die ID der Bedienung, dessen Login-Daten-Satz aus der Datenbank gelöscht werden soll.
 	 */
 	void deleteLogindata(int waiterID);
 	//endregion
 
 	//region Drucken einer Order
     /**
-     * Ausdrucken einer Bestellung in Abhängigkeit von einer ID;
+     * Ausdrucken einer Bestellung in Abhängigkeit von einer ID.
+	 * Hierbei handelt es sich um einen Kundenbeleg.
      * @param orderID ID der auszudruckenden Order.
      */
-    public void printOrderById(int orderID);
+    void printOrderById(int orderID);
 
 	/**
-	 * TODO
-	 * @param orderID
+	 * Ausdrucken eines Kundenbeleges in Abhängigkeit von einer ID.
+	 * @param orderID ID der auszudruckenden Order.
 	 */
 	void printReceipt(int orderID);
 
 	/**
-	 * TODO
-	 * @param orderID
-	 * @param orderedItems
+	 * Druckt eine Order für die Küche aus mit den neu hinzugefügten orderedItems.
+	 * @param orderID ID der auszudruckenden Order.
+	 * @param orderedItems Die neu hinzugefügten Artikel, die in der Küche zubereitet werden sollen.
 	 */
 	void printOrder(int orderID, ArrayList<OrderedItem> orderedItems);
+
+	/**
+	 * Druckt einen Login-Daten-Satz aus.
+	 * @param loginname Der Login-Name.
+	 * @param password Das Passwort in Klartext!
+	 * @param waiter Die zum Login-Daten-Satz gehörende Bedienung.
+	 */
+	void printLogindata(String loginname, String password, Waiter waiter);
+
+	/**
+	 * Druckt einen gelösten Datenkonflikt aus. Ein Datenkonflikt tritt im GUI auf, wenn der Warenbestand eines
+	 * Artikels negativ wird. Dann erscheint ein Dialog, in dem der Anwender den Datenkonflikt lösen muss. Wenn dies
+	 * abgeschlossen wurde, wird ein Ausdruck getätigt, auf dem die zu informierenden Tische mit den betroffenen
+	 * und nicht mehr verfügbaren Artikeln vermerkt sind. So können alle Kunden informiert werden.
+	 * @param orderedItems Alle vom Datenkonflikt betroffenen bestellten Artikel.
+	 */
+	void printDataConflict(ArrayList<OrderedItem> orderedItems);
 	//endregion
 
 

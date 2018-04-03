@@ -2,6 +2,11 @@ package dhbw.sa.kassensystem_rest.database.databaseservice;
 
 import org.joda.time.DateTime;
 
+/**
+ * Klasse mit Methoden für ein einheitliches Standard-Logging in die Konsole mit Zeitstempeln.
+ *
+ * @author Marvin Mai
+ */
 public class Log
 {
 

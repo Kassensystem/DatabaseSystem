@@ -4,6 +4,7 @@ package dhbw.sa.kassensystem_rest.database.printer;
 import dhbw.sa.kassensystem_rest.database.Gastronomy;
 import dhbw.sa.kassensystem_rest.database.databaseservice.DatabaseService;
 import dhbw.sa.kassensystem_rest.database.entity.*;
+import dhbw.sa.kassensystem_rest.exceptions.DataException;
 import org.joda.time.DateTime;
 
 import javax.print.*;
@@ -21,6 +22,8 @@ import java.util.ArrayList;
  * Epson TM-T88V MODEL M244A
  * Treiber muss im OS installiert sein
  * Download des Treibers:
+ * ACHTUNG: 	Treiber wurde aktualisiert und ist anscheinend nicht mehr mit Code kompatibel!
+ * 				Bitte alte Version des Treibers verwenden.
  * https://download.epson-biz.com/modules/pos/index.php?page=single_soft&cid=5131&pcat=3&scat=31
  *
  * @author Marvin Mai
@@ -259,19 +262,20 @@ public class PrinterService {
 	 */
 	private void printString(String text)
 	{
-		// find the printService of name printerName
+		// Printer-Service für den Drucker mit dem printerNamen ermitteln
 		DocFlavor flavor = DocFlavor.BYTE_ARRAY.AUTOSENSE;
 		PrintRequestAttributeSet pras = new HashPrintRequestAttributeSet();
 
 		PrintService printService[] = PrintServiceLookup.lookupPrintServices(flavor, pras);
 		PrintService service = findPrintService(printerName, printService);
 
-		assert service != null;
+		if(service == null)
+			throw new DataException("Der Drucker scheint nicht installiert zu sein!");
+
 		DocPrintJob job = service.createPrintJob();
 
-		try {
-
-			// important for umlaut chars
+		try
+		{
 			byte[] textBytes = text.getBytes("CP437");
 			byte[] commandBytes = {29, 86, 65, 0, 0};
 
@@ -284,20 +288,19 @@ public class PrinterService {
 
 
 			job.print(doc, null);
-
-		} catch (Exception e) {
+		}
+		catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 
     private PrintService findPrintService(String printerName, PrintService[] services)
 	{
-        for (PrintService service : services) {
-            if (service.getName().equalsIgnoreCase(printerName)) {
+        for (PrintService service : services)
+        {
+            if (service.getName().equalsIgnoreCase(printerName))
                 return service;
-            }
         }
-
         return null;
     }
 

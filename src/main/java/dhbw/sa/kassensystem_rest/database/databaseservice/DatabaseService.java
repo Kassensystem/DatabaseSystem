@@ -22,7 +22,8 @@ import static dhbw.sa.kassensystem_rest.database.databaseservice.Log.logInf;
 /**
  * {@inheritDoc}
  *
- * Implementierung des DatabaseService_Interfaces
+ * Implementierung des DatabaseService_Interfaces.
+ * Für die Dokumentation siehe Interface {@Link DatabaseService_Interface}
  *
  * @author Marvin Mai
  */
@@ -305,9 +306,9 @@ public class DatabaseService implements DatabaseService_Interface
 	//endregion
 
 	//region Adding data to the database
-  //Adding data to the database
-  @Override
-  public void addItem(Item item) throws MySQLServerConnectionException, DataException
+  	//Adding data to the database
+  	@Override
+  	public void addItem(Item item) throws MySQLServerConnectionException, DataException
 	{
         checkConnection();
 
@@ -517,14 +518,9 @@ public class DatabaseService implements DatabaseService_Interface
         if(this.getOrderById(orderID) == null)
             throw new DataException("Bestellung mit der ID " + orderID + " existiert nicht!");
 
-        /*if(order.isPaid())
-            //Kundenbeleg ausdrucken, wenn bezahlt wird
-            printOrder(order, false);*/
-
-        //Bei jedem Update die Differenz zur bisherigen Bestellung erkennen und in einem Kuechenbeleg ausdrucken
-        // TODO Ausdrucken der DifferenzOrder auf neues System anpassen
-        // Das Ausdrucken passiert nun beim Hinzufügen von orderedItems. Dabei wird eine Liste von orderedItems
-        // übertragen. Anschließend werden diese Übertragenen Items ausgedruckt.
+       // Bei jedem Update die Differenz zur bisherigen Bestellung erkennen und in einem Kuechenbeleg ausdrucken
+        // Das Ausdrucken passiert nun beim Hinzufügen von orderedItems in dem Rest-Controller.
+		// Dabei wird eine Liste von orderedItems übertragen. Anschließend werden diese Übertragenen Items ausgedruckt.
 
 		DBService_Order.updateOrder(connection, order, orderID);
     }
@@ -606,7 +602,7 @@ public class DatabaseService implements DatabaseService_Interface
 
 	//region Deleting data from database
     /*
-      Beim Löschen eines Items oder Tables wird dieser nur als nicht verfügbar markiert,
+      Beim Löschen eines Items oder Tables wird dieser nur als nicht verfügbar markiert, Waiter werden gekündigt,
       verbleiben aber in der Datenbank.
       Somit ist sichergestellt, dass für bisherige Orders alle Daten verfügbar bleiben.
      */
@@ -738,10 +734,8 @@ public class DatabaseService implements DatabaseService_Interface
         this.printReceipt(orderID);
     }
 
-	/**
-	 * Druckt für den Kunden einen Beleg aus.
-	 * @param orderID Die ID der Bestellung, die ausgedruckt werden soll.
-	 */
+    // Funktion die selbe wie printOrderById(), bis auf Überprüfung
+	// Ist die Methode überhaupt notwendig?
 	@Override
 	public void printReceipt(int orderID)
 	{
@@ -749,11 +743,6 @@ public class DatabaseService implements DatabaseService_Interface
 		printerService.printReceipt(orderID);
 	}
 
-	/**
-	 * Druckt eine Order für die Küche aus mit den neu hinzugefügten orderedItems.
-	 * @param orderID ID der auszudruckenden Order.
-	 * @param orderedItems Die neu hinzugefügten Artikel, die in der Küche zubereitet werden sollen.
-	 */
 	@Override
 	public void printOrder(int orderID, ArrayList<OrderedItem> orderedItems)
 	{
@@ -761,6 +750,7 @@ public class DatabaseService implements DatabaseService_Interface
 		printerService.printOrder(orderID, orderedItems);
 	}
 
+	@Override
 	public void printLogindata(String loginname, String password, Waiter waiter)
 	{
 		PrinterService printerService = new PrinterService();
@@ -768,6 +758,7 @@ public class DatabaseService implements DatabaseService_Interface
 		printerService.printLogindata(loginname, password, waiter);
 	}
 
+	@Override
 	public void printDataConflict(ArrayList<OrderedItem> orderedItems)
 	{
 		PrinterService printerService = new PrinterService();
@@ -776,6 +767,13 @@ public class DatabaseService implements DatabaseService_Interface
 	}
 	//endregion
 
+	/**
+	 * Überprüft Logindaten.
+	 * @param loginname Der übergebene Loginname.
+	 * @param passwordHash Der übergebene Password-Hash.
+	 * @return Ob der Login mit den Daten erfolgreich war.
+	 * @throws NotAuthentificatedException Wenn der Login nicht erfolgreich war.
+	 */
 	public boolean authentificate(String loginname, String passwordHash)
 			throws NotAuthentificatedException
 	{
@@ -789,6 +787,13 @@ public class DatabaseService implements DatabaseService_Interface
 	}
 
 	/**
+	 * FIXME: ACHTUNG: Diese Klasse wird im Programmablauf nicht verwendet und ist unsicher.
+	 * 			Sie ist aber die Sicherheitstechnisch bessere als die verwendete. Allerdings tritt
+	 * 			bei der Verwendung ein Problem auf, das nicht gelöst werden konnte:
+	 * 			Bei der Übertragung des Passworts von der App an die Rest-API kommt es zu einem Fehler,
+	 * 			weil nicht erlaubte Zeichen übertragen wurden. Daher wurde die Standard-Hash-Funktion der String-Klasse
+	 * 			verwendet. Wenn möglich sollte das System aber auf diese sicherere Funktion ausgelegt werden.
+	 *
 	 * Verschlüsselt ein Passwort als 256bit Hash-Code. Im GUI wird das Password eingegegeben und mit dieser
 	 * Funktion in einen Hash-Code gewandelt. Dieser wird in der Datenbank abgelegt.
 	 * Diese Verschlüsselungs-Funktion muss mit der in der Android-App verwendeten übereinstimmen.
@@ -814,6 +819,11 @@ public class DatabaseService implements DatabaseService_Interface
 	}
 
 	//region Vollständigkeit der Daten von Objekten überprüfen
+	/*
+	 * Folgende Funktionen überprüfen einen Datensatz auf ihre vollständigkeit. Wenn ein Datensatz nicht vollständig
+	 * ist, wird ein Fehlertext zusammengestellt, in dem alle fehlenden/fehlerhaften Daten vermerkt sind. Diese
+	 * wird anschließend in einer DataException ausgegeben.
+	 */
     private void isOrderComplete(Order order)
 	{
         String missingAttributs = "";
@@ -1015,6 +1025,7 @@ public class DatabaseService implements DatabaseService_Interface
 	{
 		return DBService_LoginData.existsLogindataWithWaiterID(connection, waiterID);
 	}
+
 	public boolean existsLogindataWithLoginname(String loginname)
 	{
 		return DBService_LoginData.existsLogindataWithLoginname(connection, loginname);
@@ -1041,7 +1052,7 @@ public class DatabaseService implements DatabaseService_Interface
     }
 
     /**
-     * Konvertiert einen Timestamp aus der SQL-Datenbank in eine joda.time.DateTime
+     * Konvertiert einen Timestamp aus der SQL-Datenbank in eine joda.time.DateTime.
      * @param sqlTimestamp zu konvertierender Timestamp
      * @return jode.time.DateTime
      */

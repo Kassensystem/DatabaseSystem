@@ -10,6 +10,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+/**
+ * Klasse mit Methoden zum Einsehen und Bearbeiten der Waiter-Tabelle.
+ *
+ * @auther Marvin Mai
+ */
 public class DBService_Waiter
 {
 	static final String selectAllAttributs = "SELECT waiterID, lastname, prename, employed " +

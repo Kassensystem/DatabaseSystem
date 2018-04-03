@@ -10,6 +10,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+/**
+ * Klasse mit Methoden zum Einsehen und Bearbeiten der Item-Tabelle.
+ *
+ * @auther Marvin Mai
+ */
 public class DBService_Item
 {
 	static ArrayList<Item> getAllItems(Connection connection, boolean onlyAvailable)

@@ -9,6 +9,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+/**
+ * Klasse mit Methoden zum Einsehen und Bearbeiten der OrderedItem-Tabelle.
+ *
+ * @auther Marvin Mai
+ */
 public class DBService_OrderedItem
 {
 	static final String selectAllAttributs =

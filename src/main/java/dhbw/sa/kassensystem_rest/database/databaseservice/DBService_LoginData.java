@@ -14,6 +14,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+/**
+ * Klasse mit Methoden zum Einsehen und Bearbeiten der LoginData-Tabelle.
+ *
+ * @auther Marvin Mai
+ */
 public class DBService_LoginData
 {
 	static ArrayList<Logindata> getAllLogindata(Connection connection)

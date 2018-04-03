@@ -9,6 +9,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+/**
+ * Klasse mit Methoden zum Einsehen und Bearbeiten der Itemdelivery-Tabelle.
+ *
+ * @auther Marvin Mai
+ */
 public class DBService_Itemdelivery
 {
 	static ArrayList<Itemdelivery> getAllItemdeliveries(Connection connection)

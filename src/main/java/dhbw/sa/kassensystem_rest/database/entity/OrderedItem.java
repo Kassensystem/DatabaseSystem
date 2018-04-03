@@ -8,6 +8,8 @@ import org.springframework.stereotype.Component;
  * Ein OrderedItem ist ein bestellter Artikel der zu einer Bestellung gehört.
  * Für jeden Artikel, der zu einer Bestellung gehört, wird ein OrderedItem erstellt
  * und in der Datenbank abgelegt.
+ *
+ * @author Marvin Mai
  */
 @Component
 public class OrderedItem {
@@ -22,11 +24,11 @@ public class OrderedItem {
 
 	/**
 	 * Konstruktor zum Abrufen eines vollständigen OrderedItems aus der Datenbank.
-	 * @param orderedItemID
-	 * @param orderID
-	 * @param itemID
-	 * @param itemPaid
-	 * @param itemProduced
+	 * @param orderedItemID Die von der Datenbank zugewiesene ID der OrderedItems.
+	 * @param orderID Die ID der order, zu der das OrderedItem gehört.
+	 * @param itemID Der Artikel, der mit diesem OrderedItem bestellt wurde.
+	 * @param itemPaid Ob das OrderedItem bereits bezahlt wurde.
+	 * @param itemProduced Ob das OrderedItem bereits produziert wurde.
 	 */
 	public OrderedItem(@JsonProperty("orderedItemID")int orderedItemID,
 					   @JsonProperty("orderID") int orderID,
@@ -44,8 +46,8 @@ public class OrderedItem {
 
 	/**
 	 * Konstruktor zum Hinzufügen eines neuen OrderedItems in die Datenbank.
-	 * @param orderID
-	 * @param itemID
+	 * @param orderID Die ID der order, zu der das OrderedItem gehört.
+	 * @param itemID Der Artikel, der mit diesem OrderedItem bestellt wurde.
 	 */
 	public OrderedItem(int orderID, int itemID, String comment) {
 		this.orderID = orderID;

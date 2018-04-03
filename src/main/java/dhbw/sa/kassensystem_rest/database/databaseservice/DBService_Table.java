@@ -9,6 +9,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+/**
+ * Klasse mit Methoden zum Einsehen und Bearbeiten der Table-Tabelle.
+ *
+ * @auther Marvin Mai
+ */
 public class DBService_Table
 {
 	static void addTable(Connection connection, Table table)

@@ -43,8 +43,7 @@ public class RestApiController {
     public ArrayList<Item> getAllItems
 			(@RequestHeader("loginname") String loginname, @RequestHeader("passwordhash") String passwordhash)
 	{
-		authentificate(loginname, passwordhash);
-        return databaseService.getAllAvailableItems();
+		return authentificate(loginname, passwordhash) ? databaseService.getAllAvailableItems() : null;
     }
 
     /**
@@ -55,8 +54,7 @@ public class RestApiController {
     public ArrayList<Order> getAllOrders
 			(@RequestHeader("loginname") String loginname, @RequestHeader("passwordhash") String passwordhash)
 	{
-		authentificate(loginname, passwordhash);
-        return databaseService.getAllOrders();
+		return authentificate(loginname, passwordhash) ? databaseService.getAllOrders() : null;
     }
 
     /**
@@ -67,8 +65,7 @@ public class RestApiController {
     public ArrayList<Table> getAllTables
 			(@RequestHeader("loginname") String loginname, @RequestHeader("passwordhash") String passwordhash)
 	{
-		authentificate(loginname, passwordhash);
-        return databaseService.getAllAvailableTables();
+		return authentificate(loginname, passwordhash) ? databaseService.getAllAvailableTables() : null;
     }
 
 
@@ -76,16 +73,14 @@ public class RestApiController {
     public ArrayList<OrderedItem> getAllOrderedItems
 			(@RequestHeader("loginname") String loginname, @RequestHeader("passwordhash") String passwordhash)
 	{
-		authentificate(loginname, passwordhash);
-        return databaseService.getAllOrderedItems();
+		return authentificate(loginname, passwordhash) ? databaseService.getAllOrderedItems() : null;
     }
 
     @RequestMapping("/unproducedOrderedItems")
 	public ArrayList<OrderedItem> getAllUnproducedOrderedItems
 			(@RequestHeader("loginname") String loginname, @RequestHeader("passwordhash") String passwordhash)
 	{
-		authentificate(loginname, passwordhash);
-		return databaseService.getAllUnproducedOrderedItems();
+		return authentificate(loginname, passwordhash) ? databaseService.getAllUnproducedOrderedItems() : null;
 	}
 
     @RequestMapping("/orderedItems/{orderID}")
@@ -93,8 +88,7 @@ public class RestApiController {
 			(@PathVariable("orderID") int orderId,
 			 @RequestHeader("loginname") String loginname, @RequestHeader("passwordhash") String passwordhash)
 	{
-		authentificate(loginname, passwordhash);
-        return databaseService.getOrderedItemsByOrderId(orderId);
+		return authentificate(loginname, passwordhash) ? databaseService.getOrderedItemsByOrderId(orderId) : null;
     }
   
     /*POST/PUT*/
@@ -109,20 +103,25 @@ public class RestApiController {
 			(@RequestBody Order order,
 			 @RequestHeader("loginname") String loginname, @RequestHeader("passwordhash") String passwordhash)
 	{
-		authentificate(loginname, passwordhash);
-        try {
-            order.setDate(DateTime.now());
-            // Anhand der Logindaten die waiterID des zugehörigen waiters ermitteln
-			int waiterID = databaseService.getWaiterIdByLoginData(loginname, passwordhash);
-            order.setWaiterID(waiterID);
-            Integer orderID = databaseService.addOrder(order);
+		if(authentificate(loginname, passwordhash))
+		{
+			try
+			{
+				order.setDate(DateTime.now());
+				// Anhand der Logindaten die waiterID des zugehörigen waiters ermitteln
+				int waiterID = databaseService.getWaiterIdByLoginData(loginname, passwordhash);
+				order.setWaiterID(waiterID);
+				Integer orderID = databaseService.addOrder(order);
 
-            return new ResponseEntity(orderID, HttpStatus.OK);
-        } catch (Exception e) {
-            e.printStackTrace();
-            ResponseEntity<Integer> response = new ResponseEntity(e.getMessage(), HttpStatus.NOT_FOUND);
-            return response;
-        }
+				return new ResponseEntity(orderID, HttpStatus.OK);
+			} catch (Exception e)
+			{
+				e.printStackTrace();
+				ResponseEntity<Integer> response = new ResponseEntity(e.getMessage(), HttpStatus.NOT_FOUND);
+				return response;
+			}
+		}
+		return null;
     }
 
     @RequestMapping(value = "/orderedItem", method = RequestMethod.POST)
@@ -130,28 +129,34 @@ public class RestApiController {
 			(@RequestBody ArrayList<OrderedItem> orderedItems,
 			 @RequestHeader("loginname") String loginname, @RequestHeader("passwordhash") String passwordhash)
 	{
-		authentificate(loginname, passwordhash);
-		try {
-			ArrayList<OrderedItem> newOrderedItems = new ArrayList<>();
+		if(authentificate(loginname, passwordhash))
+		{
+			try
+			{
+				ArrayList<OrderedItem> newOrderedItems = new ArrayList<>();
 
-			for(OrderedItem o: orderedItems) {
-				// alle noch nicht existierenden OrderedItems der DB hinzufügen
-				if (!databaseService.existsOrderedItemWithID(o.getOrderedItemID()))
+				for (OrderedItem o : orderedItems)
 				{
-					databaseService.addOrderedItem(o);
-					newOrderedItems.add(o);
+					// alle noch nicht existierenden OrderedItems der DB hinzufügen
+					if (!databaseService.existsOrderedItemWithID(o.getOrderedItemID()))
+					{
+						databaseService.addOrderedItem(o);
+						newOrderedItems.add(o);
+					}
 				}
+
+				// Ausdrucken der hinzugefügten OrderedItems
+				if (!newOrderedItems.isEmpty())
+					databaseService.printOrder(newOrderedItems.get(0).getOrderID(), newOrderedItems);
+
+				return new ResponseEntity(HttpStatus.OK);
+			} catch (Exception e)
+			{
+				e.printStackTrace();
+				return new ResponseEntity(e, HttpStatus.NOT_FOUND);
 			}
-
-			// Ausdrucken der hinzugefügten OrderedItems
-			if (!newOrderedItems.isEmpty())
-				databaseService.printOrder(newOrderedItems.get(0).getOrderID(), newOrderedItems);
-
-			return new ResponseEntity(HttpStatus.OK);
-		} catch (Exception e) {
-			e.printStackTrace();
-			return new ResponseEntity(e, HttpStatus.NOT_FOUND);
 		}
+		return null;
 	}
 
 	@RequestMapping(value = "/printOrder/{orderID}", method = RequestMethod.POST)
@@ -159,9 +164,12 @@ public class RestApiController {
 			(@PathVariable("orderID") int orderID,
 			 @RequestHeader("loginname") String loginname, @RequestHeader("passwordhash") String passwordhash)
 	{
-		authentificate(loginname, passwordhash);
-		databaseService.printReceipt(orderID);
-		return new ResponseEntity(HttpStatus.OK);
+		if(authentificate(loginname, passwordhash))
+		{
+			databaseService.printReceipt(orderID);
+			return new ResponseEntity(HttpStatus.OK);
+		}
+		return null;
 	}
 
     /**
@@ -175,15 +183,20 @@ public class RestApiController {
 			(@PathVariable("orderID") int orderID, @RequestBody Order order,
 			 @RequestHeader("loginname") String loginname, @RequestHeader("passwordhash") String passwordhash)
 	{
-		authentificate(loginname, passwordhash);
-        try {
-            order.setDate(DateTime.now());
-            databaseService.updateOrder(orderID, order);
-            return new ResponseEntity(HttpStatus.OK);
-        } catch (Exception e) {
-            e.printStackTrace();
-            return new ResponseEntity(e, HttpStatus.NOT_FOUND);
-        }
+		if(authentificate(loginname, passwordhash))
+		{
+			try
+			{
+				order.setDate(DateTime.now());
+				databaseService.updateOrder(orderID, order);
+				return new ResponseEntity(HttpStatus.OK);
+			} catch (Exception e)
+			{
+				e.printStackTrace();
+				return new ResponseEntity(e, HttpStatus.NOT_FOUND);
+			}
+		}
+		return null;
     }
 
     @RequestMapping(value = "/orderedItem", method = RequestMethod.PUT)
@@ -191,28 +204,36 @@ public class RestApiController {
 			(@RequestBody ArrayList<OrderedItem> orderedItems,
 			 @RequestHeader("loginname") String loginname, @RequestHeader("passwordhash") String passwordhash)
 	{
-		authentificate(loginname, passwordhash);
-		try {
-			for (OrderedItem o: orderedItems)
+		if(authentificate(loginname, passwordhash))
+		{
+			try
 			{
-				databaseService.updateOrderedItem(o.getOrderedItemID(), o);
+				for (OrderedItem o : orderedItems)
+				{
+					databaseService.updateOrderedItem(o.getOrderedItemID(), o);
+				}
+				return new ResponseEntity(HttpStatus.OK);
+			} catch (Exception e)
+			{
+				e.printStackTrace();
+				return new ResponseEntity(e, HttpStatus.NOT_FOUND);
 			}
-			return new ResponseEntity(HttpStatus.OK);
-		} catch (Exception e) {
-			e.printStackTrace();
-			return new ResponseEntity(e, HttpStatus.NOT_FOUND);
 		}
+		return null;
 	}
 
 	@RequestMapping(value = "/changeLoginPassword", method = RequestMethod.PUT)
 	public boolean updateLogindata(@RequestBody String newPassword,
 			@RequestHeader("loginname") String loginname, @RequestHeader("passwordhash") String passwordhash)
 	{
-		authentificate(loginname, passwordhash);
-		int waiterID = databaseService.getWaiterIdByLoginData(loginname, passwordhash);
-		databaseService.updateLogindata(new Logindata(waiterID, loginname, newPassword));
+		if (authentificate(loginname, passwordhash))
+		{
+			int waiterID = databaseService.getWaiterIdByLoginData(loginname, passwordhash);
+			databaseService.updateLogindata(new Logindata(waiterID, loginname, newPassword));
 
-		return true;
+			return true;
+		}
+		return false;
 	}
 
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
@@ -225,13 +246,13 @@ public class RestApiController {
 	private boolean authentificate(String loginname, String passwordHash)
 			throws NotAuthentificatedException
 	{
-		if (databaseService.authentificate(loginname, passwordHash))
-			return true;
-		return false;
+		return databaseService.authentificate(loginname, passwordHash) ? true : false;
 	}
 
-    //Exception-Handling
-
+    // Exception-Handling
+	// Diese Funktion kann für das Exception-Handling verwendet werden.
+	// Um ehrlich zu ein, bin ich mir aber nicht mehr sicher, ob sie überhaupt verwendet wird.
+	// Um nichts kaputt zu machen, lasse ich sie aber mal besser wo sie ist.
     @ExceptionHandler(MySQLServerConnectionException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
     public @ResponseBody String handleIndexNotFoundException(MySQLServerConnectionException e,

@@ -1,5 +1,10 @@
 package dhbw.sa.kassensystem_rest.database.entity;
 
+/**
+ * Model für einen Datensatz der Datenbanktabelle waiters.
+ *
+ * @author Marvin Mai
+ */
 public class Waiter
 {
 	private int waiterID;

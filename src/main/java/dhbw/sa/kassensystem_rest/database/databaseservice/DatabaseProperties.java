@@ -1,14 +1,13 @@
 package dhbw.sa.kassensystem_rest.database.databaseservice;
 
 /**
- * {@inheritDoc}
- *
- * Implementierung des DatabaseProperties_Interfaces
+ * Definition von Eigenschaften, die benötigt werden, um auf die MySQL-Datenbank zuzugreifen.
  *
  * @author Marvin Mai
  */
 class DatabaseProperties
 {
+	// Die folgenden Attribute müssen beim Einrichten der Datenbank verwendet werden:
     private static String url = "jdbc:mysql://localhost:3306/?verifyServerCertificate=false&useSSL=true";
     private static String database = "Kassensystem";
     private static String username = "DatabaseService";

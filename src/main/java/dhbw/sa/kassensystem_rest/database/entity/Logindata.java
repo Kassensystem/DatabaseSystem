@@ -8,6 +8,8 @@ import java.security.NoSuchAlgorithmException;
  * Sie wird verwendet, um neue Logindata-Einträge zu erzeugen oder diese aus der Datenbank abzurufen.
  * Zum sicheren Speichern des Passwortes wird dieses als 256-bit-Hash verschlüsselt.
  * Beim Erzeugen eines Logindata darf dem Konstruktor nur das Passwort im Klartext übergeben werden.
+ *
+ * @author Marvin Mai
  */
 public class Logindata
 {
@@ -71,16 +73,18 @@ public class Logindata
 	 */
 	public static String encryptPassword(String password)
 	{
-//		try
-//		{
-////			MessageDigest messageDigest = MessageDigest.getInstance("SHA-256");
-////			messageDigest.update(password.getBytes());
-////			return new String(messageDigest.digest());
-//		} catch (NoSuchAlgorithmException e)
-//		{
-//			e.printStackTrace();
-//		}
-//		return null;
+		// Der auskommentierte Code sollte verwendet werden, wenn die sichere Hash-Methode verwendet werden kann.
+		// (siehe DatabaseService: generateHash() )
+		/*try
+		{
+			MessageDigest messageDigest = MessageDigest.getInstance("SHA-256");
+			messageDigest.update(password.getBytes());
+			return new String(messageDigest.digest());
+		} catch (NoSuchAlgorithmException e)
+		{
+			e.printStackTrace();
+		}
+		return null;*/
 		return String.valueOf(password.hashCode());
 	}
 }

@@ -12,6 +12,11 @@ import java.util.ArrayList;
 
 import static dhbw.sa.kassensystem_rest.database.databaseservice.DatabaseService.convertJodaDateTimeToSqlTimestamp;
 
+/**
+ * Klasse mit Methoden zum Einsehen und Bearbeiten der Order-Tabelle.
+ *
+ * @auther Marvin Mai
+ */
 public class DBService_Order
 {
 	static ArrayList<Order> getAllOrders(Connection connection)
