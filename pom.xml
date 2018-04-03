@@ -4,9 +4,9 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.marvin</groupId>
-    <artifactId>springBoot</artifactId>
-    <version>kassensystem_rest</version>
+    <groupId>dhbw.sa.kassensystem_database</groupId>
+    <artifactId>kassensystem_database</artifactId>
+    <version>1.1</version>
 
     <parent>
         <groupId>org.springframework.boot</groupId>
@@ -36,7 +36,6 @@
             <artifactId>junit-jupiter-api</artifactId>
             <version>RELEASE</version>
         </dependency>
-
     </dependencies>
 
     <repositories>
@@ -85,11 +84,14 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-                <version>1.5.8.RELEASE</version>
+               <!--<version>1.5.8.RELEASE</version>-->
+
+                <configuration>
+                    <mainClass>dhbw.sa.kassensystem_rest.Main</mainClass>
+                    <layout>ZIP</layout>
+                </configuration>
+
             </plugin>
         </plugins>
     </build>
-
-
-
 </project>

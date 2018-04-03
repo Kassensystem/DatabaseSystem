@@ -1,1 +1,0 @@
-java -jar target/springBoot-kassensystem_rest.jar --debug
