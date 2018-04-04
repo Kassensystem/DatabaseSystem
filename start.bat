@@ -1,1 +1,1 @@
-java -jar target/kassensystem_database-1.1.jar
+java -jar target/kassensystem_database-2.0.jar
