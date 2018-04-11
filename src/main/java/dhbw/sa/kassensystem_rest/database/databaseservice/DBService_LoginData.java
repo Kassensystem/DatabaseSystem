@@ -49,7 +49,7 @@ public class DBService_LoginData
 	{
 		try
 		{
-			String query = "SELECT passwordhash,  waiterID" +
+			String query = "SELECT passwordhash,  waiterID " +
 					"FROM " + DatabaseProperties.getDatabase() + ".logindata " +
 					"WHERE loginname = '" + loginname + "'";
 			PreparedStatement pst = connection.prepareStatement(query);
